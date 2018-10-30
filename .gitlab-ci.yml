@@ -1,0 +1,14 @@
+image: mongo:3.2-jessie
+stages:
+  -deploy
+  -test
+deploy:
+  stage: deploy
+  script: docker-compose up --build
+  tags:
+  - docker-deploy
+test:
+  stage: test
+  script: mvn clean test
+  tags:
+    -jacoco

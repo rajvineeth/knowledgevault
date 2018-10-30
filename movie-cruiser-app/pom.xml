@@ -11,18 +11,30 @@
 	<name>movie-cruiser-app</name>
 	<description>Demo project for Spring Boot</description>
 
+
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.5.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.stackroute</groupId>
+		<artifactId>knowledge-vault-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../../knowledge-vault</relativePath>
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>10</java.version>
+		<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+		<!-- Used to locate the profile specific configuration file. -->
+		<build.profile.id>dev</build.profile.id>
+		<jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.it.execution.data.file>
+		<jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.ut.execution.data.file>
+		<jdk.version>1.7</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Only unit tests are run by default. -->
+		<skip.integration.tests>true</skip.integration.tests>
+		<skip.unit.tests>false</skip.unit.tests>
 	</properties>
+
 
 	<dependencies>
 		<dependency>
@@ -255,13 +267,190 @@
 
 	<!--</dependencies>-->
 	<!--</dependencyManagement>-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!-- Import dependency management from Spring Boot -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.0.6.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<!--<configuration>-->
+					<!--&lt;!&ndash; Sets the VM argument line used when unit tests are run. &ndash;&gt;-->
+					<!--&lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
+					<!--<argLine>${surefireArgLine}</argLine>-->
+					<!--&lt;!&ndash; Skips unit tests if the value of skip.unit.tests property is true &ndash;&gt;-->
+					<!--&lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
+					<!--<skipTests>${skip.unit.tests}</skipTests>-->
+					<!--&lt;!&ndash; Excludes integration tests when unit tests are run. &ndash;&gt;-->
+					<!--<excludes>-->
+						<!--<exclude>**/IT*.java</exclude>-->
+					<!--</excludes>-->
+				<!--</configuration>-->
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+				<configuration>
+					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+					<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--<plugin>-->
+				<!--<groupId>org.jacoco</groupId>-->
+				<!--<artifactId>jacoco-maven-plugin</artifactId>-->
+				<!--<version>0.7.7.201606060606</version>-->
+				<!--<executions>-->
+					<!--&lt;!&ndash;-->
+                        <!--Prepares the property pointing to the JaCoCo runtime agent which-->
+                        <!--is passed as VM argument when Maven the Surefire plugin is executed.-->
+                    <!--&ndash;&gt;-->
+					<!--<execution>-->
+						<!--<id>pre-unit-test</id>-->
+						<!--<goals>-->
+							<!--<goal>prepare-agent</goal>-->
+						<!--</goals>-->
+						<!--<configuration>-->
+							<!--&lt;!&ndash; Sets the path to the file which contains the execution data. &ndash;&gt;-->
+							<!--<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>-->
+							<!--&lt;!&ndash;-->
+                                <!--Sets the name of the property containing the settings-->
+                                <!--for JaCoCo runtime agent.-->
+                            <!--&ndash;&gt;-->
+							<!--<propertyName>surefireArgLine</propertyName>-->
+						<!--</configuration>-->
+					<!--</execution>-->
+					<!--&lt;!&ndash;-->
+                        <!--Ensures that the code coverage report for unit tests is created after-->
+                        <!--unit tests have been run.-->
+                    <!--&ndash;&gt;-->
+					<!--<execution>-->
+						<!--<id>post-unit-test</id>-->
+						<!--<phase>test</phase>-->
+						<!--<goals>-->
+							<!--<goal>report</goal>-->
+						<!--</goals>-->
+						<!--<configuration>-->
+							<!--&lt;!&ndash; Sets the path to the file which contains the execution data. &ndash;&gt;-->
+							<!--<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>-->
+							<!--&lt;!&ndash; Sets the output directory for the code coverage report. &ndash;&gt;-->
+							<!--<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>-->
+						<!--</configuration>-->
+					<!--</execution>-->
+					<!--&lt;!&ndash;-->
+            <!--Prepares the property pointing to the JaCoCo runtime agent which-->
+            <!--is passed as VM argument when Maven the Failsafe plugin is executed.-->
+        <!--&ndash;&gt;-->
+					<!--<execution>-->
+						<!--<id>pre-integration-test</id>-->
+						<!--<phase>pre-integration-test</phase>-->
+						<!--<goals>-->
+							<!--<goal>prepare-agent</goal>-->
+						<!--</goals>-->
+						<!--<configuration>-->
+							<!--&lt;!&ndash; Sets the path to the file which contains the execution data. &ndash;&gt;-->
+							<!--<destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>-->
+							<!--&lt;!&ndash;-->
+                                <!--Sets the name of the property containing the settings-->
+                                <!--for JaCoCo runtime agent.-->
+                            <!--&ndash;&gt;-->
+							<!--<propertyName>failsafeArgLine</propertyName>-->
+						<!--</configuration>-->
+					<!--</execution>-->
+					<!--&lt;!&ndash;-->
+                        <!--Ensures that the code coverage report for integration tests after-->
+                        <!--integration tests have been run.-->
+                    <!--&ndash;&gt;-->
+					<!--<execution>-->
+						<!--<id>post-integration-test</id>-->
+						<!--<phase>post-integration-test</phase>-->
+						<!--<goals>-->
+							<!--<goal>report</goal>-->
+						<!--</goals>-->
+						<!--<configuration>-->
+							<!--&lt;!&ndash; Sets the path to the file which contains the execution data. &ndash;&gt;-->
+							<!--<dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>-->
+							<!--&lt;!&ndash; Sets the output directory for the code coverage report. &ndash;&gt;-->
+							<!--<outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>-->
+						<!--</configuration>-->
+					<!--</execution>-->
+				<!--</executions>-->
+			<!--</plugin>-->
+
+			<!--<plugin>-->
+				<!--<groupId>org.springframework.boot</groupId>-->
+				<!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+			<!--</plugin>-->
+			<!--<plugin>-->
+				<!--<groupId>org.apache.maven.plugins</groupId>-->
+				<!--<artifactId>maven-compiler-plugin</artifactId>-->
+				<!--<configuration>-->
+					<!--<source>8</source>-->
+					<!--<target>8</target>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
+			<!--<plugin>-->
+				<!--<groupId>org.apache.maven.plugins</groupId>-->
+				<!--<artifactId>maven-failsafe-plugin</artifactId>-->
+				<!--<version>2.15</version>-->
+				<!--<executions>-->
+					<!--&lt;!&ndash;-->
+                        <!--Ensures that both integration-test and verify goals of the Failsafe Maven-->
+                        <!--plugin are executed.-->
+                    <!--&ndash;&gt;-->
+					<!--<execution>-->
+						<!--<id>integration-tests</id>-->
+						<!--<goals>-->
+							<!--<goal>integration-test</goal>-->
+							<!--<goal>verify</goal>-->
+						<!--</goals>-->
+						<!--<configuration>-->
+							<!--&lt;!&ndash; Sets the VM argument line used when integration tests are run. &ndash;&gt;-->
+							<!--&lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
+							<!--<argLine>${failsafeArgLine}</argLine>-->
+							<!--&lt;!&ndash;-->
+                                <!--Skips integration tests if the value of skip.integration.tests property-->
+                                <!--is true-->
+                            <!--&ndash;&gt;-->
+							<!--&lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
+							<!--<skipTests>${skip.integration.tests}</skipTests>-->
+						<!--</configuration>-->
+					<!--</execution>-->
+				<!--</executions>-->
+			<!--</plugin>-->
 		</plugins>
 	</build>
 

@@ -61,21 +61,21 @@ public class MovieControllerTest {
 
     @Test
     public void saveMovie() throws Exception {
-        when(movieService.addMovie(any())).thenReturn(movie);
+        when(movieService.addMovie((Movie) any())).thenReturn(movie);
         mockMvc.perform(MockMvcRequestBuilders.post("/movie-api/v1/movie")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andDo(MockMvcResultHandlers.print());
-        verify(movieService,times(1)).addMovie(any());
+        verify(movieService,times(1)).addMovie((Movie) any());
     }
     @Test
     public void saveMovieFailure() throws Exception {
-        when(movieService.addMovie(any())).thenThrow(MovieAlreadyExistsException.class);
+        when(movieService.addMovie((Movie) any())).thenThrow(MovieAlreadyExistsException.class);
         mockMvc.perform(MockMvcRequestBuilders.post("/movie-api/v1/movie")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
                 .andDo(MockMvcResultHandlers.print());
-        verify(movieService,times(1)).addMovie(any());
+        verify(movieService,times(1)).addMovie((Movie) any());
     }
 //
 //    @Test
@@ -119,30 +119,30 @@ public class MovieControllerTest {
 //    }
     @Test
     public void updateMovieFailure() throws Exception {
-        when(movieService.updateMovie(anyInt(),any())).thenThrow(MovieNotFoundException.class);
+        when(movieService.updateMovie(anyInt(), (String) any())).thenThrow(MovieNotFoundException.class);
         mockMvc.perform(MockMvcRequestBuilders.put("/movie-api/v1/movie/12")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
                 .andDo(MockMvcResultHandlers.print());
-        verify(movieService,times(1)).updateMovie(anyInt(),any());
+        verify(movieService,times(1)).updateMovie(anyInt(), (String) any());
     }
     @Test
     public void searchMovie() throws Exception {
-        when(movieService.getMovieByTitle(any())).thenReturn(movie);
+        when(movieService.getMovieByTitle((String) any())).thenReturn(movie);
         mockMvc.perform(MockMvcRequestBuilders.post("/movie-api/v1/movie/la la")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
-        verify(movieService,times(1)).getMovieByTitle(any());
+        verify(movieService,times(1)).getMovieByTitle((String) any());
     }
     @Test
     public void searchMovieFailure() throws Exception {
-        when(movieService.getMovieByTitle(any())).thenThrow(MovieNotFoundException.class);
+        when(movieService.getMovieByTitle((String) any())).thenThrow(MovieNotFoundException.class);
         mockMvc.perform(MockMvcRequestBuilders.post("/movie-api/v1/movie/la")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
                 .andDo(MockMvcResultHandlers.print());
-        verify(movieService,times(1)).getMovieByTitle(any());
+        verify(movieService,times(1)).getMovieByTitle((String) any());
     }
 
     private static String asJsonString(final Object obj)

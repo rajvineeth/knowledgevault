@@ -45,3 +45,7 @@
 #  #logging.level.org.hibernate=ERROR
 #  file:  logs/spring-boot-logging.log
 #  log4j.logger.org.thymeleaf:  DEBUG
+movie-service:
+  controller:
+    exceptionmsg1: "Movie not found"
+    exceptionmsg2: "Movie already exists"

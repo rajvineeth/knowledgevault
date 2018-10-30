@@ -35,7 +35,7 @@ services:
     volumes:
       - '/home/cgi/data/mysql:/data/db'
 
-  movie-demo:
+  mongo-demo:
     image: movie-mongo:v1
     build: movie-cruiser-app/
     restart: always
