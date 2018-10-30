@@ -13,7 +13,8 @@ codecoverage:
   script:
     - mvn clean test
 #    - cat */target/site/jacoco/index.html
-  artifacts:
-    paths:
-    - target/site/jacoco/
-  coverage: '/Code coverage: \d+\.\d+/'
+    - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, " instructions covered"; print 100*covered/instructions, "% covered" }' target/site/jacoco/jacoco.csv
+#  artifacts:
+#    paths:
+#    - target/site/jacoco/index.html
+  coverage: '\d+.\d+ \% covered'
