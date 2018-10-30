@@ -17,4 +17,4 @@ codecoverage:
 #  artifacts:
 #    paths:
 #    - target/site/jacoco/index.html
-  coverage: '\d+.\d+ \% covered'
+  coverage: '\d+.\d+ \% 'covered
