@@ -23,3 +23,5 @@ I
 movie-cruiser-app/pom.xml,a/d/adae1f3d7840510f82dbfccc71afa4199482fc03
 L
 movie-cruiser-app/.gitignore,f/1/f1c4154948386bd31ca71c28c926809bb4c2c969
+„
+Tconfig-server/src/main/java/com/stackroute/configserver/ConfigServerApplication.java,9/8/98a70e815e705e2abbfe404443c10d6d672714f4
