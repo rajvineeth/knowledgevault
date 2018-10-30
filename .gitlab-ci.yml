@@ -12,7 +12,7 @@ build:
 codecoverage:
   script:
     - mvn clean test
-    - cat target/site/jacoco/index.html
+    - cat movie-cruiser-app/target/site/jacoco/index.html
   artifacts:
     paths:
     - target/site/jacoco/
