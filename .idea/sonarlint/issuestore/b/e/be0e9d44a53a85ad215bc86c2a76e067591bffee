@@ -1,15 +1,0 @@
-
-Usquid:S2184"@Cast one of the operands of this addition operation to a "long".(…›°Ã
-›%squid:RedundantThrowsDeclarationCheck"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(«¤ÜÕ
-]squid:S1192"HDefine a constant instead of duplicating this literal "Sending" 3 times.(ÖÆ«ê
-Lsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(°— ô
-Ksquid:S3655"7Call "Optional#isPresent()" before accessing the value.(©˜ø^
-Qsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(¡çíşÿÿÿÿ
-Qsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(¡çíşÿÿÿÿ
-Lsquid:S3655"7Call "Optional#isPresent()" before accessing the value.(°— ô
-\squid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(«¤ÜÕ
-|squid:UselessImportCheck"URemove this unused import 'org.springframework.test.context.web.WebAppConfiguration'.(Š°—¨üÿÿÿÿ
-~squid:UselessImportCheck"]Remove this unused import 'com.stackroute.moviecruiserapp.exceptions.MovieNotFoundException'.(ø¶É"
-ƒsquid:UselessImportCheck"\Remove this unused import 'org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest'.(¼îÎúÿÿÿÿ
-ssquid:UselessImportCheck"QRemove this unused import 'org.springframework.boot.test.context.SpringBootTest'.(¿‹´˜
-Vsquid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ

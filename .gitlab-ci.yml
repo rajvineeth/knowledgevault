@@ -1,14 +1,13 @@
-image: mongo:3.2-jessie
+image: maven:3.5.4-jdk-10
+before_script:
+- apt-get update -qq && apt-get install
 stages:
-  -build
-  -test
-build:
-  stage: build
-  script: docker-compose up --build
-  tags:
-  - docker-deploy
+- test
+- build
+- codecoverage
 test:
-  stage: test
+  script: mvn test
+build:
+  script: mvn package
+codecoverage:
   script: mvn clean test
-  tags:
-    -jacoco

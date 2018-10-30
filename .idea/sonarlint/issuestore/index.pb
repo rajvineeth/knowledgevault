@@ -21,3 +21,5 @@ G
 eureka-registry/pom.xml,9/f/9fb49774d0d612cbe7260c8fb79c735a218f63dd
 I
 movie-cruiser-app/pom.xml,a/d/adae1f3d7840510f82dbfccc71afa4199482fc03
+L
+movie-cruiser-app/.gitignore,f/1/f1c4154948386bd31ca71c28c926809bb4c2c969
