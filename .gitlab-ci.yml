@@ -11,10 +11,11 @@ build:
   script: mvn package
 codecoverage:
   script:
-  - "mvn test"
+  - "mvn clean test"
   - "mvn jacoco:report"
-  - "mvn xml:transform"
-  - "echo \"$(cat target/generated-resources/xml/xslt/target/site/jacoco/jacoco.xml)% covered\""
+  artifacts:
+      paths:
+      - target/site/jacoco/
 #codecoverage:
 #  script:
 #    - mvn clean test
