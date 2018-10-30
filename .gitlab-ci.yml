@@ -13,4 +13,4 @@ codecoverage:
   script:
     - mvn clean test
     - cat target/site/jacoco/index.html
-  coverage: '\d+.\d+ \% '
+  coverage: '/TOTAL.+ ([0-9]{1,3}%)/'
