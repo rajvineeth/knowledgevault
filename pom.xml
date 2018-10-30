@@ -80,6 +80,29 @@
                 </execution>
             </executions>
         </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <catalogs>
+                        <catalog>catalog.xml</catalog>
+                    </catalogs>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>./</dir>
+                            <includes>target/site/jacoco/jacoco.xml</includes>
+                            <stylesheet>stylesheet.xsl</stylesheet>
+                        </transformationSet>
+                    </transformationSets>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 <!--<build>-->
