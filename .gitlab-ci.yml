@@ -9,14 +9,15 @@ test:
   script: mvn test
 build:
   script: mvn package
-codecoverage:
-  script:
-  - "mvn test"
-  - "mvn jacoco:report"
-  - "mvn xml:transform"
-  - "echo \"$(cat target/generated-resources/xml/xslt/target/site/jacoco/jacoco.xml)% covered\""
 #codecoverage:
 #  script:
-#    - mvn clean test
-#    - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, " instructions covered"; print 100*covered/instructions, "% covered" }' target/site/jacoco/jacoco.csv
-#  coverage: '\d+.\d+ \% 'covered
+#  - "mvn test"
+#  - "mvn jacoco:report"
+#  - "mvn xml:transform"
+#  - "echo \"$(cat target/generated-resources/xml/xslt/target/site/jacoco/jacoco.xml)% covered\""
+codecoverage:
+  script:
+    - mvn clean test
+    - cat target/site/jacoco/index.html
+    #- awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, " instructions covered"; print 100*covered/instructions, "% covered" }' target/site/jacoco/jacoco.csv
+  coverage: '\d+.\d+ \% 'covered

@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80ba7f16-b335-40fc-8893-4dbca6490032" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/catalog.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stylesheet.xsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-cruiser-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/movie-cruiser-app/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/config-server/target/" />
@@ -72,14 +68,14 @@
           <entry key="md" value="193" />
           <entry key="xml" value="425" />
           <entry key="xsl" value="1" />
-          <entry key="yml" value="380" />
+          <entry key="yml" value="382" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="193" />
           <entry key="XML" value="426" />
-          <entry key="YAML" value="380" />
+          <entry key="YAML" value="382" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -99,11 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="111" selection-start-line="111" selection-end-line="111" />
+            <state relative-caret-position="405">
+              <caret line="104" column="25" lean-forward="true" selection-start-line="82" selection-start-column="16" selection-end-line="104" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -163,11 +159,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitlab-ci.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+            <state relative-caret-position="315">
+              <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -193,10 +189,10 @@
         <option value="$PROJECT_DIR$/zuulgateway/pom.xml" />
         <option value="$PROJECT_DIR$/movie-cruiser-app/pom.xml" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/stylesheet.xsl" />
         <option value="$PROJECT_DIR$/catalog.xml" />
         <option value="$PROJECT_DIR$/.gitlab-ci.yml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -296,7 +292,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540925089837" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540925457693" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/movie-cruiser-app/target/coverage-reports/jacoco-unit.exec" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -556,26 +552,8 @@
     <entry file="file://$PROJECT_DIR$/config-server/target/coverage-reports/jacoco-unit.exec">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="117" selection-start-column="117" selection-end-column="117" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config-server/target/site/jacoco/index.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="111" selection-start-line="111" selection-end-line="111" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stylesheet.xsl">
       <provider selected="true" editor-type-id="text-editor">
@@ -591,10 +569,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="117" selection-start-column="117" selection-end-column="117" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitlab-ci.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        <state relative-caret-position="315">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="104" column="25" lean-forward="true" selection-start-line="82" selection-start-column="16" selection-end-line="104" selection-end-column="25" />
         </state>
       </provider>
     </entry>
