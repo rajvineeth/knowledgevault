@@ -1,0 +1,9 @@
+
+bsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(ñÖ–
+bsquid:CommentedOutCodeLine5"<This block of commented-out lines of code should be removed.(–·à 
+gsquid:CommentedOutCodeLineQ"<This block of commented-out lines of code should be removed.(Ìş¬ˆûÿÿÿÿ
+~squid:S1488I"bImmediately return this expression instead of assigning it to the temporary variable "savedMovie".(â˜ôıÿÿÿÿ
+>squid:S1905"'Remove this unnecessary cast to "List".(½À…
+Lsquid:S3655>"5Call "movie1.isPresent()" before accessing the value.(öŞ²
+Qsquid:S3655H"5Call "movie1.isPresent()" before accessing the value.(“ğã™şÿÿÿÿ
+|squid:UselessImportCheck	"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡¸Îùÿÿÿÿ
