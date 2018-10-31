@@ -1,9 +1,7 @@
 package com.stackroute.moviecruiserapp.service;
 
-import com.fasterxml.jackson.annotation.OptBoolean;
 import com.stackroute.moviecruiserapp.domain.Movie;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

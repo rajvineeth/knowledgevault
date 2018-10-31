@@ -1,7 +1,6 @@
 package com.stackroute.moviecruiserapp.repository;
 
 import com.stackroute.moviecruiserapp.domain.Movie;
-import com.stackroute.moviecruiserapp.exceptions.MovieNotFoundException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,13 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
-import java.util.Optional;
 
 //This is integrated test we need DB server
 //Find out what are testRunner

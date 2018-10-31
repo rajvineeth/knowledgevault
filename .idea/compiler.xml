@@ -9,8 +9,19 @@
         <module name="config-server" />
         <module name="eureka-registry" />
         <module name="movie-cruiser-app" />
+        <module name="movie-cruiser-app (1)" />
+        <module name="paragraph-summarization-service" />
         <module name="zuulgateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="config-server" target="1.7" />
+      <module name="eureka-registry" target="1.7" />
+      <module name="knowledge-vault-parent" target="1.7" />
+      <module name="movie-cruiser-app" target="8" />
+      <module name="movie-cruiser-app (1)" target="8" />
+      <module name="paragraph-summarization-service" target="8" />
+      <module name="zuulgateway" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
