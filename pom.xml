@@ -15,6 +15,7 @@
         <module>eureka-registry</module>
         <module>zuulgateway</module>
         <module>document-identifier-elasticsearch</module>
+        <module>paragraph-tokenizer</module>
     </modules>
 
     <properties>

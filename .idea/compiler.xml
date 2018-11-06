@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="eureka-registry" />
+        <module name="paragraph-tokenizer" />
         <module name="spring-boot-elasticsearch" />
         <module name="zuulgateway" />
       </profile>

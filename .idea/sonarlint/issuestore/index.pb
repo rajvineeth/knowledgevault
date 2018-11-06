@@ -1,6 +1,13 @@
 
+<<<<<<< HEAD
 C
 zuulgateway/pom.xml,7/b/7b270263e879b29ab2884df7c80967708648001f
+=======
+>
+.gitlab-ci.yml,5/8/587d266bb27a4dc3022bbed44dfa19849df3044c
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+>>>>>>> b815b4364594aa35eab0d487d816ebcc835491f9
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 •
