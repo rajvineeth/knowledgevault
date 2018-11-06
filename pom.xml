@@ -13,8 +13,6 @@
     <modules>
         <module>config-server</module>
         <module>eureka-registry</module>
-        <module>movie-cruiser-app</module>
-        <module>paragraph-summarization-service</module>
         <module>zuulgateway</module>
     </modules>
 
