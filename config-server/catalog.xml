@@ -1,4 +1,0 @@
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-    <public publicId="-//JACOCO//DTD Report 1.0//EN"
-            uri="src/main/java/org/jacoco/report/xml/report.dtd"/>
-</catalog>
