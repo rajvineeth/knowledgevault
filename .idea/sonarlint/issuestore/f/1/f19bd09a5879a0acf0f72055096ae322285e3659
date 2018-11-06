@@ -1,0 +1,20 @@
+
+¢%squid:RedundantThrowsDeclarationCheck,"qRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from constructor's body.(š²ÙÁ
+U
+squid:S106•"9Replace this use of System.out or System.err by a logger.(áëýšÿÿÿÿÿ
+squid:S1488H"cImmediately return this expression instead of assigning it to the temporary variable "sourceAsMap".(Ÿ¾·üýÿÿÿÿ
+squid:S1488U"cImmediately return this expression instead of assigning it to the temporary variable "sourceAsMap".(³êû©ýÿÿÿÿ
+Dsquid:S14817"-Remove this unused "response" local variable.(þÆ¢¸
+Jsquid:S1481b"3Remove this unused "deleteResponse" local variable.(Ï‰‹Ÿ
+7squid:S1170%"!Make this final field static too.(’§¤h
+=squid:S1170&"!Make this final field static too.(ñüÉ€ýÿÿÿÿ
+isquid:S2259’"LA "NullPointerException" could be thrown; "searchResponse" is nullable here.(°² ¯üÿÿÿÿ
+hsquid:S2259w"LA "NullPointerException" could be thrown; "searchResponse" is nullable here.(°² ¯üÿÿÿÿ
+esquid:S2259H"IA "NullPointerException" could be thrown; "getResponse" is nullable here.(Ÿ¾·üýÿÿÿÿ
+Ssquid:S18547"<Remove this useless assignment to local variable "response".(þÆ¢¸
+Ysquid:S1854b"BRemove this useless assignment to local variable "deleteResponse".(Ï‰‹Ÿ
+gsquid:S00116%"PRename this field "INDEX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’§¤h
+lsquid:S00116&"ORename this field "TYPE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñüÉ€ýÿÿÿÿ
+|squid:UselessImportCheck"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡ž¸Îùÿÿÿÿ
+Tsquid:UselessImportCheck"0Remove this unused import 'java.nio.file.Files'.(‚ƒü
+Tsquid:UselessImportCheck"0Remove this unused import 'java.nio.file.Paths'.(áè°¯

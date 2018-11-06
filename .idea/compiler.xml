@@ -13,6 +13,7 @@
         <module name="paragraph-processor" />
         <module name="paragraph-summarization-service" />
         <module name="paragraph-tokenizer" />
+        <module name="spring-boot-elasticsearch" />
         <module name="zuulgateway" />
       </profile>
     </annotationProcessing>
@@ -25,6 +26,7 @@
       <module name="paragraph-processor" target="1.7" />
       <module name="paragraph-summarization-service" target="8" />
       <module name="paragraph-tokenizer" target="1.7" />
+      <module name="spring-boot-elasticsearch" target="1.7" />
       <module name="zuulgateway" target="1.7" />
     </bytecodeTargetLevel>
   </component>
