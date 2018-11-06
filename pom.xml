@@ -16,6 +16,7 @@
         <module>zuulgateway</module>
         <module>document-identifier-elasticsearch</module>
         <module>paragraph-tokenizer</module>
+	    <module>paragraph-processor</module>
     </modules>
 
     <properties>
