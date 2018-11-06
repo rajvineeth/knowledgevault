@@ -5,3 +5,17 @@
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
+K
+paragraph-tokenizer/pom.xml,5/1/5120980b0f4706f94447b214c669dc8014436fec
+°
+qparagraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/service/ParaTokenizerImpl.java,5/d/5da6c3d7d3b351efd9ee178e3243547a85387a05
+ù
+mparagraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/service/ParaTokenizer.java,9/4/94936f085d8f166786d6e05eacb01abd73b43bd3
+É
+Sparagraph-processor/src/main/java/com/stackroute/ParagraphProcessorApplication.java,9/3/93bb872f724319e15de17d0ba8eb7242a1172eca
+Å
+Qparagraph-processor/src/main/java/com/stackroute/Utilities/SentenceTokenizer.java,4/3/435a214fc18612a62814013661cc067c86c1a667
+K
+paragraph-processor/pom.xml,a/3/a3003b556e160e97328aae9410bc39b4dd86b0fd
+G
+Crawler-service/pom.xml,3/4/349eadc42832648609c8e0029d58c7a99e62c5c9

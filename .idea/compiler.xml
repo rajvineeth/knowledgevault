@@ -10,6 +10,7 @@
         <module name="eureka-registry" />
         <module name="movie-cruiser-app" />
         <module name="movie-cruiser-app (1)" />
+        <module name="paragraph-processor" />
         <module name="paragraph-summarization-service" />
         <module name="paragraph-tokenizer" />
         <module name="zuulgateway" />
@@ -21,6 +22,7 @@
       <module name="knowledge-vault-parent" target="1.7" />
       <module name="movie-cruiser-app" target="8" />
       <module name="movie-cruiser-app (1)" target="8" />
+      <module name="paragraph-processor" target="1.7" />
       <module name="paragraph-summarization-service" target="8" />
       <module name="paragraph-tokenizer" target="1.7" />
       <module name="zuulgateway" target="1.7" />

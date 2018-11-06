@@ -15,6 +15,7 @@
         <module>eureka-registry</module>
         <module>zuulgateway</module>
         <module>paragraph-tokenizer</module>
+	    <module>paragraph-processor</module>
     </modules>
 
     <properties>
