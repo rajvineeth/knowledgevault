@@ -5,9 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-registry/eureka-registry.iml" filepath="$PROJECT_DIR$/eureka-registry/eureka-registry.iml" />
       <module fileurl="file://$PROJECT_DIR$/knowledge-vault-parent.iml" filepath="$PROJECT_DIR$/knowledge-vault-parent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/movie-cruiser-app/movie-cruiser-app.iml" filepath="$PROJECT_DIR$/movie-cruiser-app/movie-cruiser-app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/paragraph-summarization-service/movie-cruiser-app (1).iml" filepath="$PROJECT_DIR$/paragraph-summarization-service/movie-cruiser-app (1).iml" />
-      <module fileurl="file://$PROJECT_DIR$/paragraph-summarization-service/paragraph-summarization-service.iml" filepath="$PROJECT_DIR$/paragraph-summarization-service/paragraph-summarization-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/paragraph-tokenizer/paragraph-tokenizer.iml" filepath="$PROJECT_DIR$/paragraph-tokenizer/paragraph-tokenizer.iml" />
       <module fileurl="file://$PROJECT_DIR$/zuulgateway/zuulgateway.iml" filepath="$PROJECT_DIR$/zuulgateway/zuulgateway.iml" />
     </modules>
   </component>

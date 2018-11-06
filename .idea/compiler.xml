@@ -11,6 +11,7 @@
         <module name="movie-cruiser-app" />
         <module name="movie-cruiser-app (1)" />
         <module name="paragraph-summarization-service" />
+        <module name="paragraph-tokenizer" />
         <module name="zuulgateway" />
       </profile>
     </annotationProcessing>
@@ -21,6 +22,7 @@
       <module name="movie-cruiser-app" target="8" />
       <module name="movie-cruiser-app (1)" target="8" />
       <module name="paragraph-summarization-service" target="8" />
+      <module name="paragraph-tokenizer" target="1.8" />
       <module name="zuulgateway" target="1.7" />
     </bytecodeTargetLevel>
   </component>
