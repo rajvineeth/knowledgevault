@@ -16,6 +16,7 @@
         <module>zuulgateway</module>
         <module>document-identifier-elasticsearch</module>
         <module>paragraph-tokenizer</module>
+	    <module>paragraph-processor</module>
     </modules>
 
     <properties>
@@ -37,6 +38,18 @@
             <version>0.8.2</version>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.6.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
@@ -44,18 +57,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.1</version>
                 <configuration><testFailureIgnore>true</testFailureIgnore></configuration>
-                <!--<configuration>-->
-                <!--&lt;!&ndash; Sets the VM argument line used when unit tests are run. &ndash;&gt;-->
-                <!--&lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
-                <!--<argLine>${surefireArgLine}</argLine>-->
-                <!--&lt;!&ndash; Skips unit tests if the value of skip.unit.tests property is true &ndash;&gt;-->
-                <!--&lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
-                <!--<skipTests>${skip.unit.tests}</skipTests>-->
-                <!--&lt;!&ndash; Excludes integration tests when unit tests are run. &ndash;&gt;-->
-                <!--<excludes>-->
-                <!--<exclude>**/IT*.java</exclude>-->
-                <!--</excludes>-->
-                <!--</configuration>-->
             </plugin>
             <plugin>
             <groupId>org.jacoco</groupId>
@@ -81,59 +82,6 @@
                 </execution>
             </executions>
         </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>xml-maven-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>transform</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<catalogs>-->
-                        <!--<catalog>catalog.xml</catalog>-->
-                    <!--</catalogs>-->
-                    <!--<transformationSets>-->
-                        <!--<transformationSet>-->
-                            <!--<dir>./</dir>-->
-                            <!--<includes>target/site/jacoco/jacoco.xml</includes>-->
-                            <!--<stylesheet>stylesheet.xsl</stylesheet>-->
-                        <!--</transformationSet>-->
-                    <!--</transformationSets>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
         </plugins>
     </build>
-<!--<build>-->
-    <!--<plugins>-->
-        <!--<plugin>-->
-            <!--<groupId>org.jacoco</groupId>-->
-            <!--<artifactId>jacoco-maven-plugin</artifactId>-->
-            <!--<version>0.7.7.201606060606</version>-->
-            <!--<configuration>-->
-                <!--<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>-->
-                <!--<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>-->
-            <!--</configuration>-->
-            <!--&lt;!&ndash;<executions>&ndash;&gt;-->
-                <!--&lt;!&ndash;<execution>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<id>jacoco-initialize</id>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<goals>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<goal>prepare-agent</goal>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</goals>&ndash;&gt;-->
-                <!--&lt;!&ndash;</execution>&ndash;&gt;-->
-                <!--&lt;!&ndash;<execution>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<id>jacoco-site</id>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<phase>package</phase>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<goals>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<goal>report</goal>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</goals>&ndash;&gt;-->
-                <!--&lt;!&ndash;</execution>&ndash;&gt;-->
-            <!--&lt;!&ndash;</executions>&ndash;&gt;-->
-        <!--</plugin>-->
-    <!--</plugins>-->
-<!--</build>-->
-
-
 </project>

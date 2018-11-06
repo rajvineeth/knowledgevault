@@ -12,10 +12,10 @@
 	<description>Crawler service for Knowledge Vault</description>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.0.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.stackroute</groupId>
+		<artifactId>knowledge-vault-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../../knowledge-vault</relativePath>
 	</parent>
 
 	<properties>
@@ -25,6 +25,13 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
