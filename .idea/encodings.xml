@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/document-identifier-elasticsearch" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-registry" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/paragraph-tokenizer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zuulgateway" charset="UTF-8" />
