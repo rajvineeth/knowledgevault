@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="Crawler-service" />
         <module name="eureka-registry" />
         <module name="NLPService" />
         <module name="paragraph-processor" />
@@ -17,6 +18,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="config-server" target="1.7" />
+      <module name="Crawler-service" target="1.7" />
       <module name="eureka-registry" target="1.7" />
       <module name="knowledge-vault-parent" target="1.7" />
       <module name="NLPService" target="10" />
