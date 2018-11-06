@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-registry/eureka-registry.iml" filepath="$PROJECT_DIR$/eureka-registry/eureka-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/knowledge-vault-parent.iml" filepath="$PROJECT_DIR$/knowledge-vault-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/paragraph-processor/paragraph-processor.iml" filepath="$PROJECT_DIR$/paragraph-processor/paragraph-processor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/paragraph-tokenizer/paragraph-tokenizer.iml" filepath="$PROJECT_DIR$/paragraph-tokenizer/paragraph-tokenizer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/document-identifier-elasticsearch/spring-boot-elasticsearch.iml" filepath="$PROJECT_DIR$/document-identifier-elasticsearch/spring-boot-elasticsearch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zuulgateway/zuulgateway.iml" filepath="$PROJECT_DIR$/zuulgateway/zuulgateway.iml" />
+    </modules>
+  </component>
+</project>

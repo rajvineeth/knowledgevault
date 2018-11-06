@@ -4,7 +4,8 @@
 /build/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
-
+.idea/**
+knowledge-vault-parent.iml
 ######################
 # Node
 ######################
