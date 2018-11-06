@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7786d93-a7de-43d6-b196-e34f25762c17" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d7786d93-a7de-43d6-b196-e34f25762c17" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/paragraph-tokenizer/target/" />
     <ignored path="$PROJECT_DIR$/config-server/target/" />
     <ignored path="$PROJECT_DIR$/paragraph-processor/target/" />
@@ -61,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+            <state relative-caret-position="270">
+              <caret line="18" column="44" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -105,6 +100,35 @@
               <item name="knowledge-vault" type="462c0819:PsiDirectoryNode" />
               <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="knowledge-vault-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="knowledge-vault" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="sonarlint" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="knowledge-vault-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="knowledge-vault" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="sonarlint" type="462c0819:PsiDirectoryNode" />
+              <item name="issuestore" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="knowledge-vault-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="knowledge-vault" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="sonarlint" type="462c0819:PsiDirectoryNode" />
+              <item name="issuestore" type="462c0819:PsiDirectoryNode" />
+              <item name="6" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="knowledge-vault-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="knowledge-vault" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="sonarlint" type="462c0819:PsiDirectoryNode" />
+              <item name="issuestore" type="462c0819:PsiDirectoryNode" />
+              <item name="7" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -112,7 +136,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541496487019" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541496653848" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
   </component>
   <component name="RunDashboard">
@@ -174,12 +198,12 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24980047" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24980047" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="SonarLint" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.3284553" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -233,8 +257,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+        <state relative-caret-position="270">
+          <caret line="18" column="44" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="44" />
         </state>
       </provider>
     </entry>
