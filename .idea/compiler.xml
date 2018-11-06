@@ -13,5 +13,13 @@
         <module name="zuulgateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="config-server" target="1.7" />
+      <module name="eureka-registry" target="1.7" />
+      <module name="knowledge-vault-parent" target="1.7" />
+      <module name="paragraph-tokenizer" target="1.7" />
+      <module name="spring-boot-elasticsearch" target="1.7" />
+      <module name="zuulgateway" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,10 +1,0 @@
-
-ƒ squid:ForLoopCounterChangedCheck6"XRefactor the code in order to not assign to this loop counter from within the loop body.(¨…ÄK
-¢%squid:RedundantThrowsDeclarationCheck"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(µ½¾äüÿÿÿÿ
-bsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(”…²
-squid:S1319@"sThe return type of this method should be an interface such as "Map" rather than the implementation "LinkedHashMap".(›È˜¨øÿÿÿÿ
-}squid:S1488="aImmediately return this expression instead of assigning it to the temporary variable "sortedMap".(€ÏÂûÿÿÿÿ
-Dsquid:S1481."-Remove this unused "document" local variable.(°ìôß
-csquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(µ½¾äüÿÿÿÿ
-Ssquid:S1854."<Remove this useless assignment to local variable "document".(°ìôß
-qsquid:UselessImportCheck"HRemove this unused import 'org.elasticsearch.index.mapper.ParseContext'.(î®ž·üÿÿÿÿ
