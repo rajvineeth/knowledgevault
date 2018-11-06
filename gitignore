@@ -4,7 +4,7 @@
 /build/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
-.idea/workspace.xml
+**/.idea/workspace.xml
 **/.idea/tasks.xml
 knowledge-vault-parent.iml
 
