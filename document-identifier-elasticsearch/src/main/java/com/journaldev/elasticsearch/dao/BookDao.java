@@ -1,9 +1,13 @@
 package com.journaldev.elasticsearch.dao;
 
+import au.com.bytecode.opencsv.CSVReader;
 import com.journaldev.elasticsearch.bean.Book;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequest;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequestBuilder;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
@@ -14,9 +18,12 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.ElasticsearchClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -25,11 +32,15 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import static java.util.Collections.emptySet;
 
 @Repository
 public class BookDao {
@@ -47,7 +58,7 @@ public class BookDao {
     }
 
     public Book insertBook(Book book){
-        book.setId(UUID.randomUUID().toString());
+       // book.setId(UUID.randomUUID().toString());
         Map<String, Object> dataMap = objectMapper.convertValue(book, Map.class);
         IndexRequest indexRequest = new IndexRequest(INDEX, TYPE, book.getId())
                 .source(dataMap);
@@ -72,6 +83,18 @@ public class BookDao {
         Map<String, Object> sourceAsMap = getResponse.getSourceAsMap();
         return sourceAsMap;
     }
+//    public String analyze(String content){
+//
+//        AnalyzeRequest analyzeRequest=new AnalyzeRequest();
+//        AnalyzeResponse analyzeResponse=null;
+//        analyzeRequest.text(content);
+//        analyzeRequest.tokenizer("standard");
+//        analyzeRequest.addTokenFilter("lowercase");
+//        analyzeRequest.analyzer("english");
+//        analyzeResponse= restHighLevelClient.indices().analyze(analyzeRequest);
+//
+//    }
+
 
     public Map<String, Object> updateBookById(String id, Book book){
         UpdateRequest updateRequest = new UpdateRequest(INDEX, TYPE, id)
@@ -100,11 +123,20 @@ public class BookDao {
             e.getLocalizedMessage();
         }
     }
-    public float getScore(String content){
+
+    public float getScore(String content,String id){
         SearchRequest searchRequest=new SearchRequest(INDEX);
         searchRequest.types(TYPE);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        sourceBuilder.query(QueryBuilders.matchQuery("content", content));
+
+        BoolQueryBuilder boolQuery = new BoolQueryBuilder();
+        HashMap<String,String> fields=new HashMap();
+        fields.put("content",content);
+        fields.put("id",id);
+        for (Map.Entry<String, String> entry : fields.entrySet()){
+            boolQuery.must(QueryBuilders.matchQuery(entry.getKey(), entry.getValue()));
+        }
+        sourceBuilder.query(boolQuery);
         sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
         sourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));
         searchRequest.source(sourceBuilder);
@@ -117,10 +149,8 @@ public class BookDao {
             e.getLocalizedMessage();
         }
         SearchHit[] hits = searchResponse.getHits().getHits();
-        Collection<Map<String, Object>> contracts = new LinkedList<>();
         for (SearchHit hit : hits) {
            score= hit.getScore();
-            contracts.add(hit.getSourceAsMap());
         }
         return score;
 
@@ -146,12 +176,53 @@ public class BookDao {
         SearchHit[] hits = searchResponse.getHits().getHits();
         Collection<Map<String, Object>> contracts = new LinkedList<>();
         for (SearchHit hit : hits) {
-            System.out.println(hit.getScore());
+            System.out.println("hit: "+hit.getScore());
             contracts.add(hit.getSourceAsMap());
         }
         return contracts;
 
     }
+    public Collection<Map<String, Object>> getAll(){
 
+        SearchRequest searchRequest=new SearchRequest(INDEX);
+        searchRequest.types(TYPE);
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        sourceBuilder.query(QueryBuilders.matchAllQuery());
+        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+        sourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));
+        searchRequest.source(sourceBuilder);
+        SearchResponse searchResponse=null;
+        try{
+            searchResponse=restHighLevelClient.search(searchRequest);
+        }
+        catch (java.io.IOException e){
+            e.getLocalizedMessage();
+        }
+        SearchHit[] hits = searchResponse.getHits().getHits();
+        Collection<Map<String, Object>> contracts = new LinkedList<>();
+        for (SearchHit hit : hits) {
+            contracts.add(hit.getSourceAsMap());
+        }
+        return contracts;
+    }
+    public List<String> getDiseases() throws IOException {
+        CSVReader reader = new CSVReader(new FileReader("document-identifier-elasticsearch/src/main/Docs/DOID.csv"),',');
+        List<String[]> allRows = reader.readAll();
+        List<String> diseases=new ArrayList<>();
+        for(String[] row : allRows){
+            diseases.add(row[1]);
+        }
+        return diseases;
+    }
+
+    public List<String> getSymptoms() throws IOException {
+        CSVReader reader = new CSVReader(new FileReader("document-identifier-elasticsearch/src/main/Docs/SYMP.csv"),',');
+        List<String[]> allRows = reader.readAll();
+        List<String> diseases=new ArrayList<>();
+        for(String[] row : allRows){
+            diseases.add(row[1]);
+        }
+        return diseases;
+    }
 
 }

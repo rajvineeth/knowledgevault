@@ -18,8 +18,11 @@ public class Loaders implements ApplicationListener<ContextRefreshedEvent>  {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         try {
-              bookDao.insertBook(new Book("10","title",new String(Files.readAllBytes(Paths.get("src/main/Docs/Asthma.txt")))));
-            //bookDao.insertBook(new Book("11","title",new String(Files.readAllBytes(Paths.get("src/main/Docs/Cholestrol.txt")))));
+              bookDao.insertBook(new Book("10","title",new String(Files.readAllBytes(Paths.get("document-identifier-elasticsearch/src/main/Docs/document1.txt")))));
+            bookDao.insertBook(new Book("11","title",new String(Files.readAllBytes(Paths.get("document-identifier-elasticsearch/src/main/Docs/document2.txt")))));
+            bookDao.insertBook(new Book("12","title",new String(Files.readAllBytes(Paths.get("document-identifier-elasticsearch/src/main/Docs/document3.txt")))));
+            bookDao.insertBook(new Book("13","title",new String(Files.readAllBytes(Paths.get("document-identifier-elasticsearch/src/main/Docs/document4.txt")))));
+            bookDao.insertBook(new Book("14","title",new String(Files.readAllBytes(Paths.get("document-identifier-elasticsearch/src/main/Docs/document5.txt")))));
         } catch (IOException e) {
             e.printStackTrace();
         }
