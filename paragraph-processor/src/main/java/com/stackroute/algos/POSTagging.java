@@ -14,6 +14,13 @@ import java.util.Properties;
 public class POSTagging {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(POSTagging.class);
+    private FullTextSearch fullTextSearch = new FullTextSearchImpl();
+
+    public POSTagging() {
+
+       // default constructor
+    }
+
 
     /**
      * This function performs the prt-of-speech tagging of each word in a given text file
@@ -38,5 +45,13 @@ public class POSTagging {
             }
         }
         return sb.toString().trim();
+    }
+
+    public static void main(String[] args) {
+
+        POSTagging pst = new POSTagging();
+//        String res=String.valueOf(pst.fullTextSearch.indexer());
+//        LOGGER.info("number of indexed documents: {}",res);
+        pst.fullTextSearch.search("narcolepsy");
     }
 }

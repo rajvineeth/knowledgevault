@@ -1,5 +1,7 @@
 package com.stackroute;
 
+import com.stackroute.algos.FullTextSearch;
+import com.stackroute.algos.POSTagging;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
