@@ -4,7 +4,11 @@ import com.stackroute.Crawlerservice.Extractor.FileExtractedData;
 import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.pdf.PDFParser;
+import org.apache.tika.sax.BodyContentHandler;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -57,16 +61,27 @@ public class ExtractorServiceImpl implements ExtractorService {
 
         FileInputStream inputStream = new FileInputStream(file);
         FileExtractedData data = new FileExtractedData();
+        BodyContentHandler handler = new BodyContentHandler(-1);
+        ParseContext pcontext = new ParseContext();
 
-        Tika tika = new Tika();
+//        Tika tika = new Tika();
         Metadata metadata = new Metadata();
+//        tika.parse(inputStream, metadata);
 
-        tika.parse(inputStream, metadata);
+        //parsing the document using PDF parser
+        PDFParser pdfparser = new PDFParser();
+        try {
+            pdfparser.parse(inputStream, handler, metadata, pcontext);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
 
         data.setMetadata(String.valueOf(metadata));
-        data.setContent(tika.parseToString(file));
+//        data.setContent(tika.parseToString(file));
+        data.setContent(handler.toString());
 
         return data;
+
     }
 
 }

@@ -15,6 +15,7 @@ public class POSTagging {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(POSTagging.class);
     private FullTextSearch fullTextSearch = new FullTextSearchImpl();
+    private static boolean init;
 
     public POSTagging() {
 
@@ -48,10 +49,9 @@ public class POSTagging {
     }
 
     public static void main(String[] args) {
-
         POSTagging pst = new POSTagging();
-//        String res=String.valueOf(pst.fullTextSearch.indexer());
-//        LOGGER.info("number of indexed documents: {}",res);
+        pst.fullTextSearch.indexer(pst.init);
+        pst.init = true;
         pst.fullTextSearch.search("narcolepsy");
     }
 }
