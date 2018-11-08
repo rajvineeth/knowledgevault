@@ -1,4 +1,4 @@
-package com.journaldev.elasticsearch;
+package com.stackroute;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-public class Elastic6Application {
+public class DocIdentifierApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Elastic6Application.class, args);
+		SpringApplication.run(DocIdentifierApplication.class, args);
 	}
 }
