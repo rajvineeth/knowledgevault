@@ -1,4 +1,4 @@
-package com.journaldev.elasticsearch;
+package com.stackroute;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Elastic6ApplicationTests {
+public class DocIdentifierApplicationTests {
 
 	@Test
 	public void contextLoads() {

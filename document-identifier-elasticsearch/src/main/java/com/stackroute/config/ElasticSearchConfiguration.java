@@ -1,4 +1,4 @@
-package com.journaldev.elasticsearch.config;
+package com.stackroute.config;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ElasticSearchConfiguration extends AbstractFactoryBean<RestHighLevelClient> {
 
-    private static final Logger logger = LoggerFactory.getLogger(ElasticSearchConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(ElasticSearchConfiguration.class);
     @Value("${spring.data.elasticsearch.cluster-nodes}")
     private String clusterNodes;
     @Value("${spring.data.elasticsearch.cluster-name}")
@@ -51,6 +51,7 @@ public class ElasticSearchConfiguration extends AbstractFactoryBean<RestHighLeve
                     RestClient.builder(
                             new HttpHost("localhost", 9200, "http"),
                             new HttpHost("localhost", 9201, "http")));
+            log.info("established connection");
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

@@ -1,15 +1,15 @@
-package com.journaldev.elasticsearch.bean;
+package com.stackroute.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Book {
+public class Document {
 
     private String id;
     private String title;
     private String content;
 
-    public Book(String id, String title, String content) {
+    public Document(String id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;

@@ -21,5 +21,5 @@ public class OutputForDoc {
 
     private String docTitle;
 
-    private List<String> Keywords;
+    private List<String> keywords;
 }
