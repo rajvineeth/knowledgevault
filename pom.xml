@@ -18,6 +18,7 @@
         <module>paragraph-tokenizer</module>
 	    <module>paragraph-processor</module>
         <module>Crawler-service</module>
+        <module>NLPService</module>
     </modules>
 
     <properties>
