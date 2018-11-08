@@ -1,12 +1,12 @@
-package com.stackroute.Crawlerservice;
+package com.stackroute.Extractorservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CrawlerServiceApplication {
+public class ExtractorServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrawlerServiceApplication.class, args);
+		SpringApplication.run(ExtractorServiceApplication.class, args);
 	}
 }

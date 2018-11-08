@@ -1,9 +1,7 @@
-package com.stackroute.Crawlerservice.Extractor;
+package com.stackroute.Extractorservice.Extractor;
 
 
-import org.apache.tika.metadata.Metadata;
-
-public class FileExtractedData {
+public class ExtractedFileData {
 
     private String metadata;
     private Object content;
