@@ -1,13 +1,13 @@
 package com.stackroute.Crawlerservice.Service;
 
-//import jdk.internal.org.xml.sax.SAXException;
+import com.stackroute.Crawlerservice.Extractor.FileExtractedData;
 import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,9 +15,7 @@ import java.util.List;
 public class ExtractorServiceImpl implements ExtractorService {
 
     @Override
-    public File[] getAllFiles(String path) {
-
-        System.out.println("triggered");
+    public List<File> getAllFiles(String path) {
 
         File directory = new File(path);
 
@@ -36,25 +34,39 @@ public class ExtractorServiceImpl implements ExtractorService {
                 }
             }
 
-        File[] allFiles = (File[]) list.toArray();
-        return allFiles;
+        return list;
     }
 
     @Override
-    public String detectDocTypeUsingFacade(InputStream stream)
-            throws IOException {
+    public List<String> detectDocType(List<File> allFiles) throws IOException, TikaException {
 
+        List<String> docTypes = new ArrayList<String>();
         Tika tika = new Tika();
-        String mediaType = tika.detect(stream);
-        System.out.println(mediaType);
-        return mediaType;
+
+        for (File file : allFiles) {
+            FileInputStream inputstream = new FileInputStream(file);
+            String mediaType = tika.detect(inputstream);
+            docTypes.add(mediaType);
+        }
+
+        return docTypes;
     }
 
     @Override
-    public String extractContentUsingParser(InputStream stream) throws IOException, TikaException {
+    public FileExtractedData extractOneFile(File file) throws IOException, TikaException {
+
+        FileInputStream inputStream = new FileInputStream(file);
+        FileExtractedData data = new FileExtractedData();
 
         Tika tika = new Tika();
-        String content = tika.parseToString(stream);
-        return content;
+        Metadata metadata = new Metadata();
+
+        tika.parse(inputStream, metadata);
+
+        data.setMetadata(String.valueOf(metadata));
+        data.setContent(tika.parseToString(file));
+
+        return data;
     }
+
 }

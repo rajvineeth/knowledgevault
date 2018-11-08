@@ -12,10 +12,10 @@
 	<description>Crawler service for Knowledge Vault</description>
 
 	<parent>
-		<groupId>com.stackroute</groupId>
-		<artifactId>knowledge-vault-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
-		<relativePath>../../knowledge-vault</relativePath>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -25,13 +25,6 @@
 	</properties>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-parent</artifactId>
-			<version>2.1.0.RELEASE</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -47,17 +40,30 @@
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
-            <version>1.19.1</version>
+            <version>1.18</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-parsers</artifactId>
-            <version>1.19.1</version>
+            <version>1.18</version>
         </dependency>
 
-    </dependencies>
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox &ndash;&gt;
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>2.0.12</version>
+		</dependency>
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>jbig2-imageio</artifactId>
+            <version>3.0.0</version>
+        </dependency>-->
+
+	</dependencies>
 
 	<build>
 		<plugins>

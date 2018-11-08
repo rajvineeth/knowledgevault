@@ -710,7 +710,7 @@ Tools
 
 Print/export
 
-    Create a book
+    Create a document
     Download as PDF
     Printable version
 

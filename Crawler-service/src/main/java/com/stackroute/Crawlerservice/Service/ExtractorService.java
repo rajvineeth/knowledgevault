@@ -1,17 +1,18 @@
 package com.stackroute.Crawlerservice.Service;
 
 //import jdk.internal.org.xml.sax.SAXException;
+import com.stackroute.Crawlerservice.Extractor.FileExtractedData;
 import org.apache.tika.exception.TikaException;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.List;
 
 public interface ExtractorService {
 
-    public File[] getAllFiles(String path);
+    public List<File> getAllFiles(String path);
 
-    public String detectDocTypeUsingFacade(InputStream stream) throws IOException;
+    public List<String> detectDocType(List<File> allFiles) throws IOException, TikaException;
 
-    public String extractContentUsingParser(InputStream stream) throws IOException, TikaException;
+    public FileExtractedData extractOneFile(File file) throws IOException, TikaException;
+
 }
