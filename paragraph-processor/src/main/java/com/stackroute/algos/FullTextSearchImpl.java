@@ -25,12 +25,11 @@ public class FullTextSearchImpl implements FullTextSearch {
 
     public static final String FILE = "/home/cgi/Documents/stackroute-proj/knowledge-vault/paragraph-processor/src/main/java/com/stackroute/assets";
     public static final String INDEX = "/home/cgi/Documents/stackroute-proj/knowledge-vault/paragraph-processor/src/main/java/com/stackroute/dataRepo";
-
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
 
     @Override
-    public int indexer() {
-        int numOfIndex=0;
+    public void indexer(boolean isItIndexed) {
+        if(isItIndexed) return;
         LOGGER.info("creating indices....");
         Analyzer analyzer = new StandardAnalyzer();
         try {
@@ -44,26 +43,19 @@ public class FullTextSearchImpl implements FullTextSearch {
                 LOGGER.info("indexing file {}",f.getCanonicalPath());
                 Document doc = new Document();
                 doc.add(new Field("path",f.getPath(), Field.Store.YES, Field.Index.ANALYZED));
-
+                doc.add(new Field("isIndexed","false", Field.Store.YES, Field.Index.ANALYZED));
                 Reader reader = new FileReader(f.getCanonicalPath());
-//                String cont="";
-//                int c;
-//                while((c = reader.read())!=-1) {
-//                    cont+=(char)c;
-//                }
-//                LOGGER.info("content: {}",cont);
-//                LOGGER.info("size:{}",cont.length());
                 doc.add(new Field("contents",reader));
                 indexWriter.addDocument(doc);
+                reader.close();
             }
-            numOfIndex = indexWriter.numDocs();
             indexWriter.close();
+
             LOGGER.info("indexing complete....");
         }
         catch(Exception e) {
             LOGGER.error(String.valueOf(e.getMessage()));
         }
-        return numOfIndex;
     }
 
     @Override
@@ -86,7 +78,6 @@ public class FullTextSearchImpl implements FullTextSearch {
                     String url = doc.get("path");
                     if(url!="null") cnt++;
                     LOGGER.info("found in: {}",url);
-                    LOGGER.info("score value: {}",hits.scoreDocs[i].score);
                 }
                 LOGGER.info("total hit: {} ",cnt);
             }
