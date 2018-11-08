@@ -27,4 +27,5 @@ public class POSTaggingTest {
         String op2 = "Im/NN so/RB happy/JJ about/IN my/PRP$ marks/NNS";
         assertEquals(op1,op2);
     }
+
 }

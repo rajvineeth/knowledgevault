@@ -5,7 +5,7 @@
 
     <groupId>com.stackroute</groupId>
     <artifactId>knowledge-vault-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>knowledge-vault-parent</name>
     <!-- FIXME change it to the project's website -->
@@ -17,6 +17,8 @@
         <module>document-identifier-elasticsearch</module>
         <module>paragraph-tokenizer</module>
 	    <module>paragraph-processor</module>
+        <module>Crawler-service</module>
+        <module>NLPService</module>
     </modules>
 
     <properties>

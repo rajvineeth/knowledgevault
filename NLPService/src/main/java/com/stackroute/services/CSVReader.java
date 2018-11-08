@@ -5,26 +5,28 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CSVReader {
 
-    public List<String> getClass(String FileName, int index){
+    Logger logger;
+
+    public List<String> getClass(String fileName, int index){
         String line = "";
         String csvSplitBy = ",";
         List<String> resultList = new ArrayList<>();
 
-        try(BufferedReader br = new BufferedReader(new FileReader(FileName))){
+        try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
             int counter = 0;
             while((line = br.readLine()) != null && counter <= 3300){
                 String[] info = line.split(csvSplitBy);
-                //System.out.println(info[1]);
                 resultList.add(info[index]);
                 counter++;
             }
 
 
         }catch (IOException e){
-            e.printStackTrace();
+            logger.info(e.getMessage());
         }
         return resultList;
     }

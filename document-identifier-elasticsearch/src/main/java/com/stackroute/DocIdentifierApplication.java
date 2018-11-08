@@ -1,14 +1,14 @@
 package com.stackroute;
 
-import com.stackroute.algos.FullTextSearch;
-import com.stackroute.algos.POSTagging;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ParagraphProcessorApplication {
+@EnableAutoConfiguration
+public class DocIdentifierApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ParagraphProcessorApplication.class, args);
+		SpringApplication.run(DocIdentifierApplication.class, args);
 	}
 }

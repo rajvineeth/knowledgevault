@@ -3,8 +3,11 @@ package com.stackroute.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class StopwordRemoval {
+
+    private static Logger logger;
 
 
 
@@ -13,8 +16,7 @@ public class StopwordRemoval {
     {
         List<String> stopWords = new ArrayList<>();
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(stopWordsFilename));
+        try(BufferedReader br = new BufferedReader(new FileReader(stopWordsFilename))) {
             String line = br.readLine();
 
             while (line != null) {
@@ -23,7 +25,7 @@ public class StopwordRemoval {
             }
 
         }catch (Exception e){
-            System.out.println(e.getMessage());
+           logger.info(e.getMessage());
         }
 
 
@@ -40,7 +42,6 @@ public class StopwordRemoval {
             boolean flag = true;
             for(String stopword: stopwords){
                 if(term.equalsIgnoreCase(stopword)){
-                    //System.out.println(term);
                     flag = false;
                     break;
                 }
@@ -48,11 +49,6 @@ public class StopwordRemoval {
             if(flag)
                 resultingdoc.add(term);
         }
-
-        //System.out.println(resultingdoc);
-
-
-
         return resultingdoc;
     }
 

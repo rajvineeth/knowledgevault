@@ -50,7 +50,11 @@ public class DocumentServiceImpl implements DocumentService {
                 }
             }
         }
-        return Math.log(docs.size() / n);
+        if(n > 0) {
+            return Math.log(docs.size() / n);
+        }else{
+            return 0;
+        }
     }
 
     @Override
@@ -75,6 +79,7 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     private static HashMap sortByValues(HashMap map) {
+
         List list = new LinkedList(map.entrySet());
         // Defined Custom Comparator here
         Collections.sort(list, new Comparator() {
