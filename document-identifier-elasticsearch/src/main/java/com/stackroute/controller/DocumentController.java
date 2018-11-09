@@ -1,12 +1,14 @@
 package com.stackroute.controller;
 
 import com.stackroute.dao.DocumentDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.*;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api/v1/doc")
 public class DocumentController {
 
     private DocumentDao documentDao;
@@ -14,6 +16,9 @@ public class DocumentController {
     public DocumentController(DocumentDao documentDao) {
         this.documentDao = documentDao;
     }
+    @Autowired
+    private KafkaTemplate<String, Collection<Map>> kafkaTemplate;
+    private static final String Topic="kafka_example";
     @PostMapping
     public com.stackroute.domain.Document insertDoc(@RequestBody com.stackroute.domain.Document document){
         return documentDao.insertDoc(document);
@@ -24,7 +29,9 @@ public class DocumentController {
     }
     @GetMapping("/search")
     public Collection<Map> searchAll() throws IOException {
-        return documentDao.getKeywords();
+        Collection<Map> res=documentDao.getKeywords();
+        kafkaTemplate.send(Topic, res);
+        return res;
     }
     @GetMapping("/{content}")
     public Collection<Map<String, Object>> searchContent(@PathVariable String content){return documentDao.search(content);}

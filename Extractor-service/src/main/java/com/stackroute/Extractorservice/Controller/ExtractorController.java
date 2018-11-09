@@ -1,12 +1,14 @@
-package com.stackroute.Crawlerservice.Controller;
+package com.stackroute.Extractorservice.Controller;
 
-import com.stackroute.Crawlerservice.Extractor.FileExtractedData;
-import com.stackroute.Crawlerservice.Service.ExtractorService;
+import com.stackroute.Extractorservice.Extractor.ExtractedFileData;
+import com.stackroute.Extractorservice.Service.ExtractorService;
 import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +19,12 @@ import java.util.List;
 public class ExtractorController {
 
     @Autowired
-    ExtractorService service;
+    private ExtractorService service;
+
+    @Autowired
+    private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
+
+    private static final String Topic = "test";
 
     public ExtractorController(ExtractorService service) {
         this.service = service;
@@ -41,7 +48,7 @@ public class ExtractorController {
 
         try {
             for (File instance : allFiles) {
-                    FileExtractedData data = service.extractOneFile(instance);
+                    ExtractedFileData data = service.extractOneFile(instance);
                     String metadata = data.getMetadata();
                     Object content = data.getContent();
                     responseEntity = new ResponseEntity<String>("Details Sent", HttpStatus.OK);
@@ -51,6 +58,8 @@ public class ExtractorController {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
         catch (TikaException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+        } catch (SAXException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
         }
 
@@ -78,7 +87,7 @@ public class ExtractorController {
     @GetMapping("{path}/extract/{file}")
     public ResponseEntity<?> extractFile(@PathVariable("path") String path, @PathVariable("file") File file) {
 
-        FileExtractedData data;
+        ExtractedFileData data;
         ResponseEntity responseEntity = null;
         List<File> allFiles = service.getAllFiles("/home/cgi/" + path);
 
@@ -86,8 +95,10 @@ public class ExtractorController {
             for (File instance : allFiles) {
                 if (instance.getName().equals(file.getName())) {
                     data = service.extractOneFile(instance);
-                    System.out.println(data.getContent());
-                    responseEntity = new ResponseEntity<FileExtractedData>(data, HttpStatus.OK);
+
+                    kafkaTemplate.send(Topic, data);
+
+                    responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
                 }
 
@@ -97,6 +108,8 @@ public class ExtractorController {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
         catch (TikaException e) {
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+        } catch (SAXException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
         }
 
