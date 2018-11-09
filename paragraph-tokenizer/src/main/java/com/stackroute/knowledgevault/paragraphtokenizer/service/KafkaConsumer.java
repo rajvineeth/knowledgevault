@@ -9,11 +9,13 @@ public class KafkaConsumer {
 
     private Document document;
 
-    @KafkaListener(topics="kafka_example", groupId ="group_id")
-    public void consume(String message){
+    @KafkaListener(topics="test", groupId ="group_id")
+    public void consume(String message, ParaTokenizerImpl paraTokenizer){
+        this.document = document;
+        paraTokenizer.tokenizePara(document);
         System.out.println("consumed message:"+message);
     }
-    @KafkaListener(topics="kafka_example_jsonh",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
+    @KafkaListener(topics="test",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(Document document, ParaTokenizerImpl paraTokenizer){
         this.document = document;
         paraTokenizer.tokenizePara(document);
