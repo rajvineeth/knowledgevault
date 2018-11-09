@@ -15,7 +15,10 @@ public class POSTagging {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(POSTagging.class);
     private FullTextSearch fullTextSearch = new FullTextSearchImpl();
-    private static boolean init;
+
+    public FullTextSearch getFullTextSearch() {
+        return this.fullTextSearch;
+    }
 
     public POSTagging() {
 
@@ -46,12 +49,5 @@ public class POSTagging {
             }
         }
         return sb.toString().trim();
-    }
-
-    public static void main(String[] args) {
-        POSTagging pst = new POSTagging();
-        pst.fullTextSearch.indexer(pst.init);
-        pst.init = true;
-        pst.fullTextSearch.search("narcolepsy");
     }
 }

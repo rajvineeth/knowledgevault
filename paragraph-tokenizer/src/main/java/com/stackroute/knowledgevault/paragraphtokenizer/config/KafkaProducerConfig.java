@@ -11,13 +11,14 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
-public class KafkaConfig {
+public class KafkaProducerConfig {
 
     @Bean
-    public ProducerFactory<String, Document> producerFactory() {
+    public ProducerFactory<String, List<Document>> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -27,7 +28,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Document> kafkaTemplate() {
+    public KafkaTemplate<String, List<Document>> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
