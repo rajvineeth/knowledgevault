@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-public class KafkaConfig {
+public class KafkaProducerConfig {
 
     @Bean
     public ProducerFactory<String, List<Document>> producerFactory() {

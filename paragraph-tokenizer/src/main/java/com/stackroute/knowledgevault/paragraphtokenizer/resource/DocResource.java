@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("kafka")
 public class DocResource {
 
     @Autowired
-    private KafkaTemplate<String, Document> kafkaTemplate;
+    private KafkaTemplate<String, List<Document>> kafkaTemplate;
 
     @Autowired
     private ParaTokenizerImpl paraTokenizer;
@@ -22,7 +24,7 @@ public class DocResource {
 
     @GetMapping("/publish/{name}")
     public String post() {
-        kafkaTemplate.send(topic, paraTokenizer.);
+        kafkaTemplate.send(topic, paraTokenizer.tokenizePara(document));
         return "published successfully";
     }
 }
