@@ -15,18 +15,9 @@ public class POSTagging {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(POSTagging.class);
     private FullTextSearch fullTextSearch = new FullTextSearchImpl();
-    private static boolean init;
 
     public FullTextSearch getFullTextSearch() {
         return this.fullTextSearch;
-    }
-
-    public static boolean getInit() {
-        return init;
-    }
-
-    public static void setInit(boolean init) {
-        POSTagging.init = init;
     }
 
     public POSTagging() {

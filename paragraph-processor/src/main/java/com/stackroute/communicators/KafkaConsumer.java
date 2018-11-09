@@ -9,13 +9,18 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
 
+    // this will store the consumed data
     String input;
 
+    /**
+     * This method consumes the data for which it is listening kafka cluster to
+     * @param message: the wanted message
+     */
     @KafkaListener(topics = "kafkaTest", groupId = "group_id")
     public void consume(String message) {
         this.input=message;
         LOGGER.info("Consumed message: {} ",message);
-        LOGGER.info("response message: {} ","random response string");
+        LOGGER.info("response message: Thanks...I got the data!!");
     }
 
 }
