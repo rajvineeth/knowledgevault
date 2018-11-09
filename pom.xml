@@ -17,7 +17,7 @@
         <module>document-identifier-elasticsearch</module>
         <module>paragraph-tokenizer</module>
 	    <module>paragraph-processor</module>
-        <module>Crawler-service</module>
+        <module>Extractor-service</module>
         <module>NLPService</module>
     </modules>
 
@@ -28,6 +28,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
