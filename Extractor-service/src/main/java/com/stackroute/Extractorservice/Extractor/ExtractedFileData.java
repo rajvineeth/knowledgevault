@@ -3,6 +3,9 @@ package com.stackroute.Extractorservice.Extractor;
 
 public class ExtractedFileData {
 
+    public static Integer count = 0;
+
+    private Integer id;
     private String metadata;
     private Object content;
 
@@ -12,6 +15,7 @@ public class ExtractedFileData {
     }
 
     public ExtractedFileData() {
+        this.id=count++;
     }
 
     public String getMetadata() {
@@ -28,6 +32,14 @@ public class ExtractedFileData {
 
     public void setContent(Object content) {
         this.content = content;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }
