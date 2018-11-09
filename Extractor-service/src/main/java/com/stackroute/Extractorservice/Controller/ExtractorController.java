@@ -43,14 +43,13 @@ public class ExtractorController {
     public ResponseEntity<?> extractAllFiles(@PathVariable("path") String path) {
 
         ResponseEntity responseEntity = null;
-        //System.out.println("path");
         List<File> allFiles = service.getAllFiles("/home/cgi/" + path);
 
         try {
             for (File instance : allFiles) {
                     ExtractedFileData data = service.extractOneFile(instance);
                     String metadata = data.getMetadata();
-                    Object content = data.getContent();
+                    String content = data.getContent();
                     responseEntity = new ResponseEntity<String>("Details Sent", HttpStatus.OK);
             }
         }

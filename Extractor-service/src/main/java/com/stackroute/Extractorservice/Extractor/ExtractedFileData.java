@@ -7,12 +7,7 @@ public class ExtractedFileData {
 
     private Integer id;
     private String metadata;
-    private Object content;
-
-    public ExtractedFileData(String metadata, Object content) {
-        this.metadata = metadata;
-        this.content = content;
-    }
+    private String content;
 
     public ExtractedFileData() {
         this.id=count++;
@@ -26,11 +21,11 @@ public class ExtractedFileData {
         this.metadata = metadata;
     }
 
-    public Object getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(Object content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

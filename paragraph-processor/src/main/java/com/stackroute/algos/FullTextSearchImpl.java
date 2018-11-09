@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class FullTextSearchImpl implements FullTextSearch {
 
@@ -27,13 +29,17 @@ public class FullTextSearchImpl implements FullTextSearch {
     public static final String INDEX = "/home/cgi/Documents/stackroute-proj/knowledge-vault/paragraph-processor/src/main/java/com/stackroute/dataRepo";
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
 
+    /**
+     *  This function indexes documents/source repositories and storing information in an inverted-index
+     *  to facilitate fast search by using Lucene Library
+     */
     @Override
-    public void indexer(boolean isItIndexed) {
-        if(isItIndexed) return;
+    public void indexer() {
         LOGGER.info("creating indices....");
         Analyzer analyzer = new StandardAnalyzer();
         try {
             FSDirectory dir = new SimpleFSDirectory(new File(INDEX));
+            if(Files.exists(Paths.get(INDEX))) return;
             IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_4_10_3,analyzer);
             IndexWriter indexWriter = new IndexWriter(dir,config);
             File repo = new File(FILE);
@@ -58,8 +64,14 @@ public class FullTextSearchImpl implements FullTextSearch {
         }
     }
 
+    /**
+     * This function uses Lucene Library to  provide fast search of a given word in a  huge corpus of documents
+     * @param data: the keyword that needs to be searched in the medical dictionaries/ repositories
+     * @return: for now,it's just the location of all documents that contain the keyword.
+     */
     @Override
-    public void search(String data) {
+    public String search(String data) {
+        StringBuilder sb = new StringBuilder();
         LOGGER.info("searching the keyword: {}",data);
         try {
             IndexReader iReader = IndexReader.open(FSDirectory.open(new File(INDEX)));
@@ -69,6 +81,7 @@ public class FullTextSearchImpl implements FullTextSearch {
             Query query = queryParser.parse(data);
             TopDocs hits = searcher.search(query,100);
             if(hits.totalHits==0) {
+                sb.append("no data found");
                 LOGGER.info("no data found");
             }
             else {
@@ -77,13 +90,16 @@ public class FullTextSearchImpl implements FullTextSearch {
                     Document doc = searcher.doc(hits.scoreDocs[i].doc);
                     String url = doc.get("path");
                     if(url!="null") cnt++;
+                    sb.append("found in "+ url+"\n");
                     LOGGER.info("found in: {}",url);
                 }
                 LOGGER.info("total hit: {} ",cnt);
+                sb.append("total hits got: "+ cnt + "\n");
             }
         }
         catch(Exception e) {
             LOGGER.debug(e.getMessage());
         }
+        return sb.toString();
     }
 }
