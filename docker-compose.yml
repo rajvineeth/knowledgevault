@@ -1,20 +1,20 @@
 version:  '2'
 services:
-  zookeeper:
-    container_name: zookeeper
-    image: wurstmeister/zookeeper
-    ports:
-      - "2181:2181"
-
-  kafka:
-    container_name: kafka
-    image: wurstmeister/kafka
-    ports:
-      - "9092"
-    depends_on:
-      - "zookeeper"
-    environment:
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#  zookeeper:
+#    container_name: zookeeper
+#    image: wurstmeister/zookeeper
+#    ports:
+#      - "2181:2181"
+#
+#  kafka:
+#    container_name: kafka
+#    image: wurstmeister/kafka
+#    ports:
+#      - "9092"
+#    depends_on:
+#      - "zookeeper"
+#    environment:
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
   eureka:
     image: eureka:v1
