@@ -4,7 +4,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 
 
 public class KafkaProducer {
-
     private KafkaTemplate<String,String> kafkaTemplate;
 
     public KafkaProducer(KafkaTemplate<String,String> template) {

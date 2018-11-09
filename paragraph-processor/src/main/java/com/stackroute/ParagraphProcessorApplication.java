@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.kafka.core.KafkaTemplate;
 
+
 @SpringBootApplication
 public class ParagraphProcessorApplication implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -24,10 +25,15 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 		SpringApplication.run(ParagraphProcessorApplication.class, args);
 		POSTagging pst = new POSTagging();
 		pst.getFullTextSearch().indexer();
-		String response = pst.getFullTextSearch().search("narcolepsy");
 
-		LOGGER.info("data generated so far:\n {}",response);
-		producer.post("some dummy message produced...");
+		String[] keys = {"fibrohistiocytic","dermoid","nervous","pulmonary"};
+		for(String word: keys){
+			String response = pst.getFullTextSearch().search(word);
+			LOGGER.info("data generated so far:\n {}",response);
+			LOGGER.info("producer message: {} ",producer.post(response));
+			LOGGER.info("producer message: {} \n ","hey...i have sent the message");
+		}
+
 	}
 
 	@Override

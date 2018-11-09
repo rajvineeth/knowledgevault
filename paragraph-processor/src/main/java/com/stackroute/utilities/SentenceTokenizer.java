@@ -19,7 +19,16 @@ public class SentenceTokenizer {
     private int index = 0;
     private RuleBasedBreakIterator breakIterator;
 
+    /**
+     * default constructor
+     */
     public SentenceTokenizer() {}
+
+    /**
+     * Parametric constructor
+     * @param path: the paragraph text path
+     * @throws IOException
+     */
     public SentenceTokenizer(String path) throws IOException {
         super();
         this.textPath = path;
@@ -28,12 +37,20 @@ public class SentenceTokenizer {
                         new File(this.textPath), "UTF-8"));
     }
 
+    /**
+     * Setter function
+     * @param text: the text you want to set to
+     */
     public void setText(String text) {
         this.text = text;
         this.breakIterator.setText(text);
         this.index = 0;
     }
 
+    /**
+     * this function returns the next sentence in the paragraph
+     * @return: the next sentence in the paragraph
+     */
     public String nextSentence() {
         int end = breakIterator.next();
         if (end == BreakIterator.DONE) {
