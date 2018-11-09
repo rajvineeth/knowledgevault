@@ -98,7 +98,7 @@ public class ExtractorServiceImpl implements ExtractorService {
                 PackageParser packageparser = new PackageParser();
                 packageparser.parse(newStream, content, metadata, pcontext);
 
-                //JSON, Text and CSV Parsing
+            //JSON, Text and CSV Parsing
             case "text/plain":
                 TXTParser txtParser = new TXTParser();
                 txtParser.parse(newStream, content, metadata, pcontext);

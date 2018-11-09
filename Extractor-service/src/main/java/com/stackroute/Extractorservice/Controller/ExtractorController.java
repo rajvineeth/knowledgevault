@@ -6,6 +6,7 @@ import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.xml.sax.SAXException;
 
@@ -19,6 +20,11 @@ public class ExtractorController {
 
     @Autowired
     private ExtractorService service;
+
+    @Autowired
+    private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
+
+    private static final String Topic = "test";
 
     public ExtractorController(ExtractorService service) {
         this.service = service;
@@ -89,6 +95,9 @@ public class ExtractorController {
             for (File instance : allFiles) {
                 if (instance.getName().equals(file.getName())) {
                     data = service.extractOneFile(instance);
+
+                    kafkaTemplate.send(Topic, data);
+
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
                 }

@@ -6,6 +6,14 @@ public class ExtractedFileData {
     private String metadata;
     private Object content;
 
+    public ExtractedFileData(String metadata, Object content) {
+        this.metadata = metadata;
+        this.content = content;
+    }
+
+    public ExtractedFileData() {
+    }
+
     public String getMetadata() {
         return metadata;
     }
