@@ -49,7 +49,7 @@ public class ExtractorController {
             for (File instance : allFiles) {
                     ExtractedFileData data = service.extractOneFile(instance);
                     String metadata = data.getMetadata();
-                    Object content = data.getContent();
+                    String content = data.getContent();
                     responseEntity = new ResponseEntity<String>("Details Sent", HttpStatus.OK);
             }
         }
