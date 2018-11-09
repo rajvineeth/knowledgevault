@@ -17,6 +17,18 @@ public class POSTagging {
     private FullTextSearch fullTextSearch = new FullTextSearchImpl();
     private static boolean init;
 
+    public FullTextSearch getFullTextSearch() {
+        return this.fullTextSearch;
+    }
+
+    public static boolean getInit() {
+        return init;
+    }
+
+    public static void setInit(boolean init) {
+        POSTagging.init = init;
+    }
+
     public POSTagging() {
 
        // default constructor
@@ -47,11 +59,11 @@ public class POSTagging {
         }
         return sb.toString().trim();
     }
-
-    public static void main(String[] args) {
-        POSTagging pst = new POSTagging();
-        pst.fullTextSearch.indexer(pst.init);
-        pst.init = true;
-        pst.fullTextSearch.search("narcolepsy");
-    }
+//
+//    public static void main(String[] args) {
+//        POSTagging pst = new POSTagging();
+//        pst.fullTextSearch.indexer(pst.init);
+//        pst.init = true;
+//        pst.fullTextSearch.search("narcolepsy");
+//    }
 }
