@@ -1,11 +1,9 @@
-package com.stackroute.controller;
+package com.stackroute.communicators;
 
 import org.springframework.kafka.core.KafkaTemplate;
 
 
 public class KafkaProducer {
-
-    public String dummy = " dummy ";
 
     private KafkaTemplate<String,String> kafkaTemplate;
 

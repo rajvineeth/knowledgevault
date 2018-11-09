@@ -1,7 +1,7 @@
 package com.stackroute;
 
 import com.stackroute.algos.POSTagging;
-import com.stackroute.controller.KafkaProducer;
+import com.stackroute.communicators.KafkaProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,6 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-		this.producer = new KafkaProducer(this.kafkaTemplate);
+		producer = new KafkaProducer(this.kafkaTemplate);
 	}
 }

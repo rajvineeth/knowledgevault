@@ -59,11 +59,4 @@ public class POSTagging {
         }
         return sb.toString().trim();
     }
-//
-//    public static void main(String[] args) {
-//        POSTagging pst = new POSTagging();
-//        pst.fullTextSearch.indexer(pst.init);
-//        pst.init = true;
-//        pst.fullTextSearch.search("narcolepsy");
-//    }
 }
