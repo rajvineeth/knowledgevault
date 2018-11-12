@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.kafka.core.KafkaTemplate;
 
-
 @SpringBootApplication
 public class ParagraphProcessorApplication implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -22,6 +21,7 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 
 	public static void main(String[] args) {
 		SpringApplication.run(ParagraphProcessorApplication.class, args);
+
 		Processor pst = new Processor();
 		pst.getFullTextSearch().indexer();
 

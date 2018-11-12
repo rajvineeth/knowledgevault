@@ -69,6 +69,7 @@ public class FullTextSearchImpl implements FullTextSearch {
      * @param data: the keyword that needs to be searched in the medical dictionaries/ repositories
      * @return: for now,it's just the location of all documents that contain the keyword.
      */
+
     @Override
     public String search(String data) {
         StringBuilder sb = new StringBuilder();
