@@ -14,13 +14,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Builder
 
-public class DocumentReader {
+public class ExtractedFileData {
 
     @Id
-    private int id;
+    private Integer id;
 
-    private String docTitle;
+    private String metadata;
 
-    private String docContent;
+    private String content;
 
 }

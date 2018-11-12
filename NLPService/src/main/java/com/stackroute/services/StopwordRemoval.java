@@ -9,10 +9,7 @@ public class StopwordRemoval {
 
     private static Logger logger;
 
-
-
-
-    public static List<String> readStopWords(String stopWordsFilename)
+    private static List<String> readStopWords(String stopWordsFilename)
     {
         List<String> stopWords = new ArrayList<>();
 
