@@ -25,14 +25,13 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 		Processor pst = new Processor();
 		pst.getFullTextSearch().indexer();
 
-		String[] keys = {"fibrohistiocytic","dermoid","nervous","pulmonary"};
+		String[] keys = {"narcolepsy","dermoid","nervous","pulmonary"};
 		for(String word: keys){
 			String response = pst.getFullTextSearch().search(word);
 			LOGGER.info("data generated so far:\n {}",response);
-			LOGGER.info("producer message: {} ",producer.post(response));
-			LOGGER.info("producer message: {} \n ","hey...i have sent the message");
+//			LOGGER.info("producer message: {} ",producer.post(response));
+//			LOGGER.info("producer message: {} \n ","hey...i have sent the message");
 		}
-
 	}
 
 	@Override

@@ -2,6 +2,6 @@ package com.stackroute.algos;
 
 public interface FullTextSearch {
 
-    void indexer();
+    String indexer();
     String search(String data);
 }
