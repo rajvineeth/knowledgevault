@@ -75,7 +75,7 @@ public class DocumentServiceTest {
             }
         }
         terms = stopwordRemoval.removeStopwords(terms);
-        
+
         double tfScore = documentService.tf(terms, "Kushagra");
         Assert.assertEquals(0.0, tfScore,1e-4);
     }
