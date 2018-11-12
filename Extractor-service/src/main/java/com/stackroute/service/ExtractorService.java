@@ -1,7 +1,6 @@
-package com.stackroute.Extractorservice.Service;
+package com.stackroute.service;
 
-//import jdk.internal.org.xml.sax.SAXException;
-import com.stackroute.Extractorservice.Extractor.ExtractedFileData;
+import com.stackroute.domain.ExtractedFileData;
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 

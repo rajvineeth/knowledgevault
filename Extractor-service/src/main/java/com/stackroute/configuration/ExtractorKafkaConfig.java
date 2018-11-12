@@ -1,6 +1,6 @@
-package com.stackroute.Extractorservice.Configuration;
+package com.stackroute.configuration;
 
-import com.stackroute.Extractorservice.Extractor.ExtractedFileData;
+import com.stackroute.domain.ExtractedFileData;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ public class ExtractorKafkaConfig {
     @Bean
     public ProducerFactory<String, ExtractedFileData> producerfactory(){
         Map<String, Object> config=new HashMap<>();
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.231:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 

@@ -1,4 +1,4 @@
-package com.stackroute.Extractorservice;
+package com.stackroute;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.stackroute.Extractorservice;
+package com.stackroute;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
