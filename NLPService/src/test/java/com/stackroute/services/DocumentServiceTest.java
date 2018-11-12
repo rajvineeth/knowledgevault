@@ -104,4 +104,25 @@ public class DocumentServiceTest {
         Assert.assertEquals(0.0, idfScore, 1e-4);
 
     }
+
+    @Test
+    public void tfIdfTest() {
+        List<Document> stringtoDocument = documentService.convertStringToDocument(list);
+        List<List<String>> docs = new ArrayList<>();
+        StopwordRemoval stopwordRemoval = new StopwordRemoval();
+
+        for(Document document: stringtoDocument){
+            List<String> terms = new ArrayList<>();
+            for(Sentence sentence: document.sentences()){
+                for(int i=0;i<sentence.length();i++){
+                    terms.add(sentence.lemma(i));
+                }
+            }
+            terms = stopwordRemoval.removeStopwords(terms);
+            docs.add(terms);
+        }
+        String[] relevantTerms = {"seriously", "exist", "take", "stuff", "find", "relevant", "term", "use", "statistics", "service", "even"};
+        List<String> tfIdf = documentService.tfIdf(0,docs);
+        Assert.assertArrayEquals(relevantTerms, tfIdf.toArray());
+    }
 }
