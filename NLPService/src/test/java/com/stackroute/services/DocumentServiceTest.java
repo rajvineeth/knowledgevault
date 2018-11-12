@@ -2,6 +2,8 @@ package com.stackroute.services;
 
 import com.stackroute.domain.ExtractedFileData;
 import com.stackroute.repository.DocumentRepository;
+import edu.stanford.nlp.simple.Document;
+import edu.stanford.nlp.simple.Sentence;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,11 +34,16 @@ public class DocumentServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         extractedFileData = new ExtractedFileData();
+        ExtractedFileData extractedFileData1 = new ExtractedFileData();
         extractedFileData.setId(1);
         extractedFileData.setMetadata("this is metadata");
         extractedFileData.setContent("I am so done with this service. Seriously, why does it even exist. All it does is take stuff and find relevant terms using statistics");
         list = new ArrayList<>();
         list.add(extractedFileData);
+        extractedFileData1.setId(2);
+        extractedFileData1.setMetadata("this is also metadata");
+        extractedFileData1.setContent("why is this service is even happening, stop making this happen. I swear to God, I will SIGKILL myself");
+        list.add(extractedFileData1);
     }
 
     @Test
@@ -48,6 +55,53 @@ public class DocumentServiceTest {
         verify(documentRepository,times(1)).saveAll(list);
     }
 
-    
+    @Test
+    public void getDocumentsTest() {
+        documentRepository.saveAll(list);
+        when(documentRepository.findAll()).thenReturn(list);
+        List<ExtractedFileData> extractedFileDataList = documentService.getAllDocuments();
+        Assert.assertEquals(list, extractedFileDataList);
+    }
 
+    @Test
+    public void tfTest(){
+
+        List<Document> stringtoDocument = documentService.convertStringToDocument(list);
+        List<String> terms = new ArrayList<>();
+        StopwordRemoval stopwordRemoval = new StopwordRemoval();
+        for(Sentence sentence: stringtoDocument.get(0).sentences()){
+            for(int i=0;i<sentence.length();i++){
+                terms.add(sentence.lemma(i));
+            }
+        }
+        terms = stopwordRemoval.removeStopwords(terms);
+        
+        double tfScore = documentService.tf(terms, "Kushagra");
+        Assert.assertEquals(0.0, tfScore,1e-4);
+    }
+
+    @Test
+    public void idfTest() {
+        List<Document> stringtoDocument = documentService.convertStringToDocument(list);
+        List<List<String>> docs = new ArrayList<>();
+        StopwordRemoval stopwordRemoval = new StopwordRemoval();
+
+        for(Document document: stringtoDocument){
+            List<String> terms = new ArrayList<>();
+            for(Sentence sentence: document.sentences()){
+                for(int i=0;i<sentence.length();i++){
+                    terms.add(sentence.lemma(i));
+                }
+            }
+            terms = stopwordRemoval.removeStopwords(terms);
+            docs.add(terms);
+        }
+        double idfScore = documentService.idf(docs,"statistics");
+
+        Assert.assertEquals(0.6931,idfScore, 1e-4);
+
+        idfScore = documentService.idf(docs, "service");
+        Assert.assertEquals(0.0, idfScore, 1e-4);
+
+    }
 }
