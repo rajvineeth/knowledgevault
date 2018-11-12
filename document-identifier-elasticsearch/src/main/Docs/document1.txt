@@ -196,7 +196,7 @@ Related topics
         Dentistry Podiatry Physiotherapy Nanomedicine Molecular oncology Personalized medicine Traditional medicine Veterinary medicine Physician
         Chief physician History of medicine
 
-    Wikipedia document Book Category Category Commons page Commons WikiProject Wikiproject Portal Medicine Portal
+    Wikipedia extractedFileData Book Category Category Commons page Commons WikiProject Wikiproject Portal Medicine Portal
 
 Categories:
 
@@ -248,7 +248,7 @@ Tools
 
 Print/export
 
-    Create a document
+    Create a extractedFileData
     Download as PDF
     Printable version
 

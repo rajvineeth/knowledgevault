@@ -1,47 +1,29 @@
 package com.stackroute.dao;
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.stackroute.domain.Document;
+import com.stackroute.domain.ExtractedFileData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.nlp.simple.Sentence;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.termvectors.TermVectorsRequest;
-import org.elasticsearch.action.termvectors.TermVectorsResponse;
-import org.elasticsearch.client.Client;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.common.xcontent.ToXContent;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.index.IndexService;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.shard.IndexShard;
-import org.elasticsearch.index.termvectors.TermVectorsService;
-import org.elasticsearch.indices.IndicesService;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.ScoreSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
-import java.net.InetAddress;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-import static org.elasticsearch.action.support.WriteRequest.RefreshPolicy.IMMEDIATE;
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
 @Repository
@@ -58,9 +40,9 @@ public class DocumentDao {
         this.restHighLevelClient = restHighLevelClient;
     }
 
-    public Document insertDoc(Document document){
-        Map<String, Object> dataMap = objectMapper.convertValue(document, Map.class);
-        IndexRequest indexRequest = new IndexRequest(index, type, document.getId())
+    public ExtractedFileData insertDoc(ExtractedFileData extractedFileData){
+        Map<String, Object> dataMap = objectMapper.convertValue(extractedFileData, Map.class);
+        IndexRequest indexRequest = new IndexRequest(index, type, extractedFileData.getId())
                 .source(dataMap);
         try {
            restHighLevelClient.index(indexRequest);
@@ -69,7 +51,7 @@ public class DocumentDao {
         } catch (java.io.IOException ex){
             ex.getLocalizedMessage();
         }
-        return document;
+        return extractedFileData;
     }
     public float getScore(String content,String id){
         SearchRequest searchRequest=new SearchRequest(index);

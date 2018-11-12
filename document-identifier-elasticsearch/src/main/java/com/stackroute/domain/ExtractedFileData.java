@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Document {
+public class ExtractedFileData {
 
     private Integer id;
-    private String title;
+    private String metadata;
     private String content;
 
 
