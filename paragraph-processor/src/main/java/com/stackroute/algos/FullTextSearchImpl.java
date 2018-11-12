@@ -25,10 +25,10 @@ import java.nio.file.Paths;
 
 public class FullTextSearchImpl implements FullTextSearch {
 
-    public static final String FILE = "/home/cgi/Documents/stackroute-proj/knowledge-vault/paragraph-processor/src/main/java/com/stackroute/assets";
-    public static final String INDEX = "/home/cgi/Documents/stackroute-proj/knowledge-vault/paragraph-processor/src/main/java/com/stackroute/dataRepo";
+    public static final String FILE = "paragraph-processor/src/main/java/com/stackroute/assets";
+    public static final String INDEX = "paragraph-processor/src/main/java/com/stackroute/dataRepo";
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
-
+    
     /**
      *  This function indexes documents/source repositories and storing information in an inverted-index
      *  to facilitate fast search by using Lucene Library

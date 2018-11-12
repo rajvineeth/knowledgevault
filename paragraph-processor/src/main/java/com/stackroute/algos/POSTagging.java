@@ -14,11 +14,6 @@ import java.util.Properties;
 public class POSTagging {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(POSTagging.class);
-    private FullTextSearch fullTextSearch = new FullTextSearchImpl();
-
-    public FullTextSearch getFullTextSearch() {
-        return this.fullTextSearch;
-    }
 
     public POSTagging() {
 

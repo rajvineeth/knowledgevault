@@ -1,6 +1,5 @@
 package com.stackroute;
 
-import com.stackroute.algos.POSTagging;
 import com.stackroute.communicators.KafkaProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +22,7 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 
 	public static void main(String[] args) {
 		SpringApplication.run(ParagraphProcessorApplication.class, args);
-		POSTagging pst = new POSTagging();
+		Processor pst = new Processor();
 		pst.getFullTextSearch().indexer();
 
 		String[] keys = {"fibrohistiocytic","dermoid","nervous","pulmonary"};
