@@ -5,7 +5,6 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.*;
-import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.search.spans.SpanTermQuery;
@@ -26,9 +25,30 @@ import java.util.*;
 
 public class FullTextSearchImpl implements FullTextSearch {
 
-    public static final String FILE = "paragraph-processor/src/main/java/com/stackroute/assets";
-    public static final String INDEX = "paragraph-processor/src/main/java/com/stackroute/dataRepo";
+    private static String filesPath;
+    private static String indexPath;
+
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
+
+    @Override
+    public String getIndexPath() {
+        return indexPath;
+    }
+
+    @Override
+    public String getFilesPath() {
+        return filesPath;
+    }
+
+    @Override
+    public void setIndexPath(String path) {
+        indexPath = path;
+    }
+
+    @Override
+    public void setFilesPath(String path) {
+        filesPath = path;
+    }
     
     /**
      *  This function indexes documents/source repositories and storing information in an inverted-index
@@ -39,11 +59,11 @@ public class FullTextSearchImpl implements FullTextSearch {
         LOGGER.info("creating indices....");
         Analyzer analyzer = new StandardAnalyzer();
         try {
-            FSDirectory dir = new SimpleFSDirectory(new File(INDEX));
-            if(Files.exists(Paths.get(INDEX))) return "already exists";
-            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_4_10_3,analyzer);
+            FSDirectory dir = new SimpleFSDirectory(new File(indexPath));
+            if(Files.exists(Paths.get(indexPath))) return "already indexed...";
+            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,analyzer);
             IndexWriter indexWriter = new IndexWriter(dir,config);
-            File repo = new File(FILE);
+            File repo = new File(filesPath);
 
             File[] resources = repo.listFiles();
             int id=0;
@@ -80,7 +100,7 @@ public class FullTextSearchImpl implements FullTextSearch {
         StringBuilder sb = new StringBuilder();
         LOGGER.info("searching the keyword: {}",data);
         try {
-            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(INDEX)));
+            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(indexPath)));
             IndexSearcher searcher = new IndexSearcher(iReader);
 
             SpanQuery query = new SpanTermQuery(new Term("contents", data));

@@ -17,15 +17,18 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 	private KafkaTemplate<String,String> kafkaTemplate;
 
 	private static KafkaProducer producer;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(ParagraphProcessorApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(ParagraphProcessorApplication.class, args);
 
 		Processor pst = new Processor();
+		pst.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/assets");
+		pst.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/dataRepo");
 		pst.getFullTextSearch().indexer();
 
-		String[] keys = {"narcolepsy","dermoid","nervous","pulmonary"};
+		String[] keys = {"quick","red","fox"};//"narcolepsy","dermoid","nervous","quick"};
 		for(String word: keys){
 			String response = pst.getFullTextSearch().search(word);
 			LOGGER.info("data generated so far:\n {}",response);
