@@ -13,13 +13,16 @@ public class ParaTokenizerImpl implements ParaTokenizer {
     List<Document> list = new ArrayList<Document>();
 
     @Override
-    public List<Document> tokenizePara(Document document) {
+    public void tokenizePara(Document document) {
         String text = document.getText();
         String[] arrText = text.trim().split("\n+");
 
         for (int i = 0; i < arrText.length; i++){
             list.add(new Document(document.getId(),arrText[i]));
         }
+    }
+
+    public List<Document> getList() {
         return list;
     }
 }

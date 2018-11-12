@@ -1,7 +1,5 @@
 package com.stackroute.knowledgevault.paragraphtokenizer;
 
-import com.stackroute.knowledgevault.paragraphtokenizer.kafka.Producer;
-import com.stackroute.knowledgevault.paragraphtokenizer.model.KvMessage;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
