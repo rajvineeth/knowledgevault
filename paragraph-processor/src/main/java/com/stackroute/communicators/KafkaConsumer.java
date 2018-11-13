@@ -17,7 +17,7 @@ public class KafkaConsumer {
      * This method consumes the data for which it is listening kafka cluster to
      * @param: the wanted message
      */
-    @KafkaListener(topics="document",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
+    @KafkaListener(topics="paraTokens",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
     public void consumejson(ExtractedFileData data){
         LOGGER.info("consume message: {}",data.toString());
     }
