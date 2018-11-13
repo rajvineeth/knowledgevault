@@ -1,0 +1,13 @@
+package com.stackroute.knowledgevault.algos;
+
+import java.util.List;
+
+public interface FullTextSearch {
+
+    String indexer();
+    List<String> search(String data);
+    String getIndexPath();
+    String getFilesPath();
+    void setIndexPath(String path);
+    void setFilesPath(String path);
+}
