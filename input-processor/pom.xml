@@ -8,7 +8,7 @@
 	<packaging>jar</packaging>
 
 	<name>Input-Processor</name>
-	<description>Takes a document as input and returns an array of paragraphs</description>
+	<description>Takes text as input and returns json file</description>
 
 	<parent>
 		<groupId>com.stackroute</groupId>
