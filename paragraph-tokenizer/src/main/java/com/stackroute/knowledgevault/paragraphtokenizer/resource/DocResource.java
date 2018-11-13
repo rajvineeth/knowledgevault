@@ -15,7 +15,7 @@ public class DocResource {
     private static final String TOPIC = "paraTokens";
 
     public String post() {
-        kafkaTemplate.send(TOPIC, Arrays.asList(new Document(1, "sdhuash"), new Document(2,"sdshd")));
+        kafkaTemplate.send(TOPIC, Arrays.asList(new Document(1, "sdhuash"), new Document(1,"sdshd")));
         return "published successfully";
     }
 }
