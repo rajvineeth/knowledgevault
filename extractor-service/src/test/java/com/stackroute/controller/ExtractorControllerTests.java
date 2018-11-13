@@ -1,8 +1,9 @@
 package com.stackroute.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stackroute.domain.ExtractedFileData;
-import com.stackroute.service.ExtractorService;
+import com.stackroute.knowledgevault.controller.ExtractorController;
+import com.stackroute.knowledgevault.domain.ExtractedFileData;
+import com.stackroute.knowledgevault.service.ExtractorService;
 import org.apache.tika.exception.TikaException;
 import org.junit.Before;
 import org.junit.Test;
