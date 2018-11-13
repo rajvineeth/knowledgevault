@@ -1,21 +1,27 @@
 package com.stackroute.knowledgevault.paragraphtokenizer.resource;
 
 import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DocResource {
 
-    @Autowired
-    private KafkaTemplate<String, List<Document>> kafkaTemplate;
+    private KafkaTemplate<String, Document> kafkaTemplate;
+
+    public DocResource(KafkaTemplate<String, Document> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
     private static final String TOPIC = "paraTokens";
 
     public String post() {
-        kafkaTemplate.send(TOPIC, Arrays.asList(new Document(1, "sdhuash"), new Document(1,"sdshd")));
+        List<Document> list = new ArrayList();
+        list.add(new Document(1,"asdiyg"));
+        for (Document doc : list){
+            this.kafkaTemplate.send(TOPIC, doc);
+        }
         return "published successfully";
     }
 }

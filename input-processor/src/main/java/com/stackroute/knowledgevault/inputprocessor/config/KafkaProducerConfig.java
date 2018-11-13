@@ -1,25 +1,20 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.config;
+package com.stackroute.knowledgevault.inputprocessor.config;
 
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
+import com.stackroute.knowledgevault.inputprocessor.model.Input;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-@Configuration
 public class KafkaProducerConfig {
-
     @Bean
-    public ProducerFactory<String, Document> producerFactory() {
+    public ProducerFactory<String, Input> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.23.239.127:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -29,7 +24,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Document> kafkaTemplate() {
+    public KafkaTemplate<String, Input> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
