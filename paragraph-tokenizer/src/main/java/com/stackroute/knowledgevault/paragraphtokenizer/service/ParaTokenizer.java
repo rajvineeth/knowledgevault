@@ -5,5 +5,5 @@ import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
 import java.util.List;
 
 public interface ParaTokenizer {
-    void tokenizePara(Document document);
+    List<Document> tokenizePara(Document document);
 }
