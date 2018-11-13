@@ -28,19 +28,23 @@ public class ExtractorServiceImpl implements ExtractorService {
 
         File directory = new File(path); //path = folder name (directory)
 
-        List<File> list = Arrays.asList(directory.listFiles());
+        File[] files = directory.listFiles();
 
-        for (File file: list) {
+        List<File> list = new ArrayList<>();
 
-                if (file.isDirectory()) {
+        assert files != null;
+        for (File file: files) {
 
-                    List<File> subFolderFiles = Arrays.asList(file.listFiles()); //Files inside the sub-folder
+            if (file.isDirectory()) {
 
-                    for (File file1: subFolderFiles) {
-                        list.add(file1); //appending sub-folder files to the original list
-                    }
+                File[] subFolderFiles = file.listFiles(); //Files inside the sub-folder
+
+                assert subFolderFiles != null;
+                for (File file1 : subFolderFiles) {
+                    list.add(file1); //appending sub-folder files to the original list
                 }
-            }
+            } else list.add(file);
+        }
 
         return list;
     }

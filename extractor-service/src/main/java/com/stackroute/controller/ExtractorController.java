@@ -12,7 +12,9 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "home/cgi")
@@ -26,7 +28,7 @@ public class ExtractorController {
 
     private static final String TOPIC = "document";
 
-    String initialPath = "/home/cgi/";
+    private String initialPath = "/home/cgi/";
 
     public ExtractorController(ExtractorService service) {
         this.service = service;
@@ -34,7 +36,7 @@ public class ExtractorController {
 
     /* Fetches all the files from the specified folder in path */
     @GetMapping("{path}")
-    public ResponseEntity<List<File>> displayAllFiles(@PathVariable("path") String path) {
+    public ResponseEntity<?> displayAllFiles(@PathVariable("path") String path) {
 
         List<File> allFiles = service.getAllFiles(initialPath + path); //Fetching all files from the specified path
 
@@ -43,16 +45,20 @@ public class ExtractorController {
 
     /* Extract all the files present inside the folder specified in the path */
     @GetMapping(value = "{path}/extract")
-    public ResponseEntity<String> extractAllFiles(@PathVariable("path") String path) {
+    public ResponseEntity<?> extractAllFiles(@PathVariable("path") String path) {
 
         ResponseEntity responseEntity = null;
         List<File> allFiles = service.getAllFiles(initialPath + path);
+        HashMap<Integer, String> extractedDocs = new HashMap<>();
 
         try {
             for (File instance : allFiles) {
                     ExtractedFileData data = service.extractOneFile(instance); //Fetching metadata and content
-                    responseEntity = new ResponseEntity<String>("Details Sent", HttpStatus.OK);
+                    extractedDocs.put(data.getId(), instance.getName());
+
+                    kafkaTemplate.send(TOPIC, data);
             }
+            responseEntity = new ResponseEntity<HashMap<Integer, String>>(extractedDocs, HttpStatus.OK);
         }
         catch (IOException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -100,7 +106,7 @@ public class ExtractorController {
 
                     /* The following line will send our ExtractedFileData object containing all the information about
                     the document to the Kafka server */
-                    kafkaTemplate.send(TOPIC, data);
+                    //kafkaTemplate.send(TOPIC, data);
 
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
