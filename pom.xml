@@ -19,6 +19,7 @@
 	    <module>paragraph-processor</module>
         <module>extractor-service</module>
         <module>NLPService</module>
+        <module>input-processor</module>
     </modules>
 
     <properties>
