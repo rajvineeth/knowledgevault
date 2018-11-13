@@ -1,7 +1,6 @@
 package com.stackroute.listener;
 
 import com.stackroute.domain.ExtractedFileData;
-import com.stackroute.domain.OutputForDoc;
 import com.stackroute.services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -22,6 +21,6 @@ public class KafkaConsumer {
     @KafkaListener(topics="document",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
     public void consumejson(List<ExtractedFileData> extractedFileData){
         documentService.saveDocuments(extractedFileData);
-        System.out.println("done");
+        logger.info("done");
     }
 }
