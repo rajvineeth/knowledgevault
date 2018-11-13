@@ -1,6 +1,5 @@
 package com.stackroute.algos;
 
-import com.stackroute.domain.DocInfo;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -30,7 +29,6 @@ public class FullTextSearchImpl implements FullTextSearch {
     private static String indexPath;
 
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
-    private DocInfo docInfo;
 
     @Override
     public String getIndexPath() {
@@ -69,7 +67,6 @@ public class FullTextSearchImpl implements FullTextSearch {
             IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,analyzer);
             IndexWriter indexWriter = new IndexWriter(dir,config);
             File repo = new File(filesPath);
-            this.docInfo = new DocInfo();
 
             File[] resources = repo.listFiles();
             int id=0;
@@ -77,8 +74,8 @@ public class FullTextSearchImpl implements FullTextSearch {
                 LOGGER.info("indexing file {}",f.getCanonicalPath());
                 Document doc = new Document();
                 doc.add(new Field("path",f.getPath(), Field.Store.YES, Field.Index.ANALYZED));
+                doc.add(new Field("id",String.valueOf(id), Field.Store.YES, Field.Index.ANALYZED));
                 doc.add(new Field("name",f.getName(), Field.Store.YES, Field.Index.ANALYZED));
-                this.docInfo.add(id,f.getName());
                 id++;
                 Reader reader = new FileReader(f.getCanonicalPath());
                 doc.add(new Field("contents",reader,Field.TermVector.WITH_POSITIONS_OFFSETS));
@@ -115,24 +112,31 @@ public class FullTextSearchImpl implements FullTextSearch {
             TopDocs results = searcher.search(query,10);
             Map<Term, TermContext> termContexts = new HashMap<>();
 
+            for (int i = 0; i < results.scoreDocs.length; i++) {
+                ScoreDoc scoreDoc = results.scoreDocs[i];
+                LOGGER.info("Score of the keyword: {} in {} is = {} ",data,searcher.doc(i).get("name"),scoreDoc.score);
+            }
+
+
             for (AtomicReaderContext atomic : iReader.leaves()) {
                 Bits bitset = atomic.reader().getLiveDocs();
                 Spans spans = query.getSpans(atomic, bitset, termContexts);
                 while (spans.next()) {
                     int docid = atomic.docBase + spans.doc();
-                    spanArray.add("Doc: " + docid + " and location is from " + spans.start() + " to "
-                            + spans.end()+"\n");
+                    spanArray.add("Doc with name: " + searcher.doc(docid).get("name") +" and location is " + spans.end()+"th word in the document\n");
                 };
             };
             for(String s: spanArray) LOGGER.info(s);
         }
         catch(Exception e) {
             LOGGER.debug(e.getMessage());
-            return Collections.singletonList("error.............");
+            return Collections.singletonList("something went wrong..");
         }
 
         if(spanArray.isEmpty()) return Collections.singletonList("not found");
         spanArray.add("found");
         return spanArray;
     }
+
+
 }
