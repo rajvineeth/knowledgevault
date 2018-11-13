@@ -8,20 +8,28 @@ import org.springframework.kafka.core.KafkaTemplate;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //@RestController
 //@RequestMapping("kafka")
 public class DocResource {
 
-    @Autowired
     private KafkaTemplate<String, List<Document>> kafkaTemplate;
 
-    private static final String topic = "paraTokens";
+    public DocResource(KafkaTemplate kt) {
+        this.kafkaTemplate = kt;
+    }
 
-//    @GetMapping("/publish/{name}")
-    public String post(ParaTokenizerImpl paraTokenizer) {
-        kafkaTemplate.send(topic, paraTokenizer.getList());
+    public void setKafkaTemplate(KafkaTemplate<String, List<Document>> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    private static final String TOPIC = "paraTokens";
+
+    //    @GetMapping("/publish/{name}")
+    public String post(List<Document> list) {
+        this.kafkaTemplate.send(TOPIC,list);
         return "published successfully";
     }
 }
