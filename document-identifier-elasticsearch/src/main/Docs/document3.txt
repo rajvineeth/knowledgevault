@@ -150,7 +150,7 @@ The term 'neoplasm' is a synonym of "tumor". 'Neoplasia' denotes the process of 
 
 The term tumor is derived from the Latin noun tumor "a swelling" ultimately from the verb tumēre "to swell". In the Commonwealth the spelling "tumour" is commonly used, whereas in the U.S. it is usually spelled "tumor".
 
-In its medical sense it has traditionally meant an abnormal swelling of the flesh. The Roman medical encyclopedist Celsus (ca 30 BC–38 AD) described the four cardinal signs of acute inflammation as tumor, dolor, calor, and rubor (swelling, pain, increased heat, and redness). His treatise, De Medicina, was the first medical document printed in 1478 following the invention of the movable-type printing press.
+In its medical sense it has traditionally meant an abnormal swelling of the flesh. The Roman medical encyclopedist Celsus (ca 30 BC–38 AD) described the four cardinal signs of acute inflammation as tumor, dolor, calor, and rubor (swelling, pain, increased heat, and redness). His treatise, De Medicina, was the first medical extractedFileData printed in 1478 following the invention of the movable-type printing press.
 
 In contemporary English, the word tumor is often used as a synonym for a cystic (liquid-filled) growth or solid neoplasm (cancerous or non-cancerous),[61] with other forms of swelling often referred to as swellings.[62]
 
@@ -302,7 +302,7 @@ Tools
 
 Print/export
 
-    Create a document
+    Create a extractedFileData
     Download as PDF
     Printable version
 

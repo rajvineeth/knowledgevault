@@ -316,7 +316,7 @@ History
 Timeline of ADHD diagnostic criteria, prevalence, and treatment
 Main article: History of attention deficit hyperactivity disorder
 
-Hyperactivity has long been part of the human condition. Sir Alexander Crichton describes "mental restlessness" in his document An inquiry into the nature and origin of mental derangement written in 1798.[208][209][page needed] ADHD was first clearly described by George Still in 1902.[206]
+Hyperactivity has long been part of the human condition. Sir Alexander Crichton describes "mental restlessness" in his extractedFileData An inquiry into the nature and origin of mental derangement written in 1798.[208][209][page needed] ADHD was first clearly described by George Still in 1902.[206]
 
 The terminology used to describe the condition has changed over time and has included: in the DSM-I (1952) "minimal brain dysfunction," in the DSM-II (1968) "hyperkinetic reaction of childhood," and in the DSM-III (1980) "attention-deficit disorder (ADD) with or without hyperactivity."[206] In 1987 this was changed to ADHD in the DSM-III-R and the DSM-IV in 1994 split the diagnosis into three subtypes, ADHD inattentive type, ADHD hyperactive-impulsive type and ADHD combined type.[210] These terms were kept in the DSM-5 in 2013.[2] Other terms have included "minimal brain damage" used in the 1930s.[211]
 
@@ -678,7 +678,7 @@ Tools
 
 Print/export
 
-    Create a document
+    Create a extractedFileData
     Download as PDF
     Printable version
 

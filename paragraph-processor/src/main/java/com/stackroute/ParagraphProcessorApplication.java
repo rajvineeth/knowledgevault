@@ -1,6 +1,5 @@
 package com.stackroute;
 
-import com.stackroute.algos.POSTagging;
 import com.stackroute.communicators.KafkaProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.kafka.core.KafkaTemplate;
 
-
 @SpringBootApplication
 public class ParagraphProcessorApplication implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -19,21 +17,24 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 	private KafkaTemplate<String,String> kafkaTemplate;
 
 	private static KafkaProducer producer;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(ParagraphProcessorApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(ParagraphProcessorApplication.class, args);
-		POSTagging pst = new POSTagging();
+
+		Processor pst = new Processor();
+		pst.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/assets");
+		pst.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/dataRepo");
 		pst.getFullTextSearch().indexer();
 
-		String[] keys = {"fibrohistiocytic","dermoid","nervous","pulmonary"};
+		String[] keys = {"quick","red","fox"};//"narcolepsy","dermoid","nervous","quick"};
 		for(String word: keys){
 			String response = pst.getFullTextSearch().search(word);
 			LOGGER.info("data generated so far:\n {}",response);
-			LOGGER.info("producer message: {} ",producer.post(response));
-			LOGGER.info("producer message: {} \n ","hey...i have sent the message");
+//			LOGGER.info("producer message: {} ",producer.post(response));
+//			LOGGER.info("producer message: {} \n ","hey...i have sent the message");
 		}
-
 	}
 
 	@Override

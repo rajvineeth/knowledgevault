@@ -1,7 +1,7 @@
 package com.stackroute.services;
 
 
-import com.stackroute.domain.DocumentReader;
+import com.stackroute.domain.ExtractedFileData;
 import com.stackroute.domain.OutputForDoc;
 import com.stackroute.repository.DocumentRepository;
 import edu.stanford.nlp.simple.Document;
@@ -20,12 +20,12 @@ public class DocumentServiceImpl implements DocumentService {
     private DocumentRepository documentRepository;
 
     @Override
-    public List<DocumentReader> saveDocuments(List<DocumentReader> documentReader) {
-        return documentRepository.saveAll(documentReader);
+    public List<ExtractedFileData> saveDocuments(List<ExtractedFileData> extractedFileData) {
+        return documentRepository.saveAll(extractedFileData);
     }
 
     @Override
-    public List<DocumentReader> getAllDocuments() {
+    public List<ExtractedFileData> getAllDocuments() {
         return documentRepository.findAll();
     }
 
@@ -100,10 +100,10 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public List<OutputForDoc> processDoc(List<DocumentReader> documentReaders) {
+    public List<OutputForDoc> processDoc(List<ExtractedFileData> extractedFileData) {
         List<List<String>> docs = new ArrayList<>();
         StopwordRemoval stopWordRemoval = new StopwordRemoval();
-        List<Document> documents = convertStringToDocument(documentReaders);
+        List<Document> documents = convertStringToDocument(extractedFileData);
         List<OutputForDoc> relevantTerms = new ArrayList<>();
 
         for(Document document: documents){
@@ -116,9 +116,9 @@ public class DocumentServiceImpl implements DocumentService {
             terms = stopWordRemoval.removeStopwords(terms);
             docs.add(terms);
         }
-        for(int i=0;i<documentReaders.size();i++){
-            relevantTerms.add(new OutputForDoc(documentReaders.get(i).getId(),
-                    documentReaders.get(i).getDocTitle(),
+        for(int i = 0; i< extractedFileData.size(); i++){
+            relevantTerms.add(new OutputForDoc(extractedFileData.get(i).getId(),
+                    extractedFileData.get(i).getMetadata(),
                     tfIdf(i, docs)));
         }
 
@@ -127,10 +127,10 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public List<Document> convertStringToDocument(List<DocumentReader> documentReaders) {
+    public List<Document> convertStringToDocument(List<ExtractedFileData> extractedFileData) {
         List<Document> documents = new ArrayList<>();
-        for(DocumentReader documentReader: documentReaders){
-            documents.add(new Document(documentReader.getDocContent()));
+        for(ExtractedFileData extractedFile : extractedFileData){
+            documents.add(new Document(extractedFile.getContent()));
         }
         return documents;
     }

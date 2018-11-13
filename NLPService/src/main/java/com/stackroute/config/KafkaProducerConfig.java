@@ -1,7 +1,6 @@
 
 package com.stackroute.config;
 
-import com.stackroute.domain.DocumentReader;
 import com.stackroute.domain.OutputForDoc;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;

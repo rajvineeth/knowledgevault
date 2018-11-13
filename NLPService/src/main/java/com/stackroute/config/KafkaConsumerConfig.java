@@ -1,7 +1,6 @@
 package com.stackroute.config;
 
-import com.stackroute.domain.DocumentReader;
-//import com.stackroute.kafka.springbootkafkaconsumerexample.model.User;
+import com.stackroute.domain.ExtractedFileData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 @EnableKafka
 @Configuration
@@ -22,7 +20,7 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, Object> consumerFactory(){
 
         Map<String, Object> config= new HashMap<>();
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.231:9092");
         config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_id");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.class);
@@ -35,15 +33,15 @@ public class KafkaConsumerConfig {
         return factory;
     }
     @Bean
-    public ConsumerFactory<String, DocumentReader> userConsumerFactory(){
+    public ConsumerFactory<String, ExtractedFileData> userConsumerFactory(){
 
         Map<String, Object> config=new HashMap<>();
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.231:9092");
         config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.class);
 
-        return new DefaultKafkaConsumerFactory<>(config,new StringDeserializer(),new JsonDeserializer<>(DocumentReader.class));
+        return new DefaultKafkaConsumerFactory<>(config,new StringDeserializer(),new JsonDeserializer<>(ExtractedFileData.class));
     }
     @Bean
     public ConcurrentKafkaListenerContainerFactory userKafkaListenerFactory(){

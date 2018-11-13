@@ -4,15 +4,14 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.index.*;
+import org.apache.lucene.search.*;
+import org.apache.lucene.search.spans.SpanQuery;
+import org.apache.lucene.search.spans.SpanTermQuery;
+import org.apache.lucene.search.spans.Spans;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.SimpleFSDirectory;
+import org.apache.lucene.util.Bits;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,36 +21,60 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.*;
 
 public class FullTextSearchImpl implements FullTextSearch {
 
-    public static final String FILE = "/home/cgi/Documents/stackroute-proj/knowledge-vault/paragraph-processor/src/main/java/com/stackroute/assets";
-    public static final String INDEX = "/home/cgi/Documents/stackroute-proj/knowledge-vault/paragraph-processor/src/main/java/com/stackroute/dataRepo";
+    private static String filesPath;
+    private static String indexPath;
+
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
 
+    @Override
+    public String getIndexPath() {
+        return indexPath;
+    }
+
+    @Override
+    public String getFilesPath() {
+        return filesPath;
+    }
+
+    @Override
+    public void setIndexPath(String path) {
+        indexPath = path;
+    }
+
+    @Override
+    public void setFilesPath(String path) {
+        filesPath = path;
+    }
+    
     /**
      *  This function indexes documents/source repositories and storing information in an inverted-index
      *  to facilitate fast search by using Lucene Library
      */
     @Override
-    public void indexer() {
+    public String indexer() {
         LOGGER.info("creating indices....");
         Analyzer analyzer = new StandardAnalyzer();
         try {
-            FSDirectory dir = new SimpleFSDirectory(new File(INDEX));
-            if(Files.exists(Paths.get(INDEX))) return;
-            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_4_10_3,analyzer);
+            FSDirectory dir = new SimpleFSDirectory(new File(indexPath));
+            if(Files.exists(Paths.get(indexPath))) return "already indexed...";
+            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,analyzer);
             IndexWriter indexWriter = new IndexWriter(dir,config);
-            File repo = new File(FILE);
+            File repo = new File(filesPath);
 
             File[] resources = repo.listFiles();
+            int id=0;
             for(File f: resources) {
                 LOGGER.info("indexing file {}",f.getCanonicalPath());
                 Document doc = new Document();
                 doc.add(new Field("path",f.getPath(), Field.Store.YES, Field.Index.ANALYZED));
-                doc.add(new Field("isIndexed","false", Field.Store.YES, Field.Index.ANALYZED));
+                doc.add(new Field("id","doc_"+id, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                id++;
                 Reader reader = new FileReader(f.getCanonicalPath());
-                doc.add(new Field("contents",reader));
+                doc.add(new Field("contents",reader,Field.TermVector.WITH_POSITIONS_OFFSETS));
                 indexWriter.addDocument(doc);
                 reader.close();
             }
@@ -61,7 +84,9 @@ public class FullTextSearchImpl implements FullTextSearch {
         }
         catch(Exception e) {
             LOGGER.error(String.valueOf(e.getMessage()));
+            return "failure";
         }
+        return "success";
     }
 
     /**
@@ -69,33 +94,29 @@ public class FullTextSearchImpl implements FullTextSearch {
      * @param data: the keyword that needs to be searched in the medical dictionaries/ repositories
      * @return: for now,it's just the location of all documents that contain the keyword.
      */
+
     @Override
     public String search(String data) {
         StringBuilder sb = new StringBuilder();
         LOGGER.info("searching the keyword: {}",data);
         try {
-            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(INDEX)));
+            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(indexPath)));
             IndexSearcher searcher = new IndexSearcher(iReader);
-            Analyzer analyzer = new StandardAnalyzer();
-            QueryParser queryParser = new QueryParser("contents",analyzer);
-            Query query = queryParser.parse(data);
-            TopDocs hits = searcher.search(query,100);
-            if(hits.totalHits==0) {
-                sb.append("no data found");
-                LOGGER.info("no data found");
-            }
-            else {
-                int cnt=0;
-                for(int i=0;i<hits.totalHits;i++) {
-                    Document doc = searcher.doc(hits.scoreDocs[i].doc);
-                    String url = doc.get("path");
-                    if(url!="null") cnt++;
-                    sb.append("found in "+ url+"\n");
-                    LOGGER.info("found in: {}",url);
-                }
-                LOGGER.info("total hit: {} ",cnt);
-                sb.append("total hits got: "+ cnt + "\n");
-            }
+
+            SpanQuery query = new SpanTermQuery(new Term("contents", data));
+            TopDocs results = searcher.search(query,10);
+            Map<Term, TermContext> termContexts = new HashMap<>();
+            List<String> spanArray = new ArrayList<>();
+            for (AtomicReaderContext atomic : iReader.leaves()) {
+                Bits bitset = atomic.reader().getLiveDocs();
+                Spans spans = query.getSpans(atomic, bitset, termContexts);
+                while (spans.next()) {
+                    int docid = atomic.docBase + spans.doc();
+                    spanArray.add("Doc: " + docid + " with " + spans.start() + "-"
+                            + spans.end());
+                };
+            };
+            for(String s:spanArray) LOGGER.info(s);
         }
         catch(Exception e) {
             LOGGER.debug(e.getMessage());

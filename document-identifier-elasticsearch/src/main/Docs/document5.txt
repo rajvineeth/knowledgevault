@@ -710,7 +710,7 @@ Tools
 
 Print/export
 
-    Create a document
+    Create a extractedFileData
     Download as PDF
     Printable version
 

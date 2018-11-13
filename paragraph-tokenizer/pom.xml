@@ -5,7 +5,6 @@
 
 	<groupId>com.stackroute.knowledgevault</groupId>
 	<artifactId>paragraph-tokenizer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Paragraph-Tokenizer</name>

@@ -1,6 +1,6 @@
 package com.stackroute.services;
 
-import com.stackroute.domain.DocumentReader;
+import com.stackroute.domain.ExtractedFileData;
 import com.stackroute.domain.OutputForDoc;
 import edu.stanford.nlp.simple.Document;
 
@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface DocumentService {
 
-    public List<DocumentReader> saveDocuments(List<DocumentReader> documentReader);
+    public List<ExtractedFileData> saveDocuments(List<ExtractedFileData> extractedFileData);
 
-    public List<DocumentReader> getAllDocuments();
+    public List<ExtractedFileData> getAllDocuments();
 
     public double tf(List<String> doc, String term);
 
@@ -18,7 +18,7 @@ public interface DocumentService {
 
     public List<String> tfIdf(int index, List<List<String>> docs);
 
-    public List<OutputForDoc> processDoc(List<DocumentReader> documentReaders);
+    public List<OutputForDoc> processDoc(List<ExtractedFileData> extractedFileData);
 
-    public List<Document>convertStringToDocument(List<DocumentReader> documentReaders);
+    public List<Document>convertStringToDocument(List<ExtractedFileData> extractedFileData);
 }
