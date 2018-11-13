@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Document {
-    private Integer id;
+    private int docId;
     private String text;
 }

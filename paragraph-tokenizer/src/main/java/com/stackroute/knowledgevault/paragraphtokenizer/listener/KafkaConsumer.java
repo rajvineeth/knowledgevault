@@ -11,7 +11,7 @@ public class KafkaConsumer {
     public void consume(String message){
         System.out.println("consumed message:"+message);
     }
-    @KafkaListener(topics="kafka_example_jsonh",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
+    @KafkaListener(topics="kafka_example_jsonh",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(Document DOCUMENT){
         System.out.println("consumed message"+DOCUMENT.toString());
     }
