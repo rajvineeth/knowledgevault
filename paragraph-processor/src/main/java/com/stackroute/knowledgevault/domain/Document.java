@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Document {
 
-    private int docId;
+    private int Id;
     private String text;
 
 }

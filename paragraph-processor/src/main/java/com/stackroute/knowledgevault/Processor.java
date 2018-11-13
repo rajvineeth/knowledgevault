@@ -6,6 +6,8 @@ import com.stackroute.knowledgevault.utilities.SentenceTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+
 public class Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
@@ -37,7 +39,7 @@ public class Processor {
      * @param paragraph: the input paragraph
      * @return: tagged keywords that makes sense
      */
-    public String paraProcessing(String paragraph) {
+    public String paraProcessing(String paragraph) throws IOException {
 
         String response;
         this.sentenceTokenizer = new SentenceTokenizer();

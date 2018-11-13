@@ -7,6 +7,8 @@ import java.text.BreakIterator;
 import org.apache.commons.io.FileUtils;
 
 import com.ibm.icu.text.RuleBasedBreakIterator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 /**
  * Tokenizes the input into sentences. Uses ICU4J's RuleBasedBreakIterator
@@ -14,21 +16,30 @@ import com.ibm.icu.text.RuleBasedBreakIterator;
  */
 public class SentenceTokenizer {
 
+    @Autowired
+    private Environment env;
+
     private String text;
-    private String textPath;
+
+    public String getText() {
+        return text;
+    }
+
     private int index = 0;
+    private String textPath;
+
+    public int getIndex() {
+        return this.index;
+    }
+
+    public String getTextPath() {
+        return this.textPath;
+    }
+
     private RuleBasedBreakIterator breakIterator;
 
-    /**
-     * default constructor
-     */
     public SentenceTokenizer() {}
 
-    /**
-     * Parametric constructor
-     * @param path: the paragraph text path
-     * @throws IOException
-     */
     public SentenceTokenizer(String path) throws IOException {
         super();
         this.textPath = path;
@@ -56,8 +67,8 @@ public class SentenceTokenizer {
         if (end == BreakIterator.DONE) {
             return null;
         }
-        String sentence = text.substring(index, end);
-        index = end;
+        String sentence = text.substring(this.index, end);
+        this.index = end;
         return sentence;
     }
 }

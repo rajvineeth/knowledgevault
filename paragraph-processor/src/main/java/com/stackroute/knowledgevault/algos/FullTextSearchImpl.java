@@ -1,5 +1,6 @@
 package com.stackroute.knowledgevault.algos;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -117,7 +118,6 @@ public class FullTextSearchImpl implements FullTextSearch {
                 LOGGER.info("Score of the keyword: {} in {} is = {} ",data,searcher.doc(i).get("name"),scoreDoc.score);
             }
 
-
             for (AtomicReaderContext atomic : iReader.leaves()) {
                 Bits bitset = atomic.reader().getLiveDocs();
                 Spans spans = query.getSpans(atomic, bitset, termContexts);
@@ -138,5 +138,51 @@ public class FullTextSearchImpl implements FullTextSearch {
         return spanArray;
     }
 
+    @Override
+    public List<String> getRelevantTerms(String path) {
+        indexer();
+        LOGGER.info("please wait while we do the muscle-work.....");
+        Double[][] matrix;
+        TreeMap<Double,String> scoreList = new TreeMap<>(Collections.reverseOrder());
+        try {
+            File file = new File(path);
+            String[] text = FileUtils.readFileToString(file,"UTF-8").trim().split("\\s+");
+            File[] corpus = new File(getFilesPath()).listFiles();
+            matrix = new Double[text.length][corpus.length];
+            for(int i=0;i<matrix.length;i++) {
+                for(int j=0;j<matrix[i].length;j++) matrix[i][j] = Double.valueOf(0);
+            }
+            for(int i=0;i<text.length;i++) {
+                IndexReader iReader = IndexReader.open(FSDirectory.open(new File(getIndexPath())));
+                IndexSearcher searcher = new IndexSearcher(iReader);
+                SpanQuery query = new SpanTermQuery(new Term("contents",text[i]));
+                TopDocs results = searcher.search(query,10);
+                for(int j=0;j<results.totalHits;j++) {
+                    String docid = searcher.doc(j).get("id");
+                    scoreList.put((double) results.getMaxScore(),text[i]);
+                    matrix[i][Integer.parseInt(docid)] = Double.valueOf(results.scoreDocs[j].score);
+                }
+            }
+        }
+        catch (Exception e) {
+            LOGGER.debug(e.getMessage());
+            return null;
+        }
+//        for(int i=0;i<matrix.length;i++) {
+//            for(int j=0;j<matrix[i].length;j++) LOGGER.info("score in Document{} is : {}",j+1,matrix[i][j]);
+//        }
 
+        List<String> keywords = new ArrayList<>();
+        int cnt=0;
+        for (Map.Entry<Double,String> entry : scoreList.entrySet()) {
+//            LOGGER.info("Score = {}, Value = {}", entry.getKey(), entry.getValue());
+            if (cnt < 20) {
+                keywords.add(entry.getValue());
+                cnt++;
+            }
+        }
+        String res = keywords.toString();
+        LOGGER.info(res);
+        return keywords;
+    }
 }
