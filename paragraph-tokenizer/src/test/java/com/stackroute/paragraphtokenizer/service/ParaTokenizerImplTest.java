@@ -1,6 +1,6 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.service;
+package com.stackroute.paragraphtokenizer.service;
 
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
+import com.stackroute.domain.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

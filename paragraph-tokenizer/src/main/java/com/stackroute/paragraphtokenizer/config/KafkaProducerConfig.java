@@ -1,7 +1,6 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.config;
+package com.stackroute.paragraphtokenizer.config;
 
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
+import com.stackroute.domain.Document;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +11,6 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Configuration

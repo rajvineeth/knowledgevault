@@ -1,6 +1,6 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.resource;
+package com.stackroute.paragraphtokenizer.resource;
 
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
+import com.stackroute.domain.Document;
 import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class DocResource {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    private static final String TOPIC = "paraTokens";
+    private static final String TOPIC = "cgi1";
 
     public String post() {
         List<Document> list = new ArrayList();

@@ -1,17 +1,13 @@
-package com.stackroute.knowledgevault.paragraphtokenizer;
+package com.stackroute.paragraphtokenizer;
 
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
-import com.stackroute.knowledgevault.paragraphtokenizer.resource.DocResource;
+import com.stackroute.domain.Document;
+import com.stackroute.paragraphtokenizer.resource.DocResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.kafka.core.KafkaTemplate;
-
-import java.util.List;
 
 @SpringBootApplication
 public class ParagraphTokenizerApplication implements ApplicationListener<ContextRefreshedEvent> {

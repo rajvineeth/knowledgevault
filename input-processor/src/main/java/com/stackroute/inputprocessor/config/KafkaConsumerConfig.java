@@ -1,6 +1,6 @@
-package com.stackroute.knowledgevault.inputprocessor.config;
+package com.stackroute.inputprocessor.config;
 
-import com.stackroute.knowledgevault.inputprocessor.model.Input;
+import com.stackroute.domain.Input;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;

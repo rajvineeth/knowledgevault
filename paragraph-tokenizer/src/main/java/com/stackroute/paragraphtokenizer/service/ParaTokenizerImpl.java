@@ -1,10 +1,9 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.service;
+package com.stackroute.paragraphtokenizer.service;
 
-import com.stackroute.knowledgevault.paragraphtokenizer.model.Document;
+import com.stackroute.domain.Document;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service

@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.model;
+package com.stackroute.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

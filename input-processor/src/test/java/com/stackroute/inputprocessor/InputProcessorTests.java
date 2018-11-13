@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.paragraphtokenizer;
+package com.stackroute.inputprocessor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ParagraphTokenizerApplicationTests {
+public class InputProcessorTests {
 
 	@Test
 	public void contextLoads() {
