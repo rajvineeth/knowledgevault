@@ -1,9 +1,11 @@
 package com.stackroute.algos;
 
+import java.util.List;
+
 public interface FullTextSearch {
 
     String indexer();
-    String search(String data);
+    List<String> search(String data);
     String getIndexPath();
     String getFilesPath();
     void setIndexPath(String path);

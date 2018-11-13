@@ -10,6 +10,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.util.List;
+
 @SpringBootApplication
 public class ParagraphProcessorApplication implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -25,13 +27,13 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 
 		Processor pst = new Processor();
 		pst.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/assets");
-		pst.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/dataRepo");
+		pst.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/indices/dictionaries");
 		pst.getFullTextSearch().indexer();
 
-		String[] keys = {"quick","red","fox"};//"narcolepsy","dermoid","nervous","quick"};
+		String[] keys = {"ughh","fox","brown"};//"narcolepsy","dermoid","nervous","quick"};
 		for(String word: keys){
-			String response = pst.getFullTextSearch().search(word);
-			LOGGER.info("data generated so far:\n {}",response);
+			List<String> response = pst.getFullTextSearch().search(word);
+//			LOGGER.info("data generated so far: {}",response);
 //			LOGGER.info("producer message: {} ",producer.post(response));
 //			LOGGER.info("producer message: {} \n ","hey...i have sent the message");
 		}
