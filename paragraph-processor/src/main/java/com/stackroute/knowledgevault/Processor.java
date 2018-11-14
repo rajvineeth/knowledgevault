@@ -34,8 +34,8 @@ public class Processor {
     }
 
     public void mapping(String keyword) {
-        this.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/assets");
-        this.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/indices/paraIndex");
+        this.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/taggerResource");
+        this.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/indices/dictionaries");
 
         this.getFullTextSearch().search(keyword);
     }

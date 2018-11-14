@@ -34,7 +34,7 @@ public class BenchmarkingTest {
     @Test
     public void getRelevantTermsTest() {
         for(int i=1;i<=5;i++)
-            this.benchmarking.getRelevantTerms("src/main/java/com/stackroute/knowledgevault/benchmark/files/document"+i+".txt");
+            this.benchmarking.getRelevantTerms("src/main/java/com/stackroute/knowledgevault/assets/medicalRepositories/document"+i+".txt");
     }
 
 }
