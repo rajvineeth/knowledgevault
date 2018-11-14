@@ -2,7 +2,6 @@ package com.stackroute.knowledgevault;
 
 import com.stackroute.knowledgevault.algos.FullTextSearch;
 import com.stackroute.knowledgevault.algos.FullTextSearchImpl;
-import com.stackroute.knowledgevault.utilities.SentenceTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,27 +10,17 @@ import java.io.IOException;
 public class Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
-    private SentenceTokenizer sentenceTokenizer;
 
-//    @Autowired
     private FullTextSearch fullTextSearch = new FullTextSearchImpl();
 
     public void setFullTextSearch(FullTextSearch fullTextSearch) {
         this.fullTextSearch = fullTextSearch;
     }
 
-    public SentenceTokenizer getSentenceTokenizer() {
-        return sentenceTokenizer;
-    }
-
-    public void setSentenceTokenizer(SentenceTokenizer sentenceTokenizer) {
-        this.sentenceTokenizer = sentenceTokenizer;
-    }
 
     public FullTextSearch getFullTextSearch() {
         return this.fullTextSearch;
     }
-
 
     /**
      * This utility function spits out the relevant information
@@ -41,15 +30,6 @@ public class Processor {
      */
     public String paraProcessing(String paragraph) throws IOException {
 
-        String response;
-        this.sentenceTokenizer = new SentenceTokenizer();
-        this.sentenceTokenizer.setText(paragraph);
-        String sentence=null;
-        int sentenceNumber=0;
-        while((sentence = sentenceTokenizer.nextSentence())!=null) {
-            // do processing stuff
-            sentenceNumber++;
-        }
         return null;
     }
 

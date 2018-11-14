@@ -30,6 +30,7 @@ public class FullTextSearchImpl implements FullTextSearch {
     private static String indexPath;
 
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
+    public static final String CONTENTS = "contents";
 
     @Override
     public String getIndexPath() {
@@ -79,7 +80,7 @@ public class FullTextSearchImpl implements FullTextSearch {
                 doc.add(new Field("name",f.getName(), Field.Store.YES, Field.Index.ANALYZED));
                 id++;
                 Reader reader = new FileReader(f.getCanonicalPath());
-                doc.add(new Field("contents",reader,Field.TermVector.WITH_POSITIONS_OFFSETS));
+                doc.add(new Field(CONTENTS,reader,Field.TermVector.WITH_POSITIONS_OFFSETS));
                 indexWriter.addDocument(doc);
                 reader.close();
             }
@@ -102,18 +103,17 @@ public class FullTextSearchImpl implements FullTextSearch {
 
     @Override
     public List<String> search(String data) {
-        StringBuilder sb = new StringBuilder();
         LOGGER.info("searching the keyword: {}",data);
         List<String> spanArray = new ArrayList<>();
         try {
             IndexReader iReader = IndexReader.open(FSDirectory.open(new File(indexPath)));
             IndexSearcher searcher = new IndexSearcher(iReader);
 
-            SpanQuery query = new SpanTermQuery(new Term("contents", data));
+            SpanQuery query = new SpanTermQuery(new Term(CONTENTS, data));
             TopDocs results = searcher.search(query,10);
             Map<Term, TermContext> termContexts = new HashMap<>();
 
-            for (int i = 0; i < results.scoreDocs.length; i++) {
+            for (int i = 0; i < results.totalHits; i++) {
                 ScoreDoc scoreDoc = results.scoreDocs[i];
                 LOGGER.info("Score of the keyword: {} in {} is = {} ",data,searcher.doc(i).get("name"),scoreDoc.score);
             }
@@ -123,9 +123,9 @@ public class FullTextSearchImpl implements FullTextSearch {
                 Spans spans = query.getSpans(atomic, bitset, termContexts);
                 while (spans.next()) {
                     int docid = atomic.docBase + spans.doc();
-                    spanArray.add("Doc with name: " + searcher.doc(docid).get("name") +" and location is " + spans.end()+"th word in the document\n");
-                };
-            };
+                    spanArray.add("Doc with name: " + searcher.doc(docid).get("name") + " and location is " + spans.end() + "th word in the document\n");
+                }
+            }
             for(String s: spanArray) LOGGER.info(s);
         }
         catch(Exception e) {
@@ -138,9 +138,15 @@ public class FullTextSearchImpl implements FullTextSearch {
         return spanArray;
     }
 
+    /**
+     * this function gives a list of relevant keywords in a given document corresponding to a corpus of documents
+     * @param path: the path of the document that we want to search
+     * @return: the list of relevant keywords
+     */
     @Override
     public List<String> getRelevantTerms(String path) {
         indexer();
+        List<String> keywords = new ArrayList<>();
         LOGGER.info("please wait while we do the muscle-work.....");
         Double[][] matrix;
         TreeMap<Double,String> scoreList = new TreeMap<>(Collections.reverseOrder());
@@ -152,10 +158,10 @@ public class FullTextSearchImpl implements FullTextSearch {
             for(int i=0;i<matrix.length;i++) {
                 for(int j=0;j<matrix[i].length;j++) matrix[i][j] = Double.valueOf(0);
             }
+            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(getIndexPath())));
+            IndexSearcher searcher = new IndexSearcher(iReader);
             for(int i=0;i<text.length;i++) {
-                IndexReader iReader = IndexReader.open(FSDirectory.open(new File(getIndexPath())));
-                IndexSearcher searcher = new IndexSearcher(iReader);
-                SpanQuery query = new SpanTermQuery(new Term("contents",text[i]));
+                SpanQuery query = new SpanTermQuery(new Term(CONTENTS,text[i]));
                 TopDocs results = searcher.search(query,10);
                 for(int j=0;j<results.totalHits;j++) {
                     String docid = searcher.doc(j).get("id");
@@ -163,16 +169,15 @@ public class FullTextSearchImpl implements FullTextSearch {
                     matrix[i][Integer.parseInt(docid)] = Double.valueOf(results.scoreDocs[j].score);
                 }
             }
+            iReader.close();
         }
         catch (Exception e) {
             LOGGER.debug(e.getMessage());
-            return null;
         }
 //        for(int i=0;i<matrix.length;i++) {
 //            for(int j=0;j<matrix[i].length;j++) LOGGER.info("score in Document{} is : {}",j+1,matrix[i][j]);
 //        }
 
-        List<String> keywords = new ArrayList<>();
         int cnt=0;
         for (Map.Entry<Double,String> entry : scoreList.entrySet()) {
 //            LOGGER.info("Score = {}, Value = {}", entry.getKey(), entry.getValue());

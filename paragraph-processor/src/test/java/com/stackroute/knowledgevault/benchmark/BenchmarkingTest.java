@@ -24,17 +24,17 @@ public class BenchmarkingTest {
     }
 
     @Test
-    public void solveTest() {
-
+    public void queryForGivenKeywordTest() {
         List<String> list = new ArrayList(){{
             add("not found");
         }};
-        assertNotEquals(list,this.benchmarking.solve());
+        assertNotEquals(list,this.benchmarking.queryForGivenKeyword("cough"));
     }
 
     @Test
     public void getRelevantTermsTest() {
-        this.benchmarking.getRelevantTerms("src/main/java/com/stackroute/knowledgevault/benchmark/files/document5.txt");
+        for(int i=1;i<=5;i++)
+            this.benchmarking.getRelevantTerms("src/main/java/com/stackroute/knowledgevault/benchmark/files/document"+i+".txt");
     }
 
 }

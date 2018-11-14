@@ -1,20 +1,14 @@
 package com.stackroute.knowledgevault.benchmark;
 
 import com.stackroute.knowledgevault.Processor;
-import org.apache.commons.io.FileUtils;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.spans.SpanQuery;
-import org.apache.lucene.search.spans.SpanTermQuery;
-import org.apache.lucene.store.FSDirectory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
 import java.util.*;
 
+/**
+ * Class  to benchmark the performance of Lucene in indexing and extracting relevant keywords from an input text
+ * based on a given stored data Repositories
+ */
 public class Benchmarking {
 
     private Processor  processor;
@@ -26,12 +20,22 @@ public class Benchmarking {
         processor.getFullTextSearch().setIndexPath("src/main/java/com/stackroute/knowledgevault/benchmark/indices");
     }
 
-    public List<String> solve() {
+    /**
+     * Query for presence of a particular keyword in the repositories and get its score,location
+     * and other document related information
+     * @param keyword: the input keyword that we want to search
+     */
+    public List<String> queryForGivenKeyword(String keyword) {
         init();
         this.processor.getFullTextSearch().indexer();
-        return this.processor.getFullTextSearch().search("cough");
+        return this.processor.getFullTextSearch().search(keyword);
     }
 
+    /**
+     * this function gives a list of relevant keywords in a given document corresponding to a corpus of documents
+     * @param path: the path of the document that we want to search
+     * @return: the list of relevant keywords
+     */
     public List<String> getRelevantTerms(String path) {
         init();
         return this.processor.getFullTextSearch().getRelevantTerms(path);
