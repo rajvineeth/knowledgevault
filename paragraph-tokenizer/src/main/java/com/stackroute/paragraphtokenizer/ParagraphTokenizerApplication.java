@@ -1,7 +1,7 @@
-package com.stackroute.knowledgevault.paragraphtokenizer;
+package com.stackroute.paragraphtokenizer;
 
-import com.stackroute.domain.Document;
-import com.stackroute.knowledgevault.paragraphtokenizer.resource.DocResource;
+import com.stackroute.domain.ExtraxtedFileData;
+import com.stackroute.paragraphtokenizer.resource.DocResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 public class ParagraphTokenizerApplication implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
-	private KafkaTemplate<String, Document> kafkaTemplate;
+	private KafkaTemplate<String, ExtraxtedFileData> kafkaTemplate;
 
 	private static DocResource producer;
 

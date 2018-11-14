@@ -1,7 +1,7 @@
-package com.stackroute.knowledgevault.knowledgevault.paragraphtokenizer.config;
+package com.stackroute.paragraphtokenizer.config;
 
 
-import com.stackroute.knowledgevault.knowledgevault.paragraphtokenizer.model.Document;
+import com.stackroute.domain.ExtraxtedFileData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -20,9 +20,9 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     @Bean
-    public ConsumerFactory<String, Document> consumerFactory() {
+    public ConsumerFactory<String, ExtraxtedFileData> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.23.239.231:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");//172.23.239.231
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -38,15 +38,15 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, Document> documentConsumerFactory(){
+    public ConsumerFactory<String, ExtraxtedFileData> documentConsumerFactory(){
 
         Map<String, Object> config=new HashMap<>();
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");//172.23.239.231
         config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
-        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),new JsonDeserializer<>(Document.class));
+        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),new JsonDeserializer<>(ExtraxtedFileData.class));
     }
 
     @Bean

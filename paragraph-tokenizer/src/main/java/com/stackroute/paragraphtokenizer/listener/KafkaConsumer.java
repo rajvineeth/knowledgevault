@@ -1,6 +1,6 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.listener;
+package com.stackroute.paragraphtokenizer.listener;
 
-import com.stackroute.domain.Document;
+import com.stackroute.domain.ExtraxtedFileData;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ public class KafkaConsumer {
 //        System.out.println("consumed message:"+message);
 //    }
     @KafkaListener(topics="document",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
-    public void consumejson(Document DOCUMENT){
-        System.out.println("consumed message"+DOCUMENT.toString());
+    public void consumejson(ExtraxtedFileData ExtraxtedFileData){
+        System.out.println("consumed message"+ ExtraxtedFileData.toString());
     }
 }

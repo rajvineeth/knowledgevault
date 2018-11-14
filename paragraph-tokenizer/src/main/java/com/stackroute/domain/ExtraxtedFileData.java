@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Document {
-    private int docId;
-    private String text;
+public class ExtraxtedFileData {
+    private Integer id;
+    private String content;
 }

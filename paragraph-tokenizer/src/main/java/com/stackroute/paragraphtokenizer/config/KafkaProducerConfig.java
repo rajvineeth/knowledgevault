@@ -1,7 +1,6 @@
-package com.stackroute.knowledgevault.knowledgevault.paragraphtokenizer.config;
+package com.stackroute.paragraphtokenizer.config;
 
-import com.stackroute.knowledgevault.knowledgevault.paragraphtokenizer.model.Document;
-
+import com.stackroute.domain.ExtraxtedFileData;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +17,7 @@ import java.util.Map;
 public class KafkaProducerConfig {
 
     @Bean
-    public ProducerFactory<String, Document> producerFactory() {
+    public ProducerFactory<String, ExtraxtedFileData> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.23.239.127:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -28,7 +27,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Document> kafkaTemplate() {
+    public KafkaTemplate<String, ExtraxtedFileData> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
