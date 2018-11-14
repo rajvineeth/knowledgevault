@@ -14,16 +14,17 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class ExtractorServiceImpl implements ExtractorService {
 
-    /* Fetches all the files and files present inside the sub-folder, from the folder specified in the path */
     @Override
+    /* Fetches all the files and files present inside the sub-folder, from the folder specified in the path */
     public List<File> getAllFiles(String path) {
 
         File directory = new File(path); //path = folder name (directory)
@@ -41,7 +42,9 @@ public class ExtractorServiceImpl implements ExtractorService {
 
                 assert subFolderFiles != null;
                 for (File file1 : subFolderFiles) {
-                    list.add(file1); //appending sub-folder files to the original list
+                    if (!file1.isDirectory()) {
+                        list.add(file1); //appending sub-folder files to the original list
+                    }
                 }
             } else list.add(file);
         }
@@ -49,8 +52,8 @@ public class ExtractorServiceImpl implements ExtractorService {
         return list;
     }
 
-    /* This method detects the document type of all the files in the list following the convention of apache tika. */
     @Override
+    /* This method detects the document type of all the files in the list following the convention of apache tika. */
     public List<String> detectDocType(List<File> allFiles) throws IOException, TikaException {
 
         List<String> docTypes = new ArrayList<>(); //Document Type list
@@ -138,5 +141,4 @@ public class ExtractorServiceImpl implements ExtractorService {
         return data;
 
     }
-
 }

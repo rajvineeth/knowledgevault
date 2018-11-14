@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "home/cgi")
@@ -29,10 +28,6 @@ public class ExtractorController {
     private static final String TOPIC = "document";
 
     private String initialPath = "/home/cgi/";
-
-    public ExtractorController(ExtractorService service) {
-        this.service = service;
-    }
 
     /* Fetches all the files from the specified folder in path */
     @GetMapping("{path}")
