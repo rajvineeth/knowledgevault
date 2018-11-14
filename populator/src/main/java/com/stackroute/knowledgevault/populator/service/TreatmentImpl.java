@@ -1,7 +1,7 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.populator.service;
 
 import com.stackroute.knowledgevault.domain.Treatment;
-import com.stackroute.knowledgevault.repository.TreatmentRepo;
+import com.stackroute.knowledgevault.populator.repository.TreatmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

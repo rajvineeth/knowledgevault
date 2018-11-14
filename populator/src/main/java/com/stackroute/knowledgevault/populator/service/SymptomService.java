@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.populator.service;
 
 import com.stackroute.knowledgevault.domain.Symptom;
 

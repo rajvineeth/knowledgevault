@@ -1,7 +1,7 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.populator.service;
 
 import com.stackroute.knowledgevault.domain.Symptom;
-import com.stackroute.knowledgevault.repository.SymptomRepo;
+import com.stackroute.knowledgevault.populator.repository.SymptomRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

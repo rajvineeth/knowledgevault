@@ -1,6 +1,6 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.populator.service;
 
-import com.stackroute.knowledgevault.repository.MedicalConditionRepo;
+import com.stackroute.knowledgevault.populator.repository.MedicalConditionRepo;
 import com.stackroute.knowledgevault.domain.MedicalCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

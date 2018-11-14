@@ -1,14 +1,16 @@
-package com.stackroute.knowledgevault.controller;
+package com.stackroute.knowledgevault.populator.controller;
 
 import com.github.jsonldjava.core.JsonLdOptions;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 import com.stackroute.knowledgevault.domain.*;
-import com.stackroute.knowledgevault.service.*;
 import com.stackroute.knowledgevault.domain.Cause;
 import com.stackroute.knowledgevault.domain.MedicalCondition;
-import com.stackroute.knowledgevault.service.CauseService;
-import com.stackroute.knowledgevault.service.MedicalConditionService;
+import com.stackroute.knowledgevault.populator.service.AnatomyService;
+import com.stackroute.knowledgevault.populator.service.CauseService;
+import com.stackroute.knowledgevault.populator.service.MedicalConditionService;
+import com.stackroute.knowledgevault.populator.service.SymptomService;
+import com.stackroute.knowledgevault.populator.service.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
