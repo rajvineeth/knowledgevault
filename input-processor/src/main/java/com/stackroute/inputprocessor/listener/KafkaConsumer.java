@@ -1,6 +1,6 @@
-package com.stackroute.knowledgevault.inputprocessor.listener;
+package com.stackroute.inputprocessor.listener;
 
-import com.stackroute.knowledgevault.inputprocessor.model.Input;
+import com.stackroute.inputprocessor.domain.Input;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
