@@ -10,5 +10,6 @@ public interface FullTextSearch {
     String getFilesPath();
     void setIndexPath(String path);
     void setFilesPath(String path);
-    List<String> getRelevantTerms(String path);
+    List<String> getRelevantTerms(String path,int type);
+
 }
