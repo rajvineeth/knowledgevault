@@ -20,7 +20,6 @@ public class POSTagging {
        // default constructor
     }
 
-
     /**
      * This function performs the prt-of-speech tagging of each word in a given text file
      * @param txt: the input text file
