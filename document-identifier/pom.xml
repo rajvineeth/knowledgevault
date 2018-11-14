@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 
-	<artifactId>NLPService</artifactId>
+	<artifactId>document-identifier</artifactId>
 	<packaging>jar</packaging>
 
-	<name>NLPService</name>
+	<name>document-identifier</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -92,6 +92,12 @@
 			<artifactId>mockito-core</artifactId>
 			<version>RELEASE</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.jsonld-java</groupId>
+			<artifactId>jsonld-java</artifactId>
+			<version>0.12.2</version>
 		</dependency>
 	</dependencies>
 
