@@ -1,6 +1,6 @@
 package com.stackroute.knowledgevault.resource;
 
-import com.stackroute.knowledgevault.domain.ExtraxtedFileData;
+import com.stackroute.knowledgevault.domain.Document;
 import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.ArrayList;
@@ -8,18 +8,18 @@ import java.util.List;
 
 public class DocResource {
 
-    private KafkaTemplate<String, ExtraxtedFileData> kafkaTemplate;
+    private KafkaTemplate<String, Document> kafkaTemplate;
 
-    public DocResource(KafkaTemplate<String, ExtraxtedFileData> kafkaTemplate) {
+    public DocResource(KafkaTemplate<String, Document> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
     private static final String TOPIC = "cgi1";
 
     public String post() {
-        List<ExtraxtedFileData> list = new ArrayList();
-        list.add(new ExtraxtedFileData(1,"asdiyg"));
-        for (ExtraxtedFileData doc : list){
+        List<Document> list = new ArrayList();
+        list.add(new Document(1,"asdiyg"));
+        for (Document doc : list){
             this.kafkaTemplate.send(TOPIC, doc);
         }
         return "published successfully";

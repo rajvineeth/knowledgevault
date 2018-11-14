@@ -1,6 +1,6 @@
 package com.stackroute.knowledgevault.config;
 
-import com.stackroute.knowledgevault.domain.ExtraxtedFileData;
+import com.stackroute.knowledgevault.domain.Document;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class KafkaProducerConfig {
 
     @Bean
-    public ProducerFactory<String, ExtraxtedFileData> producerFactory() {
+    public ProducerFactory<String, Document> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.23.239.127:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -27,7 +27,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, ExtraxtedFileData> kafkaTemplate() {
+    public KafkaTemplate<String, Document> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
