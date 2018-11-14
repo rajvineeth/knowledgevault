@@ -14,7 +14,6 @@
         <module>config-server</module>
         <module>eureka-registry</module>
         <module>zuulgateway</module>
-        <module>document-identifier-elasticsearch</module>
         <module>paragraph-tokenizer</module>
 	    <module>paragraph-processor</module>
         <module>extractor-service</module>
