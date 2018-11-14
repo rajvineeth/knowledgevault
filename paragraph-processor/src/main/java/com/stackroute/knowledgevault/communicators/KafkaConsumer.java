@@ -1,6 +1,6 @@
 package com.stackroute.knowledgevault.communicators;
 
-import com.stackroute.domain.Document;
+import com.stackroute.knowledgevault.domain.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;

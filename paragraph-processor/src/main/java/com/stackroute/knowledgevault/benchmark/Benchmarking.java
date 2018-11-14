@@ -36,9 +36,9 @@ public class Benchmarking {
      * @param path: the path of the document that we want to search
      * @return: the list of relevant keywords
      */
-    public List<String> getRelevantTerms(String path) {
+    public List<String> getRelevantTerms(String path,int type) {
         init();
-        return this.processor.getFullTextSearch().getRelevantTerms(path);
+        return this.processor.getFullTextSearch().getRelevantTerms(path,type);
     }
 
 }

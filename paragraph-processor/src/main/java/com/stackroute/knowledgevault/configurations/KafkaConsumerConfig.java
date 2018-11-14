@@ -1,6 +1,6 @@
 package com.stackroute.knowledgevault.configurations;
 
-import com.stackroute.domain.Document;
+import com.stackroute.knowledgevault.domain.Document;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
