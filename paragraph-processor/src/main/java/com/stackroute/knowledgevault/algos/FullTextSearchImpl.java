@@ -24,13 +24,25 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+/**
+ * This implementation class is based on Lucene Library in Java for full-search functionality.
+ * It basically uses inverted index to store doc information in a storage space..be it File System,RAM,Datavbase.
+ * Refer to {@link} to get basic understanding : https://www.javacodegeeks.com/2015/09/introduction-to-lucene.html
+ * Pretty easy to use:
+ * 1. set your document path and index path(where you want to store index to be lated used for searching)
+ *      with setFilesPath() and setIndexPath() methods respectively.
+ * 2. call index() method
+ * 3. now your documents you provided are  indexed and ready to be used for search functionality.
+ * 4. you can use search() method to search for a particular keyword in the indexed documents.
+ * 5. use getRelevantTerms() to get a list of relevant terms from your document based on the stored repositories.
+ */
 public class FullTextSearchImpl implements FullTextSearch {
 
     private static String filesPath;
     private static String indexPath;
 
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
-    public static final String CONTENTS = "contents";
+    public static final String CONTENTS = "content";
 
     @Override
     public String getIndexPath() {
@@ -105,6 +117,7 @@ public class FullTextSearchImpl implements FullTextSearch {
     public List<String> search(String data) {
         LOGGER.info("searching the keyword: {}",data);
         List<String> spanArray = new ArrayList<>();
+        List<String> res = new ArrayList<>();
         try {
             IndexReader iReader = IndexReader.open(FSDirectory.open(new File(indexPath)));
             IndexSearcher searcher = new IndexSearcher(iReader);
@@ -113,9 +126,9 @@ public class FullTextSearchImpl implements FullTextSearch {
             TopDocs results = searcher.search(query,10);
             Map<Term, TermContext> termContexts = new HashMap<>();
 
-            for (int i = 0; i < results.totalHits; i++) {
+            for (int i = 0; i < results.scoreDocs.length; i++) {
                 ScoreDoc scoreDoc = results.scoreDocs[i];
-                LOGGER.info("Score of the keyword: {} in {} is = {} ",data,searcher.doc(i).get("name"),scoreDoc.score);
+//                LOGGER.info("Score of the keyword: {} in {} is = {} ",data,searcher.doc(i).get("name"),scoreDoc.score);
             }
 
             for (AtomicReaderContext atomic : iReader.leaves()) {
@@ -124,9 +137,11 @@ public class FullTextSearchImpl implements FullTextSearch {
                 while (spans.next()) {
                     int docid = atomic.docBase + spans.doc();
                     spanArray.add("Doc with name: " + searcher.doc(docid).get("name") + " and location is " + spans.end() + "th word in the document\n");
+                    res.add(searcher.doc(docid).get("name"));
                 }
             }
-            for(String s: spanArray) LOGGER.info(s);
+
+//            for(String s: res) LOGGER.info(s);
         }
         catch(Exception e) {
             LOGGER.debug(e.getMessage());
@@ -134,25 +149,34 @@ public class FullTextSearchImpl implements FullTextSearch {
         }
 
         if(spanArray.isEmpty()) return Collections.singletonList("not found");
-        spanArray.add("found");
-        return spanArray;
+        res.add("found");
+        return res;
     }
 
     /**
      * this function gives a list of relevant keywords in a given document corresponding to a corpus of documents
      * @param path: the path of the document that we want to search
+     * @param type: it determines the way you want to process things.
+     *            If type is 1 then the input is path of the document
+     *            Else the input is the document content itself as a String
      * @return: the list of relevant keywords
      */
     @Override
-    public List<String> getRelevantTerms(String path) {
+    public List<String> getRelevantTerms(String path,int type) {
         indexer();
         List<String> keywords = new ArrayList<>();
         LOGGER.info("please wait while we do the muscle-work.....");
         Double[][] matrix;
         TreeMap<Double,String> scoreList = new TreeMap<>(Collections.reverseOrder());
         try {
-            File file = new File(path);
-            String[] text = FileUtils.readFileToString(file,"UTF-8").trim().split("\\s+");
+            String[] text;
+            if(type==1)  {
+                File file = new File(path);
+                text = FileUtils.readFileToString(file,"UTF-8").trim().split("\\s+");
+            }
+            else {
+                text = path.trim().split("\\s+");
+            }
             File[] corpus = new File(getFilesPath()).listFiles();
             matrix = new Double[text.length][corpus.length];
             for(int i=0;i<matrix.length;i++) {

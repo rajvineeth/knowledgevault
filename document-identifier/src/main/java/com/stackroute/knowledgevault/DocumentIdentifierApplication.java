@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NlpServiceApplication {
+public class DocumentIdentifierApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NlpServiceApplication.class, args);
+		SpringApplication.run(DocumentIdentifierApplication.class, args);
 	}
 
 

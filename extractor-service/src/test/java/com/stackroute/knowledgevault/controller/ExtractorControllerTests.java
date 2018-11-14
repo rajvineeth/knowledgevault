@@ -1,7 +1,6 @@
-package com.stackroute.controller;
+package com.stackroute.knowledgevault.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stackroute.knowledgevault.controller.ExtractorController;
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import com.stackroute.knowledgevault.service.ExtractorService;
 import org.apache.tika.exception.TikaException;
@@ -62,7 +61,6 @@ public class ExtractorControllerTests {
         docTypes.add("text/plain");
         docTypes.add("application/x-tika-ooxml");
     }
-
     @Test
     public void displayAllFiles() throws Exception {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);

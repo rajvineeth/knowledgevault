@@ -26,8 +26,8 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 		SpringApplication.run(ParagraphProcessorApplication.class, args);
 
 		Processor pst = new Processor();
-		pst.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/knowledgevault/assets");
-		pst.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/knowledgevault/indices/dictionaries");
+		pst.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/knowledgevault/assets/medicalRepositories");
+		pst.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/knowledgevault/assets/repoIndices");
 		pst.getFullTextSearch().indexer();
 
 		String[] keys = {"ughh","fox","brown"};//"narcolepsy","dermoid","nervous","quick"};
