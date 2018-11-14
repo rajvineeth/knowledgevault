@@ -1,0 +1,9 @@
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/dao/DocumentDao.java
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/domain/ExtractedFileData.java
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/config/KafkaConfiguration.java
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/service/KafkaConsumer.java
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/config/ElasticSearchConfiguration.java
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/DocIdentifierApplication.java
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/domain/DocResult.java
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/loaders/Loaders.java
+/home/shubham/knowledge-vault/knowledge-vault/document-identifier-elasticsearch/src/main/java/com/stackroute/controller/DocumentController.java

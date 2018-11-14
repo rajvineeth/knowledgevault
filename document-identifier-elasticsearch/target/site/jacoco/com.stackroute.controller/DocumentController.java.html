@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DocumentController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-elasticsearch</a> &gt; <a href="index.source.html" class="el_package">com.stackroute.controller</a> &gt; <span class="el_source">DocumentController.java</span></div><h1>DocumentController.java</h1><pre class="source lang-java linenums">package com.stackroute.controller;
+
+import com.stackroute.dao.DocumentDao;
+import com.stackroute.domain.ExtractedFileData;
+import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
+import java.util.*;
+
+@RestController
+@RequestMapping(&quot;/api/v1/doc&quot;)
+public class DocumentController {
+
+    private DocumentDao documentDao;
+
+<span class="fc" id="L15">    public DocumentController(DocumentDao documentDao) {</span>
+<span class="fc" id="L16">        this.documentDao = documentDao;</span>
+<span class="fc" id="L17">    }</span>
+//    @Autowired
+//    private KafkaTemplate&lt;String, Collection&lt;Map&gt;&gt; kafkaTemplate;
+//    private static final String Topic=&quot;kafka_example&quot;;
+    @PostMapping
+    public ExtractedFileData insertDoc(@RequestBody ExtractedFileData extractedFileData){
+<span class="nc" id="L23">        return documentDao.insertDoc(extractedFileData);</span>
+    }
+    @GetMapping(&quot;/showall&quot;)
+    public Collection&lt;Map&lt;String, Object&gt;&gt; showAll(){
+<span class="nc" id="L27">        return documentDao.getAll();</span>
+    }
+    @GetMapping(&quot;/search&quot;)
+    public Collection&lt;Map&gt; searchAll() throws IOException {
+<span class="nc" id="L31">        Collection&lt;Map&gt; res=documentDao.getKeywords();</span>
+       // kafkaTemplate.send(Topic, res);
+<span class="nc" id="L33">        return res;</span>
+    }
+    @GetMapping(&quot;/{content}&quot;)
+<span class="nc" id="L36">    public Collection&lt;Map&lt;String, Object&gt;&gt; searchContent(@PathVariable String content){return documentDao.search(content);}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

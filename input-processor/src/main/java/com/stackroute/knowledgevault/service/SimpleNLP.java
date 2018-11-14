@@ -1,11 +1,11 @@
 package com.stackroute.knowledgevault.service;
 
 import edu.stanford.nlp.simple.Sentence;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 public class SimpleNLP {
 
     List lemmatize (Sentence sentence) {

@@ -2,11 +2,11 @@ package com.stackroute.knowledgevault.service;
 
 import com.stackroute.knowledgevault.domain.Input;
 import edu.stanford.nlp.simple.Document;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 public class SentenceSplitter {
 
     List splitDocument (Input input) {
