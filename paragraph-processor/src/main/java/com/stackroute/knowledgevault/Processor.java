@@ -2,34 +2,37 @@ package com.stackroute.knowledgevault;
 
 import com.stackroute.knowledgevault.algos.FullTextSearch;
 import com.stackroute.knowledgevault.algos.FullTextSearchImpl;
-import com.stackroute.knowledgevault.utilities.SentenceTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
-    private SentenceTokenizer sentenceTokenizer;
 
-//    @Autowired
-    private FullTextSearch fullTextSearch = new FullTextSearchImpl();
+    private FullTextSearch fullTextSearch;
 
     public void setFullTextSearch(FullTextSearch fullTextSearch) {
         this.fullTextSearch = fullTextSearch;
     }
 
-    public SentenceTokenizer getSentenceTokenizer() {
-        return sentenceTokenizer;
-    }
-
-    public void setSentenceTokenizer(SentenceTokenizer sentenceTokenizer) {
-        this.sentenceTokenizer = sentenceTokenizer;
-    }
 
     public FullTextSearch getFullTextSearch() {
         return this.fullTextSearch;
     }
 
+    /**
+     * Initialisation function which sets up the Lucene full text search functionalities
+     */
+    public void initProcessor() {
+        this.getFullTextSearch().setFilesPath("src/main/java/com/stackroute/knowledgevault/assets/taggerResource");
+        this.getFullTextSearch().setIndexPath("src/main/java/com/stackroute/knowledgevault/indices/dictionaries");
+        this.getFullTextSearch().indexer();
+    }
 
     /**
      * This utility function spits out the relevant information
@@ -37,24 +40,22 @@ public class Processor {
      * @param paragraph: the input paragraph
      * @return: tagged keywords that makes sense
      */
-    public String paraProcessing(String paragraph) {
-
-        String response;
-        this.sentenceTokenizer = new SentenceTokenizer();
-        this.sentenceTokenizer.setText(paragraph);
-        String sentence=null;
-        int sentenceNumber=0;
-        while((sentence = sentenceTokenizer.nextSentence())!=null) {
-            // do processing stuff
-            sentenceNumber++;
+    public Map<String,String> paraProcessing(String paragraph) {
+        Map<String,String> tags = new HashMap<>();
+//        this.getFullTextSearch().indexer();
+//        List<String> keywords = this.getFullTextSearch().getRelevantTerms(paragraph,0);
+        String[] keywords = paragraph.trim().split("\\.|\\s+");
+        for(String keyword: keywords) {
+            tags.put(keyword,keywordMapping(keyword));
         }
-        return null;
+//        LOGGER.info("tag for lung: {}", keywordMapping("lung"));
+        for (Map.Entry<String,String> entry : tags.entrySet()) {
+            LOGGER.info("word = {}, tag = {}", entry.getKey(), entry.getValue());
+        }
+        return tags;
     }
 
-    public void mapping(String keyword) {
-        this.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/assets");
-        this.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/indices/paraIndex");
-
-        this.getFullTextSearch().search(keyword);
+    public String keywordMapping(String keyword) {
+        return this.getFullTextSearch().search(keyword).get(0);
     }
 }

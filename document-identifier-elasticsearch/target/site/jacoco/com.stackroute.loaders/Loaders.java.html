@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Loaders.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-elasticsearch</a> &gt; <a href="index.source.html" class="el_package">com.stackroute.loaders</a> &gt; <span class="el_source">Loaders.java</span></div><h1>Loaders.java</h1><pre class="source lang-java linenums">package com.stackroute.loaders;
+
+import com.stackroute.domain.ExtractedFileData;
+import com.stackroute.dao.DocumentDao;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+@Component
+public class Loaders implements ApplicationListener&lt;ContextRefreshedEvent&gt;  {
+    private DocumentDao documentDao;
+<span class="fc" id="L16">    public Loaders(DocumentDao documentDao1){this.documentDao = documentDao1;}</span>
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        try {
+<span class="fc" id="L20">            System.out.println(&quot;inside loader&quot;);</span>
+<span class="nc" id="L21">            documentDao.insertDoc(new ExtractedFileData(10,&quot;title&quot;,new String(Files.readAllBytes(Paths.get(&quot;document-identifier-elasticsearch/src/main/Docs/document1.txt&quot;)))));</span>
+<span class="nc" id="L22">            documentDao.insertDoc(new ExtractedFileData(11,&quot;title&quot;,new String(Files.readAllBytes(Paths.get(&quot;document-identifier-elasticsearch/src/main/Docs/document2.txt&quot;)))));</span>
+<span class="nc" id="L23">            documentDao.insertDoc(new ExtractedFileData(12,&quot;title&quot;,new String(Files.readAllBytes(Paths.get(&quot;document-identifier-elasticsearch/src/main/Docs/document3.txt&quot;)))));</span>
+<span class="nc" id="L24">            documentDao.insertDoc(new ExtractedFileData(13,&quot;title&quot;,new String(Files.readAllBytes(Paths.get(&quot;document-identifier-elasticsearch/src/main/Docs/document4.txt&quot;)))));</span>
+<span class="nc" id="L25">            documentDao.insertDoc(new ExtractedFileData(14,&quot;title&quot;,new String(Files.readAllBytes(Paths.get(&quot;document-identifier-elasticsearch/src/main/Docs/document5.txt&quot;)))));</span>
+<span class="fc" id="L26"> } catch (IOException e) {</span>
+<span class="fc" id="L27">            e.printStackTrace();</span>
+<span class="nc" id="L28">        }</span>
+
+
+<span class="fc" id="L31">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

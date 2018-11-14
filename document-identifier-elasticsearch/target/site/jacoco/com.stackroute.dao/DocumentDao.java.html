@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DocumentDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-elasticsearch</a> &gt; <a href="index.source.html" class="el_package">com.stackroute.dao</a> &gt; <span class="el_source">DocumentDao.java</span></div><h1>DocumentDao.java</h1><pre class="source lang-java linenums">package com.stackroute.dao;
+
+import au.com.bytecode.opencsv.CSVReader;
+import com.stackroute.domain.ExtractedFileData;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.stanford.nlp.simple.Sentence;
+import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.ScoreSortBuilder;
+import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.stereotype.Repository;
+
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
+
+@Repository
+public class DocumentDao {
+
+<span class="fc" id="L32">    private String index = &quot;bookdata&quot;;</span>
+<span class="fc" id="L33">    private String type = &quot;books&quot;;</span>
+    private static final String CONTENT= &quot;content&quot;;
+    private RestHighLevelClient restHighLevelClient;
+
+    private ObjectMapper objectMapper;
+<span class="fc" id="L38">    public DocumentDao(ObjectMapper objectMapper, RestHighLevelClient restHighLevelClient){</span>
+<span class="fc" id="L39">        this.objectMapper = objectMapper;</span>
+<span class="fc" id="L40">        this.restHighLevelClient = restHighLevelClient;</span>
+<span class="fc" id="L41">    }</span>
+
+    public ExtractedFileData insertDoc(ExtractedFileData extractedFileData){
+<span class="nc" id="L44">        Map&lt;String, Object&gt; dataMap = objectMapper.convertValue(extractedFileData, Map.class);</span>
+<span class="nc" id="L45">        IndexRequest indexRequest = new IndexRequest(index, type, extractedFileData.getId())</span>
+<span class="nc" id="L46">                .source(dataMap);</span>
+        try {
+<span class="nc" id="L48">           restHighLevelClient.index(indexRequest);</span>
+<span class="nc" id="L49">        } catch(ElasticsearchException e) {</span>
+<span class="nc" id="L50">            e.getDetailedMessage();</span>
+<span class="nc" id="L51">        } catch (java.io.IOException ex){</span>
+<span class="nc" id="L52">            ex.getLocalizedMessage();</span>
+<span class="nc" id="L53">        }</span>
+<span class="nc" id="L54">        return extractedFileData;</span>
+    }
+    public float getScore(String content,String id){
+<span class="nc" id="L57">        SearchRequest searchRequest=new SearchRequest(index);</span>
+<span class="nc" id="L58">        searchRequest.types(type);</span>
+<span class="nc" id="L59">        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();</span>
+
+<span class="nc" id="L61">        BoolQueryBuilder boolQuery = new BoolQueryBuilder();</span>
+<span class="nc" id="L62">        HashMap&lt;String,String&gt; fields=new HashMap();</span>
+<span class="nc" id="L63">        fields.put(CONTENT,content);</span>
+<span class="nc" id="L64">        fields.put(&quot;id&quot;,id);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        for (Map.Entry&lt;String, String&gt; entry : fields.entrySet()){</span>
+<span class="nc" id="L66">            boolQuery.must(QueryBuilders.matchQuery(entry.getKey(), entry.getValue()));</span>
+<span class="nc" id="L67">        }</span>
+<span class="nc" id="L68">        sourceBuilder.query(boolQuery);</span>
+<span class="nc" id="L69">        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));</span>
+<span class="nc" id="L70">        sourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));</span>
+<span class="nc" id="L71">        searchRequest.source(sourceBuilder);</span>
+<span class="nc" id="L72">        SearchResponse searchResponse=null;</span>
+<span class="nc" id="L73">        float score=0;</span>
+        try{
+<span class="nc" id="L75">            searchResponse=restHighLevelClient.search(searchRequest);</span>
+        }
+<span class="nc" id="L77">        catch (java.io.IOException e){</span>
+<span class="nc" id="L78">            e.getLocalizedMessage();</span>
+<span class="nc" id="L79">        }</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if(searchResponse!=null) {</span>
+<span class="nc" id="L81">            SearchHit[] hits = searchResponse.getHits().getHits();</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            for (SearchHit hit : hits) {</span>
+<span class="nc" id="L83">                score = hit.getScore();</span>
+            }
+        }
+<span class="nc" id="L86">        return score;</span>
+    }
+
+<span class="fc" id="L89">    List&lt;String&gt; arrayList = new ArrayList&lt;&gt;();</span>
+    public Collection&lt;Map&gt; getKeywords() throws IOException {
+        String content;
+        String id;
+<span class="nc" id="L93">        Collection&lt;Map&lt;String, Object&gt;&gt; docs= getAll();</span>
+<span class="nc" id="L94">        Collection&lt;Map&gt; result=new LinkedList&lt;&gt;();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        for(Map&lt;String,Object&gt; doc:docs) {</span>
+<span class="nc" id="L96">            arrayList.clear();</span>
+<span class="nc" id="L97">            content = (String) doc.get(CONTENT);</span>
+<span class="nc" id="L98">            id = (String) doc.get(&quot;id&quot;);</span>
+<span class="nc" id="L99">            edu.stanford.nlp.simple.Document document=new edu.stanford.nlp.simple.Document(Arrays.toString(content.toLowerCase().split(&quot;\\W+&quot;)));</span>
+<span class="nc" id="L100">            arrayList=lemmatize(document);</span>
+<span class="nc" id="L101">            arrayList=removeStopWords(arrayList);</span>
+<span class="nc" id="L102">            Map&lt;String, Float&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            for (String word : arrayList) {</span>
+<span class="nc" id="L104">                map.put(word, getScore(word,id));</span>
+<span class="nc" id="L105">            }</span>
+<span class="nc" id="L106">            Map objectMap=new HashMap&lt;&gt;();</span>
+<span class="nc" id="L107">            objectMap.put(&quot;id&quot;,doc.get(&quot;id&quot;));</span>
+<span class="nc" id="L108">            Map&lt;String,Float&gt; map1=sortByValue(map);</span>
+<span class="nc" id="L109">            objectMap.put(&quot;keywords&quot;,checkInDict(map1));</span>
+<span class="nc" id="L110">            result.add(objectMap);</span>
+<span class="nc" id="L111">        }</span>
+<span class="nc" id="L112">        return result;</span>
+    }
+    public List&lt;String&gt; lemmatize(edu.stanford.nlp.simple.Document document){
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        for (Sentence sent : document.sentences()) {</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            for(int i=0;i&lt;sent.length();i++){</span>
+<span class="nc" id="L117">                arrayList.add(sent.lemma(i));</span>
+            }
+<span class="nc" id="L119">        }</span>
+<span class="nc" id="L120">        return arrayList;</span>
+    }
+    public List&lt;String&gt; removeStopWords(List&lt;String&gt; arrayList){
+<span class="nc" id="L123">        String[] stopwords = {&quot;as&quot;, &quot;able&quot;, &quot;about&quot;, &quot;above&quot;, &quot;according&quot;, &quot;accordingly&quot;, &quot;across&quot;, &quot;actually&quot;, &quot;after&quot;, &quot;afterwards&quot;, &quot;again&quot;, &quot;against&quot;, &quot;aint&quot;, &quot;all&quot;, &quot;allow&quot;, &quot;allows&quot;, &quot;almost&quot;, &quot;alone&quot;, &quot;along&quot;, &quot;already&quot;, &quot;also&quot;, &quot;although&quot;, &quot;always&quot;, &quot;am&quot;, &quot;among&quot;, &quot;amongst&quot;, &quot;an&quot;, &quot;and&quot;, &quot;another&quot;, &quot;any&quot;, &quot;anybody&quot;, &quot;anyhow&quot;, &quot;anyone&quot;, &quot;anything&quot;, &quot;anyway&quot;, &quot;anyways&quot;, &quot;anywhere&quot;, &quot;apart&quot;, &quot;appear&quot;, &quot;appreciate&quot;, &quot;appropriate&quot;, &quot;are&quot;, &quot;arent&quot;, &quot;around&quot;, &quot;as&quot;, &quot;aside&quot;, &quot;ask&quot;, &quot;asking&quot;, &quot;associated&quot;, &quot;at&quot;, &quot;available&quot;, &quot;away&quot;, &quot;awfully&quot;, &quot;be&quot;, &quot;became&quot;, &quot;because&quot;, &quot;become&quot;, &quot;becomes&quot;, &quot;becoming&quot;, &quot;been&quot;, &quot;before&quot;, &quot;beforehand&quot;, &quot;behind&quot;, &quot;being&quot;, &quot;believe&quot;, &quot;below&quot;, &quot;beside&quot;, &quot;besides&quot;, &quot;best&quot;, &quot;better&quot;, &quot;between&quot;, &quot;beyond&quot;, &quot;both&quot;, &quot;brief&quot;, &quot;but&quot;, &quot;by&quot;, &quot;cmon&quot;, &quot;cs&quot;, &quot;came&quot;, &quot;can&quot;, &quot;cant&quot;, &quot;cannot&quot;, &quot;cant&quot;, &quot;cause&quot;, &quot;causes&quot;, &quot;certain&quot;, &quot;certainly&quot;, &quot;changes&quot;, &quot;clearly&quot;, &quot;co&quot;, &quot;com&quot;, &quot;come&quot;, &quot;comes&quot;, &quot;concerning&quot;, &quot;consequently&quot;, &quot;consider&quot;, &quot;considering&quot;, &quot;contain&quot;, &quot;containing&quot;, &quot;contains&quot;, &quot;corresponding&quot;, &quot;could&quot;, &quot;couldnt&quot;, &quot;course&quot;, &quot;currently&quot;, &quot;definitely&quot;, &quot;described&quot;, &quot;despite&quot;, &quot;did&quot;, &quot;didnt&quot;, &quot;different&quot;, &quot;do&quot;, &quot;does&quot;, &quot;doesnt&quot;, &quot;doing&quot;, &quot;dont&quot;, &quot;done&quot;, &quot;down&quot;, &quot;downwards&quot;, &quot;during&quot;, &quot;each&quot;, &quot;edu&quot;, &quot;eg&quot;, &quot;eight&quot;, &quot;either&quot;, &quot;else&quot;, &quot;elsewhere&quot;, &quot;enough&quot;, &quot;entirely&quot;, &quot;especially&quot;, &quot;et&quot;, &quot;etc&quot;, &quot;even&quot;, &quot;ever&quot;, &quot;every&quot;, &quot;everybody&quot;, &quot;everyone&quot;, &quot;everything&quot;, &quot;everywhere&quot;, &quot;ex&quot;, &quot;exactly&quot;, &quot;example&quot;, &quot;except&quot;, &quot;far&quot;, &quot;few&quot;, &quot;ff&quot;, &quot;fifth&quot;, &quot;first&quot;, &quot;five&quot;, &quot;followed&quot;, &quot;following&quot;, &quot;follows&quot;, &quot;for&quot;, &quot;former&quot;, &quot;formerly&quot;, &quot;forth&quot;, &quot;four&quot;, &quot;from&quot;, &quot;further&quot;, &quot;furthermore&quot;, &quot;get&quot;, &quot;gets&quot;, &quot;getting&quot;, &quot;given&quot;, &quot;gives&quot;, &quot;go&quot;, &quot;goes&quot;, &quot;going&quot;, &quot;gone&quot;, &quot;got&quot;, &quot;gotten&quot;, &quot;greetings&quot;, &quot;had&quot;, &quot;hadnt&quot;, &quot;happens&quot;, &quot;hardly&quot;, &quot;has&quot;, &quot;hasnt&quot;, &quot;have&quot;, &quot;havent&quot;, &quot;having&quot;, &quot;he&quot;, &quot;hes&quot;, &quot;hello&quot;, &quot;help&quot;, &quot;hence&quot;, &quot;her&quot;, &quot;here&quot;, &quot;heres&quot;, &quot;hereafter&quot;, &quot;hereby&quot;, &quot;herein&quot;, &quot;hereupon&quot;, &quot;hers&quot;, &quot;herself&quot;, &quot;hi&quot;, &quot;him&quot;, &quot;himself&quot;, &quot;his&quot;, &quot;hither&quot;, &quot;hopefully&quot;, &quot;how&quot;, &quot;howbeit&quot;, &quot;however&quot;, &quot;i&quot;, &quot;id&quot;, &quot;ill&quot;, &quot;im&quot;, &quot;ive&quot;, &quot;ie&quot;, &quot;if&quot;, &quot;ignored&quot;, &quot;immediate&quot;, &quot;in&quot;, &quot;inasmuch&quot;, &quot;inc&quot;, &quot;indeed&quot;, &quot;indicate&quot;, &quot;indicated&quot;, &quot;indicates&quot;, &quot;inner&quot;, &quot;insofar&quot;, &quot;instead&quot;, &quot;into&quot;, &quot;inward&quot;, &quot;is&quot;, &quot;isnt&quot;, &quot;it&quot;, &quot;itd&quot;, &quot;itll&quot;, &quot;its&quot;, &quot;its&quot;, &quot;itself&quot;, &quot;just&quot;, &quot;keep&quot;, &quot;keeps&quot;, &quot;kept&quot;, &quot;know&quot;, &quot;knows&quot;, &quot;known&quot;, &quot;last&quot;, &quot;lately&quot;, &quot;later&quot;, &quot;latter&quot;, &quot;latterly&quot;, &quot;least&quot;, &quot;less&quot;, &quot;lest&quot;, &quot;let&quot;, &quot;lets&quot;, &quot;like&quot;, &quot;liked&quot;, &quot;likely&quot;, &quot;little&quot;, &quot;look&quot;, &quot;looking&quot;, &quot;looks&quot;, &quot;ltd&quot;, &quot;mainly&quot;, &quot;many&quot;, &quot;may&quot;, &quot;maybe&quot;, &quot;me&quot;, &quot;mean&quot;, &quot;meanwhile&quot;, &quot;merely&quot;, &quot;might&quot;, &quot;more&quot;, &quot;moreover&quot;, &quot;most&quot;, &quot;mostly&quot;, &quot;much&quot;, &quot;must&quot;, &quot;my&quot;, &quot;myself&quot;, &quot;name&quot;, &quot;namely&quot;, &quot;nd&quot;, &quot;near&quot;, &quot;nearly&quot;, &quot;necessary&quot;, &quot;need&quot;, &quot;needs&quot;, &quot;neither&quot;, &quot;never&quot;, &quot;nevertheless&quot;, &quot;new&quot;, &quot;next&quot;, &quot;nine&quot;, &quot;no&quot;, &quot;nobody&quot;, &quot;non&quot;, &quot;none&quot;, &quot;noone&quot;, &quot;nor&quot;, &quot;normally&quot;, &quot;not&quot;, &quot;nothing&quot;, &quot;novel&quot;, &quot;now&quot;, &quot;nowhere&quot;, &quot;obviously&quot;, &quot;of&quot;, &quot;off&quot;, &quot;often&quot;, &quot;oh&quot;, &quot;ok&quot;, &quot;okay&quot;, &quot;old&quot;, &quot;on&quot;, &quot;once&quot;, &quot;one&quot;, &quot;ones&quot;, &quot;only&quot;, &quot;onto&quot;, &quot;or&quot;, &quot;other&quot;, &quot;others&quot;, &quot;otherwise&quot;, &quot;ought&quot;, &quot;our&quot;, &quot;ours&quot;, &quot;ourselves&quot;, &quot;out&quot;, &quot;outside&quot;, &quot;over&quot;, &quot;overall&quot;, &quot;own&quot;, &quot;particular&quot;, &quot;particularly&quot;, &quot;per&quot;, &quot;perhaps&quot;, &quot;placed&quot;, &quot;please&quot;, &quot;plus&quot;, &quot;possible&quot;, &quot;presumably&quot;, &quot;probably&quot;, &quot;provides&quot;, &quot;que&quot;, &quot;quite&quot;, &quot;qv&quot;, &quot;rather&quot;, &quot;rd&quot;, &quot;re&quot;, &quot;really&quot;, &quot;reasonably&quot;, &quot;regarding&quot;, &quot;regardless&quot;, &quot;regards&quot;, &quot;relatively&quot;, &quot;respectively&quot;, &quot;right&quot;, &quot;said&quot;, &quot;same&quot;, &quot;saw&quot;, &quot;say&quot;, &quot;saying&quot;, &quot;says&quot;, &quot;second&quot;, &quot;secondly&quot;, &quot;see&quot;, &quot;seeing&quot;, &quot;seem&quot;, &quot;seemed&quot;, &quot;seeming&quot;, &quot;seems&quot;, &quot;seen&quot;, &quot;self&quot;, &quot;selves&quot;, &quot;sensible&quot;, &quot;sent&quot;, &quot;serious&quot;, &quot;seriously&quot;, &quot;seven&quot;, &quot;several&quot;, &quot;shall&quot;, &quot;she&quot;, &quot;should&quot;, &quot;shouldnt&quot;, &quot;since&quot;, &quot;six&quot;, &quot;so&quot;, &quot;some&quot;, &quot;somebody&quot;, &quot;somehow&quot;, &quot;someone&quot;, &quot;something&quot;, &quot;sometime&quot;, &quot;sometimes&quot;, &quot;somewhat&quot;, &quot;somewhere&quot;, &quot;soon&quot;, &quot;sorry&quot;, &quot;specified&quot;, &quot;specify&quot;, &quot;specifying&quot;, &quot;still&quot;, &quot;sub&quot;, &quot;such&quot;, &quot;sup&quot;, &quot;sure&quot;, &quot;ts&quot;, &quot;take&quot;, &quot;taken&quot;, &quot;tell&quot;, &quot;tends&quot;, &quot;th&quot;, &quot;than&quot;, &quot;thank&quot;, &quot;thanks&quot;, &quot;thanx&quot;, &quot;that&quot;, &quot;thats&quot;, &quot;thats&quot;, &quot;the&quot;, &quot;their&quot;, &quot;theirs&quot;, &quot;them&quot;, &quot;themselves&quot;, &quot;then&quot;, &quot;thence&quot;, &quot;there&quot;, &quot;theres&quot;, &quot;thereafter&quot;, &quot;thereby&quot;, &quot;therefore&quot;, &quot;therein&quot;, &quot;theres&quot;, &quot;thereupon&quot;, &quot;these&quot;, &quot;they&quot;, &quot;theyd&quot;, &quot;theyll&quot;, &quot;theyre&quot;, &quot;theyve&quot;, &quot;think&quot;, &quot;third&quot;, &quot;this&quot;, &quot;thorough&quot;, &quot;thoroughly&quot;, &quot;those&quot;, &quot;though&quot;, &quot;three&quot;, &quot;through&quot;, &quot;throughout&quot;, &quot;thru&quot;, &quot;thus&quot;, &quot;to&quot;, &quot;together&quot;, &quot;too&quot;, &quot;took&quot;, &quot;toward&quot;, &quot;towards&quot;, &quot;tried&quot;, &quot;tries&quot;, &quot;truly&quot;, &quot;try&quot;, &quot;trying&quot;, &quot;twice&quot;, &quot;two&quot;, &quot;un&quot;, &quot;under&quot;, &quot;unfortunately&quot;, &quot;unless&quot;, &quot;unlikely&quot;, &quot;until&quot;, &quot;unto&quot;, &quot;up&quot;, &quot;upon&quot;, &quot;us&quot;, &quot;use&quot;, &quot;used&quot;, &quot;useful&quot;, &quot;uses&quot;, &quot;using&quot;, &quot;usually&quot;, &quot;value&quot;, &quot;various&quot;, &quot;very&quot;, &quot;via&quot;, &quot;viz&quot;, &quot;vs&quot;, &quot;want&quot;, &quot;wants&quot;, &quot;was&quot;, &quot;wasnt&quot;, &quot;way&quot;, &quot;we&quot;, &quot;wed&quot;, &quot;well&quot;, &quot;were&quot;, &quot;weve&quot;, &quot;welcome&quot;, &quot;well&quot;, &quot;went&quot;, &quot;were&quot;, &quot;werent&quot;, &quot;what&quot;, &quot;whats&quot;, &quot;whatever&quot;, &quot;when&quot;, &quot;whence&quot;, &quot;whenever&quot;, &quot;where&quot;, &quot;wheres&quot;, &quot;whereafter&quot;, &quot;whereas&quot;, &quot;whereby&quot;, &quot;wherein&quot;, &quot;whereupon&quot;, &quot;wherever&quot;, &quot;whether&quot;, &quot;which&quot;, &quot;while&quot;, &quot;whither&quot;, &quot;who&quot;, &quot;whos&quot;, &quot;whoever&quot;, &quot;whole&quot;, &quot;whom&quot;, &quot;whose&quot;, &quot;why&quot;, &quot;will&quot;, &quot;willing&quot;, &quot;wish&quot;, &quot;with&quot;, &quot;within&quot;, &quot;without&quot;, &quot;wont&quot;, &quot;wonder&quot;, &quot;would&quot;, &quot;would&quot;, &quot;wouldnt&quot;, &quot;yes&quot;, &quot;yet&quot;, &quot;you&quot;, &quot;youd&quot;, &quot;youll&quot;, &quot;youre&quot;, &quot;youve&quot;, &quot;your&quot;, &quot;yours&quot;, &quot;yourself&quot;, &quot;yourselves&quot;, &quot;zero&quot;};</span>
+<span class="nc" id="L124">        Set&lt;String&gt; stopSet = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L125">        stopSet.addAll(Arrays.asList(stopwords));</span>
+<span class="nc" id="L126">        Pattern constraint = Pattern.compile(&quot;[a-zA-Z0-9]{1}&quot;);</span>
+<span class="nc" id="L127">        Pattern constraint2 = Pattern.compile(&quot;[0-9]+&quot;);</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        for (int i = 0; i &lt; arrayList.size(); i++) {</span>
+<span class="nc" id="L129">            String word = arrayList.get(i);</span>
+<span class="nc" id="L130">            Matcher m=constraint.matcher(word);</span>
+<span class="nc" id="L131">            Matcher m2=constraint2.matcher(word);</span>
+<span class="nc bnc" id="L132" title="All 6 branches missed.">            if (stopSet.contains(word)||m.matches()||m2.matches()) {</span>
+<span class="nc" id="L133">                arrayList.remove(word);</span>
+<span class="nc" id="L134">                i--;</span>
+            }
+        }
+<span class="nc" id="L137">        return arrayList;</span>
+    }
+    public Map&lt;String,Float&gt; checkInDict(Map&lt;String,Float&gt; map1) throws IOException {
+<span class="nc" id="L140">        Map&lt;String,Float&gt; relevantMedicalTerms=new HashMap&lt;&gt;();</span>
+<span class="nc" id="L141">        Iterator&lt;Map.Entry&lt;String, Float&gt;&gt; it = map1.entrySet().iterator();</span>
+<span class="nc" id="L142">        List&lt;String&gt; diseases = getDiseases();</span>
+<span class="nc" id="L143">        List&lt;String&gt; symptoms = getSymptoms();</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        while (it.hasNext())</span>
+        {
+<span class="nc" id="L146">            Map.Entry&lt;String,Float&gt; entry= it.next();</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            for(String disease:diseases){</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">                if(Arrays.asList(disease.split(&quot;\\b+&quot;)).contains( entry.getKey())){</span>
+<span class="nc" id="L149">                    relevantMedicalTerms.put(entry.getKey(),entry.getValue());</span>
+                }
+<span class="nc" id="L151">            }</span>
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">            for(String symptom:symptoms){</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">                if(Arrays.asList(symptom.split(&quot;\\b+&quot;)).contains(entry.getKey())){</span>
+<span class="nc" id="L155">                    relevantMedicalTerms.put(entry.getKey(),entry.getValue());</span>
+                }
+<span class="nc" id="L157">            }</span>
+<span class="nc" id="L158">        }</span>
+<span class="nc" id="L159">        return relevantMedicalTerms;</span>
+    }
+    public static &lt;K, V extends Comparable&lt;? super V&gt;&gt; Map&lt;K, V&gt; sortByValue(Map&lt;K, V&gt; unsortMap) {
+
+<span class="nc" id="L163">        List&lt;Map.Entry&lt;K, V&gt;&gt; list =</span>
+<span class="nc" id="L164">                new LinkedList&lt;&gt;(unsortMap.entrySet());</span>
+
+<span class="nc" id="L166">        Collections.sort(list, (o1, o2) -&gt; (o2.getValue()).compareTo(o1.getValue()));</span>
+
+<span class="nc" id="L168">        Map&lt;K, V&gt; result = new LinkedHashMap&lt;&gt;();</span>
+<span class="nc" id="L169">        int i=0;</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        for (Map.Entry&lt;K, V&gt; entry : list) {</span>
+<span class="nc" id="L171">            result.put(entry.getKey(), entry.getValue());</span>
+<span class="nc" id="L172">            i++;</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">            if(i==20)</span>
+<span class="nc" id="L174">                break;</span>
+<span class="nc" id="L175">        }</span>
+<span class="nc" id="L176">        return result;</span>
+    }
+
+    public Collection&lt;Map&lt;String, Object&gt;&gt; search(String content){
+<span class="nc" id="L180">        SearchRequest searchRequest=new SearchRequest(index);</span>
+<span class="nc" id="L181">        searchRequest.types(type);</span>
+<span class="nc" id="L182">        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();</span>
+<span class="nc" id="L183">        sourceBuilder.query(QueryBuilders.matchQuery(CONTENT, content));</span>
+<span class="nc" id="L184">        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));</span>
+<span class="nc" id="L185">        sourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));</span>
+<span class="nc" id="L186">        searchRequest.source(sourceBuilder);</span>
+<span class="nc" id="L187">        SearchResponse searchResponse=null;</span>
+<span class="nc" id="L188">        Collection&lt;Map&lt;String, Object&gt;&gt; contracts = new LinkedList&lt;&gt;();</span>
+        try{
+<span class="nc" id="L190">            searchResponse=restHighLevelClient.search(searchRequest);</span>
+        }
+<span class="nc" id="L192">        catch (java.io.IOException e){</span>
+<span class="nc" id="L193">            e.getLocalizedMessage();</span>
+<span class="nc" id="L194">        }</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">        if(searchResponse!=null) {</span>
+<span class="nc" id="L196">            SearchHit[] hits = searchResponse.getHits().getHits();</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">            for (SearchHit hit : hits) {</span>
+<span class="nc" id="L198">                contracts.add(hit.getSourceAsMap());</span>
+            }
+        }
+<span class="nc" id="L201">        return contracts;</span>
+
+    }
+    public Collection&lt;Map&lt;String, Object&gt;&gt; getAll(){
+
+<span class="nc" id="L206">        SearchRequest searchRequest=new SearchRequest(index);</span>
+<span class="nc" id="L207">        searchRequest.types(type);</span>
+<span class="nc" id="L208">        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();</span>
+<span class="nc" id="L209">        sourceBuilder.query(QueryBuilders.matchAllQuery());</span>
+<span class="nc" id="L210">        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));</span>
+<span class="nc" id="L211">        sourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));</span>
+<span class="nc" id="L212">        searchRequest.source(sourceBuilder);</span>
+<span class="nc" id="L213">        SearchResponse searchResponse=null;</span>
+<span class="nc" id="L214">        Collection&lt;Map&lt;String, Object&gt;&gt; contracts = new LinkedList&lt;&gt;();</span>
+        try{
+<span class="nc" id="L216">            searchResponse=restHighLevelClient.search(searchRequest);</span>
+        }
+<span class="nc" id="L218">        catch (java.io.IOException e){</span>
+<span class="nc" id="L219">            e.getLocalizedMessage();</span>
+<span class="nc" id="L220">        }</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">        if(searchResponse!=null) {</span>
+<span class="nc" id="L222">            SearchHit[] hits = searchResponse.getHits().getHits();</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">            for (SearchHit hit : hits) {</span>
+<span class="nc" id="L224">                contracts.add(hit.getSourceAsMap());</span>
+            }
+        }
+<span class="nc" id="L227">        return contracts;</span>
+    }
+    public List&lt;String&gt; getDiseases() throws IOException {
+<span class="nc" id="L230">        CSVReader reader = new CSVReader(new FileReader(&quot;document-identifier-elasticsearch/src/main/Docs/DOID.csv&quot;),',');</span>
+<span class="nc" id="L231">        List&lt;String[]&gt; allRows = reader.readAll();</span>
+<span class="nc" id="L232">        List&lt;String&gt; diseases=new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">        for(String[] row : allRows){</span>
+<span class="nc" id="L234">            diseases.add(row[1]);</span>
+<span class="nc" id="L235">        }</span>
+<span class="nc" id="L236">        return diseases;</span>
+    }
+
+    public List&lt;String&gt; getSymptoms() throws IOException {
+<span class="nc" id="L240">        CSVReader reader = new CSVReader(new FileReader(&quot;document-identifier-elasticsearch/src/main/Docs/SYMP.csv&quot;),',');</span>
+<span class="nc" id="L241">        List&lt;String[]&gt; allRows = reader.readAll();</span>
+<span class="nc" id="L242">        List&lt;String&gt; diseases=new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">        for(String[] row : allRows){</span>
+<span class="nc" id="L244">            diseases.add(row[1]);</span>
+<span class="nc" id="L245">        }</span>
+<span class="nc" id="L246">        return diseases;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
