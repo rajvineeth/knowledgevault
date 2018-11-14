@@ -29,7 +29,8 @@ public class ProcessorTest {
 
     @Test
     public void paraProcessingTest() {
-        String paragraph = "i am suffering from cancer.I have cancer in my lungs.";
+        String paragraph = "My name is neeraj. I am suffering from cancer.I have cancer in my lungs.";
+        paragraph.toLowerCase();
         this.processor.paraProcessing(paragraph);
     }
 
