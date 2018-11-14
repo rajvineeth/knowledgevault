@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,5 +19,14 @@ public class MedicalCondition {
     @Id
     private Long conditionId;
     private String type;
-    private String condiationName;
+    private String conditionName;
+
+    @Relationship(type="causedBy",direction = Relationship.UNDIRECTED)
+    private List<Cause> causeList;
+
+//    public MedicalCondition(Long conditionId,String type,String conditionName){
+//        this.conditionId=conditionId;
+//        this.type=type;
+//        this.conditionName=conditionName;
+//    }
 }

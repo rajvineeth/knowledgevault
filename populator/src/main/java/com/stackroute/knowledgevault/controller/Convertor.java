@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -46,14 +44,21 @@ public class Convertor {
         String name=(String)root.get("alternateName");
         Long id=1L;
 
-        ArrayList<Map<String, String>> causeMap = (ArrayList<Map<String, String>>) root.get("cause");
-        String causeName=(String)causeMap.get(0).get("name");
-        String causeType=(String)causeMap.get(0).get("@type");
-        Long causeId=1L;
-
-
-
-        medicalConditionService.saveCondition(new MedicalCondition(id,type,name));
-        causeService.saveCause(new Cause(causeId,causeType,causeName));
+        ArrayList<Map<String, String>> causeList = (ArrayList<Map<String, String>>) root.get("cause");
+        Iterator mapIterator = causeList.iterator();
+        String causeName="",causeType="";
+        Long causeId=0L;
+        List<Cause> causeList1=new ArrayList<>();
+        //MedicalCondition medicalCondition=new MedicalCondition(id,type,name);
+        while (mapIterator.hasNext()) {
+            Map<String,String> causeMap = (Map<String, String>) mapIterator.next();
+            causeName=(String)causeMap.get("name");
+            causeType = (String) causeMap.get("@type");
+            causeId++;
+            Cause cause=new Cause(causeId,causeType,causeName);
+            causeService.saveCause(cause);
+            causeList1.add(cause);
+        }
+        medicalConditionService.saveCondition(new MedicalCondition(id,type,name,causeList1));
     }
 }

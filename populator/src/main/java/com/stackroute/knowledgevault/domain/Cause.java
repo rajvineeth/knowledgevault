@@ -17,4 +17,12 @@ public class Cause {
     private Long causeId;
     private String type;
     private String causeName;
+
+
+//
+//    public Cause(Long causeId,String type,String causeName){
+//        this.causeId=causeId;
+//        this.type=type;
+//        this.causeName=causeName;
+//    }
 }
