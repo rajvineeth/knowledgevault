@@ -1,4 +1,4 @@
-package com.stackroute.inputprocessor;
+package com.stackroute.knowledgevault.inputprocessor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

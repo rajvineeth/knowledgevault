@@ -1,4 +1,4 @@
-package com.stackroute.paragraphtokenizer.config;
+package com.stackroute.knowledgevault.paragraphtokenizer.config;
 
 
 import com.stackroute.domain.Document;

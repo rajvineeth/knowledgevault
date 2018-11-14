@@ -1,4 +1,4 @@
-package com.stackroute.domain;
+package com.stackroute.knowledgevault.inputprocessor.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

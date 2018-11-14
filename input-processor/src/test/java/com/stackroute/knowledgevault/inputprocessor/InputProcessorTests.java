@@ -1,4 +1,4 @@
-package com.stackroute.inputprocessor;
+package com.stackroute.knowledgevault.inputprocessor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

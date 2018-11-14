@@ -1,6 +1,6 @@
-package com.stackroute.inputprocessor.listener;
+package com.stackroute.knowledgevault.inputprocessor.listener;
 
-import com.stackroute.domain.Input;
+import com.stackroute.knowledgevault.inputprocessor.model.Input;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ public class KafkaConsumer {
         System.out.println("consumed message:"+message);
     }
     @KafkaListener(topics="kafka_example_jsonh",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
-    public void consumejson(Input DOCUMENT){
-        System.out.println("consumed message"+DOCUMENT.toString());
+    public void consumejson(Input INPUT){
+        System.out.println("consumed message"+INPUT.toString());
     }
 }

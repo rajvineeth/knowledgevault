@@ -1,4 +1,4 @@
-package com.stackroute.paragraphtokenizer.resource;
+package com.stackroute.knowledgevault.paragraphtokenizer.resource;
 
 import com.stackroute.domain.Document;
 import org.springframework.kafka.core.KafkaTemplate;

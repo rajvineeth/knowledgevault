@@ -1,4 +1,4 @@
-package com.stackroute.paragraphtokenizer;
+package com.stackroute.knowledgevault.paragraphtokenizer;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
