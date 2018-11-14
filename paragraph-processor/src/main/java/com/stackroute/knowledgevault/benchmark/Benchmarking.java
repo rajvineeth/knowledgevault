@@ -16,8 +16,8 @@ public class Benchmarking {
 
     public void init() {
         this.processor = new Processor();
-        processor.getFullTextSearch().setFilesPath("src/main/java/com/stackroute/knowledgevault/benchmark/files");
-        processor.getFullTextSearch().setIndexPath("src/main/java/com/stackroute/knowledgevault/benchmark/indices");
+        processor.getFullTextSearch().setFilesPath("src/main/java/com/stackroute/knowledgevault/assets/medicalRepositories");
+        processor.getFullTextSearch().setIndexPath("src/main/java/com/stackroute/knowledgevault/assets/repoIndices");
     }
 
     /**
