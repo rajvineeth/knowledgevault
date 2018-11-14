@@ -15,6 +15,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+/**
+ * POJO class to produce output for Populator service.
+ */
 public class OutputForDoc {
     @Id
     private int id;

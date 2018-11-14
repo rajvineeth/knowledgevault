@@ -5,9 +5,16 @@ import java.io.FileReader;
 import java.util.*;
 import java.util.logging.Logger;
 
+/**
+ * Helper class to read stopwords from stopwords.txt and remove the stopwords in a document.
+ */
 public class StopwordRemoval {
 
     private static Logger logger;
+
+    /*
+    Function to read stopwords from stopwords.txt. returns a list containing all the stopwords.
+     */
 
     public static List<String> readStopWords(String stopWordsFilename)
     {
@@ -28,6 +35,11 @@ public class StopwordRemoval {
 
         return stopWords;
     }
+
+    /*
+    Function to remove stopwords from a document i.e. a list of tokenized and lemmatized words. Returns a new list
+    free of stopwords
+     */
 
     public List<String> removeStopwords(List<String> terms){
         List<String> resultingdoc = new ArrayList<>();

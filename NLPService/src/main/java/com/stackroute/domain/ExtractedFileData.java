@@ -14,6 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Builder
 
+/**
+ * POJO class for consuming input sent by Extractor Service.
+ */
+
 public class ExtractedFileData {
 
     @Id
