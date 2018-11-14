@@ -1,13 +1,8 @@
 package com.stackroute.knowledgevault.controller;
 
 
-<<<<<<< HEAD:NLPService/src/main/java/com/stackroute/knowledgevault/controller/DocumentController.java
 import com.stackroute.knowledgevault.domain.OutputForDoc;
 import com.stackroute.knowledgevault.services.DocumentService;
-=======
-import com.stackroute.domain.OutputForDoc;
-import com.stackroute.services.DocumentService;
->>>>>>> bb029cc86a748b489a73e19bef4515706a37f1cc:NLPService/src/main/java/com/stackroute/controller/DocumentController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
