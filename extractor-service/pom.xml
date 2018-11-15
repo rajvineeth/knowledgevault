@@ -62,7 +62,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
-                    <mainClass>$com.stackroute.knowledgevault.ExtractorServiceApplication</mainClass>
+                    <mainClass>$com.stackroute.knowledgevault.extractorservice.ExtractorServiceApplication</mainClass>
                 </configuration>
                   <executions>
                     <execution>
@@ -79,7 +79,7 @@
                 <archive>
                   <manifest>
                     <addClasspath>true</addClasspath>
-                    <mainClass>com.stackroute.knowledgevault.ExtractorServiceApplication</mainClass>
+                    <mainClass>com.stackroute.knowledgevault.extractorservice.ExtractorServiceApplication</mainClass>
                   </manifest>
                 </archive>
                 <descriptorRefs>

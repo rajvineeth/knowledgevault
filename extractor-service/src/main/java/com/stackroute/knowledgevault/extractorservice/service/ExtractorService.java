@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.extractorservice.service;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import org.apache.tika.exception.TikaException;

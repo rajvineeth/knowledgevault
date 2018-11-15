@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.extractorservice.service;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import org.apache.tika.exception.TikaException;
@@ -22,10 +22,10 @@ public class ExtractorServiceTests {
 
     private List<File> files = new ArrayList<>();
     private List<String> types = new ArrayList<>();
-    ExtractedFileData data = new ExtractedFileData();
+    private ExtractedFileData data = new ExtractedFileData();
 
     @Autowired
-    ExtractorService extractorService;
+    private ExtractorService extractorService;
 
     @Before
     public void setUp() {

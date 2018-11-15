@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.configuration;
+package com.stackroute.knowledgevault.extractorservice.configuration;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import org.apache.kafka.clients.producer.ProducerConfig;

@@ -1,7 +1,7 @@
-package com.stackroute.knowledgevault.controller;
+package com.stackroute.knowledgevault.extractorservice.controller;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
-import com.stackroute.knowledgevault.service.ExtractorService;
+import com.stackroute.knowledgevault.extractorservice.service.ExtractorService;
 import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,6 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
