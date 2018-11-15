@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.inputprocessor.service;
 
 import com.stackroute.knowledgevault.domain.Input;
 import edu.stanford.nlp.simple.Document;

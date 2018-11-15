@@ -1,11 +1,12 @@
-package com.stackroute.knowledgevault.resource;
+package com.stackroute.knowledgevault.paragraphtokenizer.resource;
 
 import com.stackroute.knowledgevault.domain.Document;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class DocResource {
 
     private KafkaTemplate<String, Document> kafkaTemplate;
@@ -16,10 +17,9 @@ public class DocResource {
 
     private static final String TOPIC = "cgi1";
 
-    public String post() {
-        List<Document> list = new ArrayList();
-        list.add(new Document(1,"asdiyg"));
+    public String post(List<Document> list) {
         for (Document doc : list){
+            System.out.println(doc.toString());
             this.kafkaTemplate.send(TOPIC, doc);
         }
         return "published successfully";

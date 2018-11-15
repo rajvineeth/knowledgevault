@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.config;
+package com.stackroute.knowledgevault.paragraphtokenizer.config;
 
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
@@ -25,7 +25,7 @@ public class KafkaConsumerConfig {
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.23.239.231:9092");
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
         return new DefaultKafkaConsumerFactory<>(config);
     }

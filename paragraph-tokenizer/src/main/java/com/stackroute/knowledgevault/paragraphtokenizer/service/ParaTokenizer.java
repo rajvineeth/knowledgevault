@@ -1,9 +1,9 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.paragraphtokenizer.service;
 
-import com.stackroute.knowledgevault.domain.ExtractedFileData;
+import com.stackroute.knowledgevault.domain.Document;
 
 import java.util.List;
 
 public interface ParaTokenizer {
-    List<ExtractedFileData> tokenizePara(ExtractedFileData extraxtedFileData);
+    List<Document> tokenizePara(Document doc);
 }

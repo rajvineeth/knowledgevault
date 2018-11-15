@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.inputprocessor.service;
 
 import edu.stanford.nlp.simple.Sentence;
 import org.springframework.stereotype.Component;
