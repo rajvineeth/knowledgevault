@@ -35,7 +35,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, List<JsonLDObject>> producerfactory1(){
+    public ProducerFactory<String, JsonLDObject> producerfactory1(){
         Map<String, Object> config=new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.84:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -45,7 +45,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, List<JsonLDObject>> kafkaTemplate1(){
+    public KafkaTemplate<String, JsonLDObject> kafkaTemplate1(){
         return new KafkaTemplate<>(producerfactory1());
     }
 }

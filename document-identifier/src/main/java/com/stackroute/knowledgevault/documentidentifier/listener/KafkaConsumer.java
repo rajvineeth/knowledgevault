@@ -4,7 +4,6 @@ import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import com.stackroute.knowledgevault.documentidentifier.services.DocumentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
@@ -31,7 +30,7 @@ public class KafkaConsumer {
 
     @KafkaListener(topics="document",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(ExtractedFileData extractedFileData){
-        System.out.println("consumed message"+ extractedFileData.toString());
+        System.out.println("consumed message");
         documentService.saveDocuments(extractedFileData);
     }
 

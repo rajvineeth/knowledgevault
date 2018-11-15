@@ -29,7 +29,7 @@ public class DocumentController {
     }
 
     @Autowired
-    private KafkaTemplate<String, List<JsonLDObject>> kafkaTemplate;
+    private KafkaTemplate<String, JsonLDObject> kafkaTemplate;
 
     private static final String KafkaTopic ="prod2";
 
@@ -42,7 +42,10 @@ public class DocumentController {
     public ResponseEntity<?> getAllTerms(){
         ResponseEntity responseEntity;
         List<JsonLDObject> outputForDocList = documentService.convertTermsToJsonLD(documentService.processDoc(documentService.getAllDocuments()));
-        kafkaTemplate.send(KafkaTopic, outputForDocList);
+        for(JsonLDObject object: outputForDocList){
+            kafkaTemplate.send(KafkaTopic, object);
+        }
+
         responseEntity = new ResponseEntity<List<JsonLDObject>>(outputForDocList, HttpStatus.OK);
         return responseEntity;
     }
