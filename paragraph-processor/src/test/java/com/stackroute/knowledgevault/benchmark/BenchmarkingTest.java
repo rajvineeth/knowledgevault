@@ -1,5 +1,6 @@
 package com.stackroute.knowledgevault.benchmark;
 
+import com.stackroute.knowledgevault.paragraphprocessor.benchmark.Benchmarking;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,17 +25,16 @@ public class BenchmarkingTest {
     }
 
     @Test
-    public void solveTest() {
-
+    public void queryForGivenKeywordTest() {
         List<String> list = new ArrayList(){{
             add("not found");
         }};
-        assertNotEquals(list,this.benchmarking.solve());
+        assertNotEquals(list,this.benchmarking.queryForGivenKeyword("cough"));
     }
 
     @Test
     public void getRelevantTermsTest() {
-        this.benchmarking.getRelevantTerms("src/main/java/com/stackroute/knowledgevault/benchmark/files/document5.txt");
+            this.benchmarking.getRelevantTerms("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/TB",1);
     }
 
 }

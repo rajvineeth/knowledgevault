@@ -1,6 +1,7 @@
 package com.stackroute.knowledgevault;
 
 import com.stackroute.knowledgevault.communicators.KafkaProducer;
+import com.stackroute.knowledgevault.paragraphprocessor.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,14 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 		SpringApplication.run(ParagraphProcessorApplication.class, args);
 
 		Processor pst = new Processor();
-		pst.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/knowledgevault/assets");
-		pst.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/knowledgevault/indices/dictionaries");
+		pst.getFullTextSearch().setFilesPath("paragraph-processor/src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/medicalRepositories");
+		pst.getFullTextSearch().setIndexPath("paragraph-processor/src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/repoIndices");
 		pst.getFullTextSearch().indexer();
 
 		String[] keys = {"ughh","fox","brown"};//"narcolepsy","dermoid","nervous","quick"};
 		for(String word: keys){
 			List<String> response = pst.getFullTextSearch().search(word);
-//			LOGGER.info("data generated so far: {}",response);
+			LOGGER.info("data generated so far: {}",response);
 //			LOGGER.info("producer message: {} ",producer.post(response));
 //			LOGGER.info("producer message: {} \n ","hey...i have sent the message");
 		}
