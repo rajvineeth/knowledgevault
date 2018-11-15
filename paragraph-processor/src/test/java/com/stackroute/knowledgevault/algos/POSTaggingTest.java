@@ -1,5 +1,6 @@
 package com.stackroute.knowledgevault.algos;
 
+import com.stackroute.knowledgevault.paragraphprocessor.algos.POSTagging;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

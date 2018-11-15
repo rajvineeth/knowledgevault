@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.communicators;
+package com.stackroute.knowledgevault.paragraphprocessor.communicators;
 
 import com.stackroute.knowledgevault.domain.Document;
 import org.slf4j.Logger;

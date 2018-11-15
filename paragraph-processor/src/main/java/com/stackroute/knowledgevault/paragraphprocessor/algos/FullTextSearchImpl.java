@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.algos;
+package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.Analyzer;
@@ -128,7 +128,6 @@ public class FullTextSearchImpl implements FullTextSearch {
 
             for (int i = 0; i < results.scoreDocs.length; i++) {
                 ScoreDoc scoreDoc = results.scoreDocs[i];
-//                LOGGER.info("Score of the keyword: {} in {} is = {} ",data,searcher.doc(i).get("name"),scoreDoc.score);
             }
 
             for (AtomicReaderContext atomic : iReader.leaves()) {
@@ -136,12 +135,11 @@ public class FullTextSearchImpl implements FullTextSearch {
                 Spans spans = query.getSpans(atomic, bitset, termContexts);
                 while (spans.next()) {
                     int docid = atomic.docBase + spans.doc();
-                    spanArray.add("Doc with name: " + searcher.doc(docid).get("name") + " and location is " + spans.end() + "th word in the document\n");
-                    res.add(searcher.doc(docid).get("name"));
+                    String docName = searcher.doc(docid).get("name");
+                    spanArray.add("Doc with name: " + docName + " and location is " + spans.end() + "th word in the document\n");
+                    if(!res.contains(docName)) res.add(docName);
                 }
             }
-
-//            for(String s: res) LOGGER.info(s);
         }
         catch(Exception e) {
             LOGGER.debug(e.getMessage());
@@ -163,6 +161,12 @@ public class FullTextSearchImpl implements FullTextSearch {
      */
     @Override
     public List<String> getRelevantTerms(String path,int type) {
+
+        String prevFilePath = getFilesPath();
+        String prevIndexPath = getIndexPath();
+        setFilesPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/medicalRepositories");
+        setIndexPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/repoIndices");
+
         indexer();
         List<String> keywords = new ArrayList<>();
         LOGGER.info("please wait while we do the muscle-work.....");
@@ -204,14 +208,17 @@ public class FullTextSearchImpl implements FullTextSearch {
 
         int cnt=0;
         for (Map.Entry<Double,String> entry : scoreList.entrySet()) {
-//            LOGGER.info("Score = {}, Value = {}", entry.getKey(), entry.getValue());
-            if (cnt < 20) {
+            if (cnt < 30) {
                 keywords.add(entry.getValue());
                 cnt++;
             }
         }
         String res = keywords.toString();
         LOGGER.info(res);
+
+        setIndexPath(prevIndexPath);
+        setFilesPath(prevFilePath);
+
         return keywords;
     }
 }

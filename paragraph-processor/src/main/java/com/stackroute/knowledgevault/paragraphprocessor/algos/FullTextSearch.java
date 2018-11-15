@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.algos;
+package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
 import java.util.List;
 
