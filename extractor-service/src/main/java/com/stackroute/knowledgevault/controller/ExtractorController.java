@@ -1,7 +1,7 @@
 package com.stackroute.knowledgevault.controller;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
-import com.stackroute.knowledgevault.service.ExtractorService;
+import com.stackroute.knowledgevault.paragraphtokenizer.service.ExtractorService;
 import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

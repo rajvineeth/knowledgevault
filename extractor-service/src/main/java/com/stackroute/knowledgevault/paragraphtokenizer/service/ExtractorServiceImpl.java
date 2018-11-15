@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.paragraphtokenizer.service;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import org.apache.tika.Tika;

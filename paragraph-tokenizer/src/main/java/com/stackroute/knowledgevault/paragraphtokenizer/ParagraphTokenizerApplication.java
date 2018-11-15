@@ -1,7 +1,7 @@
-package com.stackroute.knowledgevault;
+package com.stackroute.knowledgevault.paragraphtokenizer;
 
 import com.stackroute.knowledgevault.domain.Document;
-import com.stackroute.knowledgevault.resource.DocResource;
+import com.stackroute.knowledgevault.paragraphtokenizer.resource.DocResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

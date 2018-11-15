@@ -1,7 +1,6 @@
-package com.stackroute.knowledgevault.service;
+package com.stackroute.knowledgevault.paragraphtokenizer.service;
 
 import com.stackroute.knowledgevault.domain.Input;
-import edu.stanford.nlp.simple.Sentence;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

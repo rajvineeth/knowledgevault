@@ -1,5 +1,5 @@
 
-package com.stackroute.knowledgevault.config;
+package com.stackroute.knowledgevault.paragraphtokenizer.config;
 
 import com.stackroute.knowledgevault.domain.OutputForDoc;
 import org.apache.kafka.common.serialization.StringSerializer;

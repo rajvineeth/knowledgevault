@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.listener;
+package com.stackroute.knowledgevault.paragraphtokenizer.listener;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import com.stackroute.knowledgevault.services.DocumentService;

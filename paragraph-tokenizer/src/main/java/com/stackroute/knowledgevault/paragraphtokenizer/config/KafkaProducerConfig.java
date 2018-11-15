@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.config;
+package com.stackroute.knowledgevault.paragraphtokenizer.config;
 
 import com.stackroute.knowledgevault.domain.Document;
 import org.apache.kafka.clients.producer.ProducerConfig;
