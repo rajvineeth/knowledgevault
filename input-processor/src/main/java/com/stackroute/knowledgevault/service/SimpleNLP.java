@@ -20,4 +20,8 @@ public class SimpleNLP {
     List tokenize (Sentence sentence) {
         return sentence.words();
     }
+
+    List nerTagging (Sentence sentence) {
+        return sentence.nerTags();
+    }
 }

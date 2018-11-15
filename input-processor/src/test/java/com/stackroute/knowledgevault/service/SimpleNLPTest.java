@@ -1,12 +1,13 @@
 package com.stackroute.knowledgevault.service;
 
-import com.stackroute.knowledgevault.domain.Input;
-import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -26,23 +27,64 @@ public class SimpleNLPTest {
 
     @Test
     public void lemmatize() {
+        Sentence sentence = new Sentence("Ram is going to the Zoological garden");
+        List list = new ArrayList();
+        list.add("Ram");
+        list.add("be");
+        list.add("go");
+        list.add("to");
+        list.add("the");
+        list.add("zoological");
+        list.add("garden");
 
-        Assert.assertEquals("sgvsv", simpleNLP.lemmatize(new Sentence("My name is Shubham Dutta.")));
-//        Input input = new Input();
-//        input.setText(new Document("My name is Shubham Dutta."));
-////        I am 24 years old. I have an acute pain in my stomach accompanied by dysentery. There is pain in my lower back-bone. I've also vomited a couple of times. I had a 100F fever last night, so I took paracitamol to bring the fever down.");
-//        Assert.assertEquals("sjsnsd", simpleNLP.lemmatize(input.getText().));
+        Assert.assertEquals(list, simpleNLP.lemmatize(sentence));
     }
 
     @Test
     public void posTag() {
-//        Input input = new Input("My name is Shubham Dutta. I am 24 years old. I have an acute pain in my stomach accompanied by dysentery. There is pain in my lower back-bone. I've also vomited a couple of times. I had a 100F fever last night, so I took paracitamol to bring the fever down.");
+        Sentence sentence = new Sentence("Ram is going to the Zoological garden");
+        List list = new ArrayList();
+        list.add("NNP");
+        list.add("VBZ");
+        list.add("VBG");
+        list.add("TO");
+        list.add("DT");
+        list.add("JJ");
+        list.add("NN");
 
+        Assert.assertEquals(list, simpleNLP.posTag(sentence));
     }
 
     @Test
     public void tokenize() {
-//        Input input = new Input("My name is Shubham Dutta. I am 24 years old. I have an acute pain in my stomach accompanied by dysentery. There is pain in my lower back-bone. I've also vomited a couple of times. I had a 100F fever last night, so I took paracitamol to bring the fever down.");
+        Sentence sentence = new Sentence("Ram is going to the Zoological garden");
+        List list = new ArrayList();
 
+        list.add("Ram");
+        list.add("is");
+        list.add("going");
+        list.add("to");
+        list.add("the");
+        list.add("Zoological");
+        list.add("garden");
+
+        Assert.assertEquals(list,simpleNLP.tokenize(sentence));
+    }
+
+    @Test
+    public void nerTagging() {
+        Sentence sentence = new Sentence("Tulsi cures cancer");
+        List list = new ArrayList();
+
+        list.add("Ram");
+        list.add("is");
+        list.add("going");
+        list.add("to");
+        list.add("the");
+        list.add("Zoological");
+        list.add("garden");
+
+        System.out.println( simpleNLP.nerTagging(sentence));
+        Assert.assertEquals(list, simpleNLP.nerTagging(sentence));
     }
 }

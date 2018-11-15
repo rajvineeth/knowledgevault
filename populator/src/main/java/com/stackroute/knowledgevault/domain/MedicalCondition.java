@@ -21,7 +21,7 @@ public class MedicalCondition {
     private String type;
     private String conditionName;
 
-    @Relationship(type="causedBy",direction = Relationship.UNDIRECTED)
+    @Relationship(type="causedBy")
     private List<Cause> causeList;
 
 //    public MedicalCondition(Long conditionId,String type,String conditionName){
