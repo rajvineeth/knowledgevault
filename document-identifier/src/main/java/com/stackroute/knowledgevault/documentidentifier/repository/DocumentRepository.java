@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.repository;
+package com.stackroute.knowledgevault.documentidentifier.repository;
 
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;

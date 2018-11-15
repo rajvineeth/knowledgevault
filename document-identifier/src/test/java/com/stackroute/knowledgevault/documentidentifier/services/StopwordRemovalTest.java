@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.services;
+package com.stackroute.knowledgevault.documentidentifier.services;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 import org.junit.After;

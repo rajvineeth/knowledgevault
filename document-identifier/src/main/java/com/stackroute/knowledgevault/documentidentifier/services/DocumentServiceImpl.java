@@ -1,9 +1,10 @@
-package com.stackroute.knowledgevault.services;
+package com.stackroute.knowledgevault.documentidentifier.services;
 
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
+import com.stackroute.knowledgevault.domain.JsonLDObject;
 import com.stackroute.knowledgevault.domain.OutputForDoc;
-import com.stackroute.knowledgevault.repository.DocumentRepository;
+import com.stackroute.knowledgevault.documentidentifier.repository.DocumentRepository;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class DocumentServiceImpl implements DocumentService {
      */
 
     @Override
-    public List<ExtractedFileData> saveDocuments(List<ExtractedFileData> extractedFileData) {
-        return documentRepository.saveAll(extractedFileData);
+    public ExtractedFileData saveDocuments(ExtractedFileData extractedFileData) {
+        return documentRepository.save(extractedFileData);
     }
 
     /*
@@ -146,7 +147,7 @@ public class DocumentServiceImpl implements DocumentService {
             List<String> terms = new ArrayList<>();
             for(Sentence sentence: document.sentences()){
                 for(int i=0;i<sentence.length();i++){
-                    terms.add(sentence.lemma(i));
+                    terms.add(sentence.lemma(i).toLowerCase());
                 }
             }
             terms = stopWordRemoval.removeStopwords(terms);
@@ -173,6 +174,57 @@ public class DocumentServiceImpl implements DocumentService {
             documents.add(new Document(extractedFile.getContent()));
         }
         return documents;
+    }
+
+    @Override
+    public List<JsonLDObject> convertTermsToJsonLD(List<OutputForDoc> outputForDocs) {
+        /*
+            {
+            "@context": "http://schema.org",
+            "@type": "MedicalCondition",
+            "alternateName": "angina pectoris",
+            "associatedAnatomy": {
+                "@type": "AnatomicalStructure",
+                "name": "heart"
+                }
+            }
+         */
+        GetDiseasesAndSymptoms getDiseasesAndSymptoms = new GetDiseasesAndSymptoms();
+        List<String> diseases = getDiseasesAndSymptoms.getDiseases();
+        List<String> bodyparts = getDiseasesAndSymptoms.getBodyParts();
+        List<JsonLDObject> jsonLDObjects = new ArrayList<>();
+        for(OutputForDoc documents: outputForDocs){
+            Map<String, Object> root = new HashMap<>();
+            root.put("@context","http://schema.org");
+            root.put("@type", "MedicalCondition");
+            boolean flag1 = true;
+            boolean flag2 = true;
+            for(String keyword: documents.getKeywords()){
+
+                for(String disease: diseases){
+                    if(disease.contains(keyword)){
+                        root.put("alternateName", keyword);
+                        break;
+                    }
+                }
+                Map<String, String> Anatomy = new HashMap<>();
+                for(String bodypart: bodyparts){
+                    if(bodypart.contains(keyword)){
+                        Anatomy.put("@type", "AnatomicalStructure");
+                        Anatomy.put("name", keyword);
+                        break;
+                    }
+                }
+                if(flag1 && flag2) {
+                    root.put("associatedAnatomy", Anatomy);
+                    flag1 = false;
+                    flag2 = false;
+                    break;
+                }
+            }
+            jsonLDObjects.add(new JsonLDObject(documents.getId(), root));
+        }
+        return jsonLDObjects;
     }
 
 

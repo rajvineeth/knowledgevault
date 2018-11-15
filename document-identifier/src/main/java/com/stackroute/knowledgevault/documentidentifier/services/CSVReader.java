@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.services;
+package com.stackroute.knowledgevault.documentidentifier.services;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

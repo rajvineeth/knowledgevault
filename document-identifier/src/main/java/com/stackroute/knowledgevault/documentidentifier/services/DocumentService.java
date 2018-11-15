@@ -1,6 +1,7 @@
-package com.stackroute.knowledgevault.services;
+package com.stackroute.knowledgevault.documentidentifier.services;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
+import com.stackroute.knowledgevault.domain.JsonLDObject;
 import com.stackroute.knowledgevault.domain.OutputForDoc;
 import edu.stanford.nlp.simple.Document;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface DocumentService {
 
-    public List<ExtractedFileData> saveDocuments(List<ExtractedFileData> extractedFileData);
+    public ExtractedFileData saveDocuments(ExtractedFileData extractedFileData);
 
     public List<ExtractedFileData> getAllDocuments();
 
@@ -21,4 +22,6 @@ public interface DocumentService {
     public List<OutputForDoc> processDoc(List<ExtractedFileData> extractedFileData);
 
     public List<Document>convertStringToDocument(List<ExtractedFileData> extractedFileData);
+
+    public List<JsonLDObject>convertTermsToJsonLD(List<OutputForDoc> outputForDocs);
 }

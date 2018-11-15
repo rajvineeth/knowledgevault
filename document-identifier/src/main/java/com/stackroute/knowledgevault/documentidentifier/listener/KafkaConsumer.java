@@ -1,12 +1,12 @@
-package com.stackroute.knowledgevault.listener;
+package com.stackroute.knowledgevault.documentidentifier.listener;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
-import com.stackroute.knowledgevault.services.DocumentService;
+import com.stackroute.knowledgevault.documentidentifier.services.DocumentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -14,22 +14,25 @@ import java.util.logging.Logger;
  */
 
 @Service
+//@Component
 public class KafkaConsumer {
 
     private Logger logger;
 
 
+
     @Autowired
-    private DocumentService documentService;
+    private DocumentServiceImpl documentService;
 
     /*
         The function consumejson receives a list of documents (Class: ExtractedFIleData) from extractor service and saves to
         MongoDb
     */
 
-    @KafkaListener(topics="document",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
-    public void consumejson(List<ExtractedFileData> extractedFileData){
+    @KafkaListener(topics="document",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
+    public void consumejson(ExtractedFileData extractedFileData){
+        System.out.println("consumed message"+ extractedFileData.toString());
         documentService.saveDocuments(extractedFileData);
-        logger.info("done");
     }
+
 }

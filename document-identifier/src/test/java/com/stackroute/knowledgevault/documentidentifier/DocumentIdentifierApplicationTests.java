@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault;
+package com.stackroute.knowledgevault.documentidentifier;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
