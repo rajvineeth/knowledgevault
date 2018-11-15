@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.communicators;
+package com.stackroute.knowledgevault.paragraphprocessor.communicators;
 
 import org.springframework.kafka.core.KafkaTemplate;
 
