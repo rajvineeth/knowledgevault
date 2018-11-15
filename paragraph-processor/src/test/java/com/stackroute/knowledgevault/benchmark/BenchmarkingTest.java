@@ -1,5 +1,6 @@
 package com.stackroute.knowledgevault.benchmark;
 
+import com.stackroute.knowledgevault.paragraphprocessor.benchmark.Benchmarking;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +34,7 @@ public class BenchmarkingTest {
 
     @Test
     public void getRelevantTermsTest() {
-//        for(int i=1;i<=5;i++)
-            this.benchmarking.getRelevantTerms("src/main/java/com/stackroute/knowledgevault/assets/TB",1);
+            this.benchmarking.getRelevantTerms("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/TB",1);
     }
 
 }

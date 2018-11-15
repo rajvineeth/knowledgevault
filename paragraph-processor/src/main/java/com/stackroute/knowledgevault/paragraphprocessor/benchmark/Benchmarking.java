@@ -1,6 +1,6 @@
-package com.stackroute.knowledgevault.benchmark;
+package com.stackroute.knowledgevault.paragraphprocessor.benchmark;
 
-import com.stackroute.knowledgevault.Processor;
+import com.stackroute.knowledgevault.paragraphprocessor.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.*;
@@ -11,13 +11,13 @@ import java.util.*;
  */
 public class Benchmarking {
 
-    private Processor  processor;
+    private Processor processor;
     private static final Logger LOGGER = LoggerFactory.getLogger(Benchmarking.class);
 
     public void init() {
         this.processor = new Processor();
-        processor.getFullTextSearch().setFilesPath("src/main/java/com/stackroute/knowledgevault/assets/medicalRepositories");
-        processor.getFullTextSearch().setIndexPath("src/main/java/com/stackroute/knowledgevault/assets/repoIndices");
+        this.processor.getFullTextSearch().setFilesPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/medicalRepositories");
+        this.processor.getFullTextSearch().setIndexPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/repoIndices");
     }
 
     /**
