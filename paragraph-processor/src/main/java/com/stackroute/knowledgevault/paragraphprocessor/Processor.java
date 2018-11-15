@@ -4,6 +4,8 @@ import com.stackroute.knowledgevault.paragraphprocessor.algos.FullTextSearch;
 import com.stackroute.knowledgevault.paragraphprocessor.algos.FullTextSearchImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,13 +13,13 @@ public class Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
 
-    private FullTextSearch fullTextSearch;
+    private FullTextSearchImpl fullTextSearch;
 
     public Processor() {
         this.fullTextSearch = new FullTextSearchImpl();
     }
 
-    public void setFullTextSearch(FullTextSearch fullTextSearch) {
+    public void setFullTextSearch(FullTextSearchImpl fullTextSearch) {
         this.fullTextSearch = fullTextSearch;
     }
 
@@ -45,6 +47,7 @@ public class Processor {
         Map<String,String> tags = new HashMap<>();
         String[] keywords = paragraph.toLowerCase().trim().split("\\.|\\s+");
         for(String keyword: keywords) {
+            LOGGER.info(keywordMapping(keyword));
             tags.put(keyword,keywordMapping(keyword));
         }
         for (Map.Entry<String,String> entry : tags.entrySet()) {

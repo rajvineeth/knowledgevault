@@ -44,6 +44,7 @@ public class FullTextSearchImpl implements FullTextSearch {
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
     public static final String CONTENTS = "content";
 
+
     @Override
     public String getIndexPath() {
         return indexPath;
