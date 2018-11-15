@@ -1,20 +1,21 @@
 version:  '2'
+
 services:
-#  zookeeper:
-#    container_name: zookeeper
-#    image: wurstmeister/zookeeper
-#    ports:
-#      - "2181:2181"
-#
-#  kafka:
-#    container_name: kafka
-#    image: wurstmeister/kafka
-#    ports:
-#      - "9092"
-#    depends_on:
-#      - "zookeeper"
-#    environment:
-#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka
+    ports:
+      - "9092"
+    depends_on:
+      - "zookeeper"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
   eureka:
     image: eureka:v1
@@ -40,7 +41,7 @@ services:
     expose:
       - 8092
 
- document-identifier:
+  document-identifier:
     image: document-identifier:v1
     build: document-identifier/
     restart: always
@@ -57,7 +58,7 @@ services:
 
 
 
- mongodb:
+  mongodb:
     image: mongo:3.2-jessie
     ports:
       - 27017:27017
@@ -66,25 +67,11 @@ services:
     depends_on:
       - config-server
     volumes:
-      - '/home/cgi/data/mysql:/data/db'
+      - '/home/cgi/data/mongo:/data/db'
     environment:
       MONGO_INITDB_DATABASE: mydatabase
 
-`
-  mongo-demo:
-    image: movie-mongo:v1
-    build: movie-cruiser-app/
-    restart: always
-    container_name: mongo-demo-compose
-    network_mode: host
-    depends_on:
-      - mongodb
-    ports:
-      - 8090:8090
-    expose:
-      - 8090
-
-extractor-service:
+  extractor-service:
     image: extractor-service:v1
     build: extractor-service/
     restart: always
@@ -97,7 +84,7 @@ extractor-service:
     expose:
     - "8094" 
 
-input-processor:
+  input-processor:
     image: input-processor:v1
     build:  input-processor/
     restart: always
@@ -110,7 +97,7 @@ input-processor:
     expose:
     - "8093" 
 
-paragraph-processor:
+  paragraph-processor:
     image: paragraph-processor:v1
     build: paragraph-processor/
     restart: always
@@ -123,7 +110,7 @@ paragraph-processor:
     expose:
     - "8433" 
 
-paragraph-tokenizer:
+  paragraph-tokenizer:
     image: paragraph-tokenizer:v1
     build: paragraph-tokenizer/
     restart: always
@@ -136,7 +123,7 @@ paragraph-tokenizer:
     expose:
     - "8065" 
 
-populator:
+  populator:
     image: populator:v1
     build: populator/
     restart: always
@@ -148,6 +135,7 @@ populator:
     - "8067:8067"
     expose:
     - "8067" 
+  
   gateway:
     image: zuulgateway:v1
     build: zuulgateway/
@@ -155,7 +143,7 @@ populator:
     container_name: zuul-container
     network_mode: host
     depends_on:
-      - mongo-demo
+      - mongodb
     ports:
       - 8081:8081
     expose:

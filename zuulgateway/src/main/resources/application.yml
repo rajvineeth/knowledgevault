@@ -2,11 +2,12 @@ ribbon:
     eureka:
         enabled: false
 server:
-    port: 8080
+    port: 8081
 zuul:
     routes:
-        movie-service:
-            url: http://localhost:8090
+        extractor-service:
+            url: http://localhost:8094
+
 #eureka:         #tells about the Eureka server details and its refresh time
 #    instance:
 #        leaseRenewalIntervalInSeconds: 1
@@ -22,9 +23,6 @@ management:
     security:
         enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
 
-logging:
-    level:
-        com.example.howtodoinjava: DEBUG
 spring:
     application:
         name: zuul-gateway

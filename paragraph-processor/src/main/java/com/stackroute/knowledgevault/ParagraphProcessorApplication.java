@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,6 +15,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import java.util.List;
 
 @SpringBootApplication
+@EnableEurekaClient
 public class ParagraphProcessorApplication implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
