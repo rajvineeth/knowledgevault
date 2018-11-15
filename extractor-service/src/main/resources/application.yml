@@ -1,0 +1,4 @@
+producer:
+    port: 172.23.239.231
+server:
+    port: 8094

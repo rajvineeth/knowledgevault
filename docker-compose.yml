@@ -1,26 +1,27 @@
 version:  '2'
+
 services:
-#  zookeeper:
-#    container_name: zookeeper
-#    image: wurstmeister/zookeeper
-#    ports:
-#      - "2181:2181"
-#
-#  kafka:
-#    container_name: kafka
-#    image: wurstmeister/kafka
-#    ports:
-#      - "9092"
-#    depends_on:
-#      - "zookeeper"
-#    environment:
-#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka
+    ports:
+      - "9092"
+    depends_on:
+      - "zookeeper"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
   eureka:
     image: eureka:v1
     build: eureka-registry/
     restart: always
-    container_name: eureka-container
+    container_name: "eureka-container"
     network_mode: host
     ports:
       - 8091:8091
@@ -31,7 +32,7 @@ services:
     image: config-server:v1
     build: config-server/
     restart: always
-    container_name: config-container
+    container_name: "config-container"
     network_mode: host
     depends_on:
       - eureka
@@ -40,30 +41,101 @@ services:
     expose:
       - 8092
 
+  document-identifier:
+    image: document-identifier:v1
+    build: document-identifier/
+    restart: always
+    container_name: "document-identifier"
+    network_mode: host
+    depends_on:
+    - kafka
+    - mongodb
+    ports:
+    - "8080:8080"
+    expose:
+    - "8080" 
+
+
+
+
   mongodb:
     image: mongo:3.2-jessie
     ports:
-      - "27017:27017"
-    container_name: mongo-movie
+      - 27017:27017
+    container_name: "mongo-knowledgevault"
     network_mode: host
     depends_on:
       - config-server
     volumes:
-      - '/home/cgi/data/mysql:/data/db'
+      - '/home/cgi/data/mongo:/data/db'
+    environment:
+      MONGO_INITDB_DATABASE: mydatabase
 
-  mongo-demo:
-    image: movie-mongo:v1
-    build: movie-cruiser-app/
+  extractor-service:
+    image: extractor-service:v1
+    build: extractor-service/
     restart: always
-    container_name: mongo-demo-compose
+    container_name: "extractor-service"
     network_mode: host
     depends_on:
-      - mongodb
+    - kafka
     ports:
-      - 8090:8090
+    - "8094:8094"
     expose:
-      - 8090
+    - "8094" 
 
+  input-processor:
+    image: input-processor:v1
+    build:  input-processor/
+    restart: always
+    container_name: "input-processor"
+    network_mode: host
+    depends_on:
+    - kafka
+    ports:
+    - "8093:8093"
+    expose:
+    - "8093" 
+
+  paragraph-processor:
+    image: paragraph-processor:v1
+    build: paragraph-processor/
+    restart: always
+    container_name: "paragraph-processor"
+    network_mode: host
+    depends_on:
+    - kafka
+    ports:
+    - "8433:8433"
+    expose:
+    - "8433" 
+
+  paragraph-tokenizer:
+    image: paragraph-tokenizer:v1
+    build: paragraph-tokenizer/
+    restart: always
+    container_name: "paragraph-tokenizer"
+    network_mode: host
+    depends_on:
+    - kafka
+    ports:
+    - "8065:8065"
+    expose:
+    - "8065" 
+
+  populator:
+    image: populator:v1
+    build: populator/
+    restart: always
+    container_name: "populator"
+    network_mode: host
+    depends_on:
+    - kafka
+    ports:
+    - "8067:8067"
+    expose:
+    - "8067" 
+  
   gateway:
     image: zuulgateway:v1
     build: zuulgateway/
@@ -71,7 +143,7 @@ services:
     container_name: zuul-container
     network_mode: host
     depends_on:
-      - mongo-demo
+      - mongodb
     ports:
       - 8081:8081
     expose:

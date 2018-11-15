@@ -43,18 +43,14 @@
       "name":"Cavlam-650",
       "DoseSchedule":[
         {"doseUnit":"650mg"},
-        {"frequency":"thrice daily"
-
-        }
+        {"frequency":"thrice daily"}
       ]
     },
     {"@type":"Drug",
       "name":"Paracetamol",
       "DoseSchedule":[
         {"doseUnit":"500mg"},
-        {"frequency":"twice daily"
-
-        }
+        {"frequency":"twice daily"}
       ]
     }
   ]

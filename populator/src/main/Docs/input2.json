@@ -1,0 +1,57 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "d2",
+  "associatedAnatomy": {
+    "@type": "AnatomicalStructure",
+    "name": "leg"
+  },
+  "cause": [
+    {
+      "@type": "MedicalCause",
+      "name": "atherosclerosis"
+    },
+    {
+      "@type": "MedicalCause",
+      "name": "s"
+    }
+  ],
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "c"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "r"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "an accelerating pattern of chest discomfort (episodes that are more frequent, severe, longer in duration, and precipitated by minimal exertion)"
+      }
+    ]
+
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}
