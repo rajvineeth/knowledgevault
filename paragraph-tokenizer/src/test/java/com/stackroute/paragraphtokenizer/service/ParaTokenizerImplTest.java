@@ -1,8 +1,8 @@
 package com.stackroute.paragraphtokenizer.service;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
-import com.stackroute.knowledgevault.service.ParaTokenizer;
-import com.stackroute.knowledgevault.service.ParaTokenizerImpl;
+import com.stackroute.knowledgevault.paragraphtokenizer.service.ParaTokenizer;
+import com.stackroute.knowledgevault.paragraphtokenizer.service.ParaTokenizerImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -9,7 +9,7 @@
   "cause": [
     {
       "@type": "MedicalCause",
-      "name": "m"
+      "name": "atherosclerosis"
     },
     {
       "@type": "MedicalCause",
