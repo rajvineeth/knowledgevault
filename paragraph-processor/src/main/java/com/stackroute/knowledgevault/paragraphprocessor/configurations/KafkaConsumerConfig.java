@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.configurations;
+package com.stackroute.knowledgevault.paragraphprocessor.configurations;
 
 import com.stackroute.knowledgevault.domain.Document;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -27,6 +27,7 @@ public class KafkaConsumerConfig {
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(config);
     }
+
     @Bean
     public ConcurrentKafkaListenerContainerFactory kafkaListenerContainerFactory(){
         ConcurrentKafkaListenerContainerFactory factory=new ConcurrentKafkaListenerContainerFactory();

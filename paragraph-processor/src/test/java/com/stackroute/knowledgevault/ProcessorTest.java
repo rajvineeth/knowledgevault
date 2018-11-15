@@ -1,7 +1,8 @@
 package com.stackroute.knowledgevault;
 
-import com.stackroute.knowledgevault.algos.FullTextSearch;
-import com.stackroute.knowledgevault.algos.FullTextSearchImpl;
+import com.stackroute.knowledgevault.paragraphprocessor.Processor;
+import com.stackroute.knowledgevault.paragraphprocessor.algos.FullTextSearch;
+import com.stackroute.knowledgevault.paragraphprocessor.algos.FullTextSearchImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

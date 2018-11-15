@@ -23,6 +23,12 @@ public class MedicalCondition {
 
     @Relationship(type="causedBy")
     private List<Cause> causeList;
+    @Relationship(type="associatedAnatomy")
+    private Anatomy anatomy;
+    @Relationship(type="distinguishingSign")
+    private List<Symptom> symptomList;
+    @Relationship(type="possibleTreatment")
+    private List<Treatment> treatmentList;
 
 //    public MedicalCondition(Long conditionId,String type,String conditionName){
 //        this.conditionId=conditionId;
