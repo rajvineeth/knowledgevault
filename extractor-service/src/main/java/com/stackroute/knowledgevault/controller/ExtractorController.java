@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +26,11 @@ public class ExtractorController {
     @Autowired
     private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
 
+    @Autowired
+    private KafkaTemplate<String, List<ExtractedFileData>> kafkaTemplate1;
+
     private static final String TOPIC = "document";
+    private static final String TOPIC1 = "listOfDocuments";
 
     private String initialPath = "/home/cgi/";
 
@@ -45,14 +50,16 @@ public class ExtractorController {
         ResponseEntity responseEntity = null;
         List<File> allFiles = service.getAllFiles(initialPath + path);
         HashMap<Integer, String> extractedDocs = new HashMap<>();
+        List<ExtractedFileData> documents = new ArrayList<>();
 
         try {
             for (File instance : allFiles) {
                     ExtractedFileData data = service.extractOneFile(instance); //Fetching metadata and content
                     extractedDocs.put(data.getId(), instance.getName());
-
+                    documents.add(data);
                     kafkaTemplate.send(TOPIC, data);
             }
+            kafkaTemplate1.send(TOPIC1, documents);
             responseEntity = new ResponseEntity<HashMap<Integer, String>>(extractedDocs, HttpStatus.OK);
         }
         catch (IOException e) {
