@@ -17,8 +17,6 @@ public class ProcessorTest {
     @Before
     public void setUp() {
         this.processor = new Processor();
-        this.fullTextSearch = new FullTextSearchImpl();
-        this.processor.setFullTextSearch(this.fullTextSearch);
         this.processor.initProcessor();
     }
 
@@ -30,7 +28,7 @@ public class ProcessorTest {
 
     @Test
     public void paraProcessingTest() {
-        String paragraph = "My name is neeraj. I am suffering from cancer.I have cancer in my lungs.";
+        String paragraph = "My name is neeraj. I am suffering from lung cancer.";
         paragraph.toLowerCase();
         this.processor.paraProcessing(paragraph);
     }
