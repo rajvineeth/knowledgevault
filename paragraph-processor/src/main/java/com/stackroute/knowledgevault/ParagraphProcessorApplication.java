@@ -1,7 +1,7 @@
 package com.stackroute.knowledgevault;
 
-import com.stackroute.knowledgevault.communicators.KafkaProducer;
 import com.stackroute.knowledgevault.paragraphprocessor.Processor;
+import com.stackroute.knowledgevault.paragraphprocessor.communicators.KafkaProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

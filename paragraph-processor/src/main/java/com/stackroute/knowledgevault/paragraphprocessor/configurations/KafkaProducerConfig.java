@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.configurations;
+package com.stackroute.knowledgevault.paragraphprocessor.configurations;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
