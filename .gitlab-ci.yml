@@ -1,10 +1,24 @@
 image: maven:3.5.4-jdk-10
 before_script:
 - apt-get update -qq && apt-get install
+variables:
+  SONAR_URL: "http://jenkins-immersive.stackroute.in:9000/"
+  SONAR_LOGIN: "admin"
+  SONAR_PASSWORD: "Admin12#"
+
 stages:
 - test
 - build
 - codecoverage
+- test_quality
+
+sonarqube_master_job:
+  stage: test_quality
+  only:
+  - master
+  image: maven:3.3.9-jdk-8-alpine
+  script:
+  - mvn --batch-mode verify sonar:sonar -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.password=$SONAR_PASSWORD
 test:
   script: mvn test
 build:
@@ -18,6 +32,7 @@ codecoverage:
   artifacts:
       paths:
       - target/site/jacoco/
+
 #codecoverage:
 #  script:
 #    - mvn clean test

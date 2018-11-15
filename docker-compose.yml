@@ -40,11 +40,24 @@ services:
     expose:
       - 8092
 
-  mongodb:
+ document-identifier:
+    image: document-identifier:v1
+    build: document-identifier/
+    restart: always
+    container_name: document-identifier
+    network_mode: host
+    depends_on:
+    - kafka
+    - mongodb
+    ports:
+    - "8080:8080"
+    expose:
+    - "8080" 
+ mongodb:
     image: mongo:3.2-jessie
     ports:
       - "27017:27017"
-    container_name: mongo-movie
+    container_name: mongo-knowledgevault
     network_mode: host
     depends_on:
       - config-server
