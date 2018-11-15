@@ -5,6 +5,7 @@ variables:
   SONAR_URL: "http://jenkins-immersive.stackroute.in:9000/"
   SONAR_LOGIN: "admin"
   SONAR_PASSWORD: "Admin12#"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
 stages:
 - test
@@ -32,6 +33,15 @@ codecoverage:
   artifacts:
       paths:
       - target/site/jacoco/
+
+cache:
+  key: "maven3"
+  paths:
+  - .m2/repository
+
+maven_job:
+  script:
+  - mvn clean instal
 
 #codecoverage:
 #  script:

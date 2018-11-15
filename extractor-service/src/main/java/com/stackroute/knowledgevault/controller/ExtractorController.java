@@ -26,11 +26,7 @@ public class ExtractorController {
     @Autowired
     private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
 
-    @Autowired
-    private KafkaTemplate<String, List<ExtractedFileData>> kafkaTemplate1;
-
     private static final String TOPIC = "document";
-    private static final String TOPIC1 = "listOfDocuments";
 
     private String initialPath = "/home/cgi/";
 
@@ -50,16 +46,16 @@ public class ExtractorController {
         ResponseEntity responseEntity = null;
         List<File> allFiles = service.getAllFiles(initialPath + path);
         HashMap<Integer, String> extractedDocs = new HashMap<>();
-        List<ExtractedFileData> documents = new ArrayList<>();
 
         try {
             for (File instance : allFiles) {
                     ExtractedFileData data = service.extractOneFile(instance); //Fetching metadata and content
                     extractedDocs.put(data.getId(), instance.getName());
-                    documents.add(data);
+
+                    /* The following line will send our ExtractedFileData object containing all the information about
+                    the document to the Kafka server */
                     kafkaTemplate.send(TOPIC, data);
             }
-            kafkaTemplate1.send(TOPIC1, documents);
             responseEntity = new ResponseEntity<HashMap<Integer, String>>(extractedDocs, HttpStatus.OK);
         }
         catch (IOException e) {
@@ -105,10 +101,6 @@ public class ExtractorController {
                 //Looking for the file inside the folder specified in the path
                 if (instance.getName().equals(file.getName())) {
                     data = service.extractOneFile(instance);
-
-                    /* The following line will send our ExtractedFileData object containing all the information about
-                    the document to the Kafka server */
-                    //kafkaTemplate.send(TOPIC, data);
 
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
