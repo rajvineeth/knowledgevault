@@ -8,22 +8,17 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Map;
+
 @Document
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-/**
- * POJO class for consuming input sent by Extractor Service.
- */
-
-public class ExtractedFileData {
-
+public class JsonLDObject {
     @Id
-    private int id; //Id of the document
-    private String metadata; //Will contain the metadata of the document
-    private String content; //Will contain all the content of the document
+    private int id;
 
+    private Map<String, Object> jsonld;
 
 }
