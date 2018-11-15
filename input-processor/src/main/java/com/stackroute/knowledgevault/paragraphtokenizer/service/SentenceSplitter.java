@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.service;
+package com.stackroute.knowledgevault.service;
 
 import com.stackroute.knowledgevault.domain.Input;
 import edu.stanford.nlp.simple.Document;

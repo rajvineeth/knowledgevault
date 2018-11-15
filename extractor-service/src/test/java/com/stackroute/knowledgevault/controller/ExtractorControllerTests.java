@@ -2,7 +2,7 @@ package com.stackroute.knowledgevault.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
-import com.stackroute.knowledgevault.paragraphtokenizer.service.ExtractorService;
+import com.stackroute.knowledgevault.service.ExtractorService;
 import org.apache.tika.exception.TikaException;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.listener;
+package com.stackroute.knowledgevault.listener;
 
 import com.stackroute.knowledgevault.domain.Input;
 import org.springframework.kafka.annotation.KafkaListener;

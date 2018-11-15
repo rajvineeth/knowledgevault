@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.service;
+package com.stackroute.knowledgevault.service;
 
 import edu.stanford.nlp.simple.Sentence;
 import org.junit.After;
@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class SimpleNLPTest {
 

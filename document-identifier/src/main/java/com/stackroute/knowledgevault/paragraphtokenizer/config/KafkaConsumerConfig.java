@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.paragraphtokenizer.config;
+package com.stackroute.knowledgevault.config;
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
