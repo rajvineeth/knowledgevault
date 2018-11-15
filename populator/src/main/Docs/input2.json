@@ -1,19 +1,19 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "angina pectoris",
+  "alternateName": "d2",
   "associatedAnatomy": {
     "@type": "AnatomicalStructure",
-    "name": "heart"
+    "name": "leg"
   },
   "cause": [
     {
       "@type": "MedicalCause",
-      "name": "atherosclerosis"
+      "name": "m"
     },
     {
       "@type": "MedicalCause",
-      "name": "spasms of the epicardial artery"
+      "name": "s"
     }
   ],
   "code": {
@@ -25,11 +25,11 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "chest pain lasting at least 10 minutes at rest"
+        "name": "c"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "repeated episodes of chest pain at rest lasting 5 or more minutes"
+        "name": "r"
       },
       {
         "@type": "MedicalSymptom",
