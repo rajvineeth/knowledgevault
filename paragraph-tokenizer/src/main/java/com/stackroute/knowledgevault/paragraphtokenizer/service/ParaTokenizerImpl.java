@@ -1,12 +1,13 @@
 package com.stackroute.knowledgevault.paragraphtokenizer.service;
 
 import com.stackroute.knowledgevault.domain.Document;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component
 public class ParaTokenizerImpl implements ParaTokenizer {
 
     @Override
