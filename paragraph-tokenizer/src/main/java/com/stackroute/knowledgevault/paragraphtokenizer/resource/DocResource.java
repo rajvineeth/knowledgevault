@@ -15,7 +15,7 @@ public class DocResource {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    private static final String TOPIC = "cgi2";
+    private static final String TOPIC = "cgi4";
 
     public String post(List<Document> list) {
         for (Document doc : list){
