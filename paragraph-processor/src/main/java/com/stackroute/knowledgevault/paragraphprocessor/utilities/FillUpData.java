@@ -13,7 +13,7 @@ public class FillUpData {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FillUpData.class);
 
-    public JSONObject fill(Map<String,String> taggedKeywords) {
+    public static JSONObject fill(Map<String,String> taggedKeywords) {
         JSONObject obj = null;
         try {
             obj = new JSONObject(
@@ -80,14 +80,14 @@ public class FillUpData {
         }
 
         for (Map.Entry<String,String> entry : taggedKeywords.entrySet()) {
-            if(entry.getValue()=="disease") {
+            if(entry.getValue().compareTo("disease")==0) {
                 try {
                     obj.put("alternateName",entry.getKey());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            else if(entry.getValue()=="body-part") {
+            else if(entry.getValue().compareTo("body-part")==0) {
                 try {
                     JSONObject bp = (JSONObject) obj.get("associatedAnatomy");
                     bp.put("name",entry.getKey());
@@ -95,13 +95,8 @@ public class FillUpData {
                     e.printStackTrace();
                 }
             }
-            else if(entry.getValue()=="not found"){
-                try {
-                    JSONObject bp = (JSONObject) obj.get("associatedAnatomy");
-                    bp.put("name",entry.getKey());
-                }catch(Exception e) {
-                    e.printStackTrace();
-                }
+            else {
+                continue;
             }
         }
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

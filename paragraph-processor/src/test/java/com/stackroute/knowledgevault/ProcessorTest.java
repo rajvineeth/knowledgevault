@@ -12,23 +12,20 @@ import static org.junit.Assert.*;
 public class ProcessorTest {
 
     private Processor processor;
-    private FullTextSearch fullTextSearch;
 
     @Before
     public void setUp() {
         this.processor = new Processor();
-        this.processor.initProcessor();
     }
 
     @After
     public void tearDown() {
         this.processor = null;
-        this.fullTextSearch = null;
     }
 
     @Test
     public void paraProcessingTest() {
-        String paragraph = "My name is neeraj. I am suffering from lung cancer.";
+        String paragraph = "My name is neeraj. I am suffering from cancer.I have cancer in my lungs.";
         paragraph.toLowerCase();
         this.processor.paraProcessing(paragraph);
     }

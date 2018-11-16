@@ -10,8 +10,8 @@ import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.search.spans.SpanTermQuery;
 import org.apache.lucene.search.spans.Spans;
+import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Bits;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
@@ -44,7 +44,6 @@ public class FullTextSearchImpl implements FullTextSearch {
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
     public static final String CONTENTS = "content";
 
-
     @Override
     public String getIndexPath() {
         return indexPath;
@@ -74,7 +73,7 @@ public class FullTextSearchImpl implements FullTextSearch {
         LOGGER.info("creating indices....");
         Analyzer analyzer = new StandardAnalyzer();
         try {
-            FSDirectory dir = new SimpleFSDirectory(new File(indexPath));
+            Directory dir = FSDirectory.open(new File(indexPath));
             if(Files.exists(Paths.get(indexPath))) {
                 LOGGER.info("already indexed..");
                 return "already indexed...";
@@ -143,6 +142,7 @@ public class FullTextSearchImpl implements FullTextSearch {
             }
         }
         catch(Exception e) {
+            e.printStackTrace();
             LOGGER.debug(e.getMessage());
             return Collections.singletonList("something went wrong..");
         }

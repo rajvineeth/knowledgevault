@@ -10,5 +10,6 @@ import org.json.JSONObject;
 @NoArgsConstructor
 public class JSONld {
 
-    private JSONObject obj;
+    private JSONObject data;
+
 }

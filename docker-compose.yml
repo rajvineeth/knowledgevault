@@ -108,7 +108,7 @@ services:
     ports:
     - "8433:8433"
     expose:
-    - "8433" 
+    - "8433"
 
   paragraph-tokenizer:
     image: paragraph-tokenizer:v1
