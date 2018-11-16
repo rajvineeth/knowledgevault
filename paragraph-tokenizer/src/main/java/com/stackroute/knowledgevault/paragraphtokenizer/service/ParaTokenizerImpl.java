@@ -20,7 +20,6 @@ public class ParaTokenizerImpl implements ParaTokenizer {
         String text = document.getText();
         String[] arrText = text.trim().split("\n+");
 
-
         for (int i = 0; i < arrText.length; i++){
             list.add(new Document(document.getId(),arrText[i]));
         }
