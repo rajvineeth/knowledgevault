@@ -11,22 +11,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+//import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.kafka.core.KafkaTemplate;
 
 
 @SpringBootApplication
-@EnableEurekaClient
-public class ParagraphProcessorApplication implements ApplicationListener<ContextRefreshedEvent> {
+//@EnableEurekaClient
+public class ParagraphProcessorApplication  {
 
-	@Autowired
+/*	@Autowired
 	private KafkaTemplate<String,JSONld> kafkaTemplate;
 
-	private static KafkaProducer producer;
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ParagraphProcessorApplication.class);
+	private static KafkaProducer producer;*/
+//
+//	private static final Logger LOGGER = LoggerFactory.getLogger(ParagraphProcessorApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(ParagraphProcessorApplication.class, args);
@@ -41,8 +41,8 @@ public class ParagraphProcessorApplication implements ApplicationListener<Contex
 
 	}
 
-	@Override
+/*	@Override
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 		producer = new KafkaProducer(this.kafkaTemplate);
-	}
+	}*/
 }

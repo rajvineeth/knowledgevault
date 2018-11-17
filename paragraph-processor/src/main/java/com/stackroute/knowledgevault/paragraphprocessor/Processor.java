@@ -11,13 +11,9 @@ public class Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
 
-    private FullTextSearch fullTextSearch;
+    private FullTextSearchImpl fullTextSearch = new FullTextSearchImpl();
 
-    public Processor() {
-        this.fullTextSearch = new FullTextSearchImpl();
-    }
-
-    public void setFullTextSearch(FullTextSearch fullTextSearch) {
+    public void setFullTextSearch(FullTextSearchImpl fullTextSearch) {
         this.fullTextSearch = fullTextSearch;
     }
 
@@ -25,13 +21,10 @@ public class Processor {
         return this.fullTextSearch;
     }
 
-    /**
-     * Initialisation function which sets up the Lucene full text search functionality
-     */
-    public void initProcessor() {
-        this.fullTextSearch.setFilesPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/taggerResource");
-        this.fullTextSearch.setIndexPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/taggerIndices");
-        this.fullTextSearch.indexer();
+    public Processor() {
+        getFullTextSearch().setFilesPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/taggerResource");
+        getFullTextSearch().setIndexPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/taggerIndices");
+        getFullTextSearch().indexer();
     }
 
     /**
@@ -41,9 +34,8 @@ public class Processor {
      * @return: tagged keywords that makes sense
      */
     public Map<String,String> paraProcessing(String paragraph) {
-        initProcessor();
         Map<String,String> tags = new HashMap<>();
-        String[] keywords = paragraph.toLowerCase().trim().split("\\.|\\s+");
+        String[] keywords = paragraph.trim().toLowerCase().split("\\.|\\s+");
         for(String keyword: keywords) {
             tags.put(keyword,keywordMapping(keyword));
         }
@@ -54,6 +46,6 @@ public class Processor {
     }
 
     public String keywordMapping(String keyword) {
-        return this.fullTextSearch.search(keyword).get(0);
+        return getFullTextSearch().search(keyword).get(0);
     }
 }
