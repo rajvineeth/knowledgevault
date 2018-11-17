@@ -33,14 +33,14 @@ public class KafkaConsumer {
 
         pst = new Processor();
         JSONObject obj = FillUpData.fill(pst.paraProcessing("my name is neeraj and i have lungs cancer."));
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            JSONld usr = mapper.readValue(obj.toString(), JSONld.class);
-            producer.post(usr);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JSONld jsoNld = new JSONld(obj);
+//        ObjectMapper mapper = new ObjectMapper();
+//        try {
+//            JSONld usr = mapper.readValue(obj.toString(), JSONld.class);
+//            producer.post(usr);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        JSONld jsoNld = new JSONld(obj);
 //        LOGGER.info("jsonld object: {}",jsoNld.getData());
         pst = null;
         LOGGER.info("producer message: hey !! i sent the message");
