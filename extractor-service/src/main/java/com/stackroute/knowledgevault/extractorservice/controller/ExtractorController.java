@@ -25,7 +25,7 @@ public class ExtractorController {
     @Autowired
     private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
 
-    private static final String TOPIC = "document";
+    private static final String TOPIC = "consume4";
 
     private String initialPath = "./src/main/resources/";
 
