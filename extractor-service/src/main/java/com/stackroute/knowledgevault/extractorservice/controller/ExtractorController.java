@@ -27,12 +27,11 @@ public class ExtractorController {
 
     private static final String TOPIC = "document";
 
-    private String initialPath = "src/main/resources/";
+    private String initialPath = "./src/main/resources/";
 
     /* Fetches all the files from the specified folder in path */
     @GetMapping("{path}")
     public ResponseEntity<?> displayAllFiles(@PathVariable("path") String path) {
-        System.out.println("controller"+initialPath + path);
 
         List<File> allFiles = service.getAllFiles(initialPath + path); //Fetching all files from the specified path
 
@@ -54,7 +53,7 @@ public class ExtractorController {
 
                     /* The following line will send our ExtractedFileData object containing all the information about
                     the document to the Kafka server */
-                    kafkaTemplate.send(TOPIC, data);
+                    //kafkaTemplate.send(TOPIC, data);
             }
             responseEntity = new ResponseEntity<HashMap<Integer, String>>(extractedDocs, HttpStatus.OK);
         }
@@ -102,6 +101,7 @@ public class ExtractorController {
                 if (instance.getName().equals(file.getName())) {
                     data = service.extractOneFile(instance);
 
+                    kafkaTemplate.send(TOPIC, data);
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
                 }
