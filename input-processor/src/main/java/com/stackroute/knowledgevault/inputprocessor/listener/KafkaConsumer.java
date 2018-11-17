@@ -22,6 +22,8 @@ public class KafkaConsumer {
     @KafkaListener(topics="kafka_example_jsonh",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(Input INPUT){
 
+        List<Word> list = tokenize(INPUT);
+
     }
 
     public List tokenize(Input input) {
@@ -32,9 +34,9 @@ public class KafkaConsumer {
 
         this.input = input;
         Document document = new Document(input.getText());
-        sentences = document.sentences();
+        this.sentences = document.sentences();
 
-        for (Sentence sentence : sentences) {
+        for (Sentence sentence : this.sentences) {
             wordCount = 1;
 
             List<String> tokens = sentence.words();
@@ -51,6 +53,6 @@ public class KafkaConsumer {
     }
 
     public Input getInput() {
-        return input;
+        return this.input;
     }
 }
