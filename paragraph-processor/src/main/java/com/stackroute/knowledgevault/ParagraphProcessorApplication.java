@@ -5,7 +5,7 @@ import com.stackroute.knowledgevault.paragraphprocessor.Processor;
 import com.stackroute.knowledgevault.paragraphprocessor.communicators.KafkaConsumer;
 import com.stackroute.knowledgevault.paragraphprocessor.communicators.KafkaProducer;
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.FillUpData;
-import org.json.JSONObject;
+//import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
