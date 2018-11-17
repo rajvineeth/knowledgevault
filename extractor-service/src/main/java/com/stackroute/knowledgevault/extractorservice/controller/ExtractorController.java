@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "home/cgi")
+@RequestMapping(value = "extractor-service")
 public class ExtractorController {
 
     @Autowired
@@ -25,13 +25,14 @@ public class ExtractorController {
     @Autowired
     private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
 
-    private static final String TOPIC = "document";
+    private static final String TOPIC = "consume4";
 
-    private String initialPath = "/home/cgi/";
+    private String initialPath = "src/main/resources/";
 
     /* Fetches all the files from the specified folder in path */
     @GetMapping("{path}")
     public ResponseEntity<?> displayAllFiles(@PathVariable("path") String path) {
+        System.out.println("controller"+initialPath + path);
 
         List<File> allFiles = service.getAllFiles(initialPath + path); //Fetching all files from the specified path
 
