@@ -27,7 +27,7 @@ public class ExtractorServiceImpl implements ExtractorService {
     /* Fetches all the files and files present inside the sub-folder, from the folder specified in the path */
     public List<File> getAllFiles(String path) {
 
-        File directory = new File(path);//path = folder name (directory)
+        File directory = new File(path); //path = folder name (directory)
 
         File[] files = directory.listFiles();
 
