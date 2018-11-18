@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "home/cgi")
+@RequestMapping(value = "extractor-service")
 public class ExtractorController {
 
     @Autowired
@@ -25,9 +25,9 @@ public class ExtractorController {
     @Autowired
     private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
 
-    private static final String TOPIC = "document";
+    private static final String TOPIC = "consume4";
 
-    private String initialPath = "/home/cgi/";
+    private String initialPath = "./src/main/resources/";
 
     /* Fetches all the files from the specified folder in path */
     @GetMapping("{path}")
@@ -53,7 +53,7 @@ public class ExtractorController {
 
                     /* The following line will send our ExtractedFileData object containing all the information about
                     the document to the Kafka server */
-                    kafkaTemplate.send(TOPIC, data);
+                    //kafkaTemplate.send(TOPIC, data);
             }
             responseEntity = new ResponseEntity<HashMap<Integer, String>>(extractedDocs, HttpStatus.OK);
         }
@@ -101,6 +101,7 @@ public class ExtractorController {
                 if (instance.getName().equals(file.getName())) {
                     data = service.extractOneFile(instance);
 
+                    kafkaTemplate.send(TOPIC, data);
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
                 }

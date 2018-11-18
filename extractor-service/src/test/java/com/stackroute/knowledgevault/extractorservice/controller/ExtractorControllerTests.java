@@ -2,7 +2,6 @@ package com.stackroute.knowledgevault.extractorservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
-import com.stackroute.knowledgevault.extractorservice.controller.ExtractorController;
 import com.stackroute.knowledgevault.extractorservice.service.ExtractorService;
 import org.apache.tika.exception.TikaException;
 import org.junit.Before;
@@ -65,7 +64,7 @@ public class ExtractorControllerTests {
     @Test
     public void displayAllFiles() throws Exception {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
@@ -76,7 +75,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.extractOneFile((File) any())).thenReturn(data);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/extract")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/extract")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
@@ -87,7 +86,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.extractOneFile((File) any())).thenThrow(IOException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/extract")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/extract")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andDo(MockMvcResultHandlers.print());
@@ -98,7 +97,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.extractOneFile((File) any())).thenThrow(TikaException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/extract")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/extract")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
                 .andDo(MockMvcResultHandlers.print());
@@ -109,7 +108,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.extractOneFile((File) any())).thenThrow(SAXException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/extract")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/extract")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
                 .andDo(MockMvcResultHandlers.print());
@@ -120,7 +119,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.detectDocType(ArgumentMatchers.<File>anyList())).thenReturn(docTypes);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/docTypes")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/docTypes")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
@@ -131,7 +130,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.detectDocType(ArgumentMatchers.<File>anyList())).thenThrow(IOException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/docTypes")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/docTypes")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andDo(MockMvcResultHandlers.print());
@@ -142,7 +141,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.detectDocType(ArgumentMatchers.<File>anyList())).thenThrow(TikaException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/docTypes")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/docTypes")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
                 .andDo(MockMvcResultHandlers.print());
@@ -153,7 +152,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.extractOneFile((File) any())).thenReturn(data);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/extract/CGI-Reimbursement Mail.pdf.pdf")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/extract/CGI-Reimbursement Mail.pdf.pdf")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
@@ -164,7 +163,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.extractOneFile((File) any())).thenThrow(IOException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/extract/CGI-Reimbursement Mail.pdf.pdf")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/extract/CGI-Reimbursement Mail.pdf.pdf")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andDo(MockMvcResultHandlers.print());
@@ -175,7 +174,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.extractOneFile((File) any())).thenThrow(TikaException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/extract/CGI-Reimbursement Mail.pdf.pdf")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/extract/CGI-Reimbursement Mail.pdf.pdf")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
                 .andDo(MockMvcResultHandlers.print());
@@ -186,7 +185,7 @@ public class ExtractorControllerTests {
         when(extractorService.getAllFiles(anyString())).thenReturn(files);
 
         when(extractorService.extractOneFile((File) any())).thenThrow(SAXException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/home/cgi/fakie/extract/CGI-Reimbursement Mail.pdf.pdf")
+        mockMvc.perform(MockMvcRequestBuilders.get("/extractor-service/Doc/extract/CGI-Reimbursement Mail.pdf.pdf")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(files)))
                 .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
                 .andDo(MockMvcResultHandlers.print());
