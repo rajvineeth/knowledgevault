@@ -67,7 +67,9 @@ services:
     ports:
     - "8094:8094"
     expose:
-    - "8094" 
+    - "8094"
+    volumes:
+    - '/home/cgi/Documents/knowledge-vault/extractor-service:/data/extractor-service'
 
   paragraph-processor:
     image: paragraph-processor:v1
