@@ -20,7 +20,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 public class ExtractedFileData {
 
-    @Id
+
     private int id; //Id of the document
     private String metadata; //Will contain the metadata of the document
     private String content; //Will contain all the content of the document

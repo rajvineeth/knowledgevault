@@ -53,12 +53,7 @@
 			<artifactId>neo4j-ogm-bolt-driver</artifactId>
 			<version>3.1.4</version>
 		</dependency>
-        <!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-jdbc -->
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-jdbc</artifactId>
-            <version>3.1.0</version>
-        </dependency>
+
 
         <dependency>
 			<groupId>org.springframework.boot</groupId>

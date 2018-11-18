@@ -11,17 +11,17 @@ public class GetDiseasesAndSymptoms {
 
     public List<String> getDiseases(){
         CSVReader csvReader = new CSVReader();
-        return csvReader.getClass("DOID.csv", 1);
+        return csvReader.getClass("/home/cgi/Documents/knowledge-vault/document-identifier/DOID.csv", 1);
 
     }
 
     public List<String> getSymptoms(){
         CSVReader csvReader = new CSVReader();
-        return csvReader.getClass("SYMP.csv", 1);
+        return csvReader.getClass("/home/cgi/Documents/knowledge-vault/document-identifier/SYMP.csv", 1);
     }
 
     public List<String> getBodyParts(){
-        File file = new File("bodypartlist.txt");
+        File file = new File("/home/cgi/Documents/knowledge-vault/document-identifier/bodypartlist.txt");
         List<String> bodyparts = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
