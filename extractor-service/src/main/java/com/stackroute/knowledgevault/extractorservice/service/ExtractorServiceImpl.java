@@ -28,7 +28,7 @@ public class ExtractorServiceImpl implements ExtractorService {
     public List<File> getAllFiles(String path) {
 
         System.out.println("service class"+path);
-        File directory = new File("src/main/resources/Doc/README.md");//path = folder name (directory)
+        File directory = new File(path); //path = folder name (directory)
         System.out.println("iashiu"+directory);
         System.out.println(directory.isFile());
         File[] files = directory.listFiles();
