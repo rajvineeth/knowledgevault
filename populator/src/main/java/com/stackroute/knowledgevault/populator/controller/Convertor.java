@@ -6,16 +6,22 @@ import com.github.jsonldjava.utils.JsonUtils;
 import com.stackroute.knowledgevault.domain.*;
 import com.stackroute.knowledgevault.domain.Cause;
 import com.stackroute.knowledgevault.domain.MedicalCondition;
+import com.stackroute.knowledgevault.populator.repository.StructureRepo;
 import com.stackroute.knowledgevault.populator.service.AnatomyService;
 import com.stackroute.knowledgevault.populator.service.CauseService;
 import com.stackroute.knowledgevault.populator.service.MedicalConditionService;
 import com.stackroute.knowledgevault.populator.service.SymptomService;
 import com.stackroute.knowledgevault.populator.service.TreatmentService;
+import org.neo4j.driver.v1.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 @RestController
@@ -31,11 +37,45 @@ public class Convertor {
     private SymptomService symptomService;
     @Autowired
     private TreatmentService treatmentService;
+    @Autowired
+    StructureRepo structureRepo;
+
     static Long symptomId=0L;
     static Long anatomyId=1L;
     static Long treatmentId=0L;
     static Long causeId=0L;
     static Long id=1L;
+    private Driver driver;
+    @GetMapping("/createmt/{input}")
+    public void createMT(@PathVariable(value="input") String input) throws IOException, SQLException {
+
+//        // Connect
+//        Connection con = DriverManager.getConnection("jdbc:neo4j:bolt://localhost:7474");
+//
+//// Querying
+//        try (java.sql.Statement stmt = con.createStatement()) {
+//            ResultSet rs = stmt.executeQuery("MERGE N:MT {type:'syn'})");
+////            while (rs.next()) {
+////                System.out.println(rs.getString("n.name"));
+////            }
+//        }
+//        con.close();
+        structureRepo.createMT(input);
+    }
+    @GetMapping("/createmtr/{input}")
+    public void createMTR(@PathVariable(value="input") String input) throws IOException {
+        structureRepo.createMTR(input);
+    }
+    @GetMapping("/creater/{node1}/{rel}/{node2}")
+    public void createStructure(@PathVariable(value="node1") String node1,@PathVariable(value="rel") String rel,@PathVariable(value="node2") String node2) throws IOException {
+        Map<String,String> map=new HashMap<>();
+        map.put("node1",node1);
+        map.put("rel",rel);
+        map.put("node2",node2);
+        System.out.println(node1+rel+node2);
+        structureRepo.createR(node1,rel,node2);
+    }
+
     @GetMapping("/{input}")
     public void parse(@PathVariable(value="input") String input) throws IOException {
         ResponseEntity responseEntity;
