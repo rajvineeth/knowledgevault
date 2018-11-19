@@ -1,26 +1,26 @@
 version:  '2'
 
 services:
-  zookeeper:
-    container_name: zookeeper
-    image: wurstmeister/zookeeper
-    network_mode: host
-    ports:
-    - "2181:2181"
-
-  kafka:
-    container_name: kafka
-    image: wurstmeister/kafka
-    ports:
-    - "9092"
-    depends_on:
-    - "zookeeper"
-    network_mode: host
-    environment:
-      #      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      #      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_ADVERTISED_HOST_NAME: 192.163.3.112
-      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+#  zookeeper:
+#    container_name: zookeeper
+#    image: wurstmeister/zookeeper
+#    network_mode: host
+#    ports:
+#    - "2181:2181"
+#
+#  kafka:
+#    container_name: kafka
+#    image: wurstmeister/kafka
+#    ports:
+#    - "9092"
+#    depends_on:
+#    - "zookeeper"
+#    network_mode: host
+#    environment:
+#      #      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+#      #      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+#      KAFKA_ADVERTISED_HOST_NAME: 192.163.3.112
+#      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
 
 #  eureka:
 #      image: eureka:v1
@@ -61,9 +61,6 @@ services:
     - "8080:8080"
     expose:
     - "8080"
-
-
-
 
   mongodb:
     image: mongo:3.2-jessie
