@@ -140,6 +140,26 @@ services:
     expose:
     - "8067"
 
+#  user-registration:
+#    image: user-registration
+#    build: user-registration-service/
+#    container_name: user-registration
+#    network_mode: host
+#    ports:
+#      - "8083:8083"
+#    expose:
+#      - "8083"
+
+#  user-authentication:
+#    image: user-authentication
+#    build: user-authentication-service/
+#    container_name: user-registration-container
+#    network_mode: host
+#    ports:
+#      - "5084:8080"
+#    expose:
+#      - "5084"
+
 #  gateway:
 #    image: zuulgateway:v1
 #    build: zuulgateway/
