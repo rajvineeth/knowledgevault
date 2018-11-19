@@ -53,10 +53,10 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-config-client</artifactId>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-client</artifactId>
+		</dependency>
 
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -68,7 +68,11 @@
 		</dependency>-->
 	</dependencies>
 
+
 <!--	<dependencyManagement>
+=======
+	<dependencyManagement>
+>>>>>>> 3ad4775c8f5198fe7b620bce3fbdf934ced3323c
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -78,6 +82,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
+<<<<<<< HEAD
 	</dependencyManagement>-->
 
 	<build>

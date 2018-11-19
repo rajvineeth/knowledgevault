@@ -24,7 +24,7 @@ import java.util.Map;
         @Bean
         public ConsumerFactory<String,Object> consumerFactory(){
             Map<String,Object> configs = new HashMap<>();
-            configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+            configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.133");
             configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
             configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class);
             configs.put(ConsumerConfig.GROUP_ID_CONFIG,"kafkaconsumer");
@@ -43,7 +43,7 @@ import java.util.Map;
         @Bean
         public ConsumerFactory<String, User> userConsumerFactory(){
             Map<String,Object> configs = new HashMap<>();
-            configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
+            configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.133");
             configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
             configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
             configs.put(ConsumerConfig.GROUP_ID_CONFIG,"kafkauserconsumer");

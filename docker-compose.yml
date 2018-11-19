@@ -40,6 +40,7 @@ services:
     container_name: "document-identifier"
     network_mode: host
     depends_on:
+    - kafka
     - mongodb
     volumes:
     - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
@@ -65,6 +66,8 @@ services:
     restart: always
     container_name: "extractor-service"
     network_mode: host
+    depends_on:
+    - kafka
     volumes:
     - '../knowledge-vault/extractor-service/src/main/resources/:/knowledge-vault/extractor-service/src/main/resources/'
     ports:
@@ -72,12 +75,27 @@ services:
     expose:
     - "8094"
 
+  input-processor:
+      image: input-processor:v1
+      build:  input-processor/
+      restart: always
+      container_name: "input-processor"
+      network_mode: host
+      depends_on:
+      - kafka
+      ports:
+      - "8093:8093"
+      expose:
+      - "8093"
+
   paragraph-processor:
     image: paragraph-processor:v1
     build: paragraph-processor/
     restart: always
     container_name: "paragraph-processor"
     network_mode: host
+    depends_on:
+    - kafka
     ports:
     - "8433:8433"
     expose:
@@ -89,6 +107,8 @@ services:
     restart: always
     container_name: "paragraph-tokenizer"
     network_mode: host
+    depends_on:
+    - kafka
     ports:
     - "8065:8065"
     expose:
@@ -100,7 +120,42 @@ services:
     restart: always
     container_name: "populator"
     network_mode: host
+    depends_on:
+    - kafka
     ports:
     - "8067:8067"
     expose:
     - "8067"
+
+#  user-registration:
+#    image: user-registration
+#    build: user-registration-service/
+#    container_name: user-registration
+#    network_mode: host
+#    ports:
+#      - "8083:8083"
+#    expose:
+#      - "8083"
+
+#  user-authentication:
+#    image: user-authentication
+#    build: user-authentication-service/
+#    container_name: user-registration-container
+#    network_mode: host
+#    ports:
+#      - "5084:8080"
+#    expose:
+#      - "5084"
+
+#  gateway:
+#    image: zuulgateway:v1
+#    build: zuulgateway/
+#    restart: always
+#    container_name: zuul-container
+#    network_mode: host
+#    depends_on:
+#    - mongodb
+#    ports:
+#    - 8081:8081
+#    expose:
+#    - 8081

@@ -38,8 +38,8 @@ import java.util.*;
  */
 public class FullTextSearchImpl implements FullTextSearch {
 
-    private static String filesPath;
-    private static String indexPath;
+    private String filesPath;
+    private String indexPath;
 
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
     public static final String CONTENTS = "content";
