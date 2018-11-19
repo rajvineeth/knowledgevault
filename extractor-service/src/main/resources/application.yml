@@ -1,4 +1,4 @@
-#producer:
-#    port: 172.23.239.133
-#server:
-#    port: 8094
+producer:
+    port: 172.23.239.133
+server:
+    port: 8094
