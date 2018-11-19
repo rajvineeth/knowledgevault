@@ -15,8 +15,8 @@ public class ParaTokenizerImpl implements ParaTokenizer {
     private static final Logger LOGGER = LoggerFactory.getLogger(ParaTokenizerImpl.class);
 
     @Override
-    public List<Document> tokenizePara(Document document) {
-        List<Document> list = new ArrayList<>();
+    public List tokenizePara(Document document) {
+        List list = new ArrayList<>();
         String text = document.getText();
         String[] arrText = text.trim().split("\n+");
 
