@@ -36,7 +36,7 @@ services:
   document-identifier:
     image: document-identifier:v1
     build: document-identifier/
-    restart: always
+#    restart: always
     container_name: "document-identifier"
     network_mode: host
     depends_on:
