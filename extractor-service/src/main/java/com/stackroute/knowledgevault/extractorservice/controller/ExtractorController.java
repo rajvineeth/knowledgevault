@@ -27,7 +27,7 @@ public class ExtractorController {
 
     private static final String TOPIC = "consume4";
 
-    private String initialPath = "./src/main/resources/";
+    private String initialPath = "/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/";
 
     /* Fetches all the files from the specified folder in path */
     @GetMapping("{path}")

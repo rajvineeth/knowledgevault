@@ -29,14 +29,14 @@ public class ExtractorServiceTests {
 
     @Before
     public void setUp() {
-        files.add(new File("./src/main/resources/Doc/README.md"));
-        files.add(new File("./src/main/resources/Doc/Untitled Document.MD"));
         files.add(new File("./src/main/resources/Doc/fakie/README.md"));
-        files.add(new File("./src/main/resources/Doc/fakie/Untitled Document.MD"));
         files.add(new File("./src/main/resources/Doc/fakie/JavaScript_Evaluation_Exercise_1.odt"));
+        files.add(new File("./src/main/resources/Doc/fakie/Untitled Document.MD"));
+        files.add(new File("./src/main/resources/Doc/README.md"));
         files.add(new File("./src/main/resources/Doc/Profile Update Process.pptx"));
-        files.add(new File("./src/main/resources/Doc/new/package.json"));
+        files.add(new File("./src/main/resources/Doc/Untitled Document.MD"));
         files.add(new File("./src/main/resources/Doc/new/CGI-Reimbursement Mail.pdf.pdf"));
+        files.add(new File("./src/main/resources/Doc/new/package.json"));
         files.add(new File("./src/main/resources/Doc/new/JavaScript_Evaluation_Exercise_1.odt"));
 
         data.setMetadata("Content-Encoding=ISO-8859-1 Content-Type=text/plain; charset=ISO-8859-1");
@@ -52,8 +52,8 @@ public class ExtractorServiceTests {
         Assert.assertNotNull(allFiles);
 
         files.clear();
-        files.add(new File("./src/main/resources/Doc/new/package.json"));
         files.add(new File("./src/main/resources/Doc/new/CGI-Reimbursement Mail.pdf.pdf"));
+        files.add(new File("./src/main/resources/Doc/new/package.json"));
         files.add(new File("./src/main/resources/Doc/new/JavaScript_Evaluation_Exercise_1.odt"));
 
         allFiles.clear();

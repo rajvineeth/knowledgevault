@@ -69,7 +69,7 @@ services:
     expose:
     - "8094"
     volumes:
-    - '/home/cgi/Documents/knowledge-vault/extractor-service:/data/extractor-service'
+    - '/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/:/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/'
 
   paragraph-processor:
     image: paragraph-processor:v1
