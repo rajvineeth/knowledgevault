@@ -1,0 +1,9 @@
+
+
+
+spring:
+  application:
+    name: document-identifier
+  cloud:
+    config:
+      uri: http://localhost:8092

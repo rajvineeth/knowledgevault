@@ -1,8 +1,8 @@
-consumer:
-    ip: 127.0.0.1
-producer:
-    ip: 172.23.239.127
-    port: 9092
-sentence_rule_path: '"paragraph-processor/src/main/resources/sentence_break_rules"'
-server:
-    port: 8433
+#consumer:
+#    ip: 127.0.0.1
+#producer:
+#    ip: 172.23.239.127
+#    port: 9092
+#sentence_rule_path: '"paragraph-processor/src/main/resources/sentence_break_rules"'
+#server:
+#    port: 8433
