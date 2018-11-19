@@ -22,29 +22,29 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: 192.163.3.112
       KAFKA_ZOOKEEPER_CONNECT: localhost:2181
 
-  eureka:
-      image: eureka:v1
-      build: eureka-registry/
-      restart: always
-      container_name: "eureka-container"
-      network_mode: host
-      ports:
-      - 8066:8066
-      expose:
-      - 8066
-
-  config-server:
-      image: config-server:v1
-      build: config-server/
-      restart: always
-      container_name: "config-container"
-      network_mode: host
-      depends_on:
-      - eureka
-      ports:
-      - 8092:8092
-      expose:
-      - 8092
+#  eureka:
+#      image: eureka:v1
+#      build: eureka-registry/
+#      restart: always
+#      container_name: "eureka-container"
+#      network_mode: host
+#      ports:
+#      - 8066:8066
+#      expose:
+#      - 8066
+#
+#  config-server:
+#      image: config-server:v1
+#      build: config-server/
+#      restart: always
+#      container_name: "config-container"
+#      network_mode: host
+#      depends_on:
+#      - eureka
+#      ports:
+#      - 8092:8092
+#      expose:
+#      - 8092
 
   document-identifier:
     image: document-identifier:v1
@@ -55,7 +55,6 @@ services:
     depends_on:
     - kafka
     - mongodb
-    - config-server
     volumes:
     - '/home/cgi/Documents/knowledge-vault/document-identifier/:/home/cgi/Documents/knowledge-vault/document-identifier/'
     ports:
@@ -85,17 +84,14 @@ services:
     network_mode: host
     depends_on:
     - kafka
-    - config-server
 #    volumes:
 #    - '/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/:/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/'
+    volumes:
+    - '/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/:/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/'
     ports:
     - "8094:8094"
     expose:
     - "8094"
-#<<<<<<< HEAD
-    volumes:
-    - '/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/:/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/'
-#=======
 
   #    input-processor:
   #      image: input-processor:v1
@@ -118,7 +114,6 @@ services:
     network_mode: host
     depends_on:
     - kafka
-    - config-server
     ports:
     - "8433:8433"
     expose:
@@ -132,7 +127,6 @@ services:
     network_mode: host
     depends_on:
     - kafka
-    - config-server
     ports:
     - "8065:8065"
     expose:
@@ -146,7 +140,6 @@ services:
     network_mode: host
     depends_on:
     - kafka
-    - config-server
     ports:
     - "8067:8067"
     expose:
