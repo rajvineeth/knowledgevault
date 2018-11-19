@@ -31,7 +31,6 @@ public class KafkaConsumer {
         LOGGER.info("list of documents: {}",list.toString());
         LOGGER.info("i'm in consumer");
         docResource.post(list);
-//        LOGGER.info("consumed message: {}",extractedFileData.toString());
     }
 
     public List getList() {

@@ -5,5 +5,5 @@ import com.stackroute.knowledgevault.domain.Document;
 import java.util.List;
 
 public interface ParaTokenizer {
-    List<Document> tokenizePara(Document doc);
+    List tokenizePara(Document doc);
 }
