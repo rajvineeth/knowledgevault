@@ -31,18 +31,16 @@ services:
 #      expose:
 #      - 8066
 #
-#  config-server:
-#      image: config-server:v1
-#      build: config-server/
-#      restart: always
-#      container_name: "config-container"
-#      network_mode: host
-#      depends_on:
-#      - eureka
-#      ports:
-#      - 8092:8092
-#      expose:
-#      - 8092
+  config-server:
+      image: config-server:v1
+      build: config-server/
+      restart: always
+      container_name: "config-container"
+      network_mode: host
+      ports:
+      - 8092:8092
+      expose:
+      - 8092
 
   document-identifier:
     image: document-identifier:v1
