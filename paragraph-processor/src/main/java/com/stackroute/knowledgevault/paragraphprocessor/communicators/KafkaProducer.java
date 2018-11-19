@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class KafkaProducer {
 
     @Autowired
-    private KafkaTemplate<String,JSONld> kafkaTemplate;
+    private KafkaTemplate<String,JSONld> kafkaTemplate ;
 
     private static final String TOPIC = "kafkaTest";
 
