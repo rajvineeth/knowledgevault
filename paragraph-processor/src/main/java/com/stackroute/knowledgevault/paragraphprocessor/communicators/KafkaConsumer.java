@@ -14,6 +14,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 @Service
 public class KafkaConsumer {
@@ -30,18 +31,18 @@ public class KafkaConsumer {
     @KafkaListener(topics="cgi4",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
     public void consumejson(Document data){
         LOGGER.info("consumed message: {}",data.toString());
-
         pst = new Processor();
-        JSONObject obj = FillUpData.fill(pst.paraProcessing("my name is neeraj and i have lungs cancer."));
-//        ObjectMapper mapper = new ObjectMapper();
-//        try {
-//            JSONld usr = mapper.readValue(obj.toString(), JSONld.class);
-//            producer.post(usr);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        JSONld jsoNld = new JSONld(obj);
-//        LOGGER.info("jsonld object: {}",jsoNld.getData());
+        JSONObject obj = FillUpData.fill(pst.paraProcessing(data.getText()));
+        ObjectMapper mapper = new ObjectMapper();
+        JSONld jsoNld = null;
+        try {
+            HashMap<String,Object> map_data = mapper.readValue(obj.toString(), HashMap.class);
+            jsoNld = new JSONld(data.getId(),map_data);
+            producer.post(jsoNld);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LOGGER.info("jsonld object: {}",jsoNld.getData());
         pst = null;
         LOGGER.info("producer message: hey !! i sent the message");
     }

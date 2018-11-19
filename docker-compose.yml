@@ -17,8 +17,6 @@ services:
     - "zookeeper"
     network_mode: host
     environment:
-      #      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      #      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ADVERTISED_HOST_NAME: 172.23.239.70
       KAFKA_ZOOKEEPER_CONNECT: localhost:2181
 
