@@ -1,4 +1,4 @@
-FROM openjdk:10
+FROM openjdk:8
 
 ADD ./target/extractor-service-1.0.0.jar /usr/src/extractor-service-1.0.0.jar
 
