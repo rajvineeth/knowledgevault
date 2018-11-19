@@ -1,26 +1,26 @@
 version:  '2'
 
 services:
-#  zookeeper:
-#    container_name: zookeeper
-#    image: wurstmeister/zookeeper
-#    network_mode: host
-#    ports:
-#    - "2181:2181"
-#
-#  kafka:
-#    container_name: kafka
-#    image: wurstmeister/kafka
-#    ports:
-#    - "9092"
-#    depends_on:
-#    - "zookeeper"
-#    network_mode: host
-#    environment:
-#      #      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-#      #      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-#      KAFKA_ADVERTISED_HOST_NAME: 192.163.3.112
-#      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    network_mode: host
+    ports:
+    - "2181:2181"
+
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka
+    ports:
+    - "9092"
+    depends_on:
+    - "zookeeper"
+    network_mode: host
+    environment:
+      #      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      #      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_HOST_NAME: 172.23.239.70
+      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
 
 #  eureka:
 #      image: eureka:v1
@@ -90,18 +90,18 @@ services:
     expose:
     - "8094"
 
-  #    input-processor:
-  #      image: input-processor:v1
-  #      build:  input-processor/
-  #      restart: always
-  #      container_name: "input-processor"
-  #      network_mode: host
-  #      depends_on:
-  #      - kafka
-  #      ports:
-  #      - "8093:8093"
-  #      expose:
-  #      - "8093"
+#    input-processor:
+#      image: input-processor:v1
+#      build:  input-processor/
+#      restart: always
+#      container_name: "input-processor"
+#      network_mode: host
+#      depends_on:
+#      - kafka
+#      ports:
+#      - "8093:8093"
+#      expose:
+#      - "8093"
 
   paragraph-processor:
     image: paragraph-processor:v1
