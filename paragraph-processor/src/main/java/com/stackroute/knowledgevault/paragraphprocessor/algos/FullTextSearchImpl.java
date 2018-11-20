@@ -1,5 +1,10 @@
+/**
+ * @author: jshyperx
+ */
+
 package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
+import com.stackroute.knowledgevault.paragraphprocessor.MyAnalyzer;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -26,7 +31,7 @@ import java.util.*;
 
 /**
  * This implementation class is based on Lucene Library in Java for full-search functionality.
- * It basically uses inverted index to store doc information in a storage space..be it File System,RAM,Datavbase.
+ * It basically uses inverted index to store doc information in a storage space..be it File System,RAM,Database.
  * Refer to {@link} to get basic understanding : https://www.javacodegeeks.com/2015/09/introduction-to-lucene.html
  * Pretty easy to use:
  * 1. set your document path and index path(where you want to store index to be lated used for searching)
@@ -36,10 +41,12 @@ import java.util.*;
  * 4. you can use search() method to search for a particular keyword in the indexed documents.
  * 5. use getRelevantTerms() to get a list of relevant terms from your document based on the stored repositories.
  */
+
 public class FullTextSearchImpl implements FullTextSearch {
 
     private String filesPath;
     private String indexPath;
+    private Analyzer analyzer;
 
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
     public static final String CONTENTS = "content";
@@ -71,14 +78,14 @@ public class FullTextSearchImpl implements FullTextSearch {
     @Override
     public String indexer() {
         LOGGER.info("creating indices....");
-        Analyzer analyzer = new StandardAnalyzer();
+        this.analyzer = new StandardAnalyzer();
         try {
             Directory dir = FSDirectory.open(new File(indexPath));
             if(Files.exists(Paths.get(indexPath))) {
                 LOGGER.info("already indexed..");
                 return "already indexed...";
             }
-            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,analyzer);
+            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,this.analyzer);
             IndexWriter indexWriter = new IndexWriter(dir,config);
             File repo = new File(filesPath);
 
