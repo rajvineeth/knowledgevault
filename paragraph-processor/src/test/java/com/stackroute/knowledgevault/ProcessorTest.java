@@ -40,6 +40,6 @@ public class ProcessorTest {
     @Test
     public void testPatternMatch() {
         String dur = "5days";
-        assertEquals("duration",this.processor.patMatch(dur));
+        assertEquals("not found",this.processor.patMatch(dur));
     }
 }

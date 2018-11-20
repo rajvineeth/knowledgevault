@@ -51,27 +51,30 @@ public class Processor {
         }
 
         for(String keyword: keywords) {
+            String tag = keywordMapping(keyword);
+            LOGGER.info("tagged value: {}",tag);
+
             tags.put(keyword,keywordMapping(keyword));
         }
 
         for (Map.Entry<String,String> entry : tags.entrySet()) {
             LOGGER.info("{  word : {} , tag : {} }", entry.getKey(), entry.getValue());
         }
-
         return tags;
     }
 
     public String patMatch(String key) {
         String pat = "^(\\d+)(?=([day]|[week]|[month]|[year]))";
         Pattern pattern = Pattern.compile(pat);
-        if(pattern.matcher(key).find()) {
+        if(pattern.matcher(key).matches()) {
             return "duration";
         }
-        return "not-found";
+        return "not found";
     }
 
     public String keywordMapping(String keyword) {
         String tag = getFullTextSearch().search(keyword).get(0);
+        LOGGER.info(tag);
         if(tag.compareTo("not found")==0) {
             return patMatch(tag);
         }
