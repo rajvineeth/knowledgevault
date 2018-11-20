@@ -102,11 +102,6 @@ public class ExtractorController {
                     data = service.extractOneFile(instance);
 
                     kafkaTemplate.send(TOPIC, data);
-<<<<<<< HEAD
-
-=======
-//                    kafkaTemplate.send("extracted2",data);
->>>>>>> 8c285ae344eac915986a5cb8dc6ee9e4dfce4dc1
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
                 }
