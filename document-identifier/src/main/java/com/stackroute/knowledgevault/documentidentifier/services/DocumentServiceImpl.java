@@ -50,13 +50,14 @@ public class DocumentServiceImpl implements DocumentService {
      */
 
     @Override
-    public double tf(List<String> doc, String term) {
+    public double tf(List<String> doc, String term){
         double result = 0;
         for(String word: doc){
             if(term.equalsIgnoreCase(word))
                 result++;
         }
-        return result / doc.size();
+
+        return Math.log(1 + result);
     }
 
     /*
@@ -74,11 +75,7 @@ public class DocumentServiceImpl implements DocumentService {
                 }
             }
         }
-        if(n > 0) {
-            return Math.log(docs.size() / n);
-        }else{
-            return 0;
-        }
+        return Math.log((docs.size()) / (n+1));
     }
 
     /*
@@ -88,21 +85,36 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public List<String> tfIdf(int index, List<List<String>> docs) {
+
         LinkedHashMap<String, Double> weightMap = new LinkedHashMap<>();
         List<String> relevantWords = new ArrayList<>();
         int numberOfWords = 20;
+
+        double denominator = 0.0;
+
         for(String words: docs.get(index)){
             double relevance = tf(docs.get(index), words) * idf(docs, words);
+            denominator += (relevance * relevance);
             weightMap.put(words, relevance);
 
 
         }
+        denominator = Math.sqrt(denominator);
+        Iterator it = weightMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            weightMap.put((String)pair.getKey(),((double)pair.getValue())/denominator);
+        }
         Map<String, Double> sortedMap = sortByValues(weightMap);
+
         Iterator<Map.Entry<String, Double>> itr = sortedMap.entrySet().iterator();
         int i=0;
         while(itr.hasNext() && i<=numberOfWords){
-            relevantWords.add(itr.next().getKey());
-            i++;
+            String term = itr.next().getKey().trim();
+            if(!term.isEmpty()) {
+                relevantWords.add(term);
+                i++;
+            }
         }
         return relevantWords;
     }
@@ -137,22 +149,27 @@ public class DocumentServiceImpl implements DocumentService {
     list of "OutputForDoc" class containing id, title and relevant terms in the doc.
      */
     @Override
-    public List<OutputForDoc> processDoc(List<ExtractedFileData> extractedFileData) {
+    public List<OutputForDoc> processDoc(List<ExtractedFileData> extractedFileData, int n) {
         List<List<String>> docs = new ArrayList<>();
-        StopwordRemoval stopWordRemoval = new StopwordRemoval();
-        List<Document> documents = convertStringToDocument(extractedFileData);
+//        StopwordRemoval stopWordRemoval = new StopwordRemoval();
+//        List<Document> documents = convertStringToDocument(extractedFileData);
         List<OutputForDoc> relevantTerms = new ArrayList<>();
 
-        for(Document document: documents){
-            List<String> terms = new ArrayList<>();
-            for(Sentence sentence: document.sentences()){
-                for(int i=0;i<sentence.length();i++){
-                    terms.add(sentence.lemma(i).toLowerCase());
-                }
-            }
-            terms = stopWordRemoval.removeStopwords(terms);
+        for(ExtractedFileData extractedFileData1: extractedFileData){
+            List<String> terms = getnGrams(extractedFileData1, n);
             docs.add(terms);
         }
+
+//        for(Document document: documents){
+//            List<String> terms = new ArrayList<>();
+//            for(Sentence sentence: document.sentences()){
+//                for(int i=0;i<sentence.length();i++){
+//                    terms.add(sentence.lemma(i).toLowerCase());
+//                }
+//            }
+//            terms = stopWordRemoval.removeStopwords(terms);
+//            docs.add(terms);
+//        }
         for(int i = 0; i< extractedFileData.size(); i++){
             relevantTerms.add(new OutputForDoc(extractedFileData.get(i).getId(),
                     extractedFileData.get(i).getMetadata(),
@@ -176,6 +193,12 @@ public class DocumentServiceImpl implements DocumentService {
         return documents;
     }
 
+    public List<String> getnGrams(ExtractedFileData extractedFileData, int n){
+        String content = extractedFileData.getContent().replaceAll("[^\\w\\s\\ ]", "").toLowerCase();
+        NGram nGram = new NGram(content,n);
+        return nGram.list();
+    }
+
     @Override
     public List<JsonLDObject> convertTermsToJsonLD(List<OutputForDoc> outputForDocs) {
         /*
@@ -197,30 +220,24 @@ public class DocumentServiceImpl implements DocumentService {
             Map<String, Object> root = new HashMap<>();
             root.put("@context","http://schema.org");
             root.put("@type", "MedicalCondition");
-            boolean flag1 = true;
-            boolean flag2 = true;
             for(String keyword: documents.getKeywords()){
 
                 for(String disease: diseases){
-                    if(disease.contains(keyword)){
-                        root.put("alternateName", keyword);
-                        break;
+                    if(disease.contains(keyword) || keyword.contains(disease)){
+                        System.out.println(keyword);
+                        root.put("alternateName", disease);
                     }
                 }
                 Map<String, String> Anatomy = new HashMap<>();
                 for(String bodypart: bodyparts){
-                    if(bodypart.contains(keyword)){
+                    if(bodypart.contains(keyword) || keyword.contains(bodypart)){
                         Anatomy.put("@type", "AnatomicalStructure");
-                        Anatomy.put("name", keyword);
-                        break;
+                        Anatomy.put("name", bodypart);
                     }
                 }
-                if(flag1 && flag2) {
-                    root.put("associatedAnatomy", Anatomy);
-                    flag1 = false;
-                    flag2 = false;
-                    break;
-                }
+
+                root.put("associatedAnatomy", Anatomy);
+
             }
             jsonLDObjects.add(new JsonLDObject(documents.getId(), root));
         }

@@ -19,7 +19,7 @@ public interface DocumentService {
 
     public List<String> tfIdf(int index, List<List<String>> docs);
 
-    public List<OutputForDoc> processDoc(List<ExtractedFileData> extractedFileData);
+    public List<OutputForDoc> processDoc(List<ExtractedFileData> extractedFileData, int n);
 
     public List<Document>convertStringToDocument(List<ExtractedFileData> extractedFileData);
 

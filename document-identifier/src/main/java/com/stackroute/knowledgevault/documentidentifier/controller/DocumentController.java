@@ -41,7 +41,7 @@ public class DocumentController {
     @GetMapping()
     public ResponseEntity<?> getAllTerms(){
         ResponseEntity responseEntity;
-        List<JsonLDObject> outputForDocList = documentService.convertTermsToJsonLD(documentService.processDoc(documentService.getAllDocuments()));
+        List<JsonLDObject> outputForDocList = documentService.convertTermsToJsonLD(documentService.processDoc(documentService.getAllDocuments(), 2));
         for(JsonLDObject object: outputForDocList){
             kafkaTemplate.send(KafkaTopic, object);
         }

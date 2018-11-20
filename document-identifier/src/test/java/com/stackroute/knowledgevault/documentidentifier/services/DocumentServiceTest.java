@@ -1,7 +1,7 @@
-//package com.stackroute.knowledgevault.services;
+//package com.stackroute.knowledgevault.documentidentifier.services;
 //
 //import com.stackroute.knowledgevault.domain.ExtractedFileData;
-//import com.stackroute.knowledgevault.repository.DocumentRepository;
+//import com.stackroute.knowledgevault.documentidentifier.repository.DocumentRepository;
 //import edu.stanford.nlp.simple.Document;
 //import edu.stanford.nlp.simple.Sentence;
 //import org.junit.Assert;
@@ -37,7 +37,7 @@
 //        ExtractedFileData extractedFileData1 = new ExtractedFileData();
 //        extractedFileData.setId(1);
 //        extractedFileData.setMetadata("this is metadata");
-//        extractedFileData.setContent("I am so done with this service. Seriously, why does it even exist. All it does is take stuff and find relevant terms using statistics");
+//        extractedFileData.setContent("Cancer is a group of diseases involving abnormal cell growth with the potential to invade or spread to other parts of the body.[2][8] These contrast with benign tumors, which do not spread to other parts of the body.[8] Possible signs and symptoms include a lump, abnormal bleeding, prolonged cough, unexplained weight loss and a change in bowel movements.[1] While these symptoms may indicate cancer, they may have other causes.[1] Over 100 types of cancers affect humans.[8]\n");
 //        list = new ArrayList<>();
 //        list.add(extractedFileData);
 //        extractedFileData1.setId(2);
@@ -48,11 +48,11 @@
 //
 //    @Test
 //    public void saveDocumentTestSuccess() {
-//        when(documentRepository.saveAll((Iterable<ExtractedFileData>) any())).thenReturn(list);
-//        List<ExtractedFileData> savedDocs = documentService.saveDocuments(list);
-//        Assert.assertEquals(list, savedDocs);
+//        when(documentRepository.save((ExtractedFileData) any())).thenReturn(extractedFileData);
+//        ExtractedFileData savedDocs = documentService.saveDocuments(extractedFileData);
+//        Assert.assertEquals(extractedFileData, savedDocs);
 //
-//        verify(documentRepository,times(1)).saveAll(list);
+//
 //    }
 //
 //    @Test
@@ -74,7 +74,7 @@
 //                terms.add(sentence.lemma(i));
 //            }
 //        }
-//        terms = stopwordRemoval.removeStopwords(terms);
+//        //terms = stopwordRemoval.removeStopwords(terms);
 //
 //        double tfScore = documentService.tf(terms, "Kushagra");
 //        Assert.assertEquals(0.0, tfScore,1e-4);
@@ -93,7 +93,7 @@
 //                    terms.add(sentence.lemma(i));
 //                }
 //            }
-//            terms = stopwordRemoval.removeStopwords(terms);
+//            //terms = stopwordRemoval.removeStopwords(terms);
 //            docs.add(terms);
 //        }
 //        double idfScore = documentService.idf(docs,"statistics");
@@ -118,11 +118,13 @@
 //                    terms.add(sentence.lemma(i));
 //                }
 //            }
-//            terms = stopwordRemoval.removeStopwords(terms);
+//            //terms = stopwordRemoval.removeStopwords(terms);
 //            docs.add(terms);
 //        }
 //        String[] relevantTerms = {"seriously", "exist", "take", "stuff", "find", "relevant", "term", "use", "statistics", "service", "even"};
 //        List<String> tfIdf = documentService.tfIdf(0,docs);
+//        System.out.println(tfIdf);
+//        System.out.println(documentService.convertTermsToJsonLD(documentService.processDoc(list)));
 //        Assert.assertArrayEquals(relevantTerms, tfIdf.toArray());
 //    }
 //}
