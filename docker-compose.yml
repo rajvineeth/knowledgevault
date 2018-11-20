@@ -17,7 +17,7 @@ services:
     - "zookeeper"
     network_mode: host
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 172.23.239.70
+      KAFKA_ADVERTISED_HOST_NAME: 172.23.239.143
       KAFKA_ZOOKEEPER_CONNECT: localhost:2181
 
 #  eureka:
@@ -44,32 +44,32 @@ services:
 #      expose:
 #      - 8092
 
-  document-identifier:
-    image: document-identifier:v1
-    build: document-identifier/
-    restart: always
-    container_name: "document-identifier"
-    network_mode: host
-    depends_on:
-    - kafka
-    - mongodb
-    volumes:
-    - '/home/cgi/Documents/knowledge-vault/document-identifier/:/home/cgi/Documents/knowledge-vault/document-identifier/'
-    ports:
-    - "8080:8080"
-    expose:
-    - "8080"
+#  document-identifier:
+#    image: document-identifier:v1
+#    build: document-identifier/
+#    restart: always
+#    container_name: "document-identifier"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    - mongodb
+#    volumes:
+#    - '/home/cgi/Documents/knowledge-vault/document-identifier/:/home/cgi/Documents/knowledge-vault/document-identifier/'
+#    ports:
+#    - "8080:8080"
+#    expose:
+#    - "8080"
 
-  mongodb:
-    image: mongo:3.2-jessie
-    ports:
-    - 27017:27017
-    container_name: "mongo-knowledgevault"
-    network_mode: host
-    volumes:
-    - '/home/cgi/data/mongo:/data/db'
-    environment:
-      MONGO_INITDB_DATABASE: mydatabase
+#  mongodb:
+#    image: mongo:3.2-jessie
+#    ports:
+#    - 27017:27017
+#    container_name: "mongo-knowledgevault"
+#    network_mode: host
+#    volumes:
+#    - '/home/cgi/data/mongo:/data/db'
+#    environment:
+#      MONGO_INITDB_DATABASE: mydatabase
 
   extractor-service:
     image: extractor-service:v1

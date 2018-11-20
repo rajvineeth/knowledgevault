@@ -12,10 +12,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 @AllArgsConstructor
 @Builder
 @NodeEntity
-public class Symptom {
+public class MTR {
     @Id
-    private Long symptomId;
     private String type;
-    private String symptomName;
-
 }

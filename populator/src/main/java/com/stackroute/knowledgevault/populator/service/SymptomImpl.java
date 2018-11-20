@@ -1,6 +1,6 @@
 package com.stackroute.knowledgevault.populator.service;
 
-import com.stackroute.knowledgevault.domain.Symptom;
+import com.stackroute.knowledgevault.domain.MedicalSymptom;
 import com.stackroute.knowledgevault.populator.repository.SymptomRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +15,13 @@ public class SymptomImpl implements SymptomService {
         this.symptomRepo=symptomRepo;
     }
     @Override
-    public Symptom saveSymptom(Symptom symptom) {
-        return symptomRepo.save(symptom);
+    public MedicalSymptom saveSymptom(MedicalSymptom medicalSymptom) {
+        return symptomRepo.save(medicalSymptom);
     }
 
     @Override
-    public List<Symptom> symptomList() {
-        List<Symptom> symptomList = (List)symptomRepo.findAll();
-        return symptomList;
+    public List<MedicalSymptom> symptomList() {
+        List<MedicalSymptom> medicalSymptomList = (List)symptomRepo.findAll();
+        return medicalSymptomList;
     }
 }
