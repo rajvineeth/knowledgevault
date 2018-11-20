@@ -12,6 +12,8 @@ knowledge-vault-parent.iml
 .idea/sonarlint
 
 
+/home/shubham/Documents/knowledge-vault/src/main/java/com/stackroute/knowledgevault/inputprocessor/assets/taggerIndices
+
 ######################
 # Node
 ######################
