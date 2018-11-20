@@ -24,9 +24,9 @@
 
 
 
-spring:
-  application:
-    name: paragraph-processor
-  cloud:
-    config:
-      uri: http://localhost:8092
+#spring:
+#  application:
+#    name: paragraph-processor
+#  cloud:
+#    config:
+#      uri: http://localhost:8092
