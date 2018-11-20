@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories()
 @SpringBootApplication
-public class UserAuthenticationApplication implements CommandLineRunner {
+public class UserAuthenticationApplication {
 
     @Bean
     public FilterRegistrationBean jwtFilter() {
@@ -28,8 +28,8 @@ public class UserAuthenticationApplication implements CommandLineRunner {
 	}
     @Autowired
     private UserRepository userRepository;
-    @Override
+    /*@Override
     public void run(String... args) throws Exception {
           userRepository.save(new User("rajvineeth@gmail.com","12345678","SME"));
-    }
+    }*/
 }

@@ -54,9 +54,9 @@ public class UserController {
         System.out.println(userDetails);
         User User = new User(userDetails.getUsername(), userDetails.getPassword());
         try{
-            userService.saveUser(userDetails);
-            kafkaTemplate.send(TOPIC, User);
-            responseEntity= new ResponseEntity<String>(ControllerMessage3, HttpStatus.CREATED);
+           UserDetails u = userService.saveUser(userDetails);
+           kafkaTemplate.send(TOPIC, User);
+            responseEntity= new ResponseEntity<UserDetails>(u, HttpStatus.CREATED);
         }catch (UserAlreadyExistsException e){
             responseEntity = new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
             logger.error(e.getMessage()) ;
