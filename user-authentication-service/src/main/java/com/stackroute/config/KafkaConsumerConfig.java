@@ -24,14 +24,6 @@ import java.util.Map;
         @Bean
         public ConsumerFactory<String,Object> consumerFactory(){
             Map<String,Object> configs = new HashMap<>();
-            configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.133");
-            configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-            configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class);
-            configs.put(ConsumerConfig.GROUP_ID_CONFIG,"kafkaconsumer");
-            return new DefaultKafkaConsumerFactory<>(configs);
-        }
-
-        @Bean
         public ConcurrentKafkaListenerContainerFactory<String,Object> kafkaListenerContainerFactory(){
             ConcurrentKafkaListenerContainerFactory<String,Object> factory = new ConcurrentKafkaListenerContainerFactory<String,Object>();
             factory.setConsumerFactory(consumerFactory());
