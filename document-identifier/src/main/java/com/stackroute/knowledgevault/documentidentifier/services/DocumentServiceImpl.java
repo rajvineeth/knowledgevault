@@ -5,8 +5,8 @@ import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import com.stackroute.knowledgevault.domain.JsonLDObject;
 import com.stackroute.knowledgevault.domain.OutputForDoc;
 import com.stackroute.knowledgevault.documentidentifier.repository.DocumentRepository;
-import edu.stanford.nlp.simple.Document;
-import edu.stanford.nlp.simple.Sentence;
+//import edu.stanford.nlp.simple.Document;
+//import edu.stanford.nlp.simple.Sentence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -184,14 +184,14 @@ public class DocumentServiceImpl implements DocumentService {
     Helper function to convert List of "ExtractedFileData" to "Document" defined in Stanford Simple NLP
      */
 
-    @Override
-    public List<Document> convertStringToDocument(List<ExtractedFileData> extractedFileData) {
-        List<Document> documents = new ArrayList<>();
-        for(ExtractedFileData extractedFile : extractedFileData){
-            documents.add(new Document(extractedFile.getContent()));
-        }
-        return documents;
-    }
+//    @Override
+//    public List<Document> convertStringToDocument(List<ExtractedFileData> extractedFileData) {
+//        List<Document> documents = new ArrayList<>();
+//        for(ExtractedFileData extractedFile : extractedFileData){
+//            documents.add(new Document(extractedFile.getContent()));
+//        }
+//        return documents;
+//    }
 
     public List<String> getnGrams(ExtractedFileData extractedFileData, int n){
         String content = extractedFileData.getContent().replaceAll("[^\\w\\s\\ ]", "").toLowerCase();

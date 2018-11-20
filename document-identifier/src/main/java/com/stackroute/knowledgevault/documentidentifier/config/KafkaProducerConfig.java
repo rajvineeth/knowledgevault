@@ -23,6 +23,7 @@ public class KafkaProducerConfig {
     public ProducerFactory<String,Object> producerFactory(){
         Map<String,Object> configs = new HashMap<>();
         configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
+        configs.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
@@ -38,6 +39,7 @@ public class KafkaProducerConfig {
     public ProducerFactory<String, JsonLDObject> producerfactory1(){
         Map<String, Object> config=new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
+        config.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
