@@ -31,7 +31,7 @@ public class DocumentController {
     @Autowired
     private KafkaTemplate<String, JsonLDObject> kafkaTemplate;
 
-    private static final String KafkaTopic ="prod2";
+    private static final String KafkaTopic ="prod3";
 
     /*
         Function to produce the processed documents to the Kafka topic "prod2" and as a get request.

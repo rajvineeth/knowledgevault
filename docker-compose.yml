@@ -89,57 +89,57 @@ services:
     expose:
     - "8094"
 
-  input-processor:
-      image: input-processor:v1
-      build:  input-processor/
-      restart: always
-      container_name: "input-processor"
-      network_mode: host
-      depends_on:
-      - kafka
-      ports:
-      - "8093:8093"
-      expose:
-      - "8093"
-
-  paragraph-processor:
-    image: paragraph-processor:v1
-    build: paragraph-processor/
-    restart: always
-    container_name: "paragraph-processor"
-    network_mode: host
-    depends_on:
-    - kafka
-    ports:
-    - "8433:8433"
-    expose:
-    - "8433"
-
-  paragraph-tokenizer:
-    image: paragraph-tokenizer:v1
-    build: paragraph-tokenizer/
-    restart: always
-    container_name: "paragraph-tokenizer"
-    network_mode: host
-    depends_on:
-    - kafka
-    ports:
-    - "8065:8065"
-    expose:
-    - "8065"
-
-  populator:
-    image: populator:v1
-    build: populator/
-    restart: always
-    container_name: "populator"
-    network_mode: host
-    depends_on:
-    - kafka
-    ports:
-    - "8067:8067"
-    expose:
-    - "8067"
+#  input-processor:
+#      image: input-processor:v1
+#      build:  input-processor/
+#      restart: always
+#      container_name: "input-processor"
+#      network_mode: host
+#      depends_on:
+#      - kafka
+#      ports:
+#      - "8093:8093"
+#      expose:
+#      - "8093"
+#
+#  paragraph-processor:
+#    image: paragraph-processor:v1
+#    build: paragraph-processor/
+#    restart: always
+#    container_name: "paragraph-processor"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    ports:
+#    - "8433:8433"
+#    expose:
+#    - "8433"
+#
+#  paragraph-tokenizer:
+#    image: paragraph-tokenizer:v1
+#    build: paragraph-tokenizer/
+#    restart: always
+#    container_name: "paragraph-tokenizer"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    ports:
+#    - "8065:8065"
+#    expose:
+#    - "8065"
+#
+#  populator:
+#    image: populator:v1
+#    build: populator/
+#    restart: always
+#    container_name: "populator"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    ports:
+#    - "8067:8067"
+#    expose:
+#    - "8067"
 
 #  user-registration:
 #    image: user-registration

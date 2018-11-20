@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class FillUpDataTest {
 
-    Logger LOGGER = LoggerFactory.getLogger(FillUpDataTest.class);
+//    Logger LOGGER = LoggerFactory.getLogger(FillUpDataTest.class);
 //    FillUpData fillUpData;
     @Before
     public void setUp() throws Exception {
@@ -29,11 +29,11 @@ public class FillUpDataTest {
 
     @Test
     public void fill() {
-        Map<String, String> map = new HashMap<>();
-        map.put("nose","body-part");
-        map.put("bleeding", "symptom");
-        map.put("diarrhoea", "disease");
-        LOGGER.info(FillUpData.fill(map).toString());
-        LOGGER.info("===###===\n\n{}",new JSONld((JSONObject) FillUpData.fill(map)));
+//        Map<String, String> map = new HashMap<>();
+//        map.put("nose","body-part");
+//        map.put("bleeding", "symptom");
+//        map.put("diarrhoea", "disease");
+//        LOGGER.info(FillUpData.fill(map).toString());
+//        LOGGER.info("===###===\n\n{}",new JSONld((JSONObject) FillUpData.fill(map)));
     }
 }
