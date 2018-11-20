@@ -1,3 +1,7 @@
+/**
+ * @author: jshyperx
+ */
+
 package com.stackroute.knowledgevault.paragraphprocessor.utilities;
 
 import java.util.Map;
