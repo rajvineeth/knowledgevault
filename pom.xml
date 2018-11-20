@@ -59,7 +59,8 @@
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.2</version>
+            <version>0.5.5.201112152213</version>
+            <!--<version>0.8.2</version>-->
         </dependency>
         <!--<dependency>-->
             <!--&lt;!&ndash; Import dependency management from Spring Boot &ndash;&gt;-->
@@ -105,7 +106,8 @@
             <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.2</version>
+                <version>0.5.5.201112152213</version>
+                <!--<version>0.8.2</version>-->
             <configuration>
                 <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
                 <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
