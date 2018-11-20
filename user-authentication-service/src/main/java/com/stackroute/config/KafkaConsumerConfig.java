@@ -17,38 +17,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-    @Configuration
-    @EnableKafka
-    public class KafkaConsumerConfig {
+@Configuration
+@EnableKafka
+public class KafkaConsumerConfig {
 
-        @Bean
-        public ConsumerFactory<String,Object> consumerFactory(){
-            Map<String,Object> configs = new HashMap<>();
-        public ConcurrentKafkaListenerContainerFactory<String,Object> kafkaListenerContainerFactory(){
-            ConcurrentKafkaListenerContainerFactory<String,Object> factory = new ConcurrentKafkaListenerContainerFactory<String,Object>();
-            factory.setConsumerFactory(consumerFactory());
-            return factory;
-        }
-
-
-
-        @Bean
-        public ConsumerFactory<String, User> userConsumerFactory(){
-            Map<String,Object> configs = new HashMap<>();
-            configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.133");
-            configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-            configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-            configs.put(ConsumerConfig.GROUP_ID_CONFIG,"kafkauserconsumer");
-
-
-            return new DefaultKafkaConsumerFactory<>(configs,new StringDeserializer(),new org.springframework.kafka.support.serializer.JsonDeserializer<>((User.class)));
-        }
-
-        @Bean
-        public ConcurrentKafkaListenerContainerFactory<String, User> kafkaUserListenerContainerFactory(){
-            ConcurrentKafkaListenerContainerFactory<String,User> factory = new ConcurrentKafkaListenerContainerFactory<String,User>();
-            factory.setConsumerFactory(userConsumerFactory());
-            return factory;
-        }
+    @Bean
+    public ConsumerFactory<String,Object> consumerFactory(){
+        Map<String,Object> configs = new HashMap<>();
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.133:9092");
+        configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class);
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG,"kafkaconsumer");
+        return new DefaultKafkaConsumerFactory<>(configs);
     }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String,Object> kafkaListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String,Object> factory = new ConcurrentKafkaListenerContainerFactory<String,Object>();
+        factory.setConsumerFactory(consumerFactory());
+        return factory;
+    }
+
+
+
+    @Bean
+    public ConsumerFactory<String,User> userConsumerFactory(){
+        Map<String,Object> configs = new HashMap<>();
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"172.23.239.133:9092");
+        configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG,"kafkauserconsumer");
+
+
+        return new DefaultKafkaConsumerFactory<>(configs,new StringDeserializer(),new org.springframework.kafka.support.serializer.JsonDeserializer<>((User.class)));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, User> kafkaUserListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String,User> factory = new ConcurrentKafkaListenerContainerFactory<String,User>();
+        factory.setConsumerFactory(userConsumerFactory());
+        return factory;
+    }
+}
 

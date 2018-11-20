@@ -17,68 +17,70 @@ public class FillUpData {
         LOGGER.info("\n\ninside fillupdata================================================\n\n");
         JSONObject obj = null;
         try {
-            obj = new JSONObject(
-                    "{" +
-                            " \"@context\": \"http://schema.org\"," +
-                            " \"@type\": \"MedicalCondition\"," +
-                            " \"alternateName\": \"angina pectoris\"," +
-                            " \"associatedAnatomy\": {" +
-                            "   \"@type\": \"AnatomicalStructure\"," +
-                            "   \"name\": \"heart\"" +
-                            " }," +
-                            " \"cause\": [" +
-                            "   {" +
-                            "     \"@type\": \"MedicalCause\"," +
-                            "     \"name\": \"atherosclerosis\"" +
-                            "   }," +
-                            "   {" +
-                            "     \"@type\": \"MedicalCause\"," +
-                            "     \"name\": \"spasms of the epicardial artery\"" +
-                            "   }" +
-                            " ]," +
-                            " \"code\": {" +
-                            "   \"@type\": \"MedicalCode\"," +
-                            "   \"code\": \"413\"," +
-                            "   \"codingSystem\": \"ICD-9\"" +
-                            " }," +
-                            " \"differentialDiagnosis\": {" +
-                            "   \"distinguishingSign\": [" +
-                            "     {" +
-                            "       \"@type\": \"MedicalSymptom\"," +
-                            "       \"name\": \"chest pain lasting at least 10 minutes at rest\"" +
-                            "     }," +
-                            "     {" +
-                            "       \"@type\": \"MedicalSymptom\"," +
-                            "       \"name\": \"repeated episodes of chest pain at rest lasting 5 or more minutes\"" +
-                            "     }," +
-                            "     {" +
-                            "       \"@type\": \"MedicalSymptom\"," +
-                            "       \"name\": \"an accelerating pattern of chest discomfort (episodes that are more frequent, severe, longer in duration, and precipitated by minimal exertion)\"" +
-                            "     }" +
-                            "   ]" +
-                            "" +
-                            " }," +
-                            " \"possibleTreatment\":[" +
-                            "   {\"@type\":\"Drug\"," +
-                            "     \"name\":\"Cavlam-650\"," +
-                            "     \"DoseSchedule\":[" +
-                            "       {\"doseUnit\":\"650mg\"}," +
-                            "       {\"frequency\":\"thrice daily\"}" +
-                            "     ]" +
-                            "   }," +
-                            "   {\"@type\":\"Drug\"," +
-                            "     \"name\":\"Paracetamol\"," +
-                            "     \"DoseSchedule\":[" +
-                            "       {\"doseUnit\":\"500mg\"}," +
-                            "       {\"frequency\":\"twice daily\"}" +
-                            "     ]" +
-                            "   }" +
-                            " ]" +
-                            "}"
+            obj = new JSONObject(taggedKeywords.toString()
+//                    "{" +
+//                            " \"@context\": \"http://schema.org\"," +
+//                            " \"@type\": \"MedicalCondition\"," +
+//                            " \"alternateName\": \"angina pectoris\"," +
+//                            " \"associatedAnatomy\": {" +
+//                            "   \"@type\": \"AnatomicalStructure\"," +
+//                            "   \"name\": \"heart\"" +
+//                            " }," +
+//                            " \"cause\": [" +
+//                            "   {" +
+//                            "     \"@type\": \"MedicalCause\"," +
+//                            "     \"name\": \"atherosclerosis\"" +
+//                            "   }," +
+//                            "   {" +
+//                            "     \"@type\": \"MedicalCause\"," +
+//                            "     \"name\": \"spasms of the epicardial artery\"" +
+//                            "   }" +
+//                            " ]," +
+//                            " \"code\": {" +
+//                            "   \"@type\": \"MedicalCode\"," +
+//                            "   \"code\": \"413\"," +
+//                            "   \"codingSystem\": \"ICD-9\"" +
+//                            " }," +
+//                            " \"differentialDiagnosis\": {" +
+//                            "   \"distinguishingSign\": [" +
+//                            "     {" +
+//                            "       \"@type\": \"MedicalSymptom\"," +
+//                            "       \"name\": \"chest pain lasting at least 10 minutes at rest\"" +
+//                            "     }," +
+//                            "     {" +
+//                            "       \"@type\": \"MedicalSymptom\"," +
+//                            "       \"name\": \"repeated episodes of chest pain at rest lasting 5 or more minutes\"" +
+//                            "     }," +
+//                            "     {" +
+//                            "       \"@type\": \"MedicalSymptom\"," +
+//                            "       \"name\": \"an accelerating pattern of chest discomfort (episodes that are more frequent, severe, longer in duration, and precipitated by minimal exertion)\"" +
+//                            "     }" +
+//                            "   ]" +
+//                            "" +
+//                            " }," +
+//                            " \"possibleTreatment\":[" +
+//                            "   {\"@type\":\"Drug\"," +
+//                            "     \"name\":\"Cavlam-650\"," +
+//                            "     \"DoseSchedule\":[" +
+//                            "       {\"doseUnit\":\"650mg\"}," +
+//                            "       {\"frequency\":\"thrice daily\"}" +
+//                            "     ]" +
+//                            "   }," +
+//                            "   {\"@type\":\"Drug\"," +
+//                            "     \"name\":\"Paracetamol\"," +
+//                            "     \"DoseSchedule\":[" +
+//                            "       {\"doseUnit\":\"500mg\"}," +
+//                            "       {\"frequency\":\"twice daily\"}" +
+//                            "     ]" +
+//                            "   }" +
+//                            " ]" +
+//                            "}"
             );
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        LOGGER.info("******####******\n\nJSONObject:-\n{}\n\n*****####*****", obj);
 
         for (Map.Entry<String,String> entry : taggedKeywords.entrySet()) {
             if(entry.getValue().compareTo("disease")==0) {

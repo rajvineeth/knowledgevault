@@ -28,6 +28,7 @@ public class KafkaConsumer {
         LOGGER.info("consumed message: {}",INPUT.toString());
         processor = new Processor();
         JSONObject obj = FillUpData.fill(processor.paraProcessing(INPUT.getText()));
+        LOGGER.info("******####******\n\nJSONObject:-\n{}\n\n*****####*****", obj);
         producer.post(new JSONld(obj));
 
         processor = null;
