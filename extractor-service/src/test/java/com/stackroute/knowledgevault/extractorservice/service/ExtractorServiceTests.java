@@ -29,6 +29,7 @@ public class ExtractorServiceTests {
 
     @Before
     public void setUp() {
+        files.add(new File("./src/main/resources/Doc/from23final.pdf"));
         files.add(new File("./src/main/resources/Doc/fakie/README.md"));
         files.add(new File("./src/main/resources/Doc/fakie/JavaScript_Evaluation_Exercise_1.odt"));
         files.add(new File("./src/main/resources/Doc/fakie/Untitled Document.MD"));
