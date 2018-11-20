@@ -28,9 +28,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByusername(email);
     }
 
-    /*Kafka Listener*/
-   /* @KafkaListener(groupId = "kafkauserconsumer", topics = "login", containerFactory = "kafkaUserListenerContainerFactory")
+    @KafkaListener(groupId = "kafkauserconsumer", topics = "login", containerFactory = "kafkaUserListenerContainerFactory")
     public void getUserFrmTopic(@Payload User user) {
         userRepository.save(user);
-    }*/
+    }
 }

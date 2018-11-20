@@ -24,7 +24,7 @@ public class KafkaConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
     List list;
 
-    @KafkaListener(topics="extracted2",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
+    @KafkaListener(topics="extracted",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(ExtractedFileData extractedFileData){
        Document document = new Document(extractedFileData.getId(), extractedFileData.getContent());
         list = paraTokenizer.tokenizePara(document);

@@ -23,6 +23,7 @@ public class StopwordRemoval {
         try(BufferedReader br = new BufferedReader(new FileReader(stopWordsFilename))) {
             String line = br.readLine();
 
+
             while (line != null) {
                 stopWords.add(line);
                 line = br.readLine();

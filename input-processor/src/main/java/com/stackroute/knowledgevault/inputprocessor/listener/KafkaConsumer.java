@@ -1,58 +1,41 @@
 package com.stackroute.knowledgevault.inputprocessor.listener;
 
 import com.stackroute.knowledgevault.domain.Input;
-import com.stackroute.knowledgevault.domain.Word;
-import edu.stanford.nlp.simple.Document;
-import edu.stanford.nlp.simple.Sentence;
+import com.stackroute.knowledgevault.domain.JSONld;
+import com.stackroute.knowledgevault.inputprocessor.utilities.FillUpData;
+import com.stackroute.knowledgevault.inputprocessor.utilities.Processor;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class KafkaConsumer {
 
-    private Input input;
-    private List<Sentence> sentences;
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
+
+    @Autowired
+    private KafkaProducer producer;
+
+    @Autowired
+    private Processor processor;
+
 
     @KafkaListener(topics="kafka_example_jsonh",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(Input INPUT){
+        LOGGER.info("consumed message: {}",INPUT.toString());
+        processor = new Processor();
+        JSONObject obj = FillUpData.fill(processor.paraProcessing(INPUT.getText()));
+        LOGGER.info("******####******\n\nJSONObject:-\n{}\n\n*****####*****", obj);
+        producer.post(new JSONld(obj));
 
-        List<Word> list = tokenize(INPUT);
+        processor = null;
+
+        LOGGER.info("producer message: hey !! i sent the message");
+
 
     }
 
-    public List tokenize(Input input) {
-        int sentCount = 1;
-        int wordCount;
-
-        List<Word> words = new ArrayList<>();
-
-        this.input = input;
-        Document document = new Document(input.getText());
-        this.sentences = document.sentences();
-
-        for (Sentence sentence : this.sentences) {
-            wordCount = 1;
-
-            List<String> tokens = sentence.words();
-            List<String> lemmas = sentence.lemmas();
-            List<String> posTags = sentence.posTags();
-
-            for (int i = 0; i < tokens.size(); i++) {
-                words.add(new Word(sentCount, wordCount++, tokens.get(i), lemmas.get(i), posTags.get(i)));
-            }
-            sentCount++;
-        }
-//        LOGGER.info("List of words: {}",words);
-        return words;
-    }
-
-    public Input getInput() {
-        return this.input;
-    }
 }

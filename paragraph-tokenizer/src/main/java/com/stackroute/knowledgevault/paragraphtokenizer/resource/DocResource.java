@@ -19,7 +19,7 @@ public class DocResource {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    private static final String TOPIC = "cgi4";
+    private static final String TOPIC = "para-tokens";
 
     public String post(List<Document> list) {
         for (Document doc : list){

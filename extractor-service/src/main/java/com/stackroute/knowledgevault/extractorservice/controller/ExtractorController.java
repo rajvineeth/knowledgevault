@@ -27,7 +27,7 @@ public class ExtractorController {
 
     private static final String TOPIC = "extracted";
 
-    private String initialPath = "/home/cgi/Documents/knowledge-vault/extractor-service/src/main/resources/";
+    private String initialPath = "/knowledge-vault/extractor-service/src/main/resources/";
 
     /* Fetches all the files from the specified folder in path */
     @GetMapping("{path}")
@@ -102,7 +102,6 @@ public class ExtractorController {
                     data = service.extractOneFile(instance);
 
                     kafkaTemplate.send(TOPIC, data);
-                    kafkaTemplate.send("extracted2",data);
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
                 }

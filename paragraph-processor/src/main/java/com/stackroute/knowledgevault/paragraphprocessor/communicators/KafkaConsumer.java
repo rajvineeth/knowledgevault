@@ -28,7 +28,7 @@ public class KafkaConsumer {
      * This method consumes the data for which it is listening kafka cluster to
      * @param: the wanted message
      */
-    @KafkaListener(topics="cgi4",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
+    @KafkaListener(topics="para-tokens",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
     public void consumejson(Document data){
         LOGGER.info("consumed message: {}",data.toString());
         pst = new Processor();
