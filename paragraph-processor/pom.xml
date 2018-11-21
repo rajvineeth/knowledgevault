@@ -49,6 +49,11 @@
 			<classifier>models</classifier> <!--  will get the dependent domain jars -->
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 			<groupId>commons-io</groupId>
