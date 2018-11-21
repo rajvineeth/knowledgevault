@@ -59,21 +59,21 @@ services:
   #    - zookeeper
   #    restart: always
 
-  document-identifier:
-    image: document-identifier:v1
-    build: document-identifier/
-    #    restart: always
-    container_name: "document-identifier"
-    network_mode: host
-    depends_on:
-    - kafka
-    - mongodb
-    volumes:
-    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
-    ports:
-    - "8080:8080"
-    expose:
-    - "8080"
+#  document-identifier:
+#    image: document-identifier:v1
+#    build: document-identifier/
+#    #    restart: always
+#    container_name: "document-identifier"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    - mongodb
+#    volumes:
+#    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
+#    ports:
+#    - "8080:8080"
+#    expose:
+#    - "8080"
 
 #  mongodb:
 #    image: mongo:3.2-jessie
@@ -120,6 +120,8 @@ services:
     restart: always
     container_name: "paragraph-processor"
     network_mode: host
+    volumes:
+    -  '/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
     depends_on:
     - kafka
     ports:

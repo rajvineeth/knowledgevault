@@ -1,5 +1,0 @@
-"The quick red fox jumped over the lazy brown dogs.",
-"Mary had a little lamb whose fleece was white as snow.",
-"Moby Dick is a story of a whale and a man obsessed.",
-"The robber wore a black fleece jacket and a baseball cap.",
-"The English Springer Spaniel is the best of all dogs."
