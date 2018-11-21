@@ -70,8 +70,8 @@ public class Convertor {
         MedicalCondition medicalCondition=readJsonld.getMedicalCondition(root);
         Anatomy anatomy=readJsonld.getAnatomy(root);
         List<MedicalSymptom> medicalSymptomList =readJsonld.getSymptoms(root);
-        medicalGraphService.populate(1L,medicalCondition,anatomy, medicalSymptomList);
-        //medicalGraphService.makegraph(1,medicalCondition,anatomy,medicalSymptomList);
+        //medicalGraphService.populate(1L,medicalCondition,anatomy, medicalSymptomList);
+        medicalGraphService.makegraph(1,medicalCondition,anatomy,medicalSymptomList);
 
     }
     @GetMapping("/{input}")

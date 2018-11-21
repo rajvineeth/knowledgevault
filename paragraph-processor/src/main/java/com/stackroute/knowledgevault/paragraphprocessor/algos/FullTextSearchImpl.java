@@ -48,6 +48,8 @@ public class FullTextSearchImpl implements FullTextSearch {
     private String filesPath;
     private String indexPath;
     private Analyzer analyzer;
+    private IndexWriterConfig config;
+    private IndexWriter indexWriter;
 
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
     public static final String CONTENTS = "content";
@@ -86,10 +88,9 @@ public class FullTextSearchImpl implements FullTextSearch {
                 LOGGER.info("already indexed..");
                 return "already indexed...";
             }
-            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,this.analyzer);
-            IndexWriter indexWriter = new IndexWriter(dir,config);
+            this.config = new IndexWriterConfig(Version.LUCENE_CURRENT,this.analyzer);
             File repo = new File(filesPath);
-
+            this.indexWriter = new IndexWriter(dir,config);
             File[] resources = repo.listFiles();
             int id=0;
             for(File f: resources) {
@@ -103,13 +104,15 @@ public class FullTextSearchImpl implements FullTextSearch {
                 doc.add(new Field(CONTENTS,reader,Field.TermVector.WITH_POSITIONS_OFFSETS));
                 indexWriter.addDocument(doc);
                 reader.close();
+                this.indexWriter.commit();
             }
-            indexWriter.close();
+            this.indexWriter.close();
+
 
             LOGGER.info("indexing complete....");
         }
         catch(Exception e) {
-            LOGGER.error(String.valueOf(e.getMessage()));
+//            LOGGER.error(String.valueOf(e.getMessage()));
             return "failure";
         }
         return "success";
@@ -153,8 +156,8 @@ public class FullTextSearchImpl implements FullTextSearch {
             }
         }
         catch(Exception e) {
-            e.printStackTrace();
-            LOGGER.debug(e.getMessage());
+//            e.printStackTrace();
+//            LOGGER.debug(e.getMessage());
             return Collections.singletonList("something went wrong..");
         }
 
@@ -212,7 +215,7 @@ public class FullTextSearchImpl implements FullTextSearch {
             iReader.close();
         }
         catch (Exception e) {
-            LOGGER.debug(e.getMessage());
+//            LOGGER.debug(e.getMessage());
         }
 //        for(int i=0;i<matrix.length;i++) {
 //            for(int j=0;j<matrix[i].length;j++) LOGGER.info("score in Document{} is : {}",j+1,matrix[i][j]);
