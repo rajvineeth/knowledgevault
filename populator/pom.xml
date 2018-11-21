@@ -21,7 +21,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+<<<<<<< HEAD
+		<neo4j.version>3.1.4</neo4j.version>
+=======
         <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+>>>>>>> 4fbc755613cd410ea0b19b9fd49c04e15c9971f1
 	</properties>
 
 	<dependencies>
@@ -30,6 +34,28 @@
 			<!--<artifactId>spring-data-neo4j</artifactId>-->
 			<!--<version>5.1.2.RELEASE</version>-->
 		<!--</dependency>-->
+	<dependency>
+		<groupId>org.neo4j</groupId>
+		<artifactId>neo4j-jdbc-driver</artifactId>
+		<version>3.4.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.data</groupId>
+		<artifactId>spring-data-releasetrain</artifactId>
+		<version>Lovelace-SR2</version>
+		<scope>import</scope>
+		<type>pom</type>
+	</dependency>
+	<dependency>
+		<groupId>org.neo4j.driver</groupId>
+		<artifactId>neo4j-java-driver</artifactId>
+		<version>1.6.2</version>
+	</dependency>
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j-cypher-dsl</artifactId>
+			<version>1.7</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-neo4j</artifactId>
@@ -81,6 +107,18 @@
             <version>1.18.2</version>
             <scope>provided</scope>
         </dependency>
+<<<<<<< HEAD
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+		</dependency>
+=======
 
         <dependency>
             <groupId>org.springframework.kafka</groupId>
@@ -94,6 +132,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>-->
+>>>>>>> 4fbc755613cd410ea0b19b9fd49c04e15c9971f1
 	</dependencies>
 
 	<dependencyManagement>

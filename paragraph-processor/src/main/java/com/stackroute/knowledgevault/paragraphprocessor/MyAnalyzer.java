@@ -36,7 +36,7 @@ public class MyAnalyzer extends Analyzer {
         StandardTokenizer st = new StandardTokenizer(reader);
         TokenStream filter = new StandardFilter(st);
         filter = new LowerCaseFilter(filter);
-        filter = new SnowballFilter(filter,"English");
+//        filter = new SnowballFilter(filter,"English");
         return new TokenStreamComponents(st,filter);
     }
 }

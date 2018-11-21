@@ -11,6 +11,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.*;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.search.spans.SpanTermQuery;
@@ -78,7 +79,7 @@ public class FullTextSearchImpl implements FullTextSearch {
     @Override
     public String indexer() {
         LOGGER.info("creating indices....");
-        this.analyzer = new StandardAnalyzer();
+        this.analyzer = new MyAnalyzer();
         try {
             Directory dir = FSDirectory.open(new File(indexPath));
             if(Files.exists(Paths.get(indexPath))) {
@@ -128,6 +129,9 @@ public class FullTextSearchImpl implements FullTextSearch {
         try {
             IndexReader iReader = IndexReader.open(FSDirectory.open(new File(indexPath)));
             IndexSearcher searcher = new IndexSearcher(iReader);
+
+            QueryParser queryParser = new QueryParser(CONTENTS, this.analyzer);
+            queryParser.setDefaultOperator(QueryParser.Operator.OR);
 
             SpanQuery query = new SpanTermQuery(new Term(CONTENTS, data));
             TopDocs results = searcher.search(query,10);

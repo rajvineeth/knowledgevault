@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @Data
@@ -13,10 +14,11 @@ import org.neo4j.ogm.annotation.NodeEntity;
 @Builder
 @NodeEntity
 public class Treatment {
+
     @Id
-    private Long treatmentId;
-    private String type;
+    @Index(unique=true, primary=true)
     private String treatmentName;
+    private String type;
     private String doseUnit;
     private String frequency;
 

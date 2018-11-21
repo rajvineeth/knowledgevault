@@ -1,9 +1,6 @@
 package com.stackroute.knowledgevault.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -13,8 +10,14 @@ import org.neo4j.ogm.annotation.NodeEntity;
 @AllArgsConstructor
 @Builder
 @NodeEntity
-public class Structure {
+public class MedicalSymptom {
     @Id
     @Index(unique=true, primary=true)
+    private String symptomName;
     private String type;
+
+//    public MedicalSymptom( String symptomName,String type) {
+//        this.type = type;
+//        this.symptomName = symptomName;
+//    }
 }

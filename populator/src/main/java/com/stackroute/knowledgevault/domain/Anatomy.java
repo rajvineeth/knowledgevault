@@ -1,10 +1,8 @@
 package com.stackroute.knowledgevault.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @Data
@@ -13,9 +11,14 @@ import org.neo4j.ogm.annotation.NodeEntity;
 @Builder
 @NodeEntity
 public class Anatomy {
-    @Id
-    private Long anatomyId;
-    private String type;
-    private String anatomyName;
 
+    @Id
+    @Index(unique=true, primary=true)
+    private String anatomyName;
+    private String type;
+
+//    public Anatomy(String anatomyName,String type) {
+//        this.type = type;
+//        this.anatomyName = anatomyName;
+//    }
 }
