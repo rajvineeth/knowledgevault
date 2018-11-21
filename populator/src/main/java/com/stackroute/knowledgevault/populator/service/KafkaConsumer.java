@@ -15,7 +15,7 @@ public class KafkaConsumer {
     @Autowired
     MedicalGraphService medicalGraphService;
 
-    @KafkaListener(topics="prod3",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
+    @KafkaListener(topics="prod2",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
     public void consumejson(JsonLDObject res){
         System.out.println("consumed message"+res.toString());
         int id=res.getId();
