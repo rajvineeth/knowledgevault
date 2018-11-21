@@ -183,8 +183,8 @@ public class FullTextSearchImpl implements FullTextSearch {
 
         String prevFilePath = getFilesPath();
         String prevIndexPath = getIndexPath();
-        setFilesPath("src/main/java/com/stackroute/knowledgevault/assets/medicalRepositories");
-        setIndexPath("src/main/java/com/stackroute/knowledgevault/assets/repoIndices");
+        setFilesPath("/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/medicalRepositories");
+        setIndexPath("/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/repoIndices");
 
         indexer();
         List<String> keywords = new ArrayList<>();
