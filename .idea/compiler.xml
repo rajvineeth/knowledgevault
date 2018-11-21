@@ -8,21 +8,30 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="eureka-registry" />
-        <module name="movie-cruiser-app" />
+        <module name="knowledge-vault-frontend" />
+        <module name="user-authentication-service" />
+        <module name="user-registration-service" />
         <module name="zuulgateway" />
-      </profile>
-      <profile name="Annotation profile for Unknown" enabled="true">
-        <sourceOutputDir name="../generated-sources/annotations" />
-        <sourceTestOutputDir name="../generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="maven-archiver" />
-        <module name="maven-archiver (1)" />
-        <module name="maven-archiver (2)" />
-        <module name="maven-archiver (3)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="maven-archiver (2)" target="1.5" />
+      <module name="config-server" target="8" />
+      <module name="eureka-registry" target="8" />
+      <module name="knowledge-vault-frontend" target="8" />
+      <module name="knowledge-vault-parent" target="8" />
+      <module name="user-authentication-service" target="8" />
+      <module name="user-registration-service" target="8" />
+      <module name="zuulgateway" target="8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="config-server" options="-parameters" />
+      <module name="eureka-registry" options="-parameters" />
+      <module name="knowledge-vault-frontend" options="-parameters" />
+      <module name="user-authentication-service" options="-parameters" />
+      <module name="user-registration-service" options="-parameters" />
+      <module name="zuulgateway" options="-parameters" />
+    </option>
   </component>
 </project>

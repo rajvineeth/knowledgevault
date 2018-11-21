@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>com.stackroute</groupId>
+    <artifactId>knowledge-vault-parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>knowledge-vault-parent</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+    <modules>
+        <module>knowledge-vault-frontend</module>
+        <module>user-registration-service</module>
+        <module>eureka-registry</module>
+        <module>zuulgateway</module>
+        <module>user-authentication-service</module>
+	    <module>config-server</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.0.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+            <scope>provided</scope>
+        </dependency>
+<!--        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <!--<version>0.5.5.201112152213</version>-->
+            <version>0.8.2</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--&lt;!&ndash; Import dependency management from Spring Boot &ndash;&gt;-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-dependencies</artifactId>-->
+            <!--<version>2.0.6.RELEASE</version>-->
+            <!--<type>pom</type>-->
+            <!--<scope>import</scope>-->
+        <!--</dependency>-->
+    </dependencies>
+    <!--<dependencyManagement>-->
+        <!--<dependencies>-->
+            <!--<dependency>-->
+                <!--&lt;!&ndash; Import dependency management from Spring Boot &ndash;&gt;-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-dependencies</artifactId>-->
+                <!--<version>2.0.6.RELEASE</version>-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            <!--</dependency>-->
+        <!--</dependencies>-->
+    <!--</dependencyManagement>-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.21.0</version>
+                <configuration><testFailureIgnore>true</testFailureIgnore></configuration>
+            </plugin>
+            <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+                <!--<version>0.5.5.201112152213</version>-->
+                <version>0.8.2</version>
+            <configuration>
+                <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
+                <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>jacoco-initialize</id>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>jacoco-site</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        </plugins>
+    </build>
+</project>

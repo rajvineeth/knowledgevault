@@ -1,6 +1,6 @@
-FROM openjdk:10
+FROM openjdk:8
 
-ADD ./target/zuulgateway-0.0.1-SNAPSHOT.jar /usr/src/zuulgateway-0.0.1-SNAPSHOT.jar
+ADD ./target/zuulgateway-1.0.0.jar /usr/src/zuulgateway-1.0.0.jar
 EXPOSE 8081
 WORKDIR usr/src
-ENTRYPOINT ["java","-jar","zuulgateway-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","zuulgateway-1.0.0.jar"]

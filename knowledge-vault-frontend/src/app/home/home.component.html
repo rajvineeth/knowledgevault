@@ -1,0 +1,58 @@
+﻿<body>
+        <nav class="navbar navbar-dark bg-dark mb-5">
+                <!-- <a class="navbar-brand" href="/"></a> -->
+                <div class="navbar-expand mr-auto">
+                   <div class="navbar-nav">
+             
+                  </div>
+                </div>
+                <div class="navbar-expand ml-auto navbar-nav">
+                  <div class="navbar-nav">
+             
+                   <div> <p class=" btn btn-success my-3 my-sm-1">Hi {{currentUser.firstName}}!</p>
+                    </div>
+                    <p><a [routerLink]="['/register']" class="btn btn-outline-success my-3 my-sm-1" >User Profile</a>
+                    </p>
+                    <p><a [routerLink]="['/login']"class="btn btn-outline-success my-2 my-sm-1">Log Out</a></p>
+             
+                  </div>
+                </div>
+              </nav>
+<h1>Hi {{currentUser.firstName}}!</h1>
+<p>You're logged in with Knowledge-Vault !!</p>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+
+  <form ng-submit="myFunc()">
+   <input type="text">
+   <input type="submit">
+  </form>
+  
+  <p>{{myTxt}}</p>
+  
+  <p>This example demonstrates how to run an AngularJS function when a for is submitted.</p>
+  
+  <script>
+  var app = angular.module("myApp", []);
+  app.controller("myCtrl", function($scope) {
+   $scope.myTxt = "You have not yet clicked submit";
+   $scope.myFunc = function () {
+       $scope.myTxt = "You clicked submit!";
+   }
+  });
+  </script>
+  
+  </body>
+
+
+<ul>
+    <li *ngFor="let user of users">
+        
+        <div *ngIf="user.role === 'SME' ">
+        <p>{{user.username}} ({{user.firstName}} {{user.lastName}})</p>
+        <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+        </div>
+    </li>
+</ul>
+<p><a [routerLink]="['/login']">Logout</a></p>
+</body>

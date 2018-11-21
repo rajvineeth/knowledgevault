@@ -1,0 +1,35 @@
+<body>
+        <nav class="navbar navbar-dark bg-dark mb-5">
+                <!-- <a class="navbar-brand" href="/"></a> -->
+                <div class="navbar-expand mr-auto">
+                   <div class="navbar-nav">
+             
+                  </div>
+                </div>
+                <div class="navbar-expand ml-auto navbar-nav">
+                  <div class="navbar-nav">
+             
+                   <div> <p class=" btn btn-success my-3 my-sm-1">Hi {{currentUser.firstName}}!</p>
+                    </div>
+                    <p><a [routerLink]="['/register']" class="btn btn-outline-success my-3 my-sm-1" >User Profile</a>
+                    </p>
+                    <p><a [routerLink]="['/login']"class="btn btn-outline-success my-2 my-sm-1">Log Out</a></p>
+             
+                  </div>
+                </div>
+              </nav>
+<h1>Hi {{currentUser.firstName}}!</h1>
+<p>You're logged in with Knowledge-Vault !!</p>
+<p>You're an user can get information </p>
+<h3>All registered user's:</h3>
+<ul>
+    <li *ngFor="let user of users">
+        
+        <div *ngIf="user.role === 'General User' ">
+        <p>{{user.username}} ({{user.firstName}} {{user.lastName}})</p>
+        <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+        </div>
+    </li>
+</ul>
+<p><a [routerLink]="['/login']">Logout</a></p>
+</body>
