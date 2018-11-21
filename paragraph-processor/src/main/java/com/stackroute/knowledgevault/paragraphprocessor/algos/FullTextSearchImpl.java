@@ -109,7 +109,7 @@ public class FullTextSearchImpl implements FullTextSearch {
             LOGGER.info("indexing complete....");
         }
         catch(Exception e) {
-            LOGGER.error(String.valueOf(e.getMessage()));
+//            LOGGER.error(String.valueOf(e.getMessage()));
             return "failure";
         }
         return "success";
@@ -153,8 +153,8 @@ public class FullTextSearchImpl implements FullTextSearch {
             }
         }
         catch(Exception e) {
-            e.printStackTrace();
-            LOGGER.debug(e.getMessage());
+//            e.printStackTrace();
+//            LOGGER.debug(e.getMessage());
             return Collections.singletonList("something went wrong..");
         }
 

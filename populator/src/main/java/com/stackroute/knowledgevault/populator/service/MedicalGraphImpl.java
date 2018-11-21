@@ -37,22 +37,22 @@ public class MedicalGraphImpl implements MedicalGraphService {
     public void populate(Long id, MedicalCondition medicalCondition, Anatomy anatomy, List<MedicalSymptom> medicalSymptomList){
 
 
-        medicalConditionService.saveCondition(medicalCondition);
-        anatomyService.saveAnatomy(anatomy);
-        List<MTR> mtrList = mtrRepo.getRelations(medicalCondition.getType(), medicalSymptomList.get(0).getType());
-        //List<MTR> mtrSAList=mtrRepo.getRelations()
-        for(MedicalSymptom medicalSymptom : medicalSymptomList) {
-            symptomService.saveSymptom(medicalSymptom);
-
-            String rel="";
-            for(MTR mtr:mtrList){
-                rel=mtr.getType();
-                QueryDriverService example = new QueryDriverService("bolt://localhost", "neo4j", "123456");
-                example.createRel(medicalCondition,rel,medicalSymptom);
-                example.close();
-            }
-        }
-        medicalCondition.setMedicalSymptomList(medicalSymptomList);
+//        medicalConditionService.saveCondition(medicalCondition);
+//        anatomyService.saveAnatomy(anatomy);
+//        List<MTR> mtrList = mtrRepo.getRelations(medicalCondition.getType(), medicalSymptomList.get(0).getType());
+//        //List<MTR> mtrSAList=mtrRepo.getRelations()
+//        for(MedicalSymptom medicalSymptom : medicalSymptomList) {
+//            symptomService.saveSymptom(medicalSymptom);
+//
+//            String rel="";
+//            for(MTR mtr:mtrList){
+//                rel=mtr.getType();
+//                QueryDriverService example = new QueryDriverService("bolt://localhost", "neo4j", "123456");
+//                example.createRel(medicalCondition,rel,medicalSymptom);
+//                example.close();
+//            }
+//        }
+//        medicalCondition.setMedicalSymptomList(medicalSymptomList);
     }
     public void makegraph(int id, MedicalCondition medicalCondition, Anatomy anatomy, List<MedicalSymptom> medicalSymptomList){
         anatomyService.saveAnatomy(anatomy);
