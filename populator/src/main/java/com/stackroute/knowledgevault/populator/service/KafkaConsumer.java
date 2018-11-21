@@ -15,7 +15,7 @@ public class KafkaConsumer {
     @Autowired
     MedicalGraphService medicalGraphService;
 
-    @KafkaListener(topics="prod2",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
+    @KafkaListener(topics="prod3",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
     public void consumejson(JsonLDObject res){
         System.out.println("consumed message"+res.toString());
 //        int id=res.getId();
@@ -23,9 +23,9 @@ public class KafkaConsumer {
 //        MedicalCondition medicalCondition=readJsonld.getMedicalCondition(root);
 //        Anatomy anatomy=readJsonld.getAnatomy(root);
 //        List<MedicalSymptom> medicalSymptomList=readJsonld.getSymptoms(root);
-        //medicalGraphService.makegraph(id,medicalCondition,anatomy,medicalSymptomList);
+//        medicalGraphService.makegraph(id,medicalCondition,anatomy,medicalSymptomList);
     }
-    @KafkaListener(topics="kafkaTest",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
+    @KafkaListener(topics="kafkaTest",groupId = "group_json", containerFactory= "userKafkaListenerFactory2")
     public void consumeFromPara(JSONld res){
         System.out.println("consumed message from para"+res.toString());
 //        int id=res.getId();
@@ -33,7 +33,7 @@ public class KafkaConsumer {
 //        MedicalCondition medicalCondition=readJsonld.getMedicalCondition(root);
 //        Anatomy anatomy=readJsonld.getAnatomy(root);
 //        List<MedicalSymptom> medicalSymptomList=readJsonld.getSymptoms(root);
-        //medicalGraphService.makegraph(id,medicalCondition,anatomy,medicalSymptomList);
+//        medicalGraphService.makegraph(id,medicalCondition,anatomy,medicalSymptomList);
     }
 
 }
