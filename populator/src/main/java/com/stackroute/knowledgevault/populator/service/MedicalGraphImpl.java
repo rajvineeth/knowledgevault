@@ -55,19 +55,24 @@ public class MedicalGraphImpl implements MedicalGraphService {
         medicalCondition.setMedicalSymptomList(medicalSymptomList);
     }
     public void makegraph(int id, MedicalCondition medicalCondition, Anatomy anatomy, List<MedicalSymptom> medicalSymptomList){
-        anatomyService.saveAnatomy(anatomy);
-
-        for(MedicalSymptom medicalSymptom : medicalSymptomList) {
-            symptomService.saveSymptom(medicalSymptom);
-            List<MTR> mtrList = mtrRepo.getRelations("MedicalCondition", "MedicalSymptom");
-            String rel="";
-            for(MTR mtr:mtrList){
-                rel=mtr.getType();
-            }
+        if(anatomy!=null) {
+            anatomyService.saveAnatomy(anatomy);
+            medicalCondition.setAnatomy(anatomy);
         }
-        medicalCondition.setMedicalSymptomList(medicalSymptomList);
-        medicalCondition.setAnatomy(anatomy);
-        medicalConditionService.saveCondition(medicalCondition);
+        if(medicalSymptomList!=null) {
+            for (MedicalSymptom medicalSymptom : medicalSymptomList) {
+                symptomService.saveSymptom(medicalSymptom);
+                List<MTR> mtrList = mtrRepo.getRelations("MedicalCondition", "MedicalSymptom");
+                String rel = "";
+                for (MTR mtr : mtrList) {
+                    rel = mtr.getType();
+                }
+            }
+            medicalCondition.setMedicalSymptomList(medicalSymptomList);
+        }
+        if(medicalCondition!=null) {
+            medicalConditionService.saveCondition(medicalCondition);
+        }
     }
 
 }
