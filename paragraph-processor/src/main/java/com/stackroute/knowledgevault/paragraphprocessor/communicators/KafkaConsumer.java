@@ -36,7 +36,7 @@ public class KafkaConsumer {
         String para = data.getText();
         String[] keys = para.trim().split("\\.|\\s+");
         for(String key:keys) {
-            File dictionary = new File("/knowledge-vault/paragraph-processor/assets/taggerResource/");
+            File dictionary = new File("../../knowledge-vault/paragraph-processor/assets/taggerResource/");
             for(File f: dictionary.listFiles()) {
                 try {
                     String txt = FileUtils.readFileToString(f,"UTF-8");

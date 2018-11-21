@@ -104,7 +104,7 @@ services:
     container_name: "paragraph-processor"
     network_mode: host
     volumes:
-    -  '/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
+    -  '../knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
     depends_on:
     - kafka
     ports:
