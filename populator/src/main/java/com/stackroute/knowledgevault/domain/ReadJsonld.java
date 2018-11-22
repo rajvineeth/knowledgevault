@@ -15,14 +15,14 @@ public class ReadJsonld {
         }
         return  null;
     }
-    public Anatomy getAnatomy(Map jsonObject){
+    public AnatomicalStructure getAnatomicalStructure(Map jsonObject){
         Map<String, Object> root =  jsonObject;
         Map<String,String> anatomyMap= (Map<String, String>) root.get("associatedAnatomy");
         if(anatomyMap.get("name")!=null) {
             String anatomyName = anatomyMap.get("name");
             String anatomyType = anatomyMap.get("@type");
-            Anatomy anatomy = new Anatomy(anatomyName, anatomyType);
-            return anatomy;
+            AnatomicalStructure anatomicalStructure = new AnatomicalStructure(anatomyName, anatomyType);
+            return anatomicalStructure;
         }
         return null;
     }

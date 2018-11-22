@@ -13,11 +13,6 @@ import org.neo4j.ogm.annotation.NodeEntity;
 public class MedicalSymptom {
     @Id
     @Index(unique=true, primary=true)
-    private String symptomName;
+    private String name;
     private String type;
-
-//    public MedicalSymptom( String symptomName,String type) {
-//        this.type = type;
-//        this.symptomName = symptomName;
-//    }
 }

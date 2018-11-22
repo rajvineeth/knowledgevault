@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,9 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ParaTokenizerImplTest {
+
+    @Value("${tokenizer_test_folderPath}")
+    private String folder_path;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ParaTokenizerImplTest.class);
 
@@ -32,7 +36,7 @@ public class ParaTokenizerImplTest {
 
     @Test
     public void tokenizePara() throws IOException {
-        String testPath = "/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/resources/forTest";
+        String testPath = folder_path + "forTest";
         String txt = FileUtils.readFileToString(new File(testPath),"UTF-8");
         String[] adsd = txt.trim().split("\\n+");
         Integer id = 21;
@@ -52,7 +56,7 @@ public class ParaTokenizerImplTest {
 
     @Test
     public void tokenizePara2() throws IOException {
-        String testPath = "/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/resources/forTest2";
+        String testPath = folder_path + "forTest2";
         String txt = FileUtils.readFileToString(new File(testPath),"UTF-8");
         String[] adsd = txt.trim().split("\\n+");
         Integer id = 21;
@@ -72,7 +76,7 @@ public class ParaTokenizerImplTest {
 
     @Test
     public void tokenizePara3() throws IOException {
-        String testPath = "/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/resources/forTest3";
+        String testPath = folder_path + "forTest3";
         String txt = FileUtils.readFileToString(new File(testPath),"UTF-8");
         String[] adsd = txt.trim().split("\\n+");
         Integer id = 21;

@@ -4,6 +4,7 @@ import com.stackroute.knowledgevault.domain.Document;
 import com.stackroute.knowledgevault.paragraphtokenizer.listener.KafkaConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,9 @@ import java.util.List;
 
 @Component
 public class DocResource {
+
+    @Value("${production_message}")
+    private String message;
 
     private KafkaTemplate<String, Document> kafkaTemplate;
     private static final Logger LOGGER = LoggerFactory.getLogger(DocResource.class);
@@ -30,6 +34,6 @@ public class DocResource {
             LOGGER.info(doc.toString());
             this.kafkaTemplate.send(TOPIC, doc);
         }
-        return "published successfully";
+        return message;
     }
 }

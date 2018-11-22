@@ -3,6 +3,7 @@ package com.stackroute.knowledgevault.paragraphtokenizer.service;
 import com.stackroute.knowledgevault.domain.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ import java.util.List;
 
 @Component
 public class ParaTokenizerImpl implements ParaTokenizer {
+
+    @Value("${consumed.list}")
+    private String docList;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ParaTokenizerImpl.class);
 
@@ -33,7 +37,7 @@ public class ParaTokenizerImpl implements ParaTokenizer {
             list.add(new Document(document.getId(),arrText[i]));
         }
 
-        LOGGER.info("List of documents: {}", list);
+        LOGGER.info(docList, list);
         return list;
     }
 
