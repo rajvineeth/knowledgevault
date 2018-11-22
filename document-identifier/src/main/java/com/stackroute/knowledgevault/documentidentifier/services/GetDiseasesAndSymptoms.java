@@ -12,14 +12,11 @@ import java.util.logging.Logger;
 
 public class GetDiseasesAndSymptoms {
 
-    @Value("${dictionary.disease}")
-    private String diseaseDictionary;
+    private String diseaseDictionary="/knowledge-vault/document-identifier/DOID.csv";
 
-    @Value("${dictionary.symptom}")
-    private String symptomDictionary;
+    private String symptomDictionary="/knowledge-vault/document-identifier/SYMP.csv";
 
-    @Value("${dictionary.body_parts}")
-    private String bodyPartDictionary;
+    private String bodyPartDictionary="/knowledge-vault/document-identifier/bodypartlist.txt";
 
     private Logger logger;
 

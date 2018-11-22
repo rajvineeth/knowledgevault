@@ -17,12 +17,6 @@ spring:
 kafka:
   port: localhost:9092
 
-dictionary:
-  disease: /knowledge-vault/document-identifier/DOID.csv
-  symptom: /knowledge-vault/document-identifier/SYMP.csv
-  body_parts: /knowledge-vault/document-identifier/bodypartlist.txt
-  stop_words: /knowledge-vault/document-identifier/stopwords.txt
-
 management:
   security:
     enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.

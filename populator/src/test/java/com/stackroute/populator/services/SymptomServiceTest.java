@@ -1,5 +1,6 @@
 package com.stackroute.populator.services;
 
+import com.stackroute.knowledgevault.PopulatorApplication;
 import com.stackroute.knowledgevault.domain.MedicalSymptom;
 import com.stackroute.knowledgevault.populator.repository.SymptomRepo;
 import com.stackroute.knowledgevault.populator.service.SymptomImpl;
@@ -7,9 +8,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;

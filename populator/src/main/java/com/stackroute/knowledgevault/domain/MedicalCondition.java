@@ -19,15 +19,4 @@ public class MedicalCondition {
     @Index(unique=true, primary=true)
     private String name;
     private String type;
-
-    @Relationship(type="associatedAnatomy")
-    private AnatomicalStructure anatomicalStructure;
-    @Relationship(type="distinguishingSign")
-    private List<MedicalSymptom> medicalSymptomList;
-
-    public MedicalCondition(String conditionName,String type){
-        this.type=type;
-        this.name=conditionName;
-    }
-
 }

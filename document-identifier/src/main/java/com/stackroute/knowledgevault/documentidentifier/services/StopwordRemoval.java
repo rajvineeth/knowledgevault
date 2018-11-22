@@ -12,8 +12,8 @@ import java.util.logging.Logger;
  */
 public class StopwordRemoval {
 
-    @Value("${dictionary.stop_words}")
-    private String stopWords;
+
+    private String stopWords="/knowledge-vault/document-identifier/stopwords.txt";
 
     private static Logger logger;
 

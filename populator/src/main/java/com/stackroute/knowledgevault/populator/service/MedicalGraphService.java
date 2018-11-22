@@ -13,9 +13,9 @@ import java.util.List;
 @Service
 public class MedicalGraphService {
     @Autowired
-    MTRRepo mtrRepo;
+    private MTRRepo mtrRepo;
     @Autowired
-    MedicalConditionService medicalConditionService;
+    private MedicalConditionService medicalConditionService;
     @Autowired
     private AnatomyService anatomyService;
     @Autowired
@@ -47,7 +47,8 @@ public class MedicalGraphService {
                 example.createRel(medicalSymptom,rel2,medicalCondition);
 
         }
-        String relAC="",relCA="";
+        String relAC="";
+        String relCA="";
         relAC=mtrAC.getType();
         relCA=mtrCA.getType();
             example.createRel(anatomicalStructure,relAC,medicalCondition);

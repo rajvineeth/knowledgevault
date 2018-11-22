@@ -5,9 +5,6 @@ import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Collection;
-import java.util.List;
-
 public interface StructureRepo extends Neo4jRepository<Structure,String> {
     @Query("MERGE (N:MT { type: {name} })")
     public Structure createMT(@Param("name") String name);

@@ -6,7 +6,9 @@ spring:
             password: 123456
             uri: bolt://localhost
             username: neo4j
-#
+kafka:
+    port: localhost:9092
+
 #eureka:         #tells about the Eureka server details and its refresh time
 #    instance:
 #        leaseRenewalIntervalInSeconds: 1

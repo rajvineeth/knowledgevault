@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class Loaders implements ApplicationListener<ContextRefreshedEvent>{
     private StructureRepo structureRepo;
+    private static final String MEDICALCONDITION="MedicalCondition";
+    private static final String MEDICALSYMPTOM="MedicalSymptom";
+    private static final String ANATOMICALSTRUCTURE="AnatomicalStructure";
     @Autowired
     private MTRRepo mtrRepo;
 
@@ -20,16 +23,16 @@ public class Loaders implements ApplicationListener<ContextRefreshedEvent>{
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
-        structureRepo.createMT("MedicalCondition");
-        structureRepo.createMT("MedicalSymptom");
-        structureRepo.createMT("AnatomicalStructure");
+        structureRepo.createMT(MEDICALCONDITION);
+        structureRepo.createMT(MEDICALSYMPTOM);
+        structureRepo.createMT(ANATOMICALSTRUCTURE);
         structureRepo.createMTR("causedBy");
         structureRepo.createMTR("indicates");
         structureRepo.createMTR("affects");
         structureRepo.createMTR("affectedBy");
-        structureRepo.createR("MedicalSymptom","indicates","MedicalCondition");
-        structureRepo.createR("MedicalCondition","causedBy","MedicalSymptom");
-        structureRepo.createR("MedicalCondition","affects","AnatomicalStructure");
-        structureRepo.createR("AnatomicalStructure","affectedBy","MedicalCondition");
+        structureRepo.createR(MEDICALSYMPTOM,"indicates",MEDICALCONDITION);
+        structureRepo.createR(MEDICALCONDITION,"causedBy",MEDICALSYMPTOM);
+        structureRepo.createR(MEDICALCONDITION,"affects",ANATOMICALSTRUCTURE);
+        structureRepo.createR(ANATOMICALSTRUCTURE,"affectedBy",MEDICALCONDITION);
     }
 }
