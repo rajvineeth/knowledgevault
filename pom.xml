@@ -11,14 +11,10 @@
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
     <modules>
-        <module>config-server</module>
-        <module>eureka-registry</module>
-        <module>zuulgateway</module>
         <module>paragraph-tokenizer</module>
 	    <module>paragraph-processor</module>
         <module>extractor-service</module>
         <module>document-identifier</module>
-        <module>input-processor</module>
         <module>populator</module>
     </modules>
 
@@ -42,10 +38,7 @@
             <version>1.18.2</version>
             <scope>provided</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>-->
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -59,30 +52,11 @@
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <!--<version>0.5.5.201112152213</version>-->
             <version>0.8.2</version>
         </dependency>
-        <!--<dependency>-->
-            <!--&lt;!&ndash; Import dependency management from Spring Boot &ndash;&gt;-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-dependencies</artifactId>-->
-            <!--<version>2.0.6.RELEASE</version>-->
-            <!--<type>pom</type>-->
-            <!--<scope>import</scope>-->
-        <!--</dependency>-->
+
     </dependencies>
-    <!--<dependencyManagement>-->
-        <!--<dependencies>-->
-            <!--<dependency>-->
-                <!--&lt;!&ndash; Import dependency management from Spring Boot &ndash;&gt;-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-dependencies</artifactId>-->
-                <!--<version>2.0.6.RELEASE</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
-        <!--</dependencies>-->
-    <!--</dependencyManagement>-->
+
     <build>
         <plugins>
             <plugin>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FullTextSearchImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Input-Processor</a> &gt; <a href="index.source.html" class="el_package">com.stackroute.knowledgevault.inputprocessor.algos</a> &gt; <span class="el_source">FullTextSearchImpl.java</span></div><h1>FullTextSearchImpl.java</h1><pre class="source lang-java linenums">package com.stackroute.knowledgevault.inputprocessor.algos;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.index.*;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.spans.SpanQuery;
+import org.apache.lucene.search.spans.SpanTermQuery;
+import org.apache.lucene.search.spans.Spans;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.util.Bits;
+import org.apache.lucene.util.Version;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+
+<span class="fc" id="L29">public class FullTextSearchImpl implements FullTextSearch {</span>
+
+    private static String filesPath;
+    private static String indexPath;
+
+<span class="fc" id="L34">    public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);</span>
+    public static final String CONTENTS = &quot;content&quot;;
+
+    @Override
+    public String indexer() {
+<span class="fc" id="L39">        LOGGER.info(&quot;creating indices....&quot;);</span>
+<span class="fc" id="L40">        Analyzer analyzer = new StandardAnalyzer();</span>
+        try {
+<span class="fc" id="L42">            Directory dir = FSDirectory.open(new File(indexPath));</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            if(Files.exists(Paths.get(indexPath))) {</span>
+<span class="fc" id="L44">                LOGGER.info(&quot;already indexed..&quot;);</span>
+<span class="fc" id="L45">                return &quot;already indexed...&quot;;</span>
+            }
+<span class="fc" id="L47">            IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,analyzer);</span>
+<span class="fc" id="L48">            IndexWriter indexWriter = new IndexWriter(dir,config);</span>
+<span class="fc" id="L49">            File repo = new File(filesPath);</span>
+
+<span class="fc" id="L51">            File[] resources = repo.listFiles();</span>
+<span class="fc" id="L52">            int id=0;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            for(File f: resources) {</span>
+<span class="fc" id="L54">                LOGGER.info(&quot;indexing file {}&quot;,f.getCanonicalPath());</span>
+<span class="fc" id="L55">                Document doc = new Document();</span>
+<span class="fc" id="L56">                doc.add(new Field(&quot;path&quot;,f.getPath(), Field.Store.YES, Field.Index.ANALYZED));</span>
+<span class="fc" id="L57">                doc.add(new Field(&quot;id&quot;,String.valueOf(id), Field.Store.YES, Field.Index.ANALYZED));</span>
+<span class="fc" id="L58">                doc.add(new Field(&quot;name&quot;,f.getName(), Field.Store.YES, Field.Index.ANALYZED));</span>
+<span class="fc" id="L59">                id++;</span>
+<span class="fc" id="L60">                Reader reader = new FileReader(f.getCanonicalPath());</span>
+<span class="fc" id="L61">                doc.add(new Field(CONTENTS,reader,Field.TermVector.WITH_POSITIONS_OFFSETS));</span>
+<span class="fc" id="L62">                indexWriter.addDocument(doc);</span>
+<span class="fc" id="L63">                reader.close();</span>
+            }
+<span class="fc" id="L65">            indexWriter.close();</span>
+
+<span class="fc" id="L67">            LOGGER.info(&quot;indexing complete....&quot;);</span>
+        }
+<span class="nc" id="L69">        catch(Exception e) {</span>
+<span class="nc" id="L70">            LOGGER.error(String.valueOf(e.getMessage()));</span>
+<span class="nc" id="L71">            return &quot;failure&quot;;</span>
+<span class="fc" id="L72">        }</span>
+<span class="fc" id="L73">        return &quot;success&quot;;</span>
+    }
+
+    @Override
+    public List&lt;String&gt; search(String data) {
+<span class="nc" id="L78">        LOGGER.info(&quot;searching the keyword: {}&quot;,data);</span>
+<span class="nc" id="L79">        List&lt;String&gt; spanArray = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L80">        List&lt;String&gt; res = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L82">            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(indexPath)));</span>
+<span class="nc" id="L83">            IndexSearcher searcher = new IndexSearcher(iReader);</span>
+
+<span class="nc" id="L85">            SpanQuery query = new SpanTermQuery(new Term(CONTENTS, data));</span>
+<span class="nc" id="L86">            TopDocs results = searcher.search(query,10);</span>
+<span class="nc" id="L87">            Map&lt;Term, TermContext&gt; termContexts = new HashMap&lt;&gt;();</span>
+
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            for (int i = 0; i &lt; results.scoreDocs.length; i++) {</span>
+<span class="nc" id="L90">                ScoreDoc scoreDoc = results.scoreDocs[i];</span>
+            }
+
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            for (AtomicReaderContext atomic : iReader.leaves()) {</span>
+<span class="nc" id="L94">                Bits bitset = atomic.reader().getLiveDocs();</span>
+<span class="nc" id="L95">                Spans spans = query.getSpans(atomic, bitset, termContexts);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                while (spans.next()) {</span>
+<span class="nc" id="L97">                    int docid = atomic.docBase + spans.doc();</span>
+<span class="nc" id="L98">                    String docName = searcher.doc(docid).get(&quot;name&quot;);</span>
+<span class="nc" id="L99">                    spanArray.add(&quot;Doc with name: &quot; + docName + &quot; and location is &quot; + spans.end() + &quot;th word in the document\n&quot;);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">                    if(!res.contains(docName)) res.add(docName);</span>
+<span class="nc" id="L101">                }</span>
+<span class="nc" id="L102">            }</span>
+        }
+<span class="nc" id="L104">        catch(Exception e) {</span>
+<span class="nc" id="L105">            e.printStackTrace();</span>
+<span class="nc" id="L106">            LOGGER.debug(e.getMessage());</span>
+<span class="nc" id="L107">            return Collections.singletonList(&quot;something went wrong..&quot;);</span>
+<span class="nc" id="L108">        }</span>
+
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if(spanArray.isEmpty()) return Collections.singletonList(&quot;not found&quot;);</span>
+<span class="nc" id="L111">        res.add(&quot;found&quot;);</span>
+<span class="nc" id="L112">        return res;</span>
+    }
+
+    @Override
+    public String getIndexPath() {
+<span class="nc" id="L117">        return indexPath;</span>
+    }
+
+    @Override
+    public String getFilesPath() {
+<span class="nc" id="L122">        return filesPath;</span>
+    }
+
+    @Override
+    public void setIndexPath(String path) {
+<span class="fc" id="L127">        indexPath =path;</span>
+
+<span class="fc" id="L129">    }</span>
+
+    @Override
+    public void setFilesPath(String path) {
+<span class="fc" id="L133">        filesPath = path;</span>
+<span class="fc" id="L134">    }</span>
+
+    @Override
+    public List&lt;String&gt; getRelevantTerms(String path, int type) {
+
+<span class="nc" id="L139">        String prevFilePath = getFilesPath();</span>
+<span class="nc" id="L140">        String prevIndexPath = getIndexPath();</span>
+<span class="nc" id="L141">        setFilesPath(&quot;src/main/java/com/stackroute/knowledgevault/inputprocessor/assets/medicalRepositories&quot;);</span>
+<span class="nc" id="L142">        setIndexPath(&quot;src/main/java/com/stackroute/knowledgevault/inputprocessor/assets/repoIndices&quot;);</span>
+
+<span class="nc" id="L144">        indexer();</span>
+<span class="nc" id="L145">        List&lt;String&gt; keywords = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L146">        LOGGER.info(&quot;please wait while we do the muscle-work.....&quot;);</span>
+        Double[][] matrix;
+<span class="nc" id="L148">        TreeMap&lt;Double,String&gt; scoreList = new TreeMap&lt;&gt;(Collections.reverseOrder());</span>
+        try {
+            String[] text;
+<span class="nc bnc" id="L151" title="All 2 branches missed.">            if(type==1)  {</span>
+<span class="nc" id="L152">                File file = new File(path);</span>
+<span class="nc" id="L153">                text = FileUtils.readFileToString(file,&quot;UTF-8&quot;).trim().split(&quot;\\s+&quot;);</span>
+<span class="nc" id="L154">            }</span>
+            else {
+<span class="nc" id="L156">                text = path.trim().split(&quot;\\s+&quot;);</span>
+            }
+<span class="nc" id="L158">            File[] corpus = new File(getFilesPath()).listFiles();</span>
+<span class="nc" id="L159">            matrix = new Double[text.length][corpus.length];</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">            for(int i=0;i&lt;matrix.length;i++) {</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">                for(int j=0;j&lt;matrix[i].length;j++) matrix[i][j] = Double.valueOf(0);</span>
+            }
+<span class="nc" id="L163">            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(getIndexPath())));</span>
+<span class="nc" id="L164">            IndexSearcher searcher = new IndexSearcher(iReader);</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">            for(int i=0;i&lt;text.length;i++) {</span>
+<span class="nc" id="L166">                SpanQuery query = new SpanTermQuery(new Term(CONTENTS,text[i]));</span>
+<span class="nc" id="L167">                TopDocs results = searcher.search(query,10);</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">                for(int j=0;j&lt;results.totalHits;j++) {</span>
+<span class="nc" id="L169">                    String docid = searcher.doc(j).get(&quot;id&quot;);</span>
+<span class="nc" id="L170">                    scoreList.put((double) results.getMaxScore(),text[i]);</span>
+<span class="nc" id="L171">                    matrix[i][Integer.parseInt(docid)] = Double.valueOf(results.scoreDocs[j].score);</span>
+                }
+            }
+<span class="nc" id="L174">            iReader.close();</span>
+        }
+<span class="nc" id="L176">        catch (Exception e) {</span>
+<span class="nc" id="L177">            LOGGER.debug(e.getMessage());</span>
+<span class="nc" id="L178">        }</span>
+//        for(int i=0;i&lt;matrix.length;i++) {
+//            for(int j=0;j&lt;matrix[i].length;j++) LOGGER.info(&quot;score in Document{} is : {}&quot;,j+1,matrix[i][j]);
+//        }
+
+<span class="nc" id="L183">        int cnt=0;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        for (Map.Entry&lt;Double,String&gt; entry : scoreList.entrySet()) {</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">            if (cnt &lt; 30) {</span>
+<span class="nc" id="L186">                keywords.add(entry.getValue());</span>
+<span class="nc" id="L187">                cnt++;</span>
+            }
+<span class="nc" id="L189">        }</span>
+<span class="nc" id="L190">        String res = keywords.toString();</span>
+<span class="nc" id="L191">        LOGGER.info(res);</span>
+
+<span class="nc" id="L193">        setIndexPath(prevIndexPath);</span>
+<span class="nc" id="L194">        setFilesPath(prevFilePath);</span>
+
+<span class="nc" id="L196">        return keywords;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

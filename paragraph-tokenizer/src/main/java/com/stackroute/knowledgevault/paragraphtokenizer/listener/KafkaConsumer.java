@@ -33,7 +33,7 @@ public class KafkaConsumer {
     /*
      * This method consumes data from kafka server and makes call to kafka producer.
      */
-    @KafkaListener(topics="extracted",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
+    @KafkaListener(topics="extracted2",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(ExtractedFileData extractedFileData){
        Document document = new Document(extractedFileData.getId(), extractedFileData.getContent());
         list = paraTokenizer.tokenizePara(document);
