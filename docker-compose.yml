@@ -82,19 +82,6 @@ services:
     expose:
     - "8094"
 
-#  input-processor:
-#    image: input-processor:v1
-#    build:  input-processor/
-#    restart: always
-#    container_name: "input-processor"
-#    network_mode: host
-#    depends_on:
-#    - kafka
-#    ports:
-#    - "8093:8093"
-#    expose:
-#    - "8093"
-
   paragraph-processor:
     image: paragraph-processor:v1
     build: paragraph-processor/
@@ -136,3 +123,16 @@ services:
     - "8067:8067"
     expose:
     - "8067"
+
+#  input-processor:
+#    image: input-processor:v1
+#    build:  input-processor/
+#    restart: always
+#    container_name: "input-processor"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    ports:
+#    - "8093:8093"
+#    expose:
+#    - "8093"
