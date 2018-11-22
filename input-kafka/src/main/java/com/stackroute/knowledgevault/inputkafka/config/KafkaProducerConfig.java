@@ -1,10 +1,9 @@
-package com.stackroute.knowledgevault.inputprocessor.config;
+package com.stackroute.knowledgevault.inputkafka.config;
 
-import com.stackroute.knowledgevault.domain.JSONld;
+import com.stackroute.knowledgevault.domain.UserInput;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
@@ -13,10 +12,9 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
 public class KafkaProducerConfig {
     @Bean
-    public ProducerFactory<String, JSONld> producerFactory() {
+    public ProducerFactory<String, UserInput> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -27,7 +25,8 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, JSONld> kafkaTemplate() {
+    public KafkaTemplate<String, UserInput> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
+
 }
