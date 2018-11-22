@@ -20,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/document")
 public class DocumentController {
+
     @Qualifier("DocumentServiceImpl")
     private DocumentService documentService;
 

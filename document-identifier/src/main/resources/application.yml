@@ -6,12 +6,22 @@
 #            uri: mongodb://127.0.0.1/mydatabase
 server:
   port: 8080
+
 spring:
   data:
     mongodb:
       database: mydatabase
       port: 27017
       uri: mongodb://127.0.0.1/mydatabase
+
+kafka:
+  port: localhost:9092
+
+dictionary:
+  disease: /knowledge-vault/document-identifier/DOID.csv
+  symptom: /knowledge-vault/document-identifier/SYMP.csv
+  body_parts: /knowledge-vault/document-identifier/bodypartlist.txt
+  stop_words: /knowledge-vault/document-identifier/stopwords.txt
 
 management:
   security:

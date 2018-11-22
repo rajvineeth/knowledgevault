@@ -1,9 +1,0 @@
-#
-#
-#
-#spring:
-#  application:
-#    name: input-processor
-#  cloud:
-#    config:
-#      uri: http://localhost:8092

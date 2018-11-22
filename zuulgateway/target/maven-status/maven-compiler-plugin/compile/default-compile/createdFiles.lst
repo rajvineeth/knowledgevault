@@ -1,5 +1,0 @@
-filters/RouteFilter.class
-filters/PreFilter.class
-com/stackroute/knowledgevault/zuulgateway/ZuulgatewayApplication.class
-filters/ErrorFilter.class
-filters/PostFilter.class

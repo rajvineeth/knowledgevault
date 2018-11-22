@@ -7,6 +7,7 @@ import com.stackroute.knowledgevault.paragraphtokenizer.service.ParaTokenizerImp
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,12 @@ public class KafkaConsumer {
     @Autowired
     DocResource docResource;
 
+    @Value("${consumed.list}")
+    private String listMessage;
+
+    @Value("${consumed.message}")
+    private String message;
+
     //to log data on the console
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
     List list;
@@ -37,8 +44,8 @@ public class KafkaConsumer {
     public void consumejson(ExtractedFileData extractedFileData){
        Document document = new Document(extractedFileData.getId(), extractedFileData.getContent());
         list = paraTokenizer.tokenizePara(document);
-        LOGGER.info("list of documents: {}",list.toString());
-        LOGGER.info("i'm in consumer");
+        LOGGER.info(listMessage, list.toString());
+        LOGGER.info(message);
         docResource.post(list);
     }
 }
