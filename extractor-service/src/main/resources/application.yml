@@ -3,9 +3,6 @@ producer:
 server:
     port: 8094
 
-local:
-    file:
-        path: ./src/main/resources/Doc
 #eureka:         #tells about the Eureka server details and its refresh time
 #    instance:
 #        leaseRenewalIntervalInSeconds: 1
