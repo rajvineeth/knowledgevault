@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 @RestController
 @RequestMapping(value = "extractor-service")
 public class ExtractorController {
@@ -88,6 +89,7 @@ public class ExtractorController {
     }
 
     /* Extracts the particular file specified in the path */
+    @SuppressWarnings("deprecation")
     @GetMapping("{path}/extract/{file}")
     public ResponseEntity<?> extractFile(@PathVariable("path") String path, @PathVariable("file") File file) {
 

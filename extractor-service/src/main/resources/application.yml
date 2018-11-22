@@ -5,7 +5,7 @@ server:
 
 local:
     file:
-        path: ./src/main/resources/Doc
+        path: '../knowledge-vault/extractor-service/src/main/resources/'
 #eureka:         #tells about the Eureka server details and its refresh time
 #    instance:
 #        leaseRenewalIntervalInSeconds: 1
