@@ -88,6 +88,7 @@ public class ExtractorController {
     }
 
     /* Extracts the particular file specified in the path */
+    @SuppressWarnings("deprecation")
     @GetMapping("{path}/extract/{file}")
     public ResponseEntity<?> extractFile(@PathVariable("path") String path, @PathVariable("file") File file) {
 
@@ -102,7 +103,9 @@ public class ExtractorController {
                     data = service.extractOneFile(instance);
 
                     kafkaTemplate.send(TOPIC, data);
+
                     kafkaTemplate.send("extracted2", data);
+
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
                 }

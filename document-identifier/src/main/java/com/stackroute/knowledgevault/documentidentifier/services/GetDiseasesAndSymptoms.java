@@ -6,8 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class GetDiseasesAndSymptoms {
+
+    private Logger logger;
 
     public List<String> getDiseases(){
         CSVReader csvReader = new CSVReader();
@@ -21,18 +24,18 @@ public class GetDiseasesAndSymptoms {
     }
 
     public List<String> getBodyParts(){
-        File file = new File("/knowledge-vault/document-identifier/bodypartlist.txt");
+        String listingFolder = "/knowledge-vault/document-identifier/";
+        File file = new File(listingFolder + "bodypartlist.txt");
         List<String> bodyparts = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        try (BufferedReader br = new BufferedReader(new FileReader(file));){
             String st;
             while((st = br.readLine()) != null){
-                if(st.isEmpty() == false)
+                if(!st.isEmpty())
                     bodyparts.add(st);
             }
             return bodyparts;
         }catch (Exception e){
-            e.printStackTrace();
+            logger.info(e.getMessage());
         }
         return bodyparts;
     }

@@ -2,7 +2,6 @@
 package com.stackroute.knowledgevault.documentidentifier.config;
 
 import com.stackroute.knowledgevault.domain.JsonLDObject;
-import com.stackroute.knowledgevault.domain.OutputForDoc;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,6 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Configuration
