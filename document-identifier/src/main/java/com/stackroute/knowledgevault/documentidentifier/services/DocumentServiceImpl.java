@@ -5,8 +5,6 @@ import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import com.stackroute.knowledgevault.domain.JsonLDObject;
 import com.stackroute.knowledgevault.domain.OutputForDoc;
 import com.stackroute.knowledgevault.documentidentifier.repository.DocumentRepository;
-//import edu.stanford.nlp.simple.Document;
-//import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,12 +108,17 @@ public class DocumentServiceImpl implements DocumentService {
         Map<String, Double> sortedMap = sortByValues(weightMap);
 
         Iterator<Map.Entry<String, Double>> itr = sortedMap.entrySet().iterator();
+
         int i=0;
         while(itr.hasNext() && i<=numberOfWords){
             String term = itr.next().getKey().trim();
-            if(!term.isEmpty() && term.length() >=3) {
-                relevantWords.add(term);
-                i++;
+
+            if(!term.isEmpty() && term.length()>4) {
+                Sentence sentence = new Sentence(term);
+                if(sentence.posTag(0).equals("NN")) {
+                    relevantWords.add(term);
+                    i++;
+                }
             }
         }
         return relevantWords;
@@ -129,12 +132,7 @@ public class DocumentServiceImpl implements DocumentService {
 
         List list = new LinkedList(map.entrySet());
         // Defined Custom Comparator here
-        Collections.sort(list, new Comparator() {
-            public int compare(Object o1, Object o2) {
-                return ((Comparable) ((Map.Entry) (o2)).getValue())
-                        .compareTo(((Map.Entry) (o1)).getValue());
-            }
-        });
+        list.sort((Object o1, Object o2)->(((Comparable)(((Map.Entry)o2).getValue())).compareTo((((Map.Entry)o1).getValue()))));
 
         // Here I am copying the sorted list in HashMap
         // using LinkedHashMap to preserve the insertion order
@@ -153,8 +151,6 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public List<OutputForDoc> processDoc(List<ExtractedFileData> extractedFileData, int n) {
         List<List<String>> docs = new ArrayList<>();
-//        StopwordRemoval stopWordRemoval = new StopwordRemoval();
-//        List<Document> documents = convertStringToDocument(extractedFileData);
         List<OutputForDoc> relevantTerms = new ArrayList<>();
 
         for(ExtractedFileData extractedFileData1: extractedFileData){
@@ -162,16 +158,6 @@ public class DocumentServiceImpl implements DocumentService {
             docs.add(terms);
         }
 
-//        for(Document document: documents){
-//            List<String> terms = new ArrayList<>();
-//            for(Sentence sentence: document.sentences()){
-//                for(int i=0;i<sentence.length();i++){
-//                    terms.add(sentence.lemma(i).toLowerCase());
-//                }
-//            }
-//            terms = stopWordRemoval.removeStopwords(terms);
-//            docs.add(terms);
-//        }
         for(int i = 0; i< extractedFileData.size(); i++){
             relevantTerms.add(new OutputForDoc(extractedFileData.get(i).getId(),
                     extractedFileData.get(i).getMetadata(),
@@ -195,14 +181,43 @@ public class DocumentServiceImpl implements DocumentService {
         return documents;
     }
 
+    /*
+    Helper function to retrieve NGrams of the document "extractedFileData". "n" specifies the size of the phrase
+     */
+
     public List<String> getnGrams(ExtractedFileData extractedFileData, int n){
         String content = extractedFileData.getContent().replaceAll("[^\\w\\s\\ ]", "").toLowerCase();
         NGram nGram = new NGram(content,n);
         return nGram.list();
     }
 
+    /*
+    Function that converts List of "OutputForDoc" to "JsonLDObject" based on the following schema:
+        {
+            "differentialDiagnosis": {
+                "distinguishingSign": [
+                    {
+                        "@type": "MedicalSymptom",
+                        "name": "inflammation of meninges",
+                        "symptomkeyword": "inflammation of"
+                    },
+                    {
+                        "@type": "MedicalSymptom",
+                        "name": "inflammation",
+                        "symptomkeyword": "inflammation of"
+                    }
+                ]
+            },
+            "@type": "MedicalCondition",
+            "associatedAnatomy": {},
+            "alternateName": "acute inflammation of lacrimal passage",
+            "keyword": "inflammation of",
+            "@context": "http://schema.org"
+        }
+     */
+
     @Override
-    public List<JsonLDObject> convertTermsToJsonLD(List<OutputForDoc> outputForDocs) {
+    public List<JsonLDObject> getJsonLD(List<OutputForDoc> outputForDocs) {
 
         GetDiseasesAndSymptoms getDiseasesAndSymptoms = new GetDiseasesAndSymptoms();
         List<String> diseases = getDiseasesAndSymptoms.getDiseases();
@@ -211,16 +226,13 @@ public class DocumentServiceImpl implements DocumentService {
         List<JsonLDObject> jsonLDObjects = new ArrayList<>();
 
         for(OutputForDoc documents: outputForDocs){
-//            Map<String, Object> root = new HashMap<>();
-//            root.put("@context","http://schema.org");
-//            root.put("@type", "MedicalCondition");
-            boolean foundDisease = false;
+          boolean foundDisease = false;
             for(String keyword: documents.getKeywords()){
                 Map<String, Object> root = new HashMap<>();
 
 
                 for(String disease: diseases){
-                    if(disease.contains(keyword) || keyword.contains(disease)){
+                    if((disease.contains(keyword) || keyword.contains(disease)) && !disease.isEmpty()){
                         root.put("alternateName", disease);
                         root.put("keyword", keyword);
                         foundDisease = true;
@@ -236,7 +248,7 @@ public class DocumentServiceImpl implements DocumentService {
                 }
                 Map<String, String> Anatomy = new HashMap<>();
                 for(String bodypart: bodyparts){
-                    if(bodypart.contains(keyword) || keyword.contains(bodypart)){
+                    if((bodypart.contains(keyword) || keyword.contains(bodypart)) && !bodypart.isEmpty()){
                         Anatomy.put("@type", "AnatomicalStructure");
                         Anatomy.put("name", bodypart);
                         Anatomy.put("anatomykeyword", keyword);
@@ -246,7 +258,7 @@ public class DocumentServiceImpl implements DocumentService {
                 List<Map<String, Object>> diagnosis = new ArrayList<>();
                 for(String symptom: symptoms){
                     Map<String, Object> tempMap = new HashMap<>();
-                    if(symptom.contains(keyword) || keyword.contains(symptom)){
+                    if((symptom.contains(keyword) || keyword.contains(symptom)) && !symptom.isEmpty()){
                         tempMap.put("@type","MedicalSymptom");
                         tempMap.put("name", symptom);
                         tempMap.put("symptomkeyword", keyword);
@@ -260,7 +272,6 @@ public class DocumentServiceImpl implements DocumentService {
                 jsonLDObjects.add(new JsonLDObject(documents.getId(), root));
 
             }
-            //jsonLDObjects.add(new JsonLDObject(documents.getId(), root));
         }
         return jsonLDObjects;
     }

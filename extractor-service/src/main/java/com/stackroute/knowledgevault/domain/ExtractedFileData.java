@@ -4,8 +4,6 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
-/*@Setter
-@Getter*/
 public class ExtractedFileData {
 
     private static Integer count = 0;

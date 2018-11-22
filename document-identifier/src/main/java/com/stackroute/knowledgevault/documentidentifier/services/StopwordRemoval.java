@@ -1,5 +1,7 @@
 package com.stackroute.knowledgevault.documentidentifier.services;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
@@ -9,6 +11,9 @@ import java.util.logging.Logger;
  * Helper class to read stopwords from stopwords.txt and remove the stopwords in a document.
  */
 public class StopwordRemoval {
+
+    @Value("${dictionary.stop_words}")
+    private String stopWords;
 
     private static Logger logger;
 
@@ -45,7 +50,7 @@ public class StopwordRemoval {
     public List<String> removeStopwords(List<String> terms){
         List<String> resultingdoc = new ArrayList<>();
 
-        List<String> stopwords = readStopWords("/knowledge-vault/document-identifier/stopwords.txt");
+        List<String> stopwords = readStopWords(stopWords);
 
 
         for(String term: terms){

@@ -4,6 +4,7 @@ import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import com.stackroute.knowledgevault.extractorservice.service.ExtractorService;
 import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -27,7 +28,8 @@ public class ExtractorController {
 
     private static final String TOPIC = "extracted";
 
-    private String initialPath = "/knowledge-vault/extractor-service/src/main/resources/";
+    @Value("${folder.path}")
+    private String initialPath;
 
     /* Fetches all the files from the specified folder in path */
     @GetMapping("{path}")
@@ -88,6 +90,7 @@ public class ExtractorController {
     }
 
     /* Extracts the particular file specified in the path */
+    @SuppressWarnings("deprecation")
     @GetMapping("{path}/extract/{file}")
     public ResponseEntity<?> extractFile(@PathVariable("path") String path, @PathVariable("file") File file) {
 
@@ -102,7 +105,9 @@ public class ExtractorController {
                     data = service.extractOneFile(instance);
 
                     kafkaTemplate.send(TOPIC, data);
+
                     kafkaTemplate.send("extracted2", data);
+
                     responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
                     break;
                 }

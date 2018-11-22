@@ -18,8 +18,6 @@ public class KafkaConsumer {
 
     private Logger logger;
 
-
-
     @Autowired
     private DocumentServiceImpl documentService;
 
@@ -28,7 +26,7 @@ public class KafkaConsumer {
         MongoDb
     */
 
-    @KafkaListener(topics="extracted2",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
+    @KafkaListener(topics="extracted", groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(ExtractedFileData extractedFileData){
         System.out.println("consumed message");
         documentService.saveDocuments(extractedFileData);
