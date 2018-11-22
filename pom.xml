@@ -18,6 +18,9 @@
         <module>user-authentication-service</module>
 	    <module>config-server</module>
         <module>input-kafka</module>
+        <module>input-lemmatize</module>
+        <module>input-tokenize</module>
+        <module>input-postag</module>
     </modules>
 
     <parent>
