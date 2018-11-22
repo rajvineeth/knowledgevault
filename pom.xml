@@ -21,6 +21,7 @@
         <module>input-lemmatize</module>
         <module>input-tokenize</module>
         <module>input-postag</module>
+        <module>input-tagger</module>
     </modules>
 
     <parent>
