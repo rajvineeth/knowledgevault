@@ -2,7 +2,6 @@ package com.stackroute.knowledgevault.documentidentifier.controller;
 
 
 import com.stackroute.knowledgevault.domain.JsonLDObject;
-import com.stackroute.knowledgevault.domain.OutputForDoc;
 import com.stackroute.knowledgevault.documentidentifier.services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,7 +41,7 @@ public class DocumentController {
     @GetMapping()
     public ResponseEntity<?> getAllTerms(){
         ResponseEntity responseEntity;
-        List<JsonLDObject> outputForDocList = documentService.convertTermsToJsonLD(documentService.processDoc(documentService.getAllDocuments(), 2));
+        List<JsonLDObject> outputForDocList = documentService.getJsonLD(documentService.processDoc(documentService.getAllDocuments(), 2));
         for(JsonLDObject object: outputForDocList){
             kafkaTemplate.send(KafkaTopic, object);
         }

@@ -56,6 +56,26 @@ services:
     expose:
     - "8080"
 
+<<<<<<< HEAD
+
+  document-identifier:
+    image: document-identifier:v1
+    build: document-identifier/
+    #    restart: always
+    container_name: "document-identifier"
+    network_mode: host
+    depends_on:
+    - kafka
+    - mongodb
+    volumes:
+    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
+    ports:
+    - "8080:8080"
+    expose:
+    - "8080"
+
+=======
+>>>>>>> f9890a61d7132c3efeb82cc9eddd0b3065d86b3d
   mongodb:
     image: mongo:3.2-jessie
     ports:
