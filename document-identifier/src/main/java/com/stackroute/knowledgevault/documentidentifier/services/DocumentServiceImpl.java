@@ -7,6 +7,8 @@ import com.stackroute.knowledgevault.domain.OutputForDoc;
 import com.stackroute.knowledgevault.documentidentifier.repository.DocumentRepository;
 //import edu.stanford.nlp.simple.Document;
 //import edu.stanford.nlp.simple.Sentence;
+import edu.stanford.nlp.simple.Document;
+import edu.stanford.nlp.simple.Sentence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -88,7 +90,7 @@ public class DocumentServiceImpl implements DocumentService {
 
         LinkedHashMap<String, Double> weightMap = new LinkedHashMap<>();
         List<String> relevantWords = new ArrayList<>();
-        int numberOfWords = 20;
+        int numberOfWords = 40;
 
         double denominator = 0.0;
 
@@ -111,7 +113,7 @@ public class DocumentServiceImpl implements DocumentService {
         int i=0;
         while(itr.hasNext() && i<=numberOfWords){
             String term = itr.next().getKey().trim();
-            if(!term.isEmpty()) {
+            if(!term.isEmpty() && term.length() >=3) {
                 relevantWords.add(term);
                 i++;
             }
@@ -184,14 +186,14 @@ public class DocumentServiceImpl implements DocumentService {
     Helper function to convert List of "ExtractedFileData" to "Document" defined in Stanford Simple NLP
      */
 
-//    @Override
-//    public List<Document> convertStringToDocument(List<ExtractedFileData> extractedFileData) {
-//        List<Document> documents = new ArrayList<>();
-//        for(ExtractedFileData extractedFile : extractedFileData){
-//            documents.add(new Document(extractedFile.getContent()));
-//        }
-//        return documents;
-//    }
+    @Override
+    public List<Document> convertStringToDocument(List<ExtractedFileData> extractedFileData) {
+        List<Document> documents = new ArrayList<>();
+        for(ExtractedFileData extractedFile : extractedFileData){
+            documents.add(new Document(extractedFile.getContent()));
+        }
+        return documents;
+    }
 
     public List<String> getnGrams(ExtractedFileData extractedFileData, int n){
         String content = extractedFileData.getContent().replaceAll("[^\\w\\s\\ ]", "").toLowerCase();
@@ -201,45 +203,64 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public List<JsonLDObject> convertTermsToJsonLD(List<OutputForDoc> outputForDocs) {
-        /*
-            {
-            "@context": "http://schema.org",
-            "@type": "MedicalCondition",
-            "alternateName": "angina pectoris",
-            "associatedAnatomy": {
-                "@type": "AnatomicalStructure",
-                "name": "heart"
-                }
-            }
-         */
+
         GetDiseasesAndSymptoms getDiseasesAndSymptoms = new GetDiseasesAndSymptoms();
         List<String> diseases = getDiseasesAndSymptoms.getDiseases();
+        List<String> symptoms = getDiseasesAndSymptoms.getSymptoms();
         List<String> bodyparts = getDiseasesAndSymptoms.getBodyParts();
         List<JsonLDObject> jsonLDObjects = new ArrayList<>();
+
         for(OutputForDoc documents: outputForDocs){
-            Map<String, Object> root = new HashMap<>();
-            root.put("@context","http://schema.org");
-            root.put("@type", "MedicalCondition");
+//            Map<String, Object> root = new HashMap<>();
+//            root.put("@context","http://schema.org");
+//            root.put("@type", "MedicalCondition");
+            boolean foundDisease = false;
             for(String keyword: documents.getKeywords()){
+                Map<String, Object> root = new HashMap<>();
+
 
                 for(String disease: diseases){
                     if(disease.contains(keyword) || keyword.contains(disease)){
-                        System.out.println(keyword);
                         root.put("alternateName", disease);
+                        root.put("keyword", keyword);
+                        foundDisease = true;
+                        break;
                     }
+                }
+                if(foundDisease){
+                    root.put("@context","http://schema.org");
+                    root.put("@type", "MedicalCondition");
+                    foundDisease = false;
+                }else{
+                    continue;
                 }
                 Map<String, String> Anatomy = new HashMap<>();
                 for(String bodypart: bodyparts){
                     if(bodypart.contains(keyword) || keyword.contains(bodypart)){
                         Anatomy.put("@type", "AnatomicalStructure");
                         Anatomy.put("name", bodypart);
+                        Anatomy.put("anatomykeyword", keyword);
                     }
                 }
+                Map<String, Object> Symptoms = new HashMap<>();
+                List<Map<String, Object>> diagnosis = new ArrayList<>();
+                for(String symptom: symptoms){
+                    Map<String, Object> tempMap = new HashMap<>();
+                    if(symptom.contains(keyword) || keyword.contains(symptom)){
+                        tempMap.put("@type","MedicalSymptom");
+                        tempMap.put("name", symptom);
+                        tempMap.put("symptomkeyword", keyword);
+                        diagnosis.add(tempMap);
+                    }
+                }
+                Symptoms.put("distinguishingSign", diagnosis);
 
                 root.put("associatedAnatomy", Anatomy);
+                root.put("differentialDiagnosis", Symptoms);
+                jsonLDObjects.add(new JsonLDObject(documents.getId(), root));
 
             }
-            jsonLDObjects.add(new JsonLDObject(documents.getId(), root));
+            //jsonLDObjects.add(new JsonLDObject(documents.getId(), root));
         }
         return jsonLDObjects;
     }
