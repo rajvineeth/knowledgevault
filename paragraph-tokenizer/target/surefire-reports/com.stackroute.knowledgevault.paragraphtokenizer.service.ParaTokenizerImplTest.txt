@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.stackroute.knowledgevault.paragraphtokenizer.service.ParaTokenizerImplTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.599 s - in com.stackroute.knowledgevault.paragraphtokenizer.service.ParaTokenizerImplTest

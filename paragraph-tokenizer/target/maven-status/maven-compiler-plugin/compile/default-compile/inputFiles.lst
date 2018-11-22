@@ -1,9 +1,0 @@
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/service/ParaTokenizerImpl.java
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/ParagraphTokenizerApplication.java
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/config/KafkaProducerConfig.java
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/domain/ExtractedFileData.java
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/listener/KafkaConsumer.java
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/domain/Document.java
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/service/ParaTokenizer.java
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/config/KafkaConsumerConfig.java
-/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/java/com/stackroute/knowledgevault/paragraphtokenizer/resource/DocResource.java
