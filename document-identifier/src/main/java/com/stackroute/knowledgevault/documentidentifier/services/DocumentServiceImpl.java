@@ -60,6 +60,7 @@ public class DocumentServiceImpl implements DocumentService {
         }
 
         return Math.log(1 + result);
+        //return result/doc.size();
     }
 
     /*
@@ -110,12 +111,17 @@ public class DocumentServiceImpl implements DocumentService {
         Map<String, Double> sortedMap = sortByValues(weightMap);
 
         Iterator<Map.Entry<String, Double>> itr = sortedMap.entrySet().iterator();
+
         int i=0;
         while(itr.hasNext() && i<=numberOfWords){
             String term = itr.next().getKey().trim();
-            if(!term.isEmpty() && term.length() >=3) {
-                relevantWords.add(term);
-                i++;
+
+            if(!term.isEmpty() && term.length()>4) {
+                Sentence sentence = new Sentence(term);
+                if(sentence.posTag(0).equals("NN")) {
+                    relevantWords.add(term);
+                    i++;
+                }
             }
         }
         return relevantWords;
@@ -220,7 +226,7 @@ public class DocumentServiceImpl implements DocumentService {
 
 
                 for(String disease: diseases){
-                    if(disease.contains(keyword) || keyword.contains(disease)){
+                    if((disease.contains(keyword) || keyword.contains(disease)) && !disease.isEmpty()){
                         root.put("alternateName", disease);
                         root.put("keyword", keyword);
                         foundDisease = true;
@@ -236,7 +242,7 @@ public class DocumentServiceImpl implements DocumentService {
                 }
                 Map<String, String> Anatomy = new HashMap<>();
                 for(String bodypart: bodyparts){
-                    if(bodypart.contains(keyword) || keyword.contains(bodypart)){
+                    if((bodypart.contains(keyword) || keyword.contains(bodypart)) && !bodypart.isEmpty()){
                         Anatomy.put("@type", "AnatomicalStructure");
                         Anatomy.put("name", bodypart);
                         Anatomy.put("anatomykeyword", keyword);
@@ -246,7 +252,7 @@ public class DocumentServiceImpl implements DocumentService {
                 List<Map<String, Object>> diagnosis = new ArrayList<>();
                 for(String symptom: symptoms){
                     Map<String, Object> tempMap = new HashMap<>();
-                    if(symptom.contains(keyword) || keyword.contains(symptom)){
+                    if((symptom.contains(keyword) || keyword.contains(symptom)) && !symptom.isEmpty()){
                         tempMap.put("@type","MedicalSymptom");
                         tempMap.put("name", symptom);
                         tempMap.put("symptomkeyword", keyword);
