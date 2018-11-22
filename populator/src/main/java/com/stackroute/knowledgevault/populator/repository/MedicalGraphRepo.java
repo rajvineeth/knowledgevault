@@ -10,8 +10,8 @@ import org.springframework.data.repository.query.Param;
 public interface MedicalGraphRepo extends Neo4jRepository<MedicalGraph,String> {
 //    @Query("MERGE (N:MedicalCondition { type: {name} })")
 //    public MedicalGraph createMedicalCondition(@Param("name") MedicalCondition medicalCondition);
-//    @Query("MERGE (N:Anatomy { type: {name} })")
-//    public MedicalGraph createAnatomy(@Param("name") Anatomy anatomy);
+//    @Query("MERGE (N:AnatomicalStructure { type: {name} })")
+//    public MedicalGraph createAnatomy(@Param("name") AnatomicalStructure anatomicalStructure);
 //    @Query("MERGE (N:MedicalSymptom { type: {name} })")
 //    public MedicalGraph createSymptom(@Param("name") MedicalSymptom symptom);
     @Query("MATCH (u:MedicalCondition {type:{node1}}), (r:MedicalSymptom {type:{node2}})\n" +

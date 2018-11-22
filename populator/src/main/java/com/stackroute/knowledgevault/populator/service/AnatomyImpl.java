@@ -1,6 +1,6 @@
 package com.stackroute.knowledgevault.populator.service;
 
-import com.stackroute.knowledgevault.domain.Anatomy;
+import com.stackroute.knowledgevault.domain.AnatomicalStructure;
 import com.stackroute.knowledgevault.populator.repository.AnatomyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,13 @@ public class AnatomyImpl implements AnatomyService {
     }
 
     @Override
-    public Anatomy saveAnatomy(Anatomy anatomy) {
-        return anatomyRepo.save(anatomy);
+    public AnatomicalStructure saveAnatomy(AnatomicalStructure anatomicalStructure) {
+        return anatomyRepo.save(anatomicalStructure);
     }
 
     @Override
-    public List<Anatomy> anatomyList() {
-        List<Anatomy> anatomyList = (List)anatomyRepo.findAll();
-        return anatomyList;
+    public List<AnatomicalStructure> anatomyList() {
+        List<AnatomicalStructure> anatomicalStructureList = (List)anatomyRepo.findAll();
+        return anatomicalStructureList;
     }
 }

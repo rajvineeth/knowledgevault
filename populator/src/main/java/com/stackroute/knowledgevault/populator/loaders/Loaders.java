@@ -22,17 +22,17 @@ public class Loaders implements ApplicationListener<ContextRefreshedEvent>{
 
         structureRepo.createMT("MedicalCondition");
         structureRepo.createMT("MedicalSymptom");
-        structureRepo.createMT("Anatomy");
+        structureRepo.createMT("AnatomicalStructure");
         structureRepo.createMTR("causedBy");
         structureRepo.createMTR("indicates");
         structureRepo.createMTR("affects");
         structureRepo.createMTR("affectedBy");
         structureRepo.createR("MedicalSymptom","indicates","MedicalCondition");
         structureRepo.createR("MedicalCondition","causedBy","MedicalSymptom");
-        structureRepo.createR("MedicalCondition","affects","Anatomy");
-        structureRepo.createR("Anatomy","affectedBy","MedicalCondition");
-        System.out.println("rel: "+mtrRepo.getRelations("MedicalCondition","MedicalSymptom").toString()+"len: "+mtrRepo.getRelations("MedicalCondition","MedicalSymptom").size());
-        System.out.println("rel: "+mtrRepo.getRelations("MedicalSymptom","MedicalCondition").toString()+"len: "+mtrRepo.getRelations("MedicalCondition","MedicalSymptom").size());
-        System.out.println("rel: "+mtrRepo.getRelations("Anatomy","MedicalCondition").toString()+"len: "+mtrRepo.getRelations("MedicalCondition","MedicalSymptom").size());
+        structureRepo.createR("MedicalCondition","affects","AnatomicalStructure");
+        structureRepo.createR("AnatomicalStructure","affectedBy","MedicalCondition");
+        System.out.println("rel: "+mtrRepo.getRelation("MedicalCondition","MedicalSymptom").toString());
+        System.out.println("rel: "+mtrRepo.getRelation("MedicalSymptom","MedicalCondition").toString());
+        System.out.println("rel: "+mtrRepo.getRelation("AnatomicalStructure","MedicalCondition").toString());
     }
 }

@@ -10,11 +10,11 @@ import com.stackroute.knowledgevault.populator.repository.StructureRepo;
 import com.stackroute.knowledgevault.populator.service.*;
 import org.neo4j.driver.v1.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 @RestController
@@ -62,16 +62,16 @@ public class Convertor {
         structureRepo.createR(node1,rel,node2);
     }
     @GetMapping("/ra/{input}")
-    public void input(@PathVariable(value="input") String input) throws IOException {
+    public void input(@PathVariable(value="input") String input) throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         InputStream inputStream = new FileInputStream("populator/src/main/Docs/"+input+".json");
         Object jsonObject = JsonUtils.fromInputStream(inputStream);
         Map context = new HashMap();
         Map<String, Object> root = (Map) jsonObject;
         MedicalCondition medicalCondition=readJsonld.getMedicalCondition(root);
-        Anatomy anatomy=readJsonld.getAnatomy(root);
+        AnatomicalStructure anatomicalStructure =readJsonld.getAnatomy(root);
         List<MedicalSymptom> medicalSymptomList =readJsonld.getSymptoms(root);
-        medicalGraphService.populate(1L,medicalCondition,anatomy, medicalSymptomList);
-        //medicalGraphService.makegraph(1,medicalCondition,anatomy,medicalSymptomList);
+        medicalGraphService.populate(1,medicalCondition, anatomicalStructure, medicalSymptomList);
+        //medicalGraphService.makegraph(1,medicalCondition,anatomicalStructure,medicalSymptomList);
 
     }
     @GetMapping("/{input}")
@@ -84,17 +84,17 @@ public class Convertor {
         Object compact = JsonLdProcessor.compact(jsonObject, context, options);
         String symptomName="",symptomType="";
         boolean anatomyPresent=false,causePresent=false,conditionPresent=false,symptomPresent=false,treatmentPresent=false;
-        Anatomy anatomy=null;
+        AnatomicalStructure anatomicalStructure =null;
         Map<String, Object> root = (Map) jsonObject;
         String type=(String) root.get("@type");
         String name=(String)root.get("alternateName");
         Map<String,String> anatomyMap= (Map<String, String>) root.get("associatedAnatomy");
         String anatomyName=anatomyMap.get("name");
         String anatomyType=anatomyMap.get("@type");
-        List<Anatomy> anatomyList=anatomyService.anatomyList();
+        List<AnatomicalStructure> anatomicalStructureList =anatomyService.anatomyList();
 
-            anatomy=new Anatomy(anatomyName,anatomyType);
-            anatomyService.saveAnatomy(anatomy);
+            anatomicalStructure =new AnatomicalStructure(anatomyName,anatomyType);
+            anatomyService.saveAnatomy(anatomicalStructure);
 
         Map<String,String> codeMap= (Map<String, String>) root.get("code");
         Map<String,List> differentialDiagnosis= (Map<String, List>) root.get("differentialDiagnosis");
@@ -160,7 +160,7 @@ public class Convertor {
                 causeList1.add(cause);
 
         }
-        medicalConditionService.saveCondition(new MedicalCondition(name,type,causeList1,anatomy, medicalSymptomList,treatmentList));
+        medicalConditionService.saveCondition(new MedicalCondition(name,type,causeList1, anatomicalStructure, medicalSymptomList,treatmentList));
         System.out.println(medicalConditionService.conditionList());
     }
 

@@ -24,7 +24,7 @@ public class MedicalCondition {
     @Relationship(type="causedBy")
     private List<Cause> causeList;
     @Relationship(type="associatedAnatomy")
-    private Anatomy anatomy;
+    private AnatomicalStructure anatomicalStructure;
     @Relationship(type="distinguishingSign")
     private List<MedicalSymptom> medicalSymptomList;
     @Relationship(type="possibleTreatment")

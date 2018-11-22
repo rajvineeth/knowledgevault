@@ -36,7 +36,7 @@ services:
     - "7687:7687"
     network_mode: host
     volumes:
-    - '../data/neo4j:/data/db'
+    - '../../neo4j/data:/data/db'
     environment:
     - NEO4J_AUTH=neo4j/123456
 

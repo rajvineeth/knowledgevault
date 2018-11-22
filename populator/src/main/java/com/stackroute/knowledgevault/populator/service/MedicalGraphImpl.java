@@ -3,20 +3,11 @@ package com.stackroute.knowledgevault.populator.service;
 import com.stackroute.knowledgevault.domain.*;
 import com.stackroute.knowledgevault.populator.repository.MTRRepo;
 import com.stackroute.knowledgevault.populator.repository.MedicalGraphRepo;
-import org.neo4j.driver.v1.*;
-import org.neo4j.driver.v1.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.sql.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Optional;
-
-import static org.neo4j.driver.v1.Values.parameters;
 
 @Service
 public class MedicalGraphImpl implements MedicalGraphService {
@@ -34,39 +25,46 @@ public class MedicalGraphImpl implements MedicalGraphService {
 
 
 
-    public void populate(Long id, MedicalCondition medicalCondition, Anatomy anatomy, List<MedicalSymptom> medicalSymptomList){
-
-
+    public void populate(int id, MedicalCondition medicalCondition, AnatomicalStructure anatomicalStructure, List<MedicalSymptom> medicalSymptomList) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         medicalConditionService.saveCondition(medicalCondition);
-        anatomyService.saveAnatomy(anatomy);
-        List<MTR> mtrList = mtrRepo.getRelations(medicalCondition.getType(), medicalSymptomList.get(0).getType());
-        //List<MTR> mtrSAList=mtrRepo.getRelations()
+        anatomyService.saveAnatomy(anatomicalStructure);
+        MTR mtrCS = mtrRepo.getRelation(medicalCondition.getType(), medicalSymptomList.get(0).getType());
+        MTR mtrSC = mtrRepo.getRelation(medicalSymptomList.get(0).getType(),medicalCondition.getType());
+        MTR mtrAC = mtrRepo.getRelation(anatomicalStructure.getType(),medicalCondition.getType());
+        MTR mtrCA = mtrRepo.getRelation(medicalCondition.getType(), anatomicalStructure.getType());
+        QueryDriverService example = new QueryDriverService("bolt://localhost", "neo4j", "123456");
+
         for(MedicalSymptom medicalSymptom : medicalSymptomList) {
             symptomService.saveSymptom(medicalSymptom);
-
-            String rel="";
-            for(MTR mtr:mtrList){
-                rel=mtr.getType();
-                QueryDriverService example = new QueryDriverService("bolt://localhost", "neo4j", "123456");
-                example.createRel(medicalCondition,rel,medicalSymptom);
-                example.close();
-            }
+            String rel1="";
+                rel1=mtrCS.getType();
+                example.createRel(medicalCondition,rel1,medicalSymptom);
+            String rel2="";
+            rel2=mtrSC.getType();
+            example.createRel(medicalSymptom,rel2,medicalCondition);
         }
-        medicalCondition.setMedicalSymptomList(medicalSymptomList);
+        System.out.println(mtrAC.getType()+" "+mtrCA.getType());
+        String relAC="",relCA="";
+        relAC=mtrAC.getType();
+        relCA=mtrCA.getType();
+        example.createRel(anatomicalStructure,relAC,medicalCondition);
+        example.createRel(medicalCondition,relCA, anatomicalStructure);
+       // medicalCondition.setMedicalSymptomList(medicalSymptomList);
+        example.close();
     }
-    public void makegraph(int id, MedicalCondition medicalCondition, Anatomy anatomy, List<MedicalSymptom> medicalSymptomList){
-        if(anatomy!=null) {
-            anatomyService.saveAnatomy(anatomy);
-            medicalCondition.setAnatomy(anatomy);
+    public void makegraph(int id, MedicalCondition medicalCondition, AnatomicalStructure anatomicalStructure, List<MedicalSymptom> medicalSymptomList){
+        if(anatomicalStructure !=null) {
+            anatomyService.saveAnatomy(anatomicalStructure);
+            medicalCondition.setAnatomicalStructure(anatomicalStructure);
         }
         if(medicalSymptomList!=null) {
             for (MedicalSymptom medicalSymptom : medicalSymptomList) {
                 symptomService.saveSymptom(medicalSymptom);
-                List<MTR> mtrList = mtrRepo.getRelations("MedicalCondition", "MedicalSymptom");
-                String rel = "";
-                for (MTR mtr : mtrList) {
-                    rel = mtr.getType();
-                }
+//                List<MTR> mtrList = (List<MTR>) mtrRepo.getRelation("MedicalCondition", "MedicalSymptom");
+//                String rel = "";
+//                for (MTR mtr : mtrList) {
+//                    rel = mtr.getType();
+//                }
             }
             medicalCondition.setMedicalSymptomList(medicalSymptomList);
         }
