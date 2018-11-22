@@ -18,6 +18,7 @@ import org.apache.lucene.search.spans.SpanTermQuery;
 import org.apache.lucene.search.spans.Spans;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Bits;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
@@ -83,7 +84,7 @@ public class FullTextSearchImpl implements FullTextSearch {
         LOGGER.info("creating indices....");
         this.analyzer = new MyAnalyzer();
         try {
-            Directory dir = FSDirectory.open(new File(indexPath));
+            FSDirectory dir = SimpleFSDirectory.open(new File(indexPath));
             if(Files.exists(Paths.get(indexPath))) {
                 LOGGER.info("already indexed..");
                 return "already indexed...";
@@ -94,25 +95,25 @@ public class FullTextSearchImpl implements FullTextSearch {
             File[] resources = repo.listFiles();
             int id=0;
             for(File f: resources) {
-                LOGGER.info("indexing file {}",f.getCanonicalPath());
+                LOGGER.info("indexing file {}",f.getPath());
                 Document doc = new Document();
                 doc.add(new Field("path",f.getPath(), Field.Store.YES, Field.Index.ANALYZED));
                 doc.add(new Field("id",String.valueOf(id), Field.Store.YES, Field.Index.ANALYZED));
                 doc.add(new Field("name",f.getName(), Field.Store.YES, Field.Index.ANALYZED));
                 id++;
-                Reader reader = new FileReader(f.getCanonicalPath());
+                Reader reader = new FileReader(f.getPath());
                 doc.add(new Field(CONTENTS,reader,Field.TermVector.WITH_POSITIONS_OFFSETS));
                 indexWriter.addDocument(doc);
                 reader.close();
                 this.indexWriter.commit();
             }
             this.indexWriter.close();
-
+            dir.close();
 
             LOGGER.info("indexing complete....");
         }
         catch(Exception e) {
-//            LOGGER.error(String.valueOf(e.getMessage()));
+            LOGGER.error(String.valueOf(e.getMessage()));
             return "failure";
         }
         return "success";
@@ -130,7 +131,9 @@ public class FullTextSearchImpl implements FullTextSearch {
         List<String> spanArray = new ArrayList<>();
         List<String> res = new ArrayList<>();
         try {
-            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(indexPath)));
+
+            FSDirectory dir = FSDirectory.open(new File(indexPath));
+            IndexReader iReader = IndexReader.open(dir);
             IndexSearcher searcher = new IndexSearcher(iReader);
 
             QueryParser queryParser = new QueryParser(CONTENTS, this.analyzer);
@@ -154,10 +157,11 @@ public class FullTextSearchImpl implements FullTextSearch {
                     if(!res.contains(docName)) res.add(docName);
                 }
             }
+            dir.close();
         }
         catch(Exception e) {
-//            e.printStackTrace();
-//            LOGGER.debug(e.getMessage());
+            e.printStackTrace();
+            LOGGER.debug(e.getMessage());
             return Collections.singletonList("something went wrong..");
         }
 
@@ -179,8 +183,8 @@ public class FullTextSearchImpl implements FullTextSearch {
 
         String prevFilePath = getFilesPath();
         String prevIndexPath = getIndexPath();
-        setFilesPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/medicalRepositories");
-        setIndexPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/repoIndices");
+        setFilesPath("/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/medicalRepositories");
+        setIndexPath("/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/repoIndices");
 
         indexer();
         List<String> keywords = new ArrayList<>();

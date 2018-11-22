@@ -1,4 +1,4 @@
-image: maven:3.5.4-jdk-10
+image: maven:3.3.9-jdk-8
 before_script:
 - apt-get update -qq && apt-get install
 variables:
@@ -17,7 +17,7 @@ sonarqube_master_job:
   stage: test_quality
   only:
   - v1.0.0
-  image: maven:3.5.4-jdk-10
+  image: maven:3.3.9-jdk-8
   script:
   - mvn --batch-mode verify sonar:sonar -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.password=$SONAR_PASSWORD
 test:

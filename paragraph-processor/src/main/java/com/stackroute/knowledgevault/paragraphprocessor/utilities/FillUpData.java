@@ -84,7 +84,7 @@ public class FillUpData {
         }
 
         for (Map.Entry<String,String> entry : taggedKeywords.entrySet()) {
-            if(entry.getValue().compareTo("disease")==0) {
+            if(entry.getValue().compareTo("diseases")==0) {
                 try {
                     obj.put("alternateName",entry.getKey());
                 } catch (JSONException e) {
