@@ -30,8 +30,6 @@ public class KafkaConsumer {
     @KafkaListener(topics="para-tokens",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
     public void consumejson(Document data){
         LOGGER.info("consumed message: {}",data.toString());
-<<<<<<< HEAD
-
         Map<String,List<Pair>> tags = new HashMap<>();
 
         Map<String,Double> keys = DocProcessor.performNGramAnalysis(data.getText());
@@ -39,12 +37,6 @@ public class KafkaConsumer {
 
         for(Map.Entry<String,Double> key: keys.entrySet()) {
 
-=======
-        Map<String,String> tags = new HashMap<>();
-        String para = data.getText();
-        String[] keys = para.trim().split("\\.|\\s+");
-        for(String key:keys) {
->>>>>>> f9890a61d7132c3efeb82cc9eddd0b3065d86b3d
             File dictionary = new File("../../knowledge-vault/paragraph-processor/assets/taggerResource/");
             for(File f: dictionary.listFiles()) {
 
