@@ -4,7 +4,6 @@ import com.github.jsonldjava.core.JsonLdOptions;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.utils.JsonUtils;
 import com.stackroute.knowledgevault.domain.*;
-import com.stackroute.knowledgevault.domain.Cause;
 import com.stackroute.knowledgevault.domain.MedicalCondition;
 import com.stackroute.knowledgevault.populator.repository.StructureRepo;
 import com.stackroute.knowledgevault.populator.service.*;
@@ -23,13 +22,9 @@ public class Convertor {
     @Autowired
     private MedicalConditionService medicalConditionService;
     @Autowired
-    private CauseService causeService;
-    @Autowired
     private AnatomyService anatomyService;
     @Autowired
     private SymptomService symptomService;
-    @Autowired
-    private TreatmentService treatmentService;
     @Autowired
     StructureRepo structureRepo;
 
@@ -68,7 +63,7 @@ public class Convertor {
         Map context = new HashMap();
         Map<String, Object> root = (Map) jsonObject;
         MedicalCondition medicalCondition=readJsonld.getMedicalCondition(root);
-        AnatomicalStructure anatomicalStructure =readJsonld.getAnatomy(root);
+        AnatomicalStructure anatomicalStructure =readJsonld.getAnatomicalStructure(root);
         List<MedicalSymptom> medicalSymptomList =readJsonld.getSymptoms(root);
         medicalGraphService.populate(1,medicalCondition, anatomicalStructure, medicalSymptomList);
         //medicalGraphService.makegraph(1,medicalCondition,anatomicalStructure,medicalSymptomList);
@@ -116,51 +111,7 @@ public class Convertor {
 
         }
 
-        List<Map<String,Object>> treatment= (List<Map<String, Object>>) root.get("possibleTreatment");
-        Iterator treatmentIterator=treatment.iterator();
-        String treatmentName="",treatmentType="";
-
-        List<Treatment> treatmentList=new ArrayList<>();
-        while(treatmentIterator.hasNext()){
-            treatmentPresent=false;
-            Map<String,Object> stringObjectMap= (Map<String, Object>) treatmentIterator.next();
-            treatmentName= (String) stringObjectMap.get("name");
-            treatmentType= (String) stringObjectMap.get("@type");
-            List<Treatment> treatmentList1=treatmentService.treatmentList();
-
-
-                treatmentId++;
-                ArrayList<Map<String, String>> dose = (ArrayList<Map<String, String>>) stringObjectMap.get("DoseSchedule");
-                String doseUnit = dose.get(0).get("doseUnit");
-                String frequency = dose.get(1).get("frequency");
-                Treatment treatment1 = new Treatment(  treatmentName,treatmentType, doseUnit, frequency);
-                treatmentService.saveTreatment(treatment1);
-                treatmentList.add(treatment1);
-
-        }
-
-
-
-        ArrayList<Map<String, String>> causeList = (ArrayList<Map<String, String>>) root.get("cause");
-        Iterator mapIterator = causeList.iterator();
-        String causeName="",causeType="";
-
-        List<Cause> causeList1=new ArrayList<>();
-
-        while (mapIterator.hasNext()) {
-            causePresent=false;
-            Map<String,String> causeMap = (Map<String, String>) mapIterator.next();
-            causeName=(String)causeMap.get("name");
-
-
-                causeType = (String) causeMap.get("@type");
-                causeId++;
-                Cause cause = new Cause( causeType, causeName);
-                causeService.saveCause(cause);
-                causeList1.add(cause);
-
-        }
-        medicalConditionService.saveCondition(new MedicalCondition(name,type,causeList1, anatomicalStructure, medicalSymptomList,treatmentList));
+        medicalConditionService.saveCondition(new MedicalCondition(name,type, anatomicalStructure, medicalSymptomList));
         System.out.println(medicalConditionService.conditionList());
     }
 

@@ -15,9 +15,4 @@ public class MedicalSymptom {
     @Index(unique=true, primary=true)
     private String symptomName;
     private String type;
-
-//    public MedicalSymptom( String symptomName,String type) {
-//        this.type = type;
-//        this.symptomName = symptomName;
-//    }
 }

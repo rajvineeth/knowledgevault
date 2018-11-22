@@ -22,9 +22,6 @@ public class MedicalGraphImpl implements MedicalGraphService {
     @Autowired
     MedicalGraphRepo medicalGraphRepo;
 
-
-
-
     public void populate(int id, MedicalCondition medicalCondition, AnatomicalStructure anatomicalStructure, List<MedicalSymptom> medicalSymptomList) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         medicalConditionService.saveCondition(medicalCondition);
         anatomyService.saveAnatomy(anatomicalStructure);
@@ -49,7 +46,6 @@ public class MedicalGraphImpl implements MedicalGraphService {
         relCA=mtrCA.getType();
         example.createRel(anatomicalStructure,relAC,medicalCondition);
         example.createRel(medicalCondition,relCA, anatomicalStructure);
-       // medicalCondition.setMedicalSymptomList(medicalSymptomList);
         example.close();
     }
     public void makegraph(int id, MedicalCondition medicalCondition, AnatomicalStructure anatomicalStructure, List<MedicalSymptom> medicalSymptomList){

@@ -15,7 +15,7 @@ public class ReadJsonld {
         }
         return  null;
     }
-    public AnatomicalStructure getAnatomy(Map jsonObject){
+    public AnatomicalStructure getAnatomicalStructure(Map jsonObject){
         Map<String, Object> root =  jsonObject;
         Map<String,String> anatomyMap= (Map<String, String>) root.get("associatedAnatomy");
         if(anatomyMap.get("name")!=null) {

@@ -17,8 +17,4 @@ public class AnatomicalStructure {
     private String anatomyName;
     private String type;
 
-//    public AnatomicalStructure(String anatomyName,String type) {
-//        this.type = type;
-//        this.anatomyName = anatomyName;
-//    }
 }
