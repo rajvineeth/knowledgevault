@@ -15,21 +15,38 @@ import java.util.regex.Pattern;
 public class Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
+    private String filePath;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getIndexPath() {
+        return indexPath;
+    }
+
+    public void setIndexPath(String indexPath) {
+        this.indexPath = indexPath;
+    }
+
+    private String indexPath;
 
     private FullTextSearchImpl fullTextSearch = new FullTextSearchImpl();
-
-    public void setFullTextSearch(FullTextSearchImpl fullTextSearch) {
-        this.fullTextSearch = fullTextSearch;
-    }
 
     public FullTextSearch getFullTextSearch() {
         return this.fullTextSearch;
     }
 
-    public Processor() {
-        getFullTextSearch().setFilesPath("../paragraph-processor/assets/taggerResource");
-        getFullTextSearch().setIndexPath("../paragraph-processor/assets/taggerIndices");
-        getFullTextSearch().indexer();
+    public Processor(){}
+
+    public Processor(String filePath,String indexPath) {
+        this.filePath = filePath;
+        this.indexPath = indexPath;
+        this.getFullTextSearch().indexer(this.filePath,this.indexPath);
     }
 
     /**
@@ -53,7 +70,6 @@ public class Processor {
         for(String keyword: keywords) {
             String tag = keywordMapping(keyword);
             LOGGER.info("tagged value: {}",tag);
-
             tags.put(keyword,keywordMapping(keyword));
         }
 
@@ -73,7 +89,7 @@ public class Processor {
     }
 
     public String keywordMapping(String keyword) {
-        String tag = getFullTextSearch().search(keyword).get(0);
+        String tag = getFullTextSearch().search(this.indexPath,keyword).get(0);
         LOGGER.info(tag);
         if(tag.compareTo("not found")==0) {
             return patMatch(tag);

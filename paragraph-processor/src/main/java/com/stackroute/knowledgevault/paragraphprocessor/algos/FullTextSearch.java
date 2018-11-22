@@ -16,12 +16,8 @@ import java.util.List;
  */
 public interface FullTextSearch {
 
-    String indexer();
-    List<String> search(String data);
-    String getIndexPath();
-    String getFilesPath();
-    void setIndexPath(String path);
-    void setFilesPath(String path);
-    List<String> getRelevantTerms(String path,int type);
+    String indexer(String filePath,String indexPath);
+    List<String> search(String indexPath,String data);
+    List<String> getRelevantTerms(String filePath,String indexPath,String path,int type);
 
 }

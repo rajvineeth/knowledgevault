@@ -46,8 +46,6 @@ import java.util.*;
 
 public class FullTextSearchImpl implements FullTextSearch {
 
-    private String filesPath;
-    private String indexPath;
     private Analyzer analyzer;
     private IndexWriterConfig config;
     private IndexWriter indexWriter;
@@ -55,32 +53,13 @@ public class FullTextSearchImpl implements FullTextSearch {
     public static final Logger LOGGER = LoggerFactory.getLogger(FullTextSearchImpl.class);
     public static final String CONTENTS = "content";
 
-    @Override
-    public String getIndexPath() {
-        return indexPath;
-    }
-
-    @Override
-    public String getFilesPath() {
-        return filesPath;
-    }
-
-    @Override
-    public void setIndexPath(String path) {
-        indexPath = path;
-    }
-
-    @Override
-    public void setFilesPath(String path) {
-        filesPath = path;
-    }
-
     /**
      *  This function indexes documents/source repositories and storing information in an inverted-index
      *  to facilitate fast search by using Lucene Library
      */
     @Override
-    public String indexer() {
+    public String indexer(String filesPath,String indexPath) {
+
         LOGGER.info("creating indices....");
         this.analyzer = new MyAnalyzer();
         try {
@@ -91,7 +70,7 @@ public class FullTextSearchImpl implements FullTextSearch {
             }
             this.config = new IndexWriterConfig(Version.LUCENE_CURRENT,this.analyzer);
             File repo = new File(filesPath);
-            this.indexWriter = new IndexWriter(dir,config);
+            this.indexWriter = new IndexWriter(dir,this.config);
             File[] resources = repo.listFiles();
             int id=0;
             for(File f: resources) {
@@ -108,11 +87,11 @@ public class FullTextSearchImpl implements FullTextSearch {
                 this.indexWriter.commit();
             }
             this.indexWriter.close();
-            dir.close();
 
             LOGGER.info("indexing complete....");
         }
         catch(Exception e) {
+            e.printStackTrace();
             LOGGER.error(String.valueOf(e.getMessage()));
             return "failure";
         }
@@ -126,7 +105,7 @@ public class FullTextSearchImpl implements FullTextSearch {
      */
 
     @Override
-    public List<String> search(String data) {
+    public List<String> search(String indexPath,String data) {
         LOGGER.info("searching the keyword: {}",data);
         List<String> spanArray = new ArrayList<>();
         List<String> res = new ArrayList<>();
@@ -140,12 +119,7 @@ public class FullTextSearchImpl implements FullTextSearch {
             queryParser.setDefaultOperator(QueryParser.Operator.OR);
 
             SpanQuery query = new SpanTermQuery(new Term(CONTENTS, data));
-            TopDocs results = searcher.search(query,10);
             Map<Term, TermContext> termContexts = new HashMap<>();
-
-            for (int i = 0; i < results.scoreDocs.length; i++) {
-                ScoreDoc scoreDoc = results.scoreDocs[i];
-            }
 
             for (AtomicReaderContext atomic : iReader.leaves()) {
                 Bits bitset = atomic.reader().getLiveDocs();
@@ -157,6 +131,7 @@ public class FullTextSearchImpl implements FullTextSearch {
                     if(!res.contains(docName)) res.add(docName);
                 }
             }
+            iReader.close();
             dir.close();
         }
         catch(Exception e) {
@@ -179,14 +154,9 @@ public class FullTextSearchImpl implements FullTextSearch {
      * @return: the list of relevant keywords
      */
     @Override
-    public List<String> getRelevantTerms(String path,int type) {
+    public List<String> getRelevantTerms(String filePath,String indexPath,String path,int type) {
 
-        String prevFilePath = getFilesPath();
-        String prevIndexPath = getIndexPath();
-        setFilesPath("/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/medicalRepositories");
-        setIndexPath("/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/repoIndices");
-
-        indexer();
+        indexer(filePath,indexPath);
         List<String> keywords = new ArrayList<>();
         LOGGER.info("please wait while we do the muscle-work.....");
         Double[][] matrix;
@@ -200,12 +170,12 @@ public class FullTextSearchImpl implements FullTextSearch {
             else {
                 text = path.trim().split("\\s+");
             }
-            File[] corpus = new File(getFilesPath()).listFiles();
+            File[] corpus = new File(filePath).listFiles();
             matrix = new Double[text.length][corpus.length];
             for(int i=0;i<matrix.length;i++) {
                 for(int j=0;j<matrix[i].length;j++) matrix[i][j] = Double.valueOf(0);
             }
-            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(getIndexPath())));
+            IndexReader iReader = IndexReader.open(FSDirectory.open(new File(indexPath)));
             IndexSearcher searcher = new IndexSearcher(iReader);
             for(int i=0;i<text.length;i++) {
                 SpanQuery query = new SpanTermQuery(new Term(CONTENTS,text[i]));
@@ -234,9 +204,6 @@ public class FullTextSearchImpl implements FullTextSearch {
         }
         String res = keywords.toString();
         LOGGER.info(res);
-
-        setIndexPath(prevIndexPath);
-        setFilesPath(prevFilePath);
 
         return keywords;
     }

@@ -1,6 +1,8 @@
 package com.stackroute.knowledgevault;
 
 import com.stackroute.knowledgevault.paragraphprocessor.Processor;
+import com.stackroute.knowledgevault.paragraphprocessor.utilities.DocProcessor;
+import com.stackroute.knowledgevault.paragraphprocessor.utilities.Pair;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -8,16 +10,18 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
 public class ProcessorTest {
 
     private Processor processor;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ProcessorTest.class);
 
     @Before
@@ -32,6 +36,9 @@ public class ProcessorTest {
 
     @Test
     public void paraProcessingTest() {
+        this.processor.setFilePath("../paragraph-processor/assets/taggerResource");
+        this.processor.setIndexPath("../paragraph-processor/assets/taggerIndices");
+        this.processor.getFullTextSearch().indexer(this.processor.getFilePath(),this.processor.getIndexPath());
         String paragraph = "my name is neeraj and i have been suffering from cancer in my lungs. I also have toothache for past 5days";
         LOGGER.info(paragraph);
         this.processor.paraProcessing(paragraph);
@@ -39,6 +46,9 @@ public class ProcessorTest {
 
     @Test
     public void keywordMapping() {
+        this.processor.setFilePath("../paragraph-processor/assets/taggerResource/");
+        this.processor.setIndexPath("../paragraph-processor/assets/taggerIndices");
+        this.processor.getFullTextSearch().indexer(this.processor.getFilePath(),this.processor.getIndexPath());
         String tag = this.processor.keywordMapping("cancer");
         assertEquals("diseases",tag);
     }
@@ -51,19 +61,26 @@ public class ProcessorTest {
 
     @Test
     public void teste() {
-        Map<String,String> tags = new HashMap<>();
-        String para = "i have cancer in my lungs";
-        String[] keys = para.trim().split("\\.|\\s+");
-        for(String key:keys) {
+        Map<String,List<Pair>> tags = new HashMap<>();
+        String para = "i have cancer in my lungs.typhoid cough.Migraine.";
+
+        Map<String,Double> keys = DocProcessor.performNGramAnalysis(para);
+        LOGGER.info("returned keys: {}",keys.keySet());
+
+        for(Map.Entry<String,Double> key: keys.entrySet()) {
+
             File dictionary = new File("../../knowledge-vault/paragraph-processor/assets/taggerResource/");
-            File[] res = dictionary.listFiles();
-            for(File f: res) {
-                try {
-                    String txt = FileUtils.readFileToString(f,"UTF-8");
-                    String[] words = txt.split("\\.|\\s+");
-                    for(String word: words) {
-                        if(word.compareTo(key)==0) tags.put(key,f.getName());
+            for(File f: dictionary.listFiles()) {
+
+                tags.putIfAbsent(f.getName(),new ArrayList<>());
+                try(BufferedReader br = new BufferedReader(new FileReader(f))) {
+                    String txt;
+                    while((txt = br.readLine())!=null) {
+                        if(txt.compareTo(key.getKey())==0) {
+                            tags.get(f.getName()).add(new Pair(key.getKey(),key.getValue()));
+                        }
                     }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -12,12 +12,15 @@ import java.util.*;
 public class Benchmarking {
 
     private Processor processor;
+    private String filepath;
+    private String indexPath;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(Benchmarking.class);
 
     public void init() {
-        this.processor = new Processor();
-        this.processor.getFullTextSearch().setFilesPath("../paragraph-processor/assets/medicalRepositories");
-        this.processor.getFullTextSearch().setIndexPath("../paragraph-processor/assets/repoIndices");
+        this.filepath = "../paragraph-processor/assets/medicalRepositories";
+        this.indexPath = "../paragraph-processor/assets/repoIndices";
+        this.processor = new Processor(filepath,indexPath);
     }
 
     /**
@@ -26,9 +29,9 @@ public class Benchmarking {
      * @param keyword: the input keyword that we want to search
      */
     public List<String> queryForGivenKeyword(String keyword) {
-        init();
-        this.processor.getFullTextSearch().indexer();
-        return this.processor.getFullTextSearch().search(keyword);
+//        init();
+        this.processor.getFullTextSearch().indexer(this.filepath,this.indexPath);
+        return this.processor.getFullTextSearch().search(this.indexPath,keyword);
     }
 
     /**
@@ -38,7 +41,7 @@ public class Benchmarking {
      */
     public List<String> getRelevantTerms(String path,int type) {
         init();
-        return this.processor.getFullTextSearch().getRelevantTerms(path,type);
+        return this.processor.getFullTextSearch().getRelevantTerms(this.filepath,this.indexPath,path,type);
     }
 
 }

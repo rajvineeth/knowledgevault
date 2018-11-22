@@ -28,6 +28,7 @@ public class BenchmarkingTest {
         List<String> list = new ArrayList(){{
             add("not found");
         }};
+        this.benchmarking.init();
         assertNotEquals(list,this.benchmarking.queryForGivenKeyword("cough"));
     }
 
