@@ -13,6 +13,10 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Configuration settings for kafka producer that generates data in a particular specified service.
+ */
+
 @Configuration
 public class KafkaProducerConfig {
 

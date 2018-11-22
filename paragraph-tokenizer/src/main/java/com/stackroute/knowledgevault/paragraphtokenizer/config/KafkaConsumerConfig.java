@@ -15,6 +15,10 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Configuration settings for kafka consumer in order to consume data from specific topic.
+ */
+
 @EnableKafka
 @Configuration
 public class KafkaConsumerConfig {
