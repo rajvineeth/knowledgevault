@@ -24,18 +24,17 @@ public class KafkaConsumer {
         MedicalCondition medicalCondition=readJsonld.getMedicalCondition(root);
         AnatomicalStructure anatomicalStructure=readJsonld.getAnatomicalStructure(root);
         List<MedicalSymptom> medicalSymptomList=readJsonld.getSymptoms(root);
-        //medicalGraphService.makegraph(id,medicalCondition,anatomicalStructure,medicalSymptomList);
         medicalGraphService.populate(id,medicalCondition,anatomicalStructure,medicalSymptomList);
     }
     @KafkaListener(topics="kafkaTest",groupId = "group_json", containerFactory= "userKafkaListenerFactory2")
-    public void consumeFromPara(JSONld res){
+    public void consumeFromPara(JSONld res) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         System.out.println("consumed message from para "+res.toString());
         int id=res.getId();
         Map<String,Object> root=res.getData();
         MedicalCondition medicalCondition=readJsonld.getMedicalCondition(root);
         AnatomicalStructure anatomicalStructure=readJsonld.getAnatomicalStructure(root);
         List<MedicalSymptom> medicalSymptomList=readJsonld.getSymptoms(root);
-        medicalGraphService.makegraph(id,medicalCondition,anatomicalStructure,medicalSymptomList);
+        medicalGraphService.populate(id,medicalCondition,anatomicalStructure,medicalSymptomList);
     }
 
 }

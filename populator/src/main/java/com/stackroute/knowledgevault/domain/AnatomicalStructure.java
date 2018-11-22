@@ -14,7 +14,7 @@ public class AnatomicalStructure {
 
     @Id
     @Index(unique=true, primary=true)
-    private String anatomyName;
+    private String name;
     private String type;
 
 }

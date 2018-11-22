@@ -86,7 +86,6 @@ public class Convertor {
         Map<String,String> anatomyMap= (Map<String, String>) root.get("associatedAnatomy");
         String anatomyName=anatomyMap.get("name");
         String anatomyType=anatomyMap.get("@type");
-        List<AnatomicalStructure> anatomicalStructureList =anatomyService.anatomyList();
 
             anatomicalStructure =new AnatomicalStructure(anatomyName,anatomyType);
             anatomyService.saveAnatomy(anatomicalStructure);
@@ -101,7 +100,6 @@ public class Convertor {
             Map<String,String> sym= (Map<String, String>) signIterator.next();
             symptomName=sym.get("name");
             symptomType=sym.get("@type");
-            List<MedicalSymptom> medicalSymptomList1 =symptomService.symptomList();
 
 
                 symptomId++;
@@ -112,7 +110,7 @@ public class Convertor {
         }
 
         medicalConditionService.saveCondition(new MedicalCondition(name,type, anatomicalStructure, medicalSymptomList));
-        System.out.println(medicalConditionService.conditionList());
+
     }
 
 }

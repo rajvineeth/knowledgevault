@@ -20,9 +20,4 @@ public class MedicalConditionImpl implements MedicalConditionService {
         return medicalConditionRepo.save(medicalCondition);
     }
 
-    @Override
-    public List<MedicalCondition> conditionList() {
-        List<MedicalCondition> listcondtions = (List)medicalConditionRepo.findAll();
-        return listcondtions;
-    }
 }

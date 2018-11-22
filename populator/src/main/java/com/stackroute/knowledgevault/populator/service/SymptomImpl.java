@@ -19,9 +19,4 @@ public class SymptomImpl implements SymptomService {
         return symptomRepo.save(medicalSymptom);
     }
 
-    @Override
-    public List<MedicalSymptom> symptomList() {
-        List<MedicalSymptom> medicalSymptomList = (List)symptomRepo.findAll();
-        return medicalSymptomList;
-    }
 }

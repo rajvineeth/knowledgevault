@@ -19,10 +19,4 @@ public class AnatomyImpl implements AnatomyService {
     public AnatomicalStructure saveAnatomy(AnatomicalStructure anatomicalStructure) {
         return anatomyRepo.save(anatomicalStructure);
     }
-
-    @Override
-    public List<AnatomicalStructure> anatomyList() {
-        List<AnatomicalStructure> anatomicalStructureList = (List)anatomyRepo.findAll();
-        return anatomicalStructureList;
-    }
 }

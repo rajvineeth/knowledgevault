@@ -18,7 +18,6 @@
 	    <module>paragraph-processor</module>
         <module>extractor-service</module>
         <module>document-identifier</module>
-        <module>input-processor</module>
         <module>populator</module>
     </modules>
 

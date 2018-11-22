@@ -17,7 +17,7 @@ public class MedicalCondition {
 
     @Id
     @Index(unique=true, primary=true)
-    private String conditionName;
+    private String name;
     private String type;
 
     @Relationship(type="associatedAnatomy")
@@ -27,7 +27,7 @@ public class MedicalCondition {
 
     public MedicalCondition(String conditionName,String type){
         this.type=type;
-        this.conditionName=conditionName;
+        this.name=conditionName;
     }
 
 }

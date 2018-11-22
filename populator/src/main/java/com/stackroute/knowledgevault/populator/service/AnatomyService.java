@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface AnatomyService {
     public AnatomicalStructure saveAnatomy(AnatomicalStructure anatomicalStructure) ;
-    public List<AnatomicalStructure> anatomyList();
 }
