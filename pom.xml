@@ -11,9 +11,9 @@
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
     <modules>
-        <module>config-server</module>
-        <module>eureka-registry</module>
-        <module>zuulgateway</module>
+        <!--<module>config-server</module>-->
+        <!--<module>eureka-registry</module>-->
+        <!--<module>zuulgateway</module>-->
         <module>paragraph-tokenizer</module>
 	    <module>paragraph-processor</module>
         <module>extractor-service</module>

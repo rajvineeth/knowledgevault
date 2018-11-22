@@ -70,7 +70,7 @@ services:
   extractor-service:
     image: extractor-service:v1
     build: extractor-service/
-    restart: always
+   # restart: always
     container_name: "extractor-service"
     network_mode: host
     depends_on:
@@ -81,7 +81,7 @@ services:
     - "8094:8094"
     expose:
     - "8094"
-#
+
 #  input-processor:
 #    image: input-processor:v1
 #    build:  input-processor/
@@ -98,7 +98,7 @@ services:
   paragraph-processor:
     image: paragraph-processor:v1
     build: paragraph-processor/
-    restart: always
+  #  restart: always
     container_name: "paragraph-processor"
     network_mode: host
     volumes:
@@ -113,7 +113,7 @@ services:
   paragraph-tokenizer:
     image: paragraph-tokenizer:v1
     build: paragraph-tokenizer/
-    restart: always
+   # restart: always
     container_name: "paragraph-tokenizer"
     network_mode: host
     depends_on:
@@ -126,7 +126,7 @@ services:
   populator:
     image: populator:v1
     build: populator/
-    restart: always
+  #  restart: always
     container_name: "populator"
     network_mode: host
     depends_on:
