@@ -22,10 +22,10 @@ import java.util.List;
 public class KafkaConsumer {
 
     @Autowired
-    ParaTokenizerImpl paraTokenizer;
+    private ParaTokenizerImpl paraTokenizer;
 
     @Autowired
-    DocResource docResource;
+    private DocResource docResource;
 
     @Value("${consumed.list}")
     private String listMessage;
