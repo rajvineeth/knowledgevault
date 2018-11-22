@@ -17,11 +17,11 @@ public class CSVReader {
         List<String> resultList = new ArrayList<>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
-            int counter = 0;
-            while((line = br.readLine()) != null && counter <= 3300){
+
+            while((line = br.readLine()) != null){
                 String[] info = line.split(csvSplitBy);
                 resultList.add(info[index]);
-                counter++;
+
             }
 
 

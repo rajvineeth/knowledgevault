@@ -1,10 +1,15 @@
 package com.stackroute.knowledgevault.paragraphtokenizer.service;
 
 import com.stackroute.knowledgevault.domain.Document;
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +17,7 @@ import static org.junit.Assert.*;
 
 public class ParaTokenizerImplTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ParaTokenizerImplTest.class);
 
     ParaTokenizer paraTokenizer;
     @Before
@@ -25,20 +31,60 @@ public class ParaTokenizerImplTest {
     }
 
     @Test
-    public void tokenizePara() {
+    public void tokenizePara() throws IOException {
+        String testPath = "/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/resources/forTest";
+        String txt = FileUtils.readFileToString(new File(testPath),"UTF-8");
+        String[] adsd = txt.trim().split("\\n+");
         Integer id = 21;
-        String text = "Alex Valero knew he could trust his instincts. Over the years, he had followed them to law school in Spain, then Afghanistan as a UN peacekeeper, then Zaragoza, where he was a successful graphic designer for a global sports brand. It was there he received the news that would change his life: his father had died from a sudden heart attack in Granada. An only child, Alex immediately crossed the country to be with his mother, and as the weeks passed, he decided to stay.\n" +
-                "\n" +
-                "Granada is a small city, and Alex soon discovered that jobs were hard to find, despite his qualifications. He was hardly alone. At that time in 2016, 4.2 million people across Spain were looking for work, with levels of youth unemployment over 40 percent. Alex searched for a job for almost a year without success, so when his girlfriend suggested that he come along to a digital marketing course at the local university, Alex jumped at the chance. Together, they completed the Google Actívate program, part of the Grow with Google initiative offering free online and face-to-face courses in digital skills. More than 335,000 people have trained with Google Actívate so far, as Google pursues its commitment to help 1 million Europeans find work or grow their businesses by 2020.\n" +
-                "\n" +
-                "As he worked through the course, Alex began recognizing a trend: many of his friends told familiar stories of fruitless job applications and the struggle to make ends meet. And while out cycling one day, Alex had a brainwave: bars and restaurants often need extra staff at short notice and struggle to find them in time. What if an app could connect his unemployed friends with restaurants that need help?";
-        Document doc = new Document(id,text);
+        Document doc = new Document(id,txt);
 
         List expList = new ArrayList();
-        expList.add(new Document(id,"Alex Valero knew he could trust his instincts. Over the years, he had followed them to law school in Spain, then Afghanistan as a UN peacekeeper, then Zaragoza, where he was a successful graphic designer for a global sports brand. It was there he received the news that would change his life: his father had died from a sudden heart attack in Granada. An only child, Alex immediately crossed the country to be with his mother, and as the weeks passed, he decided to stay."));
-        expList.add(new Document(id,"Granada is a small city, and Alex soon discovered that jobs were hard to find, despite his qualifications. He was hardly alone. At that time in 2016, 4.2 million people across Spain were looking for work, with levels of youth unemployment over 40 percent. Alex searched for a job for almost a year without success, so when his girlfriend suggested that he come along to a digital marketing course at the local university, Alex jumped at the chance. Together, they completed the Google Actívate program, part of the Grow with Google initiative offering free online and face-to-face courses in digital skills. More than 335,000 people have trained with Google Actívate so far, as Google pursues its commitment to help 1 million Europeans find work or grow their businesses by 2020."));
-        expList.add(new Document(id,"As he worked through the course, Alex began recognizing a trend: many of his friends told familiar stories of fruitless job applications and the struggle to make ends meet. And while out cycling one day, Alex had a brainwave: bars and restaurants often need extra staff at short notice and struggle to find them in time. What if an app could connect his unemployed friends with restaurants that need help?"));
+        for (int i = 0; i < adsd.length; i++){
 
+            LOGGER.info(adsd[i]);
+            expList.add(new Document(id,adsd[i]));
+        }
+        LOGGER.info(expList.toString());
+        List list = paraTokenizer.tokenizePara(doc);
+
+        assertEquals(expList,list);
+    }
+
+    @Test
+    public void tokenizePara2() throws IOException {
+        String testPath = "/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/resources/forTest2";
+        String txt = FileUtils.readFileToString(new File(testPath),"UTF-8");
+        String[] adsd = txt.trim().split("\\n+");
+        Integer id = 21;
+        Document doc = new Document(id,txt);
+
+        List expList = new ArrayList();
+        for (int i = 0; i < adsd.length; i++){
+
+            LOGGER.info(adsd[i]);
+            expList.add(new Document(id,adsd[i]));
+        }
+        LOGGER.info(expList.toString());
+        List list = paraTokenizer.tokenizePara(doc);
+
+        assertEquals(expList,list);
+    }
+
+    @Test
+    public void tokenizePara3() throws IOException {
+        String testPath = "/home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/resources/forTest3";
+        String txt = FileUtils.readFileToString(new File(testPath),"UTF-8");
+        String[] adsd = txt.trim().split("\\n+");
+        Integer id = 21;
+        Document doc = new Document(id,txt);
+
+        List expList = new ArrayList();
+        for (int i = 0; i < adsd.length; i++){
+
+            LOGGER.info(adsd[i]);
+            expList.add(new Document(id,adsd[i]));
+        }
+        LOGGER.info(expList.toString());
         List list = paraTokenizer.tokenizePara(doc);
 
         assertEquals(expList,list);

@@ -24,23 +24,12 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/edu.stanford.nlp/stanford-corenlp -->
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
 			<version>3.9.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>stanford-corenlp</artifactId>
-			<version>3.9.2</version>
-			<classifier>models</classifier> <!--  will get the dependent domain jars -->
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -56,20 +45,10 @@
 			<artifactId>icu4j</artifactId>
 			<version>63.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-json</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 
         <dependency>

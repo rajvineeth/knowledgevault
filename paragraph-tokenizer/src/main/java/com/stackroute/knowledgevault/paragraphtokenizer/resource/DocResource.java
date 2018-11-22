@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * the kafka producer function that sends data to the kafka server.
+ */
+
 @Component
 public class DocResource {
 

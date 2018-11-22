@@ -9,11 +9,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this class uses simple regex exp to tokenize the document text into different paragraphs,
+ * using .split(regex) method.
+ */
+
 @Component
 public class ParaTokenizerImpl implements ParaTokenizer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ParaTokenizerImpl.class);
 
+    /*
+     * Takes in documents as input and then splits the documents into smaller documents
+     * and returns a list of documents.
+     */
     @Override
     public List tokenizePara(Document document) {
         List list = new ArrayList<>();

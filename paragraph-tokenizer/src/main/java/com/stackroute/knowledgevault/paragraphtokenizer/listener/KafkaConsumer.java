@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Kafka consumer service with listener that invokes tokenize() method,
+ * whenever new data is available in the kafka server.
+ */
+
 @Service
 public class KafkaConsumer {
 
@@ -21,9 +26,13 @@ public class KafkaConsumer {
     @Autowired
     DocResource docResource;
 
+    //to log data on the console
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
     List list;
 
+    /*
+     * This method consumes data from kafka server and makes call to kafka producer.
+     */
     @KafkaListener(topics="extracted2",groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(ExtractedFileData extractedFileData){
        Document document = new Document(extractedFileData.getId(), extractedFileData.getContent());
@@ -31,9 +40,5 @@ public class KafkaConsumer {
         LOGGER.info("list of documents: {}",list.toString());
         LOGGER.info("i'm in consumer");
         docResource.post(list);
-    }
-
-    public List getList() {
-        return list;
     }
 }
