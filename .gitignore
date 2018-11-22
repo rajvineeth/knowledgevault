@@ -14,10 +14,14 @@ knowledge-vault-parent.iml
 
 /home/shubham/Documents/knowledge-vault/src/main/java/com/stackroute/knowledgevault/inputprocessor/assets/taggerIndices
 
+config-server/
+eureka-registry/
+zuulgateway/
+
 ######################
 # Node
 ######################
-/node/
+/node/eureka
 node_tmp/
 node_modules/
 npm-debug.log.*
