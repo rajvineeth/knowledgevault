@@ -31,8 +31,5 @@ public class Loaders implements ApplicationListener<ContextRefreshedEvent>{
         structureRepo.createR("MedicalCondition","causedBy","MedicalSymptom");
         structureRepo.createR("MedicalCondition","affects","AnatomicalStructure");
         structureRepo.createR("AnatomicalStructure","affectedBy","MedicalCondition");
-        System.out.println("rel: "+mtrRepo.getRelation("MedicalCondition","MedicalSymptom").toString());
-        System.out.println("rel: "+mtrRepo.getRelation("MedicalSymptom","MedicalCondition").toString());
-        System.out.println("rel: "+mtrRepo.getRelation("AnatomicalStructure","MedicalCondition").toString());
     }
 }

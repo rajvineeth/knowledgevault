@@ -45,7 +45,7 @@ public class StopwordRemoval {
     public List<String> removeStopwords(List<String> terms){
         List<String> resultingdoc = new ArrayList<>();
 
-        List<String> stopwords = readStopWords("/home/cgi/Documents/knowledge-vault/document-identifier/stopwords.txt");
+        List<String> stopwords = readStopWords("/knowledge-vault/document-identifier/stopwords.txt");
 
 
         for(String term: terms){

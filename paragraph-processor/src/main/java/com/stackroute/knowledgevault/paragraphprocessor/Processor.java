@@ -27,8 +27,8 @@ public class Processor {
     }
 
     public Processor() {
-        getFullTextSearch().setFilesPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/taggerResource");
-        getFullTextSearch().setIndexPath("src/main/java/com/stackroute/knowledgevault/paragraphprocessor/assets/taggerIndices");
+        getFullTextSearch().setFilesPath("../paragraph-processor/assets/taggerResource");
+        getFullTextSearch().setIndexPath("../paragraph-processor/assets/taggerIndices");
         getFullTextSearch().indexer();
     }
 
