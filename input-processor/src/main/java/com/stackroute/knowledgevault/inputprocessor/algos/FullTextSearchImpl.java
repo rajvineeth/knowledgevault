@@ -41,13 +41,12 @@ public class FullTextSearchImpl implements FullTextSearch {
         try {
             Directory dir = FSDirectory.open(new File(indexPath));
             if(Files.exists(Paths.get(indexPath))) {
-                LOGGER.info("already indexed..");
+                LOGGER.info("already indexed..p");
                 return "already indexed...";
             }
             IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,analyzer);
             IndexWriter indexWriter = new IndexWriter(dir,config);
             File repo = new File(filesPath);
-
             File[] resources = repo.listFiles();
             int id=0;
             for(File f: resources) {
@@ -57,6 +56,7 @@ public class FullTextSearchImpl implements FullTextSearch {
                 doc.add(new Field("id",String.valueOf(id), Field.Store.YES, Field.Index.ANALYZED));
                 doc.add(new Field("name",f.getName(), Field.Store.YES, Field.Index.ANALYZED));
                 id++;
+                LOGGER.info("\n**********okay here*************\n{}",f.getCanonicalPath());
                 Reader reader = new FileReader(f.getCanonicalPath());
                 doc.add(new Field(CONTENTS,reader,Field.TermVector.WITH_POSITIONS_OFFSETS));
                 indexWriter.addDocument(doc);
