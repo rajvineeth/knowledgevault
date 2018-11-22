@@ -1,0 +1,9 @@
+#
+#
+#
+#spring:
+#  application:
+#    name: paragraph-tokenizer
+#  cloud:
+#    config:
+#      uri: http://localhost:8092

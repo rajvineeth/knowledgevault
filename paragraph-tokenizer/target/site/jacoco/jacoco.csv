@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Paragraph-Tokenizer,com.stackroute.knowledgevault.paragraphtokenizer,ParagraphTokenizerApplication,8,0,0,0,3,0,2,0,2,0
+Paragraph-Tokenizer,com.stackroute.knowledgevault.paragraphtokenizer.listener,KafkaConsumer,38,0,0,0,8,0,3,0,3,0
+Paragraph-Tokenizer,com.stackroute.knowledgevault.paragraphtokenizer.config,KafkaConsumerConfig,88,0,0,0,19,0,5,0,5,0
+Paragraph-Tokenizer,com.stackroute.knowledgevault.paragraphtokenizer.config,KafkaProducerConfig,39,0,0,0,8,0,3,0,3,0
+Paragraph-Tokenizer,com.stackroute.knowledgevault.paragraphtokenizer.service,ParaTokenizerImpl,0,44,0,2,0,9,0,4,0,3
+Paragraph-Tokenizer,com.stackroute.knowledgevault.domain,ExtractedFileData,198,0,30,0,9,0,28,0,13,0
+Paragraph-Tokenizer,com.stackroute.knowledgevault.domain,Document,51,67,10,6,1,4,12,6,4,6
+Paragraph-Tokenizer,com.stackroute.knowledgevault.paragraphtokenizer.resource,DocResource,33,0,2,0,9,0,4,0,3,0
