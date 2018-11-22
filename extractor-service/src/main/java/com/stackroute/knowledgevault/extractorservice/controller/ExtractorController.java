@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 @RestController
 @RequestMapping(value = "extractor-service")
 public class ExtractorController {

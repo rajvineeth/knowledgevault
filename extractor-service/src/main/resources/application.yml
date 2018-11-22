@@ -3,9 +3,6 @@ producer:
 server:
     port: 8094
 
-local:
-    file:
-        path: '../knowledge-vault/extractor-service/src/main/resources/'
 #eureka:         #tells about the Eureka server details and its refresh time
 #    instance:
 #        leaseRenewalIntervalInSeconds: 1
