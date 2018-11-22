@@ -42,32 +42,32 @@ services:
 
 
 
-#  document-identifier:
-#    image: document-identifier:v1
-#    build: document-identifier/
-#    #    restart: always
-#    container_name: "document-identifier"
-#    network_mode: host
-#    depends_on:
-#    - kafka
-#    - mongodb
-#    volumes:
-#    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
-#    ports:
-#    - "8080:8080"
-#    expose:
-#    - "8080"
+  document-identifier:
+    image: document-identifier:v1
+    build: document-identifier/
+    #    restart: always
+    container_name: "document-identifier"
+    network_mode: host
+    depends_on:
+    - kafka
+    - mongodb
+    volumes:
+    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
+    ports:
+    - "8080:8080"
+    expose:
+    - "8080"
 
-#  mongodb:
-#    image: mongo:3.2-jessie
-#    ports:
-#    - 27017:27017
-#    container_name: "mongo-knowledgevault"
-#    network_mode: host
-#    volumes:
-#    - '../data/mongo:/data/db'
-#    environment:
-#      MONGO_INITDB_DATABASE: mydatabase
+  mongodb:
+    image: mongo:3.2-jessie
+    ports:
+    - 27017:27017
+    container_name: "mongo-knowledgevault"
+    network_mode: host
+    volumes:
+    - '../data/mongo:/data/db'
+    environment:
+      MONGO_INITDB_DATABASE: mydatabase
 
   extractor-service:
     image: extractor-service:v1
