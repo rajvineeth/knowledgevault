@@ -1,6 +1,5 @@
 package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
-import java.nio.file.LinkOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,7 +15,6 @@ public class TokenizerImpl implements Tokenizer{
 
     public TokenizerImpl() {
         this(Pattern.compile("\\b\\w\\w+"));
-//        this(Pattern.compile("(\\n|^).*?(?=\\n|$)"));
     }
 
     @Override

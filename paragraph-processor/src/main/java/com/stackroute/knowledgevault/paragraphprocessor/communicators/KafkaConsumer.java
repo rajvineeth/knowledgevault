@@ -6,7 +6,6 @@ import com.stackroute.knowledgevault.domain.JSONld;
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.DocProcessor;
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.FillUpData;
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.Pair;
-import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,6 @@ public class KafkaConsumer {
 
             File dictionary = new File("../../knowledge-vault/paragraph-processor/assets/taggerResource/");
             for(File f: dictionary.listFiles()) {
-
                 tags.putIfAbsent(f.getName(),new ArrayList<>());
                 try(BufferedReader br = new BufferedReader(new FileReader(f))) {
                     String txt;
@@ -48,9 +46,10 @@ public class KafkaConsumer {
                             tags.get(f.getName()).add(new Pair(key.getKey(),key.getValue()));
                         }
                     }
-
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
+                    LOGGER.info("error found: {} ", e.getStackTrace());
                 }
             }
         }
@@ -64,6 +63,7 @@ public class KafkaConsumer {
             this.producer.post(jsoNld);
         } catch (IOException e) {
             e.printStackTrace();
+            LOGGER.info("error found: {} ", e.getStackTrace());
         }
         LOGGER.info("jsonld object: {}",jsoNld.getData());
         LOGGER.info("producer message: hey !! i sent the message");

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -18,20 +19,20 @@ public class FillUpData {
 
     private static final String JSONTEMPLATE = "{" +
             " \"@context\": \"http://schema.org\"," +
-            " \"@type\": \"MedicalCondition\"," +
-            " \"alternateName\": \"angina pectoris\"," +
+            " \"@type\": \"null\"," +
+            " \"alternateName\": \"null\"," +
             " \"associatedAnatomy\": {" +
             "   \"@type\": \"AnatomicalStructure\"," +
-            "   \"name\": \"heart\"" +
+            "   \"name\": \"null\"" +
             " }," +
             " \"cause\": [" +
             "   {" +
             "     \"@type\": \"MedicalCause\"," +
-            "     \"name\": \"atherosclerosis\"" +
+            "     \"name\": \"null\"" +
             "   }," +
             "   {" +
             "     \"@type\": \"MedicalCause\"," +
-            "     \"name\": \"spasms of the epicardial artery\"" +
+            "     \"name\": \"null\"" +
             "   }" +
             " ]," +
             " \"code\": {" +
@@ -43,32 +44,32 @@ public class FillUpData {
             "   \"distinguishingSign\": [" +
             "     {" +
             "       \"@type\": \"MedicalSymptom\"," +
-            "       \"name\": \"chest pain lasting at least 10 minutes at rest\"" +
+            "       \"name\": \"null\"" +
             "     }," +
             "     {" +
             "       \"@type\": \"MedicalSymptom\"," +
-            "       \"name\": \"repeated episodes of chest pain at rest lasting 5 or more minutes\"" +
+            "       \"name\": \"null\"" +
             "     }," +
             "     {" +
             "       \"@type\": \"MedicalSymptom\"," +
-            "       \"name\": \"an accelerating pattern of chest discomfort (episodes that are more frequent, severe, longer in duration, and precipitated by minimal exertion)\"" +
+            "       \"name\": \"null\"" +
             "     }" +
             "   ]" +
             "" +
             " }," +
             " \"possibleTreatment\":[" +
             "   {\"@type\":\"Drug\"," +
-            "     \"name\":\"Cavlam-650\"," +
+            "     \"name\":\"null\"," +
             "     \"DoseSchedule\":[" +
-            "       {\"doseUnit\":\"650mg\"}," +
-            "       {\"frequency\":\"thrice daily\"}" +
+            "       {\"doseUnit\":\"null\"}," +
+            "       {\"frequency\":\"null\"}" +
             "     ]" +
             "   }," +
             "   {\"@type\":\"Drug\"," +
-            "     \"name\":\"Paracetamol\"," +
+            "     \"name\":\"null\"," +
             "     \"DoseSchedule\":[" +
-            "       {\"doseUnit\":\"500mg\"}," +
-            "       {\"frequency\":\"twice daily\"}" +
+            "       {\"doseUnit\":\"null\"}," +
+            "       {\"frequency\":\"null\"}" +
             "     ]" +
             "   }" +
             " ]" +
@@ -81,6 +82,7 @@ public class FillUpData {
         try {
             obj = new JSONObject(JSONTEMPLATE);
         } catch (JSONException e) {
+            LOGGER.info("couldn't create JSONLD object...something bad happened.");
             e.printStackTrace();
         }
 
@@ -96,15 +98,6 @@ public class FillUpData {
                 try {
                     JSONObject bp = (JSONObject) obj.get("associatedAnatomy");
                     bp.put("name",entry.getKey());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if(entry.getValue().compareTo("symptom")==0) {
-                try {
-                    JSONObject dd = (JSONObject) obj.get("differentialDiagnosis");
-                    JSONObject ds = (JSONObject) dd.get("distinguishingSign");
-                    ds.put("name",entry.getKey());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -130,26 +123,27 @@ public class FillUpData {
         }
 
         for(Map.Entry<String,List<Pair>> entry: tags.entrySet()) {
-            if(entry.getKey().compareTo("diseases")==0) {
+            if(entry.getKey().compareTo("diseases")==0 && entry.getValue().size()>0) {
                 try {
-                    obj.put("alternateName",entry.getKey());
+                    obj.put("alternateName",entry.getValue().get(0).getKeyword());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            else if(entry.getKey().compareTo("body-part")==0) {
+            else if(entry.getKey().compareTo("body-part")==0 && entry.getValue().size()>0) {
                 try {
                     JSONObject bp = (JSONObject) obj.get("associatedAnatomy");
-                    bp.put("name",entry.getKey());
+                    bp.put("name",entry.getValue().get(0).getKeyword());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            else if(entry.getKey().compareTo("symptom")==0) {
+            else if(entry.getKey().compareTo("symptom")==0 && entry.getValue().size()>0) {
                 try {
                     JSONObject dd = (JSONObject) obj.get("differentialDiagnosis");
-                    JSONObject ds = (JSONObject) dd.get("distinguishingSign");
-                    ds.put("name",entry.getKey());
+                    JSONArray ds = (JSONArray) dd.get("distinguishingSign");
+                    JSONObject jobj = ds.getJSONObject(0);
+                    jobj.put("name",entry.getValue().get(0).getKeyword());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -158,6 +152,12 @@ public class FillUpData {
                 continue;
             }
         }
-        return null;
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String jsonOutput = gson.toJson(obj);
+        LOGGER.info(jsonOutput);
+
+        LOGGER.info("successfully updated JSON");
+        return obj;
     }
 }
