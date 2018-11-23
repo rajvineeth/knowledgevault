@@ -34,7 +34,9 @@ public class BenchmarkingTest {
 
     @Test
     public void getRelevantTermsTest() {
-        this.benchmarking.getRelevantTerms("/home/cgi/Documents/knowledge-vault/paragraph-processor/assets/TB",1);
+        String str1 = "[liver, cancer, of, the, in, and, a, disease, to, cancers, with, or, children, is, as, for, health, from, are, symptoms, on, adults, that, by, be, may, swelling, an, below, skin]";
+        String str2 = this.benchmarking.getRelevantTerms("../paragraph-processor/assets/TB",1).toString();
+        assertEquals(str1,str2);
     }
 
 }
