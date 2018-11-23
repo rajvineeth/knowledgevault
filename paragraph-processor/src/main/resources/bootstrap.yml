@@ -1,0 +1,32 @@
+#management:
+#  security:
+#    enabled: false
+#eureka:         #tells about the Eureka server details and its refresh time
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8066/eureka/
+#    healthcheck:
+#      enabled: true
+#    lease:
+#      duration: 5
+#    register-with-eureka: true
+#    fetch-registry: true
+#
+#spring:
+#  application:
+#    name: paragraph-processor
+#  profiles:
+#    active:
+#  cloud:
+#    config:
+#      uri: http://localhost:8092
+
+
+
+
+#spring:
+#  application:
+#    name: paragraph-processor
+#  cloud:
+#    config:
+#      uri: http://localhost:8092

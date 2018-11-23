@@ -1,0 +1,15 @@
+package com.stackroute.knowledgevault.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Map;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class JSONld {
+    private int id;
+    private Map<String,Object> data;
+}

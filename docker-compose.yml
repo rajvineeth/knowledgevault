@@ -1,62 +1,124 @@
 version:  '2'
+
 services:
-  eureka:
-    image: eureka:v1
-    build: eureka-registry/
-    restart: always
-    container_name: eureka-container
+
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
     network_mode: host
     ports:
-      - 8091:8091
-    expose:
-      - 8091
+    - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
 
-  config-server:
-    image: config-server:v1
-    build: config-server/
-    restart: always
-    container_name: config-container
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka
+    ports:
+    - "9092"
+    depends_on:
+    - "zookeeper"
+    network_mode: host
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+    volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+
+  neo4j:
+    container_name: neo4j
+    image: neo4j:latest
+    ports:
+    - "7474:7474"
+    - "7687:7687"
+    network_mode: host
+    volumes:
+    - '../data/neo4j:/data/db'
+    environment:
+    - NEO4J_AUTH=neo4j/123456
+
+  document-identifier:
+    image: document-identifier:v1
+    build: document-identifier/
+    #    restart: always
+    container_name: "document-identifier"
     network_mode: host
     depends_on:
-      - eureka
+    - kafka
+    - mongodb
+    volumes:
+    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
     ports:
-      - 8092:8092
+    - "8080:8080"
     expose:
-      - 8092
+    - "8080"
 
   mongodb:
     image: mongo:3.2-jessie
     ports:
-      - "27017:27017"
-    container_name: mongo-movie
+    - 27017:27017
+    container_name: "mongo-knowledgevault"
     network_mode: host
-    depends_on:
-      - config-server
     volumes:
-      - '/home/cgi/data/mysql:/data/db'
+    - '../data/mongo:/data/db'
+    environment:
+      MONGO_INITDB_DATABASE: mydatabase
 
-  movie-demo:
-    image: movie-mongo:v1
-    build: movie-cruiser-app/
-    restart: always
-    container_name: mongo-demo-compose
+  extractor-service:
+    image: extractor-service:v1
+    build: extractor-service/
+   # restart: always
+    container_name: "extractor-service"
     network_mode: host
     depends_on:
-      - mongodb
+    - kafka
+    volumes:
+    - '../knowledge-vault/extractor-service/src/main/resources/:/knowledge-vault/extractor-service/src/main/resources/'
     ports:
-      - 8090:8090
+    - "8094:8094"
     expose:
-      - 8090
+    - "8094"
 
-  gateway:
-    image: zuulgateway:v1
-    build: zuulgateway/
-    restart: always
-    container_name: zuul-container
+  paragraph-processor:
+    image: paragraph-processor:v1
+    build: paragraph-processor/
+  #  restart: always
+    container_name: "paragraph-processor"
+    network_mode: host
+    volumes:
+    -  '../knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
+    depends_on:
+    - kafka
+    ports:
+    - "8433:8433"
+    expose:
+    - "8433"
+
+  paragraph-tokenizer:
+    image: paragraph-tokenizer:v1
+    build: paragraph-tokenizer/
+   # restart: always
+    container_name: "paragraph-tokenizer"
     network_mode: host
     depends_on:
-      - mongo-demo
+    - kafka
     ports:
-      - 8081:8081
+    - "8065:8065"
     expose:
-      - 8081
+    - "8065"
+
+  populator:
+    image: populator:v1
+    build: populator/
+  #  restart: always
+    container_name: "populator"
+    network_mode: host
+    depends_on:
+    - kafka
+    - neo4j
+    ports:
+    - "8067:8067"
+    expose:
+    - "8067"
