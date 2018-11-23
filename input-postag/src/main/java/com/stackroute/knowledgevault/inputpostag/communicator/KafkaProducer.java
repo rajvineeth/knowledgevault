@@ -19,7 +19,7 @@ public class KafkaProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    private static final String TOPIC = "user-input";
+    private static final String TOPIC = "input-POS";
 
     public String post(InputPOS userInput) {
         LOGGER.info("posting to kafka...");

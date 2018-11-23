@@ -1,5 +1,6 @@
 package com.stackroute.knowledgevault.inputpostag.config;
 
+import com.stackroute.knowledgevault.domain.InputPOS;
 import com.stackroute.knowledgevault.domain.UserInput;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -16,7 +17,7 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
     @Bean
-    public ProducerFactory<String, UserInput> producerFactory() {
+    public ProducerFactory<String, InputPOS> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -27,7 +28,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, UserInput> kafkaTemplate() {
+    public KafkaTemplate<String, InputPOS> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
