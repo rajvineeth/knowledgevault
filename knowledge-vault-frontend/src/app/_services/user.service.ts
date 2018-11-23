@@ -28,4 +28,8 @@ export class UserService {
     delete(id: number) {
         return this.http.delete(`${environment.apiUrl}/users/` + id);
     }
+    send(user: string) {
+       // console.log("got http post");
+        return this.http.get(`${environment.apiUrl3}/kv/` + user);
+    }
 }
