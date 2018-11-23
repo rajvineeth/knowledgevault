@@ -32,6 +32,7 @@ public class MedicalGraphServiceTest {
 
     AnatomicalStructure anatomicalStructure;
     Document document;
+    Content content;
     @Mock
     AnatomyService anatomyService;
     @Mock
@@ -63,10 +64,16 @@ public class MedicalGraphServiceTest {
         anatomicalStructure.setType("AnatomicalStructure");
         document=new Document();
         document.setName("cancer");
-        document.setType("document");
+        document.setType("Document");
+        content=new Content();
+
         ArrayList<Integer> list=new ArrayList<>();
         list.add(1);
         document.setId(list);
+        content.setParaId(list);
+        content.setId(1);
+        content.setName("cancer");
+        content.setType("Content");
 
     }
 
@@ -81,6 +88,18 @@ public class MedicalGraphServiceTest {
         when(queryDriverService.createRel((Object)any(),(String)any(),(Object)any())).thenReturn(true);
         when(mtrRepo.getRelation((String)any(),(String)any())).thenReturn(mtr);
         Boolean result=medicalGraphService.populate(document,medicalCondition,anatomicalStructure,symptomList);
+        Assert.assertEquals(true,result);
+
+        verify(medicalConditionService,times(1)).saveCondition(medicalCondition);
+        verify(anatomyService,times(1)).saveAnatomy(anatomicalStructure);
+        verify(symptomService,times(1)).saveSymptom(medicalSymptom);
+        verify(mtrRepo,times(5)).getRelation((String) any(),(String) any());
+    }
+    @Test
+    public void populateFromParaTestSuccess() {
+        when(queryDriverService.createRel((Object)any(),(String)any(),(Object)any())).thenReturn(true);
+        when(mtrRepo.getRelation((String)any(),(String)any())).thenReturn(mtr);
+        Boolean result=medicalGraphService.populateFromPara(content,medicalCondition,anatomicalStructure,symptomList);
         Assert.assertEquals(true,result);
 
         verify(medicalConditionService,times(1)).saveCondition(medicalCondition);
