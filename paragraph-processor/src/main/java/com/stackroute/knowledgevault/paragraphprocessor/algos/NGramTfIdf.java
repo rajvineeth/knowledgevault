@@ -21,13 +21,12 @@ public class NGramTfIdf {
      * @return iterator over document terms, where each document's terms is an iterator over strings
      */
     public static Iterable<Collection<String>> ngramDocumentTerms(Tokenizer tokenizer, List<Integer> ns, Iterable<String> documents) {
-        // Tokenize the documents.
+
         List<List<String>> tokenizedDocuments = new ArrayList<>();
         for (String document : documents) {
             List<String> tokens = tokenizer.tokenize(document);
             tokenizedDocuments.add(tokens);
         }
-        // Extract N-grams as the terms in our model.
         List<Collection<String>> documentTerms = new ArrayList<>();
         for (List<String> tokenizedDocument : tokenizedDocuments) {
             Collection<String> terms = new ArrayList<>();
@@ -62,7 +61,7 @@ public class NGramTfIdf {
     }
 
     private static String termStatistics(Map<String, Double> stats) {
-        // Print terms in decreasing numerical order
+
         List<Map.Entry<String, Double>> es = new ArrayList<>(stats.entrySet());
 
         Collections.sort(es, new Comparator<Map.Entry<String, Double>>() {

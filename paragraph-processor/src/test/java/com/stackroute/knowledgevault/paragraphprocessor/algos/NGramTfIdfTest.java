@@ -1,23 +1,34 @@
 package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
-import com.google.common.collect.Lists;
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.DocProcessor;
-import org.apache.kafka.common.protocol.types.Field;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toMap;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ConfigurationProperties("classpath:resources/application.yml")
 public class NGramTfIdfTest {
 
     private NGramTfIdf nGramTfIdf;
-    private static final Logger LOGGER  = LoggerFactory.getLogger(NGramTfIdf.class);
 
+    @Value("${test.nGramTestPara}")
+    private String para;
+
+    private static final Logger LOGGER  = LoggerFactory.getLogger(NGramTfIdf.class);
 
     @Before
     public void init() {
@@ -40,7 +51,6 @@ public class NGramTfIdfTest {
         boolean smooth = false;
         boolean noAddOne = false;
 
-        String para = "i have cancer. it is in my lungs";
         List<String> text = Arrays.asList(para.trim().split("\\.|\\n"));
 
         Iterable<Collection<String>> documents = nGramTfIdf.ngramDocumentTerms(ns, text);
@@ -63,8 +73,12 @@ public class NGramTfIdfTest {
             }
         }
 
-        LOGGER.info("\nscore details of individual docs: {}\n", DocProcessor.sortByValues(res));
+        HashMap<String,Double> sorted = DocProcessor.sortByValues(res);
 
+        LOGGER.info("\nscore details of individual docs: {}\n", DocProcessor.sortByValues(res).keySet());
+
+        String keySet = "[have cancer, have, cancer, it is, it is in, in, is in, in my lungs, my lungs, is, it, my, is in my, lungs, in my]";
+        Assert.assertEquals(keySet,sorted.keySet().toString());
     }
 
 }

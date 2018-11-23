@@ -24,7 +24,6 @@ public class TokenizerImpl implements Tokenizer{
         while (matcher.find()) {
             tokens.add(matcher.group());
         }
-        System.out.println(tokens.toString());
         return tokens;
     }
 }

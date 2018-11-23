@@ -65,6 +65,7 @@ public class MyAnalyzerTest {
 
     @Test
     public void indexTest() throws IOException {
+        StringBuilder sb = new StringBuilder();
         Directory dir = new RAMDirectory();
         Analyzer analyzer = new MyAnalyzer();
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_CURRENT,analyzer);
@@ -85,9 +86,13 @@ public class MyAnalyzerTest {
             TermsEnum it = terms.iterator(null);
             BytesRef term = it.next();
             while (term != null) {
-                LOGGER.info(term.utf8ToString());
+                String data = term.utf8ToString();
+                LOGGER.info(data);
+                sb.append(data+"\n");
                 term = it.next();
             }
         }
+
+        assertEquals("cancer\nhave\ni\nin\nlung\nmy\n",sb.toString());
     }
 }
