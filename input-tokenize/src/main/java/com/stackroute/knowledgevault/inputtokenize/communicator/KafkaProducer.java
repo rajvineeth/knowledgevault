@@ -21,9 +21,9 @@ public class KafkaProducer {
 
     private static final String TOPIC = "input-token";
 
-    public String post(InputToken userInput) {
+    public String post(InputToken inputToken) {
         LOGGER.info("posting to kafka...");
-        this.kafkaTemplate.send(TOPIC, userInput);
+        this.kafkaTemplate.send(TOPIC, inputToken);
         return "published successfully";
     }
 }
