@@ -12,6 +12,11 @@ import java.util.*;
 
 public class NGramTfIdfTest {
 
+<<<<<<< HEAD
+=======
+    private NGramTfIdf nGramTfIdf;
+
+>>>>>>> def674afbce501528e49b6198e8cd6db04b3d87e
     private static final Logger LOGGER  = LoggerFactory.getLogger(NGramTfIdf.class);
 
     @Test
