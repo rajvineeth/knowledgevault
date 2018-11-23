@@ -18,8 +18,8 @@ import static org.junit.Assert.*;
 
 public class ParaTokenizerImplTest {
 
-    @Value("${tokenizer_test_folderPath}")
-    private String folder_path;
+//    @Value("${tokenizer_test_folderPath}")
+    private String folder_path= "src/main/resources/";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ParaTokenizerImplTest.class);
 

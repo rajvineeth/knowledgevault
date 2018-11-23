@@ -19,14 +19,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ConfigurationProperties("classpath:resources/application.yml")
 public class NGramTfIdfTest {
 
     private NGramTfIdf nGramTfIdf;
-
-    @Value("${test.nGramTestPara}")
-    private String para;
 
     private static final Logger LOGGER  = LoggerFactory.getLogger(NGramTfIdf.class);
 
@@ -50,6 +45,8 @@ public class NGramTfIdfTest {
         TfIdf.Normalization normalization = TfIdf.Normalization.COSINE;
         boolean smooth = false;
         boolean noAddOne = false;
+
+        String para = "i have cancer. it is in my lungs.";
 
         List<String> text = Arrays.asList(para.trim().split("\\.|\\n"));
 
