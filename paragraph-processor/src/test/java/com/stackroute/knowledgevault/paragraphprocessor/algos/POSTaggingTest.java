@@ -12,18 +12,6 @@ import static org.junit.Assert.*;
 
 public class POSTaggingTest {
 
-    POSTagging posTagging;
-
-    @Before
-    public void init() {
-        this.posTagging = new POSTagging();
-    }
-
-    @After
-    public void destroy() {
-        this.posTagging = null;
-    }
-
     @Test
     public void taggerTest() {
         String str = "Im so happy about my marks";

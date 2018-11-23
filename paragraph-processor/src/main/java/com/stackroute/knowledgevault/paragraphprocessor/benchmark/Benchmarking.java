@@ -1,8 +1,6 @@
 package com.stackroute.knowledgevault.paragraphprocessor.benchmark;
 
 import com.stackroute.knowledgevault.paragraphprocessor.Processor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.*;
 
 /**
@@ -14,8 +12,6 @@ public class Benchmarking {
     private Processor processor;
     private String filepath;
     private String indexPath;
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Benchmarking.class);
 
     public void init() {
         this.filepath = "../paragraph-processor/assets/medicalRepositories";
@@ -29,7 +25,6 @@ public class Benchmarking {
      * @param keyword: the input keyword that we want to search
      */
     public List<String> queryForGivenKeyword(String keyword) {
-//        init();
         this.processor.getFullTextSearch().indexer(this.filepath,this.indexPath);
         return this.processor.getFullTextSearch().search(this.indexPath,keyword);
     }

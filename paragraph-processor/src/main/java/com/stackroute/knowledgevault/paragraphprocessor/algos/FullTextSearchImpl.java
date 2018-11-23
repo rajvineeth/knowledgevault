@@ -7,7 +7,6 @@ package com.stackroute.knowledgevault.paragraphprocessor.algos;
 import com.stackroute.knowledgevault.paragraphprocessor.MyAnalyzer;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.*;
@@ -16,7 +15,6 @@ import org.apache.lucene.search.*;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.search.spans.SpanTermQuery;
 import org.apache.lucene.search.spans.Spans;
-import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Bits;
@@ -59,8 +57,7 @@ public class FullTextSearchImpl implements FullTextSearch {
      */
     @Override
     public String indexer(String filesPath,String indexPath) {
-
-        LOGGER.info("creating indices....");
+        LOGGER.info("creating indices...");
         this.analyzer = new MyAnalyzer();
         try {
             FSDirectory dir = SimpleFSDirectory.open(new File(indexPath));
@@ -159,7 +156,7 @@ public class FullTextSearchImpl implements FullTextSearch {
         indexer(filePath,indexPath);
         List<String> keywords = new ArrayList<>();
         LOGGER.info("please wait while we do the muscle-work.....");
-        Double[][] matrix;
+        Double[][] matrix = null;
         TreeMap<Double,String> scoreList = new TreeMap<>(Collections.reverseOrder());
         try {
             String[] text;
@@ -189,11 +186,11 @@ public class FullTextSearchImpl implements FullTextSearch {
             iReader.close();
         }
         catch (Exception e) {
-//            LOGGER.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
         }
-//        for(int i=0;i<matrix.length;i++) {
-//            for(int j=0;j<matrix[i].length;j++) LOGGER.info("score in Document{} is : {}",j+1,matrix[i][j]);
-//        }
+        for(int i=0;i<matrix.length;i++) {
+            for(int j=0;j<matrix[i].length;j++) LOGGER.info("score in Document{} is : {}",j+1,matrix[i][j]);
+        }
 
         int cnt=0;
         for (Map.Entry<Double,String> entry : scoreList.entrySet()) {
@@ -202,6 +199,7 @@ public class FullTextSearchImpl implements FullTextSearch {
                 cnt++;
             }
         }
+
         String res = keywords.toString();
         LOGGER.info(res);
 

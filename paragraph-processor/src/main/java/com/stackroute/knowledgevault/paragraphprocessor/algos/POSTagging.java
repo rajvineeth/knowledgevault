@@ -15,6 +15,7 @@ import java.util.Properties;
 
 public class POSTagging {
 
+    private POSTagging() {}
     private static final Logger LOGGER = LoggerFactory.getLogger(POSTagging.class);
 
     /**
