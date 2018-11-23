@@ -20,7 +20,7 @@ public class KafkaConsumer {
     @Autowired
     private KafkaProducer kafkaProducer;
 
-    @KafkaListener(topics="user-input", groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
+    @KafkaListener(topics="user-input-POS", groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(UserInput userInput){
         logger.info("consumed message");
 

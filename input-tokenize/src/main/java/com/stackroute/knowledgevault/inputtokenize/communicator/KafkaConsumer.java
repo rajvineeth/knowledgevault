@@ -23,7 +23,7 @@ public class KafkaConsumer {
     /*
      * This method consumes data from kafka server and makes call to kafka producer.
      */
-    @KafkaListener(topics = "user-input", groupId = "group_json", containerFactory = "documentKafkaListenerFactory")
+    @KafkaListener(topics = "user-input-token", groupId = "group_json", containerFactory = "documentKafkaListenerFactory")
     public void consumejson(UserInput userInput){
         LOGGER.info("TokenUserInput: {}",userInput.toString());
         Document document = new Document(userInput.getText());
