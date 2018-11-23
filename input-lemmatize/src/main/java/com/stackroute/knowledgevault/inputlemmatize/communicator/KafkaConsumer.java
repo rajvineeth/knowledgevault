@@ -1,6 +1,6 @@
-package com.stackroute.knowledgevault.inputtokenize.communicator;
+package com.stackroute.knowledgevault.inputlemmatize.communicator;
 
-import com.stackroute.knowledgevault.domain.InputToken;
+import com.stackroute.knowledgevault.domain.InputLemma;
 import com.stackroute.knowledgevault.domain.UserInput;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
@@ -8,10 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class KafkaConsumer {
 
     @Autowired
@@ -25,21 +27,21 @@ public class KafkaConsumer {
      */
     @KafkaListener(topics = "user-input", groupId = "group_json", containerFactory = "documentKafkaListenerFactory")
     public void consumejson(UserInput userInput){
-        LOGGER.info("TokenUserInput: {}",userInput.toString());
+        LOGGER.info("LemmaUserInput: {}",userInput.toString());
         Document document = new Document(userInput.getText());
-        LOGGER.info("TokenDocument: {}",document.toString());
+        LOGGER.info("LemmaDocument: {}",document.toString());
         List<Sentence> sentences = document.sentences();
-        LOGGER.info("TokenSentences: {}",sentences.toString());
-        List<String> tokens = new ArrayList<>();
+        LOGGER.info("LemmaSentences: {}",sentences.toString());
+        List<String> lemmas = new ArrayList<>();
         List<String> temp;
         for (Sentence sentence: sentences) {
-            temp = sentence.words();
-            LOGGER.info("TokenTempLemma: {}",temp.toString());
-            for (String token: temp) {
-                tokens.add(token);
+            temp = sentence.lemmas();
+            LOGGER.info("LemmaTempLemma: {}",temp.toString());
+            for (String lemma: temp) {
+                lemmas.add(lemma);
             }
         }
-        LOGGER.info("Tokenfinal: {}",tokens.toString());
-        producer.post(new InputToken(userInput.getId(),tokens));
+        LOGGER.info("Lemmafinal: {}",lemmas.toString());
+        producer.post(new InputLemma(userInput.getId(),lemmas));
     }
 }
