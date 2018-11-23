@@ -1,9 +1,7 @@
 package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.DocProcessor;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +10,6 @@ import java.util.*;
 
 public class NGramTfIdfTest {
 
-<<<<<<< HEAD
-=======
-    private NGramTfIdf nGramTfIdf;
-
->>>>>>> def674afbce501528e49b6198e8cd6db04b3d87e
     private static final Logger LOGGER  = LoggerFactory.getLogger(NGramTfIdf.class);
 
     @Test
