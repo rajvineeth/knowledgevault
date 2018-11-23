@@ -29,15 +29,17 @@ public class ExtractorServiceTests {
 
     @Before
     public void setUp() {
-        files.add(new File("./src/main/resources/Doc/gastro.pdf"));
-        files.add(new File("./src/main/resources/Doc/Cholera.txt"));
-        files.add(new File("./src/main/resources/Doc/fakie/Typhoid.txt"));
         files.add(new File("./src/main/resources/Doc/fakie/Cholera.txt"));
+        files.add(new File("./src/main/resources/Doc/fakie/Typhoid.txt"));
         files.add(new File("./src/main/resources/Doc/fakie/Malaria.txt"));
         files.add(new File("./src/main/resources/Doc/HIV.ppt"));
-        files.add(new File("./src/main/resources/Doc/new/gastro.pdf"));
-        files.add(new File("./src/main/resources/Doc/new/Typhoid.txt"));
+
+        files.add(new File("./src/main/resources/Doc/Cholera.txt"));
         files.add(new File("./src/main/resources/Doc/new/Tuberculosis.json"));
+        files.add(new File("./src/main/resources/Doc/new/Typhoid.txt"));
+        files.add(new File("./src/main/resources/Doc/new/gastro.pdf"));
+        files.add(new File("./src/main/resources/Doc/gastro.pdf"));
+
         files.add(new File("./src/main/resources/Doc/Malaria.txt"));
 
         data.setMetadata("Content-Encoding=UTF-8 Content-Type=text/plain; charset=UTF-8");
@@ -53,9 +55,9 @@ public class ExtractorServiceTests {
         Assert.assertNotNull(allFiles);
 
         files.clear();
-        files.add(new File("./src/main/resources/Doc/new/gastro.pdf"));
-        files.add(new File("./src/main/resources/Doc/new/Typhoid.txt"));
         files.add(new File("./src/main/resources/Doc/new/Tuberculosis.json"));
+        files.add(new File("./src/main/resources/Doc/new/Typhoid.txt"));
+        files.add(new File("./src/main/resources/Doc/new/gastro.pdf"));
 
         allFiles.clear();
         allFiles = extractorService.getAllFiles("./src/main/resources/Doc/new");
