@@ -3,7 +3,6 @@ package com.stackroute.knowledgevault.inputtagger.communicator;
 import com.stackroute.knowledgevault.domain.InputLemma;
 import com.stackroute.knowledgevault.domain.InputObject;
 import com.stackroute.knowledgevault.domain.InputPOS;
-import com.stackroute.knowledgevault.domain.InputToken;
 import com.stackroute.knowledgevault.inputtagger.utils.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,19 +20,22 @@ public class KafkaConsumer {
     private InputObject inputObject;
     @Autowired
     private Processor processor;
+
+    @Autowired
+    private KafkaProducer producer;
     /*
      * This method consumes data from kafka server and makes call to kafka producer.
      */
     @KafkaListener(topics = "input-POS", groupId = "group_json", containerFactory = "posKafkaListenerFactory")
     public void consumejson(InputPOS inputPOS){
         LOGGER.info("TaggerLemmaUserInput: {}",inputPOS.toString());
-        if(inputObject != null) {
+        if(inputObject == null) {
             inputObject = new InputObject(inputPOS.getId());
             inputObject.setPoses(inputPOS.getPoses());
         }
         else {
             inputObject.setPoses(inputPOS.getPoses());
-            processor.process(inputObject);
+            producer.post(processor.process(inputObject));
         }
 
     }
@@ -41,13 +43,14 @@ public class KafkaConsumer {
     @KafkaListener(topics = "input-lemma", groupId = "group_json", containerFactory = "lemmaKafkaListenerFactory")
     public void consumejson(InputLemma inputLemma){
         LOGGER.info("TaggerLemmaUserInput: {}",inputLemma.toString());
-        if(inputObject != null) {
+        if(inputObject == null) {
             inputObject = new InputObject(inputLemma.getId());
-            inputObject.setPoses(inputLemma.getLemmas());
+            inputObject.setLemmas(inputLemma.getLemmas());
         }
         else {
-            inputObject.setPoses(inputLemma.getLemmas());
-            processor.process(inputObject);
+            inputObject.setLemmas(inputLemma.getLemmas());
+
+            producer.post(processor.process(inputObject));
         }
     }
 //
