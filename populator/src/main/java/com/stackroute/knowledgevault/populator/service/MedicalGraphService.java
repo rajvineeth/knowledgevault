@@ -1,13 +1,12 @@
 package com.stackroute.knowledgevault.populator.service;
 
-import com.stackroute.knowledgevault.domain.AnatomicalStructure;
-import com.stackroute.knowledgevault.domain.MTR;
-import com.stackroute.knowledgevault.domain.MedicalCondition;
-import com.stackroute.knowledgevault.domain.MedicalSymptom;
+import com.stackroute.knowledgevault.domain.*;
 import com.stackroute.knowledgevault.populator.repository.MTRRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,40 +19,109 @@ public class MedicalGraphService {
     private AnatomyService anatomyService;
     @Autowired
     private SymptomService symptomService;
+    @Autowired
+    private DocumentService documentService;
+    @Autowired
+    private ContentService contentService;
 
-    public MedicalGraphService(MTRRepo mtrRepo, MedicalConditionService medicalConditionService, AnatomyService anatomyService, SymptomService symptomService) {
+    public MedicalGraphService(MTRRepo mtrRepo, MedicalConditionService medicalConditionService, AnatomyService anatomyService, SymptomService symptomService, DocumentService documentService, ContentService contentService) {
         this.mtrRepo = mtrRepo;
         this.medicalConditionService = medicalConditionService;
         this.anatomyService = anatomyService;
         this.symptomService = symptomService;
+        this.documentService = documentService;
+        this.contentService = contentService;
     }
 
-    public Boolean populate(int id, MedicalCondition medicalCondition, AnatomicalStructure anatomicalStructure, List<MedicalSymptom> medicalSymptomList)  {
-        medicalConditionService.saveCondition(medicalCondition);
-        anatomyService.saveAnatomy(anatomicalStructure);
-        MTR mtrCS = mtrRepo.getRelation(medicalCondition.getType(), medicalSymptomList.get(0).getType());
-        MTR mtrSC = mtrRepo.getRelation(medicalSymptomList.get(0).getType(),medicalCondition.getType());
-        MTR mtrAC = mtrRepo.getRelation(anatomicalStructure.getType(),medicalCondition.getType());
-        MTR mtrCA = mtrRepo.getRelation(medicalCondition.getType(), anatomicalStructure.getType());
+    public Boolean populate(Document document, MedicalCondition medicalCondition, AnatomicalStructure anatomicalStructure, List<MedicalSymptom> medicalSymptomList)  {
         QueryDriverService example = new QueryDriverService("bolt://localhost", "neo4j", "123456");
-
-        for(MedicalSymptom medicalSymptom : medicalSymptomList) {
-            symptomService.saveSymptom(medicalSymptom);
-            String rel1="";
-            rel1=mtrCS.getType();
-                example.createRel(medicalCondition,rel1,medicalSymptom);
-            String rel2="";
-            rel2=mtrSC.getType();
-                example.createRel(medicalSymptom,rel2,medicalCondition);
-
+        if(medicalCondition!=null && medicalCondition.getName()!=null && medicalCondition.getType()!=null && document!=null) {
+            medicalConditionService.saveCondition(medicalCondition);
+            documentService.saveDocument(document);
+            MTR mtrCD=mtrRepo.getRelation(medicalCondition.getType(),"Document");
+            example.createRel(medicalCondition,mtrCD.getType(),document);
         }
-        String relAC="";
-        String relCA="";
-        relAC=mtrAC.getType();
-        relCA=mtrCA.getType();
+        if(anatomicalStructure!=null && anatomicalStructure.getName()!=null && anatomicalStructure.getType()!=null) {
+            anatomyService.saveAnatomy(anatomicalStructure);
+        }
+        if(medicalSymptomList.size()!=0 && medicalSymptomList.get(0).getName()!=null && medicalSymptomList.get(0).getType()!=null){
+            for (MedicalSymptom medicalSymptom : medicalSymptomList) {
+                symptomService.saveSymptom(medicalSymptom);
+            }
+        }
+        if(medicalCondition!=null && medicalSymptomList.size()!=0 && medicalCondition.getName()!=null && medicalSymptomList.get(0).getName()!=null  && medicalSymptomList.get(0).getType()!=null) {
+            MTR mtrCS = mtrRepo.getRelation(medicalCondition.getType(), medicalSymptomList.get(0).getType());
+            MTR mtrSC = mtrRepo.getRelation(medicalSymptomList.get(0).getType(), medicalCondition.getType());
+            for (MedicalSymptom medicalSymptom : medicalSymptomList) {
+                String rel1 = "";
+                rel1 = mtrCS.getType();
+                example.createRel(medicalCondition, rel1, medicalSymptom);
+                String rel2 = "";
+                rel2 = mtrSC.getType();
+                example.createRel(medicalSymptom, rel2, medicalCondition);
+
+            }
+        }
+        if(medicalCondition!=null && anatomicalStructure!=null && medicalCondition.getName()!=null && anatomicalStructure.getName()!=null && medicalCondition.getType()!=null && anatomicalStructure.getType()!=null) {
+            MTR mtrAC = mtrRepo.getRelation(anatomicalStructure.getType(), medicalCondition.getType());
+            MTR mtrCA = mtrRepo.getRelation(medicalCondition.getType(), anatomicalStructure.getType());
+            String relAC="";
+            String relCA="";
+            relAC=mtrAC.getType();
+            relCA=mtrCA.getType();
             example.createRel(anatomicalStructure,relAC,medicalCondition);
             example.createRel(medicalCondition,relCA, anatomicalStructure);
+        }
+        example.close();
+        return true;
+    }
+    public Boolean populateFromPara(Content content, MedicalCondition medicalCondition, AnatomicalStructure anatomicalStructure, List<MedicalSymptom> medicalSymptomList)  {
+        QueryDriverService example = new QueryDriverService("bolt://localhost", "neo4j", "123456");
+        if(medicalCondition!=null && !medicalCondition.getName().equals("null") && !medicalCondition.getType().equals("null")) {
+                medicalConditionService.saveCondition(medicalCondition);
+                System.out.println("----------------" + medicalCondition.getName());
+            contentService.saveContent(content);
+            MTR mtrCC = mtrRepo.getRelation(medicalCondition.getType(), "Content");
+            example.createRel(medicalCondition,mtrCC.getType(),content);
 
+        }
+        if(anatomicalStructure!=null && anatomicalStructure.getName()!=null && anatomicalStructure.getType()!=null) {
+            System.out.println("----------------" + anatomicalStructure.getName());
+            anatomyService.saveAnatomy(anatomicalStructure);
+        }
+        if(medicalSymptomList.size()!=0 && medicalSymptomList.get(0).getName()!=null && medicalSymptomList.get(0).getType()!=null){
+            for (MedicalSymptom medicalSymptom : medicalSymptomList) {
+                System.out.println("----------------" + medicalSymptom.getName());
+                symptomService.saveSymptom(medicalSymptom);
+            }
+        }
+        if(medicalCondition!=null && medicalSymptomList.size()!=0 && medicalCondition.getName()!=null && medicalSymptomList.get(0).getName()!=null  && medicalSymptomList.get(0).getType()!=null) {
+            MTR mtrCS = mtrRepo.getRelation(medicalCondition.getType(), medicalSymptomList.get(0).getType());
+            MTR mtrSC = mtrRepo.getRelation(medicalSymptomList.get(0).getType(), medicalCondition.getType());
+            for (MedicalSymptom medicalSymptom : medicalSymptomList) {
+                String rel1 = "";
+                if(mtrCS!=null)
+                rel1 = mtrCS.getType();
+                example.createRel(medicalCondition, rel1, medicalSymptom);
+                String rel2 = "";
+                if(mtrSC!=null)
+                rel2 = mtrSC.getType();
+                example.createRel(medicalSymptom, rel2, medicalCondition);
+
+            }
+        }
+        if(medicalCondition!=null && anatomicalStructure!=null && medicalCondition.getName()!=null && anatomicalStructure.getName()!=null && medicalCondition.getType()!=null && anatomicalStructure.getType()!=null) {
+            MTR mtrAC = mtrRepo.getRelation(anatomicalStructure.getType(), medicalCondition.getType());
+            MTR mtrCA = mtrRepo.getRelation(medicalCondition.getType(), anatomicalStructure.getType());
+            String relAC="";
+            String relCA="";
+            if(mtrAC!=null)
+            relAC=mtrAC.getType();
+            if(mtrCA!=null)
+            relCA=mtrCA.getType();
+            example.createRel(anatomicalStructure,relAC,medicalCondition);
+            example.createRel(medicalCondition,relCA, anatomicalStructure);
+        }
         example.close();
         return true;
     }

@@ -20,4 +20,5 @@ public class MedicalConditionImpl implements MedicalConditionService {
         return medicalConditionRepo.save(medicalCondition);
     }
 
+
 }

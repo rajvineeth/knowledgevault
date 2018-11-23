@@ -59,7 +59,8 @@ public class KafkaConsumer {
         JSONld jsoNld = null;
         try {
             HashMap<String,Object> map_data = mapper.readValue(obj.toString(), HashMap.class);
-            jsoNld = new JSONld(data.getId(),map_data);
+            jsoNld = new JSONld(data.getId(),JSONld.paraId,map_data);
+            JSONld.paraId++;
             this.producer.post(jsoNld);
         } catch (IOException e) {
             e.printStackTrace();

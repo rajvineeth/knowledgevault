@@ -19,7 +19,7 @@ public class FillUpData {
 
     private static final String JSONTEMPLATE = "{" +
             " \"@context\": \"http://schema.org\"," +
-            " \"@type\": \"null\"," +
+            " \"@type\": \"MedicalCondition\"," +
             " \"alternateName\": \"null\"," +
             " \"associatedAnatomy\": {" +
             "   \"@type\": \"AnatomicalStructure\"," +

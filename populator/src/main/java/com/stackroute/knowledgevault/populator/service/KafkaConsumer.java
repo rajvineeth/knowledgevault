@@ -27,7 +27,8 @@ public class KafkaConsumer {
             MedicalCondition medicalCondition = readJsonld.getMedicalCondition(root);
             AnatomicalStructure anatomicalStructure = readJsonld.getAnatomicalStructure(root);
             List<MedicalSymptom> medicalSymptomList = readJsonld.getSymptoms(root);
-            medicalGraphService.populate(id, medicalCondition, anatomicalStructure, medicalSymptomList);
+            Document document=readJsonld.createDoc(id,medicalCondition);
+            medicalGraphService.populate(document, medicalCondition, anatomicalStructure, medicalSymptomList);
         }
     }
     @KafkaListener(topics="kafkaTest",groupId = "group_json", containerFactory= "userKafkaListenerFactory2")
@@ -35,11 +36,13 @@ public class KafkaConsumer {
         if(res!=null) {
             LOGGER.info("consumed message from para {}", res);
             int id = res.getId();
+            int paraId=res.paraId;
             Map<String, Object> root = res.getData();
             MedicalCondition medicalCondition = readJsonld.getMedicalCondition(root);
             AnatomicalStructure anatomicalStructure = readJsonld.getAnatomicalStructure(root);
             List<MedicalSymptom> medicalSymptomList = readJsonld.getSymptoms(root);
-            medicalGraphService.populate(id, medicalCondition, anatomicalStructure, medicalSymptomList);
+            Content content=readJsonld.createContent(id,paraId,medicalCondition);
+            medicalGraphService.populateFromPara(content, medicalCondition, anatomicalStructure, medicalSymptomList);
         }
     }
 
