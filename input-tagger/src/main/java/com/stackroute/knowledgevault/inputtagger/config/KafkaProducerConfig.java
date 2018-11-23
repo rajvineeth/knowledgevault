@@ -1,6 +1,5 @@
 package com.stackroute.knowledgevault.inputtagger.config;
 
-import com.stackroute.knowledgevault.domain.UserInput;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
