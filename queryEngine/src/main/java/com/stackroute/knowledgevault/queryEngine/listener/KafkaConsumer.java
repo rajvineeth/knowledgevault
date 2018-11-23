@@ -22,11 +22,13 @@ public class KafkaConsumer {
     private QueryService queryService = new QueryService();
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
 
-    @KafkaListener(topics = "queryinput", groupId = "group_json", containerFactory = "userKafkaListenerFactory")
+    @KafkaListener(topics = "queryInput", groupId = "group_json_query", containerFactory = "userKafkaListenerFactory")
     public void consumejson(ProcessedInput processedInput) {
         LOGGER.info("consumed message");
         Driver drive = driver.getDriver();
         for(Map.Entry<String,String> entry: processedInput.getKeyValue().entrySet()) {
+            LOGGER.info(entry.getKey());
+            LOGGER.info(entry.getValue());
             queryService.runquery(drive,entry.getKey(),entry.getValue());
         }
         queryService.close(drive);
