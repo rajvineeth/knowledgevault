@@ -23,17 +23,17 @@ public class KafkaConsumer {
      */
     @KafkaListener(topics = "input-POS", groupId = "group_json", containerFactory = "posKafkaListenerFactory")
     public void consumejson(InputPOS inputPOS){
-        LOGGER.info("LemmaUserInput: {}",inputPOS.toString());
+        LOGGER.info("TaggerLemmaUserInput: {}",inputPOS.toString());
     }
 
     @KafkaListener(topics = "input-lemma", groupId = "group_json", containerFactory = "lemmaKafkaListenerFactory")
     public void consumejson(InputLemma inputLemma){
-        LOGGER.info("LemmaUserInput: {}",inputLemma.toString());
+        LOGGER.info("TaggerLemmaUserInput: {}",inputLemma.toString());
     }
 
     @KafkaListener(topics = "input-token", groupId = "group_json", containerFactory = "tokenKafkaListenerFactory")
     public void consumejson(InputToken inputToken){
-        LOGGER.info("LemmaUserInput: {}",inputToken.toString());
+        LOGGER.info("TaggerLemmaUserInput: {}",inputToken.toString());
     }
 
 
