@@ -12,6 +12,11 @@ import org.springframework.kafka.annotation.KafkaListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * kafka not working right now due to unknown reasons
+ *
+ */
+
 public class KafkaConsumer {
 
     @Autowired
