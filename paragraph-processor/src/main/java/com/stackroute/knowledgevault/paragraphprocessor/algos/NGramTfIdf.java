@@ -2,16 +2,12 @@ package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
 import org.apache.commons.lang3.StringUtils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
 
 
 public class NGramTfIdf {
 
-    private static final Logger LOGGER  = LoggerFactory.getLogger(NGramTfIdf.class);
-
+    private NGramTfIdf() {}
     /**
      * Tokenize a set of documents and extract n-gram terms
      *

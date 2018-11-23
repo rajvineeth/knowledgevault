@@ -5,6 +5,21 @@ producer:
     port: 9092
 server:
     port: 8433
-
-test:
-    nGramTestPara: 'i have cancer. it is in my lungs'
+#
+#lucene:
+#    INDEX_START: '"indexing the files now..."'
+#    INDEX_SUCCESS: "indexing complete..."
+#    DUPLICATE_INDEX: "already indexed..."
+#    ERROR_MSG: "something went wrong..."
+#    MUSCLE_WORK: "please wait while we do the muscle-work..."
+#
+#kafka_producer:
+#    MSG_SUCCESS: "producer message: hey !! i sent the message"
+#    PUBLISH_MSG: "Published successfully"
+#
+#kafka:
+#    config:
+#        ipPort: "localhost:9092"
+#
+#jsonld:
+#    ERROR_MSG: "couldn't create JSONLD object...something bad happened."

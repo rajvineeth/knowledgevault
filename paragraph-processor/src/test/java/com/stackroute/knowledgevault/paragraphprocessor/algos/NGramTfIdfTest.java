@@ -1,44 +1,16 @@
 package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.DocProcessor;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ConfigurationProperties("classpath:resources/application.yml")
 public class NGramTfIdfTest {
 
-    private NGramTfIdf nGramTfIdf;
-
-    @Value("${test.nGramTestPara}")
-    private String para;
-
     private static final Logger LOGGER  = LoggerFactory.getLogger(NGramTfIdf.class);
-
-    @Before
-    public void init() {
-        this.nGramTfIdf = new NGramTfIdf();
-    }
-
-    @After
-    public void destroy() {
-        this.nGramTfIdf = null;
-    }
 
     @Test
     public void testNgramTfIdf() {
@@ -51,9 +23,10 @@ public class NGramTfIdfTest {
         boolean smooth = false;
         boolean noAddOne = false;
 
+        String para = "i have cancer. it is in my lungs.";
         List<String> text = Arrays.asList(para.trim().split("\\.|\\n"));
 
-        Iterable<Collection<String>> documents = nGramTfIdf.ngramDocumentTerms(ns, text);
+        Iterable<Collection<String>> documents = NGramTfIdf.ngramDocumentTerms(ns, text);
 
         Iterable<Map<String, Double>> tfs = TfIdf.tfs(documents);
         Map<String, Double> idf = TfIdf.idfFromTfs(tfs, smooth, !noAddOne);
@@ -73,7 +46,7 @@ public class NGramTfIdfTest {
             }
         }
 
-        HashMap<String,Double> sorted = DocProcessor.sortByValues(res);
+        Map<String,Double> sorted = DocProcessor.sortByValues(res);
 
         LOGGER.info("\nscore details of individual docs: {}\n", DocProcessor.sortByValues(res).keySet());
 
