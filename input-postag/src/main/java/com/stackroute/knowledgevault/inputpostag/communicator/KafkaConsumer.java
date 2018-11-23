@@ -6,11 +6,13 @@ import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Service
 public class KafkaConsumer {
 
     private Logger logger;
