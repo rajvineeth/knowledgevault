@@ -41,7 +41,7 @@ cache:
 
 maven_job:
   script:
-  - mvn clean instal
+  - mvn clean install
 
 #codecoverage:
 #  script:
