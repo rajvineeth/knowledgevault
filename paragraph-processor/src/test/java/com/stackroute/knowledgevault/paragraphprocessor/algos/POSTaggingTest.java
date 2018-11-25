@@ -1,30 +1,35 @@
 package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
-import com.stackroute.knowledgevault.paragraphprocessor.algos.POSTagging;
-import org.junit.After;
-import org.junit.Before;
+import edu.stanford.nlp.simple.Document;
+
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class POSTaggingTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(POSTaggingTest.class);
+
     @Test
-    public void taggerTest() {
-        String str = "Im so happy about my marks";
-        Map<String,String> res = POSTagging.tagger(str);
-        Map<String,String> map = new HashMap(){{
-            put("Im","NN");
-            put("so","RB");
-            put("happy","JJ");
-            put("about","IN");
-            put("my","PRP$");
-            put("marks","NNS");
-        }};
-        assertEquals(map.toString(),res.toString());
+    public void posTest() {
+        String txt = "i am#low#cardiac arrest#luck.";
+        LOGGER.info(POSTagging.tagger(txt,"#").toString());
     }
 
+    @Test
+    public void lemmaTest() {
+        String txt = "i#have#cancers#in#my#lungs#i like#running";
+        String[] arr = txt.split("#");
+        List<String> lemmas = new ArrayList();
+        for(String str: arr) {
+            if(!str.contains(" ")) {
+                Document doc = new Document(str);
+                lemmas.add(doc.sentence(0).lemmas().get(0));
+            }
+        }
+        LOGGER.info(lemmas.toString());
+    }
 }

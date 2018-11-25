@@ -21,6 +21,7 @@ import java.util.*;
 public class KafkaConsumer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
+    private static int paraId = 1;
 
     @Autowired
     private KafkaProducer producer;
@@ -30,6 +31,7 @@ public class KafkaConsumer {
      */
     @KafkaListener(topics="para-tokens",groupId = "group_json", containerFactory= "userKafkaListenerFactory")
     public void consumejson(Document data){
+
         LOGGER.info("consumed message: {}",data);
 
         Map<String,Double> keys = DocProcessor.performNGramAnalysis(data.getText());
@@ -38,9 +40,12 @@ public class KafkaConsumer {
         Map<String,List<Pair>> tags = DocProcessor.generateTags(keys);
         JSONObject obj = FillUpData.fillOntology(tags);
 
-        JSONld jsoNld = DocProcessor.json2jsonld(obj,data.getId());
+        JSONld jsoNld = DocProcessor.json2jsonld(obj,data.getId(),paraId);
+	    paraId++;
+
         this.producer.post(jsoNld);
-        LOGGER.info("jsonld object: {}",jsoNld.getData());
+
+        LOGGER.info("JSONld object: {}",jsoNld);
         LOGGER.info("producer message: hey !! i sent the message");
     }
 }

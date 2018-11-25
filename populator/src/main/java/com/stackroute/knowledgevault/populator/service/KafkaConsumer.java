@@ -36,7 +36,7 @@ public class KafkaConsumer {
         if(res!=null) {
             LOGGER.info("consumed message from para {}", res);
             int id = res.getId();
-            int paraId=res.paraId;
+            int paraId=res.getParaId();
             Map<String, Object> root = res.getData();
             MedicalCondition medicalCondition = readJsonld.getMedicalCondition(root);
             AnatomicalStructure anatomicalStructure = readJsonld.getAnatomicalStructure(root);
