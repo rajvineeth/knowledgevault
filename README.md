@@ -17,9 +17,9 @@ Currently v1.0.0 contains the services required to create the knowledge vault. I
 
 On local machine, send files on the following address using Postman or equivalent services on the following IP:
 
-`localhost:8094/extractor-service/Doc/extract/<file-name>`
-
-where file-name refers to files in the resources folder of extractor-service.
+`localhost:8094/extractor-service/<folder-name>/extract/<file-name>`
+    
+where folder-name refers to the folder in the resources folder of extractor-service, and file-name is the name of the file inside the respective folder.
 
 To process all the documents sent, and send JSON-LD object to populator service, send a GET request on the following IP using Postman:
 
