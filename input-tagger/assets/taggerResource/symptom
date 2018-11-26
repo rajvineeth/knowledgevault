@@ -431,3 +431,215 @@ xerostomia
 xerostomia
 yawns too much
 yellow eyes
+
+pain
+Abdominal pain
+Back pain
+Chest pain
+Otalgia (Earache)
+Headache
+Chronic pain
+Pelvic pain
+Toothache (ache)
+Vaginal (Pain)
+Rectal pain
+Dermatomal pain
+Extremities pain
+
+Chills
+Fever
+Paresthesia (numbness, tingling, electric tweaks)
+Light-headed
+Dizzy
+Dizzy – about to black out
+Dizzy – with the room spinning around me
+My mouth is dry
+Nauseated
+Sick
+like I have the flu
+like I have to vomit
+Short of breath
+Sleepy
+Sweaty
+Thirsty
+Tired
+Weak
+
+Breathe normally
+Hear normally:
+losing hearing
+sounds are too loud
+ringing or hissing in my ears
+Move one side – arm and/or leg
+Pass a bowel action normally
+Pass urine normally
+Remember normally
+See properly:
+Blindness
+blurred vision
+double vision
+Sleep normally
+Smell things normally
+Speak normally
+Stop passing watery bowel actions
+Stop scratching
+Stop sweating
+Swallow normally
+Taste properly
+Walk normally
+Write normally
+
+cachexia (R64)
+loss of appetite (R63.0)
+weight loss (R63.4)
+weight gain (R63.5)
+dry mouth (R68.2)
+fatigue (R53)
+malaise
+asthenia
+muscle weakness (M62.8)
+pyrexia (R50)
+jaundice (P58, P59, R17)
+pain
+abdominal pain (R10)
+chest pain (R07)
+bruising (Sx0 (x=0 through 9))
+epistaxis (R04.0)
+tremor (R25.1)
+convulsions (R56)
+muscle cramps (R25.2)
+tinnitus (H93.1)
+dizziness / vertigo (R42)
+syncope (R55)
+hypothermia (T68)
+hyperthermia (T670)
+discharge
+bleeding
+swelling
+deformity
+sweats
+chills and shivering
+
+acalculia
+acrophobia
+agnosia
+agoraphobia
+akathisia
+akinesia
+alexia
+amusia
+anhedonia
+anomia
+anosognosia
+anxiety
+apraxia
+arachnophobia
+ataxia
+bradykinesia
+cataplexy (G47.4)
+chorea
+claustrophobia
+confusion
+deliberate self harm and drug overdose
+depression
+dysarthria
+dysdiadochokinesia
+dysgraphia
+dystonia
+euphoria
+hallucination
+headache
+hemiballismus and ballismus
+homicidal ideation
+insomnia (F51.0, G47.0)
+Lhermitte's sign (as if an electrical sensation shoots down back & into arms)
+mania (F30)
+paralysis
+paranoia or persecution
+paresthesia
+phobia (see the List of Phobias)
+prosopagnosia
+sciatica
+somnolence (R40.0)
+suicidal ideation
+tic
+tremor
+
+Ocular
+amaurosis fugax (G45.3) and amaurosis
+blurred vision
+Dalrymple's sign
+double vision (H53.2)
+exophthalmos (H05.2)
+mydriasis/miosis (H570)
+nystagmus
+Gastrointestinal
+anorexia (R63.0)
+bloating (R14)
+belching (R14)
+blood in stool: melena (K92.1), hematochezia
+constipation (K59.0)
+diarrhea (A09, K58, K59.1)
+dysphagia (R13)
+dyspepsia (K30)
+flatulence (R14)
+fecal incontinence
+haematemesis
+nausea (R11)
+odynophagia
+proctalgia fugax
+pyrosis (R12)
+rectal malodor
+steatorrhea
+vomiting (R11)
+Cardiovascular
+chest pain (R07)
+claudication
+palpitation (R00.2)
+tachycardia (R00.0)
+bradycardia (R00.1)
+arrhythmia
+Urologic
+dysuria (R30.0)
+hematuria (R31)
+impotence (N48.4)
+polyuria (R35)
+retrograde ejaculation
+strangury
+urinary frequency (R35)
+urinary incontinence (R32)
+urinary retention
+Pulmonary
+hypoventilation
+hyperventilation
+bradypnea (R06.0)
+apnea
+cough (R05)
+dyspnea (R06.0)
+hemoptysis (R04.2)
+pleuritic chest pain
+sputum production (R09.3)
+tachypnea (R06.0)
+Integumentary
+abrasion
+alopecia
+anasarca (R60.1)
+blister (T14.0)
+edema (R60)
+hirsutism
+itching (L29)
+laceration
+paresthesia (R20.2)
+rash (R21)
+urticaria (L50)
+Obstetric / Gynaecological
+abnormal vaginal bleeding
+bloody show preceding onset of labour
+painful intercourse (N94.1)
+pelvic pain
+infertility
+labour pains
+vaginal bleeding in early pregnancy / miscarriage
+vaginal bleeding in late pregnancy
+vaginal discharge
+vaginismus (N94.2)
