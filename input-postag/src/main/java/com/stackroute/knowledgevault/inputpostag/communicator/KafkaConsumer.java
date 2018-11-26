@@ -21,7 +21,7 @@ public class KafkaConsumer {
     @Autowired
     private KafkaProducer kafkaProducer;
 
-    @KafkaListener(topics="user-input-POS", groupId = "group_json", containerFactory= "documentKafkaListenerFactory")
+    @KafkaListener(topics="user-input-POS", groupId = "group_json_POS", containerFactory= "documentKafkaListenerFactory")
     public void consumejson(UserInput userInput){
         LOGGER.info("consumed message");
 

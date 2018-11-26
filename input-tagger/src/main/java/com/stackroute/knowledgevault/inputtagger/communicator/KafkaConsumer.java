@@ -26,7 +26,7 @@ public class KafkaConsumer {
     /*
      * This method consumes data from kafka server and makes call to kafka producer.
      */
-    @KafkaListener(topics = "input-POS", groupId = "group_json", containerFactory = "posKafkaListenerFactory")
+    @KafkaListener(topics = "input-POS", groupId = "group_json_tag_POS", containerFactory = "posKafkaListenerFactory")
     public void consumejson(InputPOS inputPOS){
         LOGGER.info("TaggerLemmaUserInput: {}",inputPOS.toString());
         if(inputObject == null) {
@@ -40,7 +40,7 @@ public class KafkaConsumer {
 
     }
 
-    @KafkaListener(topics = "input-lemma", groupId = "group_json", containerFactory = "lemmaKafkaListenerFactory")
+    @KafkaListener(topics = "input-lemma", groupId = "group_json_tag_lemma", containerFactory = "lemmaKafkaListenerFactory")
     public void consumejson(InputLemma inputLemma){
         LOGGER.info("TaggerLemmaUserInput: {}",inputLemma.toString());
         if(inputObject == null) {

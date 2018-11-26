@@ -25,7 +25,7 @@ public class KafkaConsumer {
     /*
      * This method consumes data from kafka server and makes call to kafka producer.
      */
-    @KafkaListener(topics = "user-input-lemma", groupId = "group_json", containerFactory = "documentKafkaListenerFactory")
+    @KafkaListener(topics = "user-input-lemma", groupId = "group_json_lemma", containerFactory = "documentKafkaListenerFactory")
     public void consumejson(UserInput userInput){
         LOGGER.info("LemmaUserInput: {}",userInput.toString());
         Document document = new Document(userInput.getText());
