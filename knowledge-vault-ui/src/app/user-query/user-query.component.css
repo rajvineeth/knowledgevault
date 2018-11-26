@@ -1,0 +1,23 @@
+ .userInput-card {
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: white;
+  text-align: center;
+}
+
+button {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.userInput-full-width {
+    width: 100%;
+    color: black;
+}
+
+mat-card-title {
+  color: black;
+  font-family: source sans pro, sans-serif;
+}
