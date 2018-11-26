@@ -38,12 +38,22 @@
     <!-- <textarea ng-model="myTextarea"></textarea> -->
     <!-- <input type="textarea">
     <input type="submit"> -->
-    <div class="input-group ">
-        <!-- <input type="text" class="form-control" placeholder="Enter ur symptoms" aria-label="Recipient's username" aria-describedby="basic-addon2"> -->
+    <!--<div class="input-group ">
+         <input type="text" class="form-control" placeholder="Enter ur symptoms" aria-label="Recipient's username" aria-describedby="basic-addon2"> 
         
         <textarea class="form-control" aria-label="With textarea" placeholder="Enter ur symptoms"></textarea>
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon2">Submit</span>
         </div>
-      </div>
+      </div> -->
+    
+      <form class="search">
+        <label for="description"> Search: </label>
+        <input type="text" id="display-name" name="ip-display" required placeholder="Describe your problem here">
+        <button (click) = "search()"> Search </button>
+        <!-- <app-cards *ngIf = "movies.length > 0" [cards] = "movies"></app-cards> -->
+        <span></span>
+      </form>
+
+
 </body>
