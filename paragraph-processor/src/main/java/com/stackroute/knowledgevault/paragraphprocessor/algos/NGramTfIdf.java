@@ -60,12 +60,8 @@ public class NGramTfIdf {
 
         List<Map.Entry<String, Double>> es = new ArrayList<>(stats.entrySet());
 
-        Collections.sort(es, new Comparator<Map.Entry<String, Double>>() {
-            @Override
-            public int compare(Map.Entry<String, Double> a, Map.Entry<String, Double> b) {
-                return b.getValue().compareTo(a.getValue());
-            }
-        });
+        Collections.sort(es,(o1,o2) ->
+            ((Comparable) ((Map.Entry) (o2)).getValue()).compareTo(((Map.Entry) (o1)).getValue()));
 
         List<String> fields = new ArrayList<>();
         for (Map.Entry<String, Double> e : es) {

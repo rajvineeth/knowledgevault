@@ -58,9 +58,9 @@ public class Processor {
     public Map<String,String> paraProcessing(String paragraph) {
 
         Map<String,String> tags = new HashMap<>();
-        Map<String,String> pos_tagged = POSTagging.tagger(paragraph," ");
+        Map<String,String> posTagged = POSTagging.tagger(paragraph," ");
         List<String> keywords = new ArrayList<>();
-        for(Map.Entry<String,String> entry: pos_tagged.entrySet()) {
+        for(Map.Entry<String,String> entry: posTagged.entrySet()) {
             String pos = entry.getValue();
             if(pos.compareTo("NN")==0 || pos.compareTo("NNS")==0 || pos.compareTo("JJ")==0) {
                 keywords.add(entry.getKey());

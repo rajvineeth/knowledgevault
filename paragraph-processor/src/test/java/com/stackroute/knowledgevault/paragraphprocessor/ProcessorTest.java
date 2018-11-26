@@ -62,7 +62,7 @@ public class ProcessorTest {
     @Test
     public void jsonldGenTest() {
         Map<String,List<Pair>> tags = new HashMap<>();
-        String para = "i have cancers.";
+        String para = "The thirteen common communicable diseases found in India are as follows: 1. Malaria 2. Typhoid 3. Hepatitis 4. Jaundice 5. Leptospirosis 6. Diarrhoeal Diseases 7. Amoebiasis 8. Cholera 9. Brucellosis 10. Hookworm Infection 11. Influenza 12. Filariasis 13. Tuberculosis.";
 
         Map<String,Double> keys = DocProcessor.performNGramAnalysis(para);
         LOGGER.info("returned keys: {}",keys.keySet());

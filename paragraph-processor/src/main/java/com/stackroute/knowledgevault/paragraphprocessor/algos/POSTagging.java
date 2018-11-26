@@ -22,7 +22,6 @@ public class POSTagging {
         Map<String,String> res = new HashMap<>();
         String text = txt.replaceAll("\\.","");
         String[] arr = text.split(regex);
-        System.out.println(arr.toString());
         for(String token: arr) {
             LOGGER.info("sentence: {}", token);
             Document doc = new Document(token);

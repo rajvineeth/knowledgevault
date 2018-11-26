@@ -109,7 +109,7 @@ public class DocProcessor {
      * This function checks if a keyword is valid while being searched during tagging phase in a dictionary.
      * @param key : the keyword that is to be tagged
      * @param txt : the word that the keywrod is being compared to for a match in the dictionary.
-     * @return : ture if a match  is found , otherwise false.
+     * @return : true if a match is found , otherwise false.
      */
     public static boolean validKey(String key,String txt)  {
         boolean status = false;
@@ -176,8 +176,8 @@ public class DocProcessor {
         } catch (IOException e) {
             LOGGER.error("error found: {} ", e.getStackTrace());
         } catch (Exception e) {
-		LOGGER.error("error found here: {}", e.getStackTrace());
-	}
+		    LOGGER.error("error found here: {}", e.getStackTrace());
+	    }
         return jsoNld;
     }
 
