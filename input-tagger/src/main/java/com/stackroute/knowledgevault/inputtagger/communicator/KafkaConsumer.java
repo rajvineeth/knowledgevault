@@ -28,12 +28,15 @@ public class KafkaConsumer {
      */
     @KafkaListener(topics = "input-POS", groupId = "group_json_tag_POS", containerFactory = "posKafkaListenerFactory")
     public void consumejson(InputPOS inputPOS){
-        LOGGER.info("TaggerLemmaUserInput: {}",inputPOS.toString());
+        LOGGER.info("inside KafkaConsumer.consumejson()");
+        LOGGER.info("TaggerPOSUserInput: {}",inputPOS.toString());
         if(inputObject == null) {
+            LOGGER.info("inside KafkaConsumer.consumejson().if()");
             inputObject = new InputObject(inputPOS.getId());
             inputObject.setPoses(inputPOS.getPoses());
         }
         else {
+            LOGGER.info("inside KafkaConsumer.consumejson().else");
             inputObject.setPoses(inputPOS.getPoses());
             producer.post(processor.process(inputObject));
         }
@@ -42,12 +45,15 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "input-lemma", groupId = "group_json_tag_lemma", containerFactory = "lemmaKafkaListenerFactory")
     public void consumejson(InputLemma inputLemma){
+        LOGGER.info("inside lemma KafkaConsumer.consumejson()");
         LOGGER.info("TaggerLemmaUserInput: {}",inputLemma.toString());
         if(inputObject == null) {
+            LOGGER.info("inside lemma KafkaConsumer.consumejson().if()");
             inputObject = new InputObject(inputLemma.getId());
             inputObject.setLemmas(inputLemma.getLemmas());
         }
         else {
+            LOGGER.info("inside lemma KafkaConsumer.consumejson().else");
             inputObject.setLemmas(inputLemma.getLemmas());
 
             producer.post(processor.process(inputObject));
