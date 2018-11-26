@@ -96,20 +96,13 @@ public class Processor {
                     else continue;
                 default:
                     LOGGER.info("inside Processor.process().for(Keyword {}: keywords default", keyword);
-                    continue;
             }
         }
-//        Map<String, String> map = new HashMap<>();
-//        map.put("hand","body-part");
-//        map.put("cough","symptom");
-//        map.put("shxassai", "medicine");
-//        LOGGER.info("output :{}", new ProcessedInput(map));
         LOGGER.info("\nthe created final keword map:\n {}", keywordMap);
         return new ProcessedInput(keywordMap);
     }
 
     private boolean checkIf(String path, String lemma) {
-        LOGGER.info("directory files: {}",new File(commonPath).listFiles());
         File dictionary = new File(path);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(dictionary))) {
             String txt;
@@ -119,8 +112,7 @@ public class Processor {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            LOGGER.info("error found: {}", e.getStackTrace());
+            LOGGER.info("context {}",e);
         }
         return false;
 
