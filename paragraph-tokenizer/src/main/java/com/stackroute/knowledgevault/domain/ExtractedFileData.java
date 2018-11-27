@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ExtractedFileData {
 
-    private static Integer count = 0;
+    private static Integer count = 1;
 
     private Integer id;
     private String metadata;

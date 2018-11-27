@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 public class ExtractedFileData {
 
-    private static Integer count = 0;
+    private static Integer count = 1;
 
     private Integer id; //Id of the document
     private String metadata; //Will contain the metadata of the document

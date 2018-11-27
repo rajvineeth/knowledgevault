@@ -5,6 +5,12 @@ producer:
     port: 9092
 server:
     port: 8433
+spring:
+    data:
+        mongodb:
+            database: mydatabase
+            port: 27017
+            uri: mongodb://127.0.0.1/mydatabase
 #
 #lucene:
 #    INDEX_START: '"indexing the files now..."'

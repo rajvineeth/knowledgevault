@@ -2,6 +2,8 @@ package com.stackroute.knowledgevault.paragraphprocessor.communicators;
 
 import com.stackroute.knowledgevault.domain.Document;
 import com.stackroute.knowledgevault.domain.JSONld;
+import com.stackroute.knowledgevault.domain.ParaContent;
+import com.stackroute.knowledgevault.paragraphprocessor.service.ParaContentService;
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.DocProcessor;
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.FillUpData;
 import com.stackroute.knowledgevault.paragraphprocessor.utilities.Pair;
@@ -25,6 +27,9 @@ public class KafkaConsumer {
 
     @Autowired
     private KafkaProducer producer;
+    ParaContent paraContent;
+    @Autowired
+    ParaContentService paraContentService;
     /**
      * This method consumes the data for which it is listening kafka cluster to
      * @param: the wanted message
@@ -41,8 +46,9 @@ public class KafkaConsumer {
         JSONObject obj = FillUpData.fillOntology(tags);
 
         JSONld jsoNld = DocProcessor.json2jsonld(obj,data.getId(),paraId);
+        paraContent=new ParaContent(data.getId(),paraId,data.getText());
+        paraContentService.saveContent(paraContent);
 	    paraId++;
-
         this.producer.post(jsoNld);
 
         LOGGER.info("JSONld object: {}",jsoNld);
