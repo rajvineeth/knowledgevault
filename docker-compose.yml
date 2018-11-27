@@ -2,6 +2,19 @@ version:  '2'
 
 services:
 
+#  gateway:
+#    image: zuulgateway:v1
+#    build: zuulgateway/
+#    restart: always
+#    container_name: zuul-container
+#    network_mode: host
+#    depends_on:
+#    - mongodb
+#    ports:
+#    - 8080:8080
+#    expose:
+#    - 8080
+
   zookeeper:
     container_name: zookeeper
     image: wurstmeister/zookeeper
@@ -15,6 +28,7 @@ services:
   kafka:
     container_name: kafka
     image: wurstmeister/kafka
+    mem_limit: 2000000000
     ports:
     - "9092"
     depends_on:
@@ -24,8 +38,15 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+      KAFKA_REPLICA_FETCH_MAX_BYTES: 1000000000
+      KAFKA_PRODUCER_MAX_REQUEST_SIZE: 1000000000
+      KAFKA_CONSUMER_MAX_PARTITION_FETCH_BYTES: 1000000000
+      CONNECT_PRODUCER_MAX_REQUEST_SIZE: 1000000000
+      CONNECT_CONSUMER_MAX_PARTITION_FETCH_BYTES: 1000000000
+      KAFKA_MESSAGE_MAX_BYTES: 1000000000
     volumes:
     - '/var/run/docker.sock:/var/run/docker.sock'
+
 
   neo4j:
     container_name: neo4j
@@ -66,6 +87,8 @@ services:
     environment:
       MONGO_INITDB_DATABASE: mydatabase
 
+
+
   extractor-service:
     image: extractor-service:v1
     build: extractor-service/
@@ -80,6 +103,7 @@ services:
     - "8094:8094"
     expose:
     - "8094"
+    mem_limit: 1000000000
 
   paragraph-processor:
     image: paragraph-processor:v1
