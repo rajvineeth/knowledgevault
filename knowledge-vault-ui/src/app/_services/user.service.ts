@@ -17,7 +17,7 @@ export class UserService {
     }
 
     register(user: User) {
-        console.log("got http post");
+        console.log('got http post');
         return this.http.post(`${environment.apiUrl2}/api/v1/saveuser`, user);
     }
 

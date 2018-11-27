@@ -6,7 +6,7 @@ import { FileUploadDragDropComponent } from './file-upload-drag-drop/file-upload
 import { DragndropComponent } from './dragndrop/dragndrop.component';
 
 @NgModule({
-  declarations: [SmeComponent,DragndropComponent,FileUploadDragDropComponent],
+  declarations: [SmeComponent, DragndropComponent, FileUploadDragDropComponent],
   imports: [
     CommonModule,
     CustomMaterialModule

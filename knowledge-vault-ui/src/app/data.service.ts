@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { iReceivedQuery } from './receivedQuery';
+import { ReceivedQuery } from './receivedQuery';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
@@ -17,19 +17,17 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DataService {
-  
-
 
   // change to IP address of query-engine
-  private _url: string = "http://localhost:0000/query";
+  private _url = 'http://localhost:0000/query';
 
   constructor(private http: HttpClient) { }
 
-  getQuery(): Observable<iReceivedQuery[]>{
-    console.log(this.http.get<iReceivedQuery[]>(this._url));
-    return this.http.get<iReceivedQuery[]>(this._url).pipe(catchError(err => {
+  getQuery(): Observable<ReceivedQuery[]> {
+    console.log(this.http.get<ReceivedQuery[]>(this._url));
+    return this.http.get<ReceivedQuery[]>(this._url).pipe(catchError(err => {
       console.log(err.error);
-      return throwError(err.error)
+      return throwError(err.error);
     }));
   }
 }
