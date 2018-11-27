@@ -22,6 +22,7 @@ public class KafkaProducer {
     private static final String TOPIC = "queryInput";
 
     public String post(ProcessedInput userInput) {
+        LOGGER.info("inside KafkaProducer.post()");
         LOGGER.info("posting to kafka...");
         this.kafkaTemplate.send(TOPIC, userInput);
         return "published successfully";

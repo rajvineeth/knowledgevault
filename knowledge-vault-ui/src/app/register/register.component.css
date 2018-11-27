@@ -1,0 +1,21 @@
+.my-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.title {
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+button {
+  background-color: #5cb85c;
+  color: white;
+}

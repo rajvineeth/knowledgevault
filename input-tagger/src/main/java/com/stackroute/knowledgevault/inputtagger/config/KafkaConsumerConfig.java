@@ -24,7 +24,7 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id_tag");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
@@ -38,31 +38,31 @@ public class KafkaConsumerConfig {
         return factory;
     }
 
-    @Bean
-    public ConsumerFactory<String, InputToken> tokenConsumerFactory(){
-
-        Map<String, Object> config=new HashMap<>();
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json");
-        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-
-        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),new JsonDeserializer<>(InputToken.class));
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory tokenKafkaListenerFactory(){
-        ConcurrentKafkaListenerContainerFactory factory=new ConcurrentKafkaListenerContainerFactory();
-        factory.setConsumerFactory(tokenConsumerFactory());
-        return factory;
-    }
+//    @Bean
+//    public ConsumerFactory<String, InputToken> tokenConsumerFactory(){
+//
+//        Map<String, Object> config=new HashMap<>();
+//        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
+//        config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json");
+//        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+//
+//        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),new JsonDeserializer<>(InputToken.class));
+//    }
+//
+//    @Bean
+//    public ConcurrentKafkaListenerContainerFactory tokenKafkaListenerFactory(){
+//        ConcurrentKafkaListenerContainerFactory factory=new ConcurrentKafkaListenerContainerFactory();
+//        factory.setConsumerFactory(tokenConsumerFactory());
+//        return factory;
+//    }
 
     @Bean
     public ConsumerFactory<String, InputLemma> lemmaConsumerFactory(){
 
         Map<String, Object> config=new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json_tag_lemma");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
@@ -81,7 +81,7 @@ public class KafkaConsumerConfig {
 
         Map<String, Object> config=new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json_tag_POS");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 

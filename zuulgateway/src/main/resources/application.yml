@@ -1,13 +1,23 @@
 ribbon:
     eureka:
         enabled: false
-server:
-    port: 8081
+
 zuul:
     routes:
-        extractor-service:
-            url: http://localhost:8094
-
+        input-kafka:
+            #            path: /input/**
+            url: http://localhost:8148
+        input-lemmatize:
+            path: /lemmatizing/**
+            url: http://localhost:8140
+        input-postag:
+            path: /pos/**
+            url: http://localhost:8142
+        input-tagger:
+            path: /tagger/**
+            url: http://localhost:8144
+    host:
+        socket-timeout-millis: 30000
 #eureka:         #tells about the Eureka server details and its refresh time
 #    instance:
 #        leaseRenewalIntervalInSeconds: 1
