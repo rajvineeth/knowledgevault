@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +28,14 @@ public class Processor {
 
     public ProcessedInput process (InputObject inputObject) {
         LOGGER.info("inside Processor.process()");
-        LOGGER.info("\n********\nInputObject\nInside Processor.process() method\n*******\n{}",inputObject.toString());
+        LOGGER.info("********InputObject*******");
+        LOGGER.info("Inside Processor.process() method");
+        LOGGER.info("{}",inputObject.toString());
         List<Keyword> keywords = KeywordFilter.filterKeywords(inputObject);
+        List<Keyword> nGramTokens = produceNGram(inputObject);
+        for (Keyword k: nGramTokens) {
+            keywords.add(k);
+        }
         Map<String, String> keywordMap = new HashMap<>();
         boolean ageFlag = true;
 
@@ -72,6 +79,11 @@ public class Processor {
                         keywordMap.put(keyword.getLemma(), "body-part");
                         break;
                     }
+                    else if (checkIf(personName, keyword.getLemma())){
+                        LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NNP if()", keyword);
+                        LOGGER.info("Tagging {} to person name...", keyword.getLemma());
+                        keywordMap.put(keyword.getLemma(),"person-name");
+                    }
                     else continue;
                 case "NN":
                     LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NN", keyword);
@@ -93,6 +105,11 @@ public class Processor {
                         keywordMap.put(keyword.getLemma(), "body-part");
                         break;
                     }
+                    else if (checkIf(personName, keyword.getLemma())){
+                        LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NNP if()", keyword);
+                        LOGGER.info("Tagging {} to person name...", keyword.getLemma());
+                        keywordMap.put(keyword.getLemma(),"person-name");
+                    }
                     else continue;
                 default:
                     LOGGER.info("inside Processor.process().for(Keyword {}: keywords default", keyword);
@@ -100,6 +117,33 @@ public class Processor {
         }
         LOGGER.info("\nthe created final keword map:\n {}", keywordMap);
         return new ProcessedInput(keywordMap);
+    }
+
+    private List<Keyword> produceNGram(InputObject inputObject) {
+        LOGGER.info("inside Processor.produceNGram()...");
+        List<Keyword> keywords = new ArrayList<>();
+        String sentence;
+        int sentenceID = 0;
+        List<String> ngrams;
+        for (int j = 2; j <= 5; j++){
+            LOGGER.info("inside Processor.produceNGram for()...");
+            sentenceID = 0;
+            for (int i = 0; i < inputObject.getLemmas().size(); i++) {
+                LOGGER.info("inside Processor.produceNGram for() for()...");
+                sentence = "";
+                sentenceID++;
+                while (!(inputObject.getLemmas().get(i).equals(".")) && i < inputObject.getLemmas().size()-1){
+                    LOGGER.info("inside Processor.produceNGram for() for() while()...");
+                    sentence += " " + inputObject.getLemmas().get(i++);
+                }
+                ngrams = new NGram(sentence, j).list();
+                for (String s: ngrams){
+                    LOGGER.info("inside Processor.produceNGram for() for() for()...");
+                    keywords.add(new Keyword(inputObject.getId(),sentenceID, s, "NN" ));
+                }
+            }
+        }
+        return keywords;
     }
 
     private boolean checkIf(String path, String lemma) {
@@ -115,6 +159,5 @@ public class Processor {
             LOGGER.info("context {}",e);
         }
         return false;
-
     }
 }

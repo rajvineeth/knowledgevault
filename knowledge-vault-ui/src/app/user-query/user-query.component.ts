@@ -1,8 +1,13 @@
 import { SpeechService } from './../../lib/speech.service';
 import { UserQueryService } from './../user-query.service';
+<<<<<<< HEAD
 import { Component, OnInit , OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+=======
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+>>>>>>> 942c824be7dad1fca44f7ce6c89578f874f627c7
 
 @Component({
   selector: 'app-user-query',
@@ -17,6 +22,7 @@ export class UserQueryComponent implements OnInit , OnDestroy {
   subscription = Subscription.EMPTY;
   good: any;
 
+<<<<<<< HEAD
   started = false;
 
   private _destroyed = new Subject<void>();
@@ -50,11 +56,15 @@ export class UserQueryComponent implements OnInit , OnDestroy {
             this.speech.start();
         }
     }
+=======
+  constructor(private router: Router, private service: UserQueryService) { }
+>>>>>>> 942c824be7dad1fca44f7ce6c89578f874f627c7
 
 
   search() {
     console.log(this.inputText);
     // this.service.postUserQuery(this.inputText);
+    this.router.navigate(['queryresults']);
   }
 
 }
