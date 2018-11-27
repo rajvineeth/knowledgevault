@@ -12,6 +12,7 @@ public class KeyPhraser {
     private static final Logger LOGGER = LoggerFactory.getLogger(KeyPhraser.class);
 
     public static List<Keyword> phrase(InputObject inputObject) {
+        inputObject.compress();
 
         return null;
     }
