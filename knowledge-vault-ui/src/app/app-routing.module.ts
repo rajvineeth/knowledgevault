@@ -7,12 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
+import { QueryResultsComponent } from './query-results/query-results.component';
 
 const routes: Routes = [
   //{ path: 'user', component: UserComponent },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'home', component: HomeComponent},
+  { path: 'queryresults', component: QueryResultsComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
