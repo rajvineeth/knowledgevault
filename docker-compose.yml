@@ -5,30 +5,27 @@ services:
   zookeeper:
     container_name: zookeeper
     image: wurstmeister/zookeeper
-#    network_mode: host
+    network_mode: host
     ports:
     - "2181:2181"
-    expose:
-    - "2181"
     environment:
-     ZOOKEEPER_CLIENT_PORT: 2181
-     ZOOKEEPER_TICK_TIME: 2000
+       ZOOKEEPER_CLIENT_PORT: 2181
+       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
-    image: wurstmeister/kafka
     container_name: kafka
+    image: wurstmeister/kafka
     ports:
     - "9092"
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
-#      KAFKA_CREATE_TOPICS: "education:1:1"
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
-    volumes:
-    - '/var/run/docker.sock:/var/run/docker.sock'
     depends_on:
     - "zookeeper"
-#    restart: always
+    network_mode: host
+    environment:
+        KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+        KAFKA_ADVERTISED_HOST_NAME: localhost
+        KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+    volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
 
   input-kafka:
     image: input-kafka
@@ -38,9 +35,9 @@ services:
     depends_on:
     - kafka
     ports:
-    - "8184:8184"
+    - "8148:8148"
     expose:
-    - "8184"
+    - "8148"
 
   input-lemmatize:
     image: input-lemmatize
@@ -90,65 +87,68 @@ services:
 #    expose:
 #    - "8185"
 
-#  neo4j:
-#    image: tpires/neo4j
-#    env_file: .env
-#    cap_add:
-#    - SYS_RESOURCE
+#   neo4j:
+#     container_name: neo4j
+#     image: neo4j:latest
+#     ports:
+#     - "7474:7474"
+#     network_mode: host
+#     volumes:
+#     - '../data/neo4j:/data/db'
+#     environment:
+#     - NEO4J_AUTH=neo4j/123456
+
+#  mysql:
+#    image: mysql:5.7
 #    ports:
-#   - "7474:7474"
+#    - 3306:3306
+#    container_name: mysql
+#    environment:
+#    - MYSQL_USER =  root
+#    - MYSQL_ROOT_PASSWORD ="root"
+#    - MYSQL_DATABASE = mydatabase
+#    volumes:
+#    - '/opt/datasql:/var/lib/mysql'
+#    network_mode: "host"
+#    hostname: localhost
+##    restart: always
+#
+#  mongodb:
+#    image: mongo:3.2-jessie
+#    ports:
+#    - 27017:27017
+#    container_name: "mongo"
+#    network_mode: host
+#    volumes:
+#    - '../data/mongo:/data/db'
+#    environment:
+#      MONGO_INITDB_DATABASE: userDetails
 
-  mysql:
-    image: mysql:5.7
-    ports:
-      - 3306:3306
-    container_name: mysql
-    environment:
-      - MYSQL_USER = root
-      - MYSQL_ROOT_PASSWORD = root
-      - MYSQL_DATABASE = login
-    volumes:
-      - '/opt/datasql:/var/lib/mysql'
-    network_mode: "host"
-    hostname: localhost
-#    restart: always
+#  user-registration:
+#    image: user-registration
+#    build: user-registration-service/
+#    container_name: user-registration
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    - mongodb
+#    ports:
+#    - "8182:8182"
+#    expose:
+#    - "8182"
 
-  mongodb:
-    image: mongo:3.2-jessie
-    ports:
-    - 27017:27017
-    container_name: "mongo"
-    network_mode: host
-    volumes:
-    - '../data/mongo:/data/db'
-    environment:
-      MONGO_INITDB_DATABASE: userDetails
-
-  user-registration:
-    image: user-registration
-    build: user-registration-service/
-    container_name: user-registration
-    network_mode: host
-    depends_on:
-    - kafka
-    - mongodb
-    ports:
-    - "8182:8182"
-    expose:
-    - "8182"
-
-  user-authentication:
-    image: user-authentication
-    build: user-authentication-service/
-    container_name: user-authentication
-    network_mode: host
-    depends_on:
-    - kafka
-    - mysql
-    ports:
-    - "8184:8184"
-    expose:
-    - "8184"
+#  user-authentication:
+#    image: user-authentication
+#    build: user-authentication-service/
+#    container_name: user-authentication
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    - mysql
+#    ports:
+#    - "8184:8184"
+#    expose:
+#    - "8184"
   
 #  angular:
 #    image: angular
@@ -160,6 +160,7 @@ services:
 #    expose:
 #    - "4200"
 #    container_name: "angular"
+
 
   gateway:
     image: zuulgateway:v1
@@ -173,6 +174,6 @@ services:
     - input-postag
     - input-tagger
     ports:
-    - 8081:8081
+    - "8081:8081"
     expose:
-    - 8081
+    - "8081"

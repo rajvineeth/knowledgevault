@@ -9,11 +9,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
-  { path: 'user', component: UserComponent },
+  //{ path: 'user', component: UserComponent },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: '', component: HomeComponent}
-  // { path: '', redirectTo: 'home', pathMatch: 'full'}
+  { path: 'home', component: HomeComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
 
 @NgModule({
