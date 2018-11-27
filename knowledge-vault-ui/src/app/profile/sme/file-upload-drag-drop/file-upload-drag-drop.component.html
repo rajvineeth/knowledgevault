@@ -2,8 +2,9 @@
     <div draggable="true" ngClass="{{dragAreaClass}}">
         <div class="row">
             <div class="col-md-12 text-center">
-                <a href="javascript:void(0)" (click)="file.click()">Click to browse </a>
-                Or Drag & Drop File.
+                <div style="margin-left: 25%">
+                    <a href="javascript:void(0)" (click)="file.click()">Click to browse </a> Or Drag & Drop File.
+                </div>
                 <input type="file" #file [multiple]="(maxFiles >=1)" (change)="onFileChange($event)" style="display:none" />
             </div>
         </div>
@@ -11,8 +12,8 @@
 </mat-card-content>
 
 <mat-card-footer>
-    <a href="#" *ngIf="errors.length > 0 || successfiles.length > 0" class="pull-right cursorpointer" (click)="clearFiles()">
-        Clear All</a>
+    <div *ngIf="errors.length > 0 || successfiles.length > 0" class="pull-right cursorpointer" (click)="clearFiles()">
+        Clear All</div>
     <div class="row error" *ngIf="errors.length > 0">
         <ul>
             <li *ngFor="let err of errors">{{err}}</li>

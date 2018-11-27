@@ -5,15 +5,19 @@ import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@a
   templateUrl: './file-upload-drag-drop.component.html',
   styleUrls: ['./file-upload-drag-drop.component.css']
 })
+
 export class FileUploadDragDropComponent implements OnInit {
+
   errors: Array<string> = [];
   successfiles: Array<string> = [];
   dragAreaClass: string = 'dragarea';
   fileList = [];
+
   @Input() fileExt: string = "PDF";
   @Input() maxFiles: number = 10;
-  @Input() maxSize: number = 10; // 10MB
+  @Input() maxSize: number = 10;
   @Output() uploadStatus = new EventEmitter<any>();
+
   @Input() set IsuploadSucess(isUploaded: boolean) {
     if (isUploaded) {
       this.errors = [];
@@ -21,18 +25,23 @@ export class FileUploadDragDropComponent implements OnInit {
       this.fileList = [];
     }
   }
+
   constructor() {
     this.successfiles = [];
   }
+
   ngOnInit() { }
+
   onFileChange(event) {
     let files = event.target.files;
     this.saveFiles(files);
   }
+
   @HostListener('dragover', ['$event']) onDragOver(event) {
     this.dragAreaClass = "droparea";
     event.preventDefault();
   }
+
   @HostListener('dragenter', ['$event']) onDragEnter(event) {
     this.dragAreaClass = "droparea";
     event.preventDefault();
@@ -41,6 +50,7 @@ export class FileUploadDragDropComponent implements OnInit {
     this.dragAreaClass = "dragarea";
     event.preventDefault();
   }
+
   @HostListener('drop', ['$event']) onDrop(event) {
     this.dragAreaClass = "dragarea";
     event.preventDefault();
@@ -48,6 +58,7 @@ export class FileUploadDragDropComponent implements OnInit {
     var files = event.dataTransfer.files;
     this.saveFiles(files);
   }
+
   saveFiles(files) {
     this.errors = [];
     // Validate file size and allowed extensions
@@ -69,6 +80,7 @@ export class FileUploadDragDropComponent implements OnInit {
       return;
     }
   }
+
   private isValidFiles(files) {
     // Check Number of files
     if (files.length > this.maxFiles) {
@@ -78,6 +90,7 @@ export class FileUploadDragDropComponent implements OnInit {
     this.isValidFileExtension(files);
     return this.errors.length === 0;
   }
+
   private isValidFileExtension(files) {
     // Make array of file extensions
     var extensions = (this.fileExt.split(','))
@@ -90,16 +103,17 @@ export class FileUploadDragDropComponent implements OnInit {
       if (!exists) {
         this.errors.push("Invalid file : " + files[i].name+", Upload only "+this.fileExt+" file.");
       }
-      // Check file size
       this.isValidFileSize(files[i]);
     }
   }
+
   private isValidFileSize(file) {
     var fileSizeinMB = file.size / (1024 * 1000);
-    var size = Math.round(fileSizeinMB * 100) / 100; // convert upto 2 decimal place
+    var size = Math.round(fileSizeinMB * 100) / 100;
     if (size > this.maxSize)
       this.errors.push("Error (File Size): " + file.name + ": exceed file size limit of " + this.maxSize + "MB ( " + size + "MB )");
   }
+
   clearFiles() {
     this.errors = [];
     this.successfiles = [];

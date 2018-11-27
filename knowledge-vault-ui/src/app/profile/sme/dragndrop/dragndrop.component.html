@@ -7,7 +7,12 @@
       <app-file-upload-drag-drop [IsuploadSucess]="IsUploaded" maxFiles="10" maxSize="10" fileExt="PDF" (uploadStatus)="getFiles($event)">
       </app-file-upload-drag-drop>
     </mat-card-content>
-
 </mat-card>
+
 <button class="saveButton" mat-raised-button type="button" (click)="sendFileDB()">Save Document</button>
+
+<div *ngIf="show_success_msg">
+  <h1 style="color: mediumpurple"> {{ save_success }} </h1>
+</div>
+
 <br>
