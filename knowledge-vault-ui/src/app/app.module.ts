@@ -1,9 +1,9 @@
 import { CustomMaterialModule } from './core/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { SpeechModule } from '../lib/';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -32,9 +32,12 @@ import { UserQueryComponent } from './user-query/user-query.component';
     FormsModule,
     CustomMaterialModule,
     BrowserAnimationsModule,
-    FormsModule
+    SpeechModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'SPEECH_LANG', useValue: 'en-US' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

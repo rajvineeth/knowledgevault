@@ -23,3 +23,8 @@
      <button mat-raised-button (click)="search()">Search</button>
    </mat-card-actions>
  </mat-card>
+
+ <button (click)="toggleVoiceRecognition()">{{ started ? 'Stop voice recognition' : 'Start voice recognition' }}</button>
+<p>
+  I heard {{ msg }}
+</p>
