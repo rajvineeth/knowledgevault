@@ -1,11 +1,11 @@
 mat-toolbar {
-    background-color: darkorchid;
-    color: #bbb;
+    background-color: black;
+    color: white;
     font-size: 1rem;
 }
 
 a {
-    color: #5cb85c;
+    color: white;
     font-weight: bold;
     text-decoration: none;
 }
