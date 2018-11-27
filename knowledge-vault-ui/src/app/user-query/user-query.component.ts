@@ -18,7 +18,7 @@ export class UserQueryComponent implements OnInit {
 
   search() {
     console.log(this.inputText);
-    // this.service.postUserQuery(this.inputText);
+    this.service.postUserQuery(this.inputText);
     this.router.navigate(['queryresults']);
   }
 
