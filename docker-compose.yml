@@ -36,9 +36,9 @@ services:
 #    depends_on:
 #    - kafka
 #    ports:
-#    - "8184:8184"
+#    - "8148:8148"
 #    expose:
-#    - "8184"
+#    - "8148"
 #
 #  input-lemmatize:
 #    image: input-lemmatize
@@ -75,30 +75,30 @@ services:
 #    - "8144:8144"
 #    expose:
 #    - "8144"
-
-#  queryEngine:
-#    image: queryEngine
-#    build: queryEngine/
-#    container_name: "queryEngine"
-#    network_mode: host
-#    depends_on:
-#    - kafka
-#    ports:
-#    - "8185:8185"
-#    expose:
-#    - "8185"
-
-#   neo4j:
-#     container_name: neo4j
-#     image: neo4j:latest
-#     ports:
-#     - "7474:7474"
-#     network_mode: host
-#     volumes:
-#     - '../data/neo4j:/data/db'
-#     environment:
-#     - NEO4J_AUTH=neo4j/123456
-
+#
+##  queryEngine:
+##    image: queryEngine
+##    build: queryEngine/
+##    container_name: "queryEngine"
+##    network_mode: host
+##    depends_on:
+##    - kafka
+##    ports:
+##    - "8185:8185"
+##    expose:
+##    - "8185"
+#
+##   neo4j:
+##     container_name: neo4j
+##     image: neo4j:latest
+##     ports:
+##     - "7474:7474"
+##     network_mode: host
+##     volumes:
+##     - '../data/neo4j:/data/db'
+##     environment:
+##     - NEO4J_AUTH=neo4j/123456
+#
 
 
   mysql:
@@ -107,9 +107,9 @@ services:
     - 3306:3306
     container_name: mysql
     environment:
-    - MYSQL_USER =  root
-    - MYSQL_ROOT_PASSWORD ="root"
-    - MYSQL_DATABASE = mydatabase
+#    - MYSQL_USER =root
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=mydatabase
     volumes:
     - '/opt/datasql:/var/lib/mysql'
     network_mode: "host"
