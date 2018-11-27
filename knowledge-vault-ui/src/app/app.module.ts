@@ -41,7 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     { provide: 'SPEECH_LANG', useValue: 'en-US' },
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent]
 })
