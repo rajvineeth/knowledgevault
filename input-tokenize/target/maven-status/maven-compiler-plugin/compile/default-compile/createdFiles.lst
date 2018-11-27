@@ -1,0 +1,7 @@
+com/stackroute/knowledgevault/inputtokenize/communicator/KafkaConsumer.class
+com/stackroute/knowledgevault/inputtokenize/communicator/KafkaProducer.class
+com/stackroute/knowledgevault/inputtokenize/config/KafkaConsumerConfig.class
+com/stackroute/knowledgevault/domain/InputToken.class
+com/stackroute/knowledgevault/domain/UserInput.class
+com/stackroute/knowledgevault/inputtokenize/config/KafkaProducerConfig.class
+com/stackroute/knowledgevault/inputtokenize/InputTokenizeApplication.class

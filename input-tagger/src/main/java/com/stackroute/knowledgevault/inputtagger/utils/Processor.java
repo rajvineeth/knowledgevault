@@ -29,7 +29,6 @@ public class Processor {
         LOGGER.info("inside Processor.process()");
         LOGGER.info("\n********\nInputObject\nInside Processor.process() method\n*******\n{}",inputObject.toString());
         List<Keyword> keywords = KeywordFilter.filterKeywords(inputObject);
-//        List<Keyword> keyPhrases = KeyPhraser.phrase(inputObject);
         Map<String, String> keywordMap = new HashMap<>();
         boolean ageFlag = true;
 
