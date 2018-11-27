@@ -22,7 +22,7 @@ export class DragndropComponent implements OnInit {
   sendFileDB() {
     this.IsUploaded = false;
     this.show_success_msg = true;
-    this.save_success = "thank you for your contribution.We have saved your document in our database.We will add it to our knowledge-base once it is approved."
+    this.save_success = "Thank you for your contribution.We have saved your document in our database.We will add it to our knowledge-base once it is approved by Paurush Chaudhary."
     if (this.fileList.length > 0) {
       for (let i = 0; i < this.fileList.length; i++) {
         this.FileName = this.fileList[i].name;

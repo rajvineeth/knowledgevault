@@ -7,8 +7,14 @@
       <span class="example-spacer"></span>
 
       <button mat-button (click)="home()">Home</button>
-      <button mat-button (click)="login()">Login</button>
-      <button mat-button (click)="register()">Register</button>
+      <span *ngIf="amILoggedOut; else elseBlock;">
+        <button mat-button (click)="login()">Login</button>
+        <button mat-button (click)="register()">Register</button>
+      </span>
+      <ng-template #elseBlock>
+        <button mat-button (click)="logout()"> Logout </button>
+      </ng-template>
+
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
