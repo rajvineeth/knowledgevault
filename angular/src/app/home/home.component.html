@@ -1,0 +1,59 @@
+﻿<body>
+        <nav class="navbar navbar-light bg-light mb-5">
+                <!-- <a class="navbar-brand" href="/"></a> -->
+                <a class="navbar-brand" [routerLink]="['']"><h1>Knowledge Vault </h1> </a> 
+                <div class="navbar-expand mr-auto">
+                   <div class="navbar-nav">
+             
+                  </div>
+                </div>
+                <div class="navbar-expand ml-auto navbar-nav">
+                  <div class="navbar-nav">
+             
+                   <div> <p class=" btn btn-primary my-3 my-sm-1">Hi {{currentUser.firstName}}!</p>
+                    </div>
+                    <p><a [routerLink]="['/register']" class="btn btn-outline-primary my-3 my-sm-1" >Register</a>
+                    </p>
+                    <p><a [routerLink]="['/login']"class="btn btn-outline-primary my-2 my-sm-1">Log in</a></p>
+             
+                  </div>
+                </div>
+              </nav>
+              
+<!-- <h1>Hi {{currentUser.firstName}}!</h1>
+<p>You're logged in with Knowledge-Vault !!</p>
+
+<ul>
+    <li *ngFor="let user of users">
+        
+        <div *ngIf="user.role === 'SME' ">
+        <p>{{user.username}} ({{user.firstName}} {{user.lastName}})</p>
+        <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+        </div>
+    </li>
+</ul>
+<p><a [routerLink]="['/login']">Logout</a></p> -->
+<h1>Knowledge Vault's Symptom Checker </h1>
+<p>Experiencing symptoms but not sure what they mean? Use Symptom Checker to help determine possible causes and treatments, and when to see a doctor.</p>
+    <!-- <textarea ng-model="myTextarea"></textarea> -->
+    <!-- <input type="textarea">
+    <input type="submit"> -->
+    <!--<div class="input-group ">
+         <input type="text" class="form-control" placeholder="Enter ur symptoms" aria-label="Recipient's username" aria-describedby="basic-addon2"> 
+        
+        <textarea class="form-control" aria-label="With textarea" placeholder="Enter ur symptoms"></textarea>
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon2">Submit</span>
+        </div>
+      </div> -->
+    
+      <form class="search">
+        <label for="description"> Search: </label>
+        <input type="text" id="display-name" name="ip-display" required placeholder="Describe your problem here">
+        <button (click) = "search()"> Search </button>
+        <!-- <app-cards *ngIf = "movies.length > 0" [cards] = "movies"></app-cards> -->
+        <span></span>
+      </form>
+
+
+</body>

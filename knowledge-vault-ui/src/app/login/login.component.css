@@ -1,0 +1,28 @@
+.login-card {
+  background-color: white;
+  color: #5cb85c;
+  max-width: 40rem;
+  position: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+button {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  padding: 8px 26px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-form {
+  width: 100%;
+  font-size: 1.2rem;
+}

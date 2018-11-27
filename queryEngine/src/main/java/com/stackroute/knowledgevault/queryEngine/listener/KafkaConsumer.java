@@ -17,10 +17,14 @@ import java.util.Map;
 @Service
 public class KafkaConsumer {
 
+<<<<<<< HEAD
     @Autowired
     private KafkaProducer producer;
 
     private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
+=======
+    private DriverInit driver = new DriverInit("bolt://172.23.239.179:7687", "neo4j", "123456");
+>>>>>>> 95da466924c1afe1b7e35e49ffd24a2b8819830d
     private QueryService queryService = new QueryService();
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
 
