@@ -2,7 +2,7 @@ import { CustomMaterialModule } from './core/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { SpeechModule } from '../lib/';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -31,15 +31,20 @@ import { ShareService } from './share.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     CustomMaterialModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
+    SpeechModule,
     HttpClientModule,
     ProfileModule
   ],
-  providers: [ShareService],
+  providers: [
+    { provide: 'SPEECH_LANG', useValue: 'en-US' },
+    FormsModule,
+    ReactiveFormsModule,
+    ShareService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

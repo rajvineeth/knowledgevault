@@ -1,4 +1,4 @@
-export class iReceivedQuery{
+export class ReceivedQuery {
     MedicalCondition: string;
-    MedicalSymptom: string
+    MedicalSymptom: string;
 }

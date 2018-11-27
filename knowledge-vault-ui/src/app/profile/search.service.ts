@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -10,9 +10,9 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class UserQueryService {
+export class SearchService {
 
-  private getRequest = 'http://172.23.239.127:8081/kv/';
+  private getRequest = 'http://172.23.239.127:8081/input-kafka/kv/';
 
   constructor(private http: HttpClient) { }
 

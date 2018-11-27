@@ -16,10 +16,4 @@ export class ShareService {
   public getValue(): Observable<any> {
     return this.valueObs;
   }
-
-  private sub1 = new Subject();
-  subj1$ = this.sub1.asObservable();
-  sendStatus(value: any) {
-    this.sub1.next(value);
-  }
 }
