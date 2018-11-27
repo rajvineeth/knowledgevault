@@ -1,7 +1,0 @@
-/home/cgi/Desktop/frontend/knowledge-vault/input-tokenize/src/main/java/com/stackroute/knowledgevault/domain/InputToken.java
-/home/cgi/Desktop/frontend/knowledge-vault/input-tokenize/src/main/java/com/stackroute/knowledgevault/inputtokenize/communicator/KafkaConsumer.java
-/home/cgi/Desktop/frontend/knowledge-vault/input-tokenize/src/main/java/com/stackroute/knowledgevault/domain/UserInput.java
-/home/cgi/Desktop/frontend/knowledge-vault/input-tokenize/src/main/java/com/stackroute/knowledgevault/inputtokenize/config/KafkaProducerConfig.java
-/home/cgi/Desktop/frontend/knowledge-vault/input-tokenize/src/main/java/com/stackroute/knowledgevault/inputtokenize/config/KafkaConsumerConfig.java
-/home/cgi/Desktop/frontend/knowledge-vault/input-tokenize/src/main/java/com/stackroute/knowledgevault/inputtokenize/communicator/KafkaProducer.java
-/home/cgi/Desktop/frontend/knowledge-vault/input-tokenize/src/main/java/com/stackroute/knowledgevault/inputtokenize/InputTokenizeApplication.java
