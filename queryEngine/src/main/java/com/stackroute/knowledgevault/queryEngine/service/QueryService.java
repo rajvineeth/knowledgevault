@@ -1,18 +1,22 @@
 package com.stackroute.knowledgevault.queryEngine.service;
 
+import com.stackroute.knowledgevault.domain.ProcessedInput;
 import org.neo4j.driver.v1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QueryService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryService.class);
 //    private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
 //    Driver drive = driver.getDriver();
-    public void runquery(Driver driver, String k1, String k2) {
+    public ProcessedInput runquery(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger");
         // Sessions are lightweight and disposable connection wrappers.
+        Map<String,String> map = new HashMap<>();
         try (Session session = driver.session()) {
             // Wrapping Cypher in an explicit transaction provides atomicity
             // and makes handling errors much easier.
@@ -25,9 +29,12 @@ public class QueryService {
                     Record record = result.next();
                     // Values can be extracted from a record by index or name.
                     System.out.println(record.get("name").asString() + " "+record.get("name1").asString());
+                    map.put(record.get("name").asString(),record.get("name1").asString());
                 }
                 LOGGER.info("Out of string loop");
                 tx.success();  // Mark this write as successful.
+                LOGGER.info("output:{}", new ProcessedInput());
+                return new ProcessedInput();
             }
         }
     }

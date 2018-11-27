@@ -18,7 +18,7 @@ import java.util.Map;
 @Service
 public class KafkaConsumer {
 
-    private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
+    private DriverInit driver = new DriverInit("bolt://172.23.239.179:7687", "neo4j", "123456");
     private QueryService queryService = new QueryService();
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
 
