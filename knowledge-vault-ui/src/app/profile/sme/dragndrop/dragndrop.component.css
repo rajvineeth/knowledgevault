@@ -1,0 +1,10 @@
+.saveButton {
+    background-color: lightcoral;
+    margin-left: 40%;
+}
+
+#myImg {
+    background-image: url("../../../../assets/dropArea.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}

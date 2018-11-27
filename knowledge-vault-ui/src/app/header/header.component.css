@@ -3,14 +3,18 @@
 }
 
 mat-toolbar {
-  background-color: darkorchid;
-  color: #bbb;
+  background-color: black;
+  color: white;
 }
 
 span, a {
-  color: #5cb85c;
+  color: white;
   font-weight: bold;
   text-decoration: none;
+}
+
+a {
+  color: white;
 }
 
 button:hover {

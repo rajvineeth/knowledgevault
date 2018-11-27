@@ -1,6 +1,7 @@
 app-footer {
-    position: relative;
+
     bottom: 0;
+    flex: 1 1 auto;
     left: 0;
     width: 100%;
 }
