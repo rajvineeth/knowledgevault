@@ -57,5 +57,18 @@ export class UserQueryComponent implements OnInit , OnDestroy {
             this.speech.start();
         }
     }
+<<<<<<< HEAD
+=======
+=======
+  constructor(private router: Router, private service: UserQueryService) { }
+>>>>>>> 942c824be7dad1fca44f7ce6c89578f874f627c7
+
+
+  search() {
+    console.log(this.inputText);
+    this.service.postUserQuery(this.inputText);
+    this.router.navigate(['queryresults']);
+  }
+>>>>>>> 3f2c308e980ff578e8e5798cc8574e10c459986e
 
 }
