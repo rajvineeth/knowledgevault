@@ -14,7 +14,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InputObject {
-    private static final Logger LOGGER = LoggerFactory.getLogger(InputObject.class);
     private int id;
     private List<String> lemmas;
     private List<String> poses;
