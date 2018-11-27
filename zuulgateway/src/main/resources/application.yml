@@ -5,16 +5,12 @@ ribbon:
 zuul:
     routes:
         input-kafka:
-            #            path: /input/**
-            url: http://localhost:8148
+            url: http://localhost:8148/kv
         input-lemmatize:
-            path: /lemmatizing/**
             url: http://localhost:8140
         input-postag:
-            path: /pos/**
             url: http://localhost:8142
         input-tagger:
-            path: /tagger/**
             url: http://localhost:8144
     host:
         socket-timeout-millis: 30000
