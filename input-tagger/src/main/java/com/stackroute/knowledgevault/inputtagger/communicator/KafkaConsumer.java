@@ -17,8 +17,7 @@ public class KafkaConsumer {
     //to log data on the console
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
 
-    private InputObject inputObject = null;
-    private boolean wait = true;
+    private InputObject inputObject = new InputObject();
     @Autowired
     private Processor processor;
 
@@ -31,42 +30,31 @@ public class KafkaConsumer {
     public void consumejson(InputPOS inputPOS){
         LOGGER.info("inside POS KafkaConsumer.consumejson()");
         LOGGER.info("TaggerPOSUserInput: {}",inputPOS.toString());
-        this.inputObject = new InputObject(inputPOS.getId());
+        this.inputObject.setId(inputPOS.getId());
         this.inputObject.setPoses(inputPOS.getPoses());
-        this.wait = false;
 
-//        if(this.inputObject == null) {
-//            LOGGER.info("inside POS KafkaConsumer.consumejson().if()");
-
-//        }
-//        else {
-//            LOGGER.info("inside POS KafkaConsumer.consumejson().else");
-//            this.inputObject.setPoses(inputPOS.getPoses());
-//            InputObject paasingVar = this.inputObject;
-//            this.inputObject = null;
-//            producer.post(processor.process(paasingVar));
-//        }
-
+        if (inputObject.getLemmas() != null && inputObject.getPoses() != null){
+            LOGGER.info("inside pos consumer().if()...");
+            InputObject passingVar = this.inputObject;
+            this.inputObject = null;
+            producer.post(processor.process(passingVar));
+        }
     }
 
     @KafkaListener(topics = "input-lemma", groupId = "group_json_tag_lemma", containerFactory = "lemmaKafkaListenerFactory")
     public void consumejson(InputLemma inputLemma){
-        while (wait);
         LOGGER.info("inside lemma KafkaConsumer.consumejson()");
         LOGGER.info("TaggerLemmaUserInput: {}",inputLemma.toString());
+        this.inputObject.setId(inputLemma.getId());
         this.inputObject.setLemmas(inputLemma.getLemmas());
-        InputObject paasingVar = this.inputObject;
-        this.inputObject = null;
-        producer.post(processor.process(paasingVar));
-//        if(this.inputObject == null) {
-//            LOGGER.info("inside lemma KafkaConsumer.consumejson().if()");
-//            this.inputObject = new InputObject(inputLemma.getId());
-//            this.inputObject.setLemmas(inputLemma.getLemmas());
-//        }
-//        else {
-//            LOGGER.info("inside lemma KafkaConsumer.consumejson().else");
 
-//        }
+        if (inputObject.getLemmas() != null && inputObject.getPoses() != null){
+            LOGGER.info("inside lemma consumer().if()...");
+            InputObject paasingVar = this.inputObject;
+            this.inputObject = null;
+            producer.post(processor.process(paasingVar));
+        }
+
     }
 //
 //    @KafkaListener(topics = "input-token", groupId = "group_json", containerFactory = "tokenKafkaListenerFactory")
