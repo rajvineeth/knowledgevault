@@ -1,0 +1,8 @@
+<fieldset>
+  <legend ><b style="text-align:center">Upload Document</b></legend>
+  <app-file-upload-drag-drop [IsuploadSucess]="IsUploaded" maxFiles="10" maxSize="10" fileExt="PDF" (uploadStatus)="getFiles($event)">
+  </app-file-upload-drag-drop>
+</fieldset>
+<br>
+<button type="button" (click)="sendFileDB()">Save Document</button>
+<br>
