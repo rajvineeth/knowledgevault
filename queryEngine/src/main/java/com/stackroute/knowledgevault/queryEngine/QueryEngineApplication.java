@@ -47,10 +47,10 @@ public class QueryEngineApplication {
 
 	public static void main(String[] args) {
 
-		DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
+		DriverInit driver = new DriverInit("bolt://172.23.239.179:7687", "neo4j", "123456");
 		QueryService queryService = new QueryService();
 		Driver drive = driver.getDriver();
-		String k1="cough",k2="blood";
+		String k1="Groin pain",k2="blood";
 		queryService.runquery(drive, k1, k2);
 		queryService.close(drive);
 

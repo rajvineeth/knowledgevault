@@ -21,5 +21,4 @@ public class InputObject {
         LOGGER.info("inside InputObject.constructor()");
         this.id = id;
     }
-
 }

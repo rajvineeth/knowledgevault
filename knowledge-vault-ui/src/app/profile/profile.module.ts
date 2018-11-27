@@ -1,16 +1,15 @@
 import { CustomMaterialModule } from './../core/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SmeComponent } from './sme/sme.component';
-import { DragndropComponent } from './sme/dragndrop/dragndrop.component';
-import { FileUploadDragDropComponent } from './sme/file-upload-drag-drop/file-upload-drag-drop.component';
-import { HomeComponent } from '../home/home.component';
+import { GeneralUserComponent } from './general-user/general-user.component';
+import { SmeModule } from './sme/sme.module';
 
 @NgModule({
-  declarations: [SmeComponent,FileUploadDragDropComponent,DragndropComponent],
+  declarations: [GeneralUserComponent],
   imports: [
     CommonModule,
     CustomMaterialModule,
+    SmeModule
   ]
 })
 
