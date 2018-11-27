@@ -22,4 +22,13 @@ public class InputObject {
         this.id = id;
     }
 
+    public void compress() {
+        for (int i = 0; i < lemmas.size()-1; i++) {
+            if (poses.get(i+1).equals(poses.get(i))) {
+                lemmas.get(i).concat(" " + lemmas.get(i+1));
+                lemmas.remove(i+1);
+                poses.remove(i+1);
+            }
+        }
+    }
 }
