@@ -10,12 +10,12 @@ export class FileUploadDragDropComponent implements OnInit {
 
   errors: Array<string> = [];
   successfiles: Array<string> = [];
-  dragAreaClass: string = 'dragarea';
+  dragAreaClass = 'dragarea';
   fileList = [];
 
-  @Input() fileExt: string = "PDF";
-  @Input() maxFiles: number = 10;
-  @Input() maxSize: number = 10;
+  @Input() fileExt = 'PDF';
+  @Input() maxFiles = 10;
+  @Input() maxSize = 10;
   @Output() uploadStatus = new EventEmitter<any>();
 
   @Input() set IsuploadSucess(isUploaded: boolean) {
@@ -33,29 +33,29 @@ export class FileUploadDragDropComponent implements OnInit {
   ngOnInit() { }
 
   onFileChange(event) {
-    let files = event.target.files;
+    const files = event.target.files;
     this.saveFiles(files);
   }
 
   @HostListener('dragover', ['$event']) onDragOver(event) {
-    this.dragAreaClass = "droparea";
+    this.dragAreaClass = 'droparea';
     event.preventDefault();
   }
 
   @HostListener('dragenter', ['$event']) onDragEnter(event) {
-    this.dragAreaClass = "droparea";
+    this.dragAreaClass = 'droparea';
     event.preventDefault();
   }
   @HostListener('dragleave', ['$event']) onDragLeave(event) {
-    this.dragAreaClass = "dragarea";
+    this.dragAreaClass = 'dragarea';
     event.preventDefault();
   }
 
   @HostListener('drop', ['$event']) onDrop(event) {
-    this.dragAreaClass = "dragarea";
+    this.dragAreaClass = 'dragarea';
     event.preventDefault();
     event.stopPropagation();
-    var files = event.dataTransfer.files;
+    const files = event.dataTransfer.files;
     this.saveFiles(files);
   }
 
@@ -67,13 +67,12 @@ export class FileUploadDragDropComponent implements OnInit {
       return;
     }
     if (files.length > 0 && (this.isValidFiles(files))) {
-      for (var j = 0; j < files.length; j++) {
-        if (!this.fileList.some(x => x.name == files[j].name)) {
+      for (let j = 0; j < files.length; j++) {
+        if (!this.fileList.some(x => x.name === files[j].name)) {
           this.fileList.push(files[j]);
-          this.successfiles.push("File: " + files[j].name + " added successfully.");
-        }
-        else {
-          this.errors.push("File: " + files[j].name + " Already added in list.");
+          this.successfiles.push('File: ' + files[j].name + ' added successfully.');
+        } else {
+          this.errors.push('File: ' + files[j].name + ' Already added in list.');
         }
       }
       this.uploadStatus.emit(this.fileList);
@@ -84,7 +83,7 @@ export class FileUploadDragDropComponent implements OnInit {
   private isValidFiles(files) {
     // Check Number of files
     if (files.length > this.maxFiles) {
-      this.errors.push("Error: At a time you can upload only " + this.maxFiles + " files");
+      this.errors.push('Error: At a time you can upload only ' + this.maxFiles + ' files');
       return;
     }
     this.isValidFileExtension(files);
@@ -93,25 +92,26 @@ export class FileUploadDragDropComponent implements OnInit {
 
   private isValidFileExtension(files) {
     // Make array of file extensions
-    var extensions = (this.fileExt.split(','))
-      .map(function (x) { return x.toLocaleUpperCase().trim() });
-    for (var i = 0; i < files.length; i++) {
+    const extensions = (this.fileExt.split(','))
+      .map(function (x) { return x.toLocaleUpperCase().trim(); });
+    for (let i = 0; i < files.length; i++) {
       // Get file extension
-      var ext = files[i].name.toUpperCase().split('.').pop() || files[i].name;
+      const ext = files[i].name.toUpperCase().split('.').pop() || files[i].name;
       // Check the extension exists
-      var exists = extensions.includes(ext);
+      const exists = extensions.includes(ext);
       if (!exists) {
-        this.errors.push("Invalid file : " + files[i].name+", Upload only "+this.fileExt+" file.");
+        this.errors.push('Invalid file : ' + files[i].name + ', Upload only ' + this.fileExt + ' file.');
       }
       this.isValidFileSize(files[i]);
     }
   }
 
   private isValidFileSize(file) {
-    var fileSizeinMB = file.size / (1024 * 1000);
-    var size = Math.round(fileSizeinMB * 100) / 100;
-    if (size > this.maxSize)
-      this.errors.push("Error (File Size): " + file.name + ": exceed file size limit of " + this.maxSize + "MB ( " + size + "MB )");
+    const fileSizeinMB = file.size / (1024 * 1000);
+    const size = Math.round(fileSizeinMB * 100) / 100;
+    if (size > this.maxSize) {
+      this.errors.push('Error (File Size): ' + file.name + ': exceed file size limit of ' + this.maxSize + 'MB ( ' + size + 'MB )');
+    }
   }
 
   clearFiles() {

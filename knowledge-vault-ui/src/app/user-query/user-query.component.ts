@@ -22,7 +22,7 @@ export class UserQueryComponent implements OnInit , OnDestroy {
 
   private _destroyed = new Subject<void>();
 
-  constructor(private service: UserQueryService , public speech: SpeechService, private router: Router) { }
+    constructor(private router: Router, private service: UserQueryService , public speech: SpeechService) { }
 
   ngOnInit(): void {
         this.speech.start();
@@ -44,6 +44,12 @@ export class UserQueryComponent implements OnInit , OnDestroy {
         this.subscription.unsubscribe();
     }
 
+    search() {
+        console.log(this.inputText);
+        this.service.postUserQuery(this.inputText);
+        this.router.navigate(['queryresults']);
+    }
+
     toggleVoiceRecognition(): void {
         if (this.started) {
             this.speech.stop();
@@ -51,12 +57,5 @@ export class UserQueryComponent implements OnInit , OnDestroy {
             this.speech.start();
         }
     }
-
-
-  search() {
-    console.log(this.inputText);
-    this.service.postUserQuery(this.inputText);
-    this.router.navigate(['queryresults']);
-  }
 
 }
