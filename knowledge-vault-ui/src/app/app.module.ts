@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserQueryComponent } from './user-query/user-query.component';
+import { QueryResultsComponent } from './query-results/query-results.component';
 import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    UserQueryComponent
+    UserQueryComponent,
+    QueryResultsComponent
   ],
   imports: [
     BrowserModule,
