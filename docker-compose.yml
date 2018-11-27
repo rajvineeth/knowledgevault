@@ -5,7 +5,7 @@ services:
   zookeeper:
     container_name: zookeeper
     image: wurstmeister/zookeeper
-    network_mode: host
+#    network_mode: host
     ports:
     - "2181:2181"
     expose:
@@ -18,9 +18,7 @@ services:
     image: wurstmeister/kafka
     container_name: kafka
     ports:
-    - "9092:9092"
-    expose:
-    - 9092
+    - "9092"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: localhost
 #      KAFKA_CREATE_TOPICS: "education:1:1"
@@ -100,10 +98,7 @@ services:
 #    ports:
 #   - "7474:7474"
 
-
-
   mysql:
-
     image: mysql:5.7
     ports:
       - 3306:3306
@@ -122,7 +117,7 @@ services:
     image: mongo:3.2-jessie
     ports:
     - 27017:27017
-    container_name: "mongo-knowledgevault"
+    container_name: "mongo"
     network_mode: host
     volumes:
     - '../data/mongo:/data/db'
@@ -145,7 +140,7 @@ services:
   user-authentication:
     image: user-authentication
     build: user-authentication-service/
-    container_name: user-registration-container
+    container_name: user-authentication
     network_mode: host
     depends_on:
     - kafka
@@ -155,26 +150,29 @@ services:
     expose:
     - "8184"
   
-  angular:
-    image: angular
-    build: angular/.
-#    depends_on:
-#    - gateway
-    ports:
-    - "4200:4200"
-    expose:
-    - "4200"
-    container_name: "angular"
-
-#  gateway:
-#    image: zuulgateway:v1
-#    build: zuulgateway/
-#    restart: always
-#    container_name: zuul-container
-#    network_mode: host
-#    depends_on:
-#    - mongodb
+#  angular:
+#    image: angular
+#    build: angular/.
+##    depends_on:
+##    - gateway
 #    ports:
-#    - 8081:8081
+#    - "4200:4200"
 #    expose:
-#    - 8081
+#    - "4200"
+#    container_name: "angular"
+
+  gateway:
+    image: zuulgateway:v1
+    build: zuulgateway/
+    restart: always
+    container_name: zuul-container
+    network_mode: host
+    depends_on:
+    - input-kafka
+    - input-lemmatize
+    - input-postag
+    - input-tagger
+    ports:
+    - 8081:8081
+    expose:
+    - 8081

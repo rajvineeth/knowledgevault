@@ -5,7 +5,7 @@ ribbon:
 zuul:
     routes:
         input-kafka:
-            url: http://localhost:8148/kv
+            url: http://localhost:8148
         input-lemmatize:
             url: http://localhost:8140
         input-postag:
