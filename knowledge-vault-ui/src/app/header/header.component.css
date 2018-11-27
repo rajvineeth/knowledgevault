@@ -1,20 +1,18 @@
 .example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
   flex: 1 1 auto;
 }
 
 mat-toolbar {
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: #bbb;
 }
 
 span, a {
-  color: white;
+  color: #5cb85c;
   font-weight: bold;
   text-decoration: none;
-}
-
-a {
-  color: white;
 }
 
 button:hover {

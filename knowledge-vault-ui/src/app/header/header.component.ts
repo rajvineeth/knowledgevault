@@ -8,7 +8,7 @@ import { UserService } from '../_services';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  providers:[User, UserService]
+  providers: [User, UserService]
 })
 
 export class HeaderComponent implements OnInit {
@@ -36,8 +36,8 @@ export class HeaderComponent implements OnInit {
   }
 
   private loadAllUsers() {
-    this.userService.getAll().pipe(first()).subscribe(users => { 
-        this.users = users; 
+    this.userService.getAll().pipe(first()).subscribe(users => {
+        this.users = users;
     });
 }
 }

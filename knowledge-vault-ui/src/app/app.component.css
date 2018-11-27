@@ -1,8 +1,7 @@
 app-footer {
-
-    bottom: 0;
-    flex: 1 1 auto;
-    left: 0;
-    width: 100%;
+  position: absolute;
+  flex: 1 1 auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
-
