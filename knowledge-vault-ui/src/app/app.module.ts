@@ -1,9 +1,7 @@
-import { GeneralUserComponent } from './profile/general-user/general-user.component';
 import { CustomMaterialModule } from './core/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +12,9 @@ import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserQueryComponent } from './user-query/user-query.component';
+import { QueryResultsComponent } from './query-results/query-results.component';
 import { ProfileModule } from './profile/profile.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { ProfileModule } from './profile/profile.module';
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    UserQueryComponent
+    UserQueryComponent,
+    QueryResultsComponent
   ],
   imports: [
     BrowserModule,

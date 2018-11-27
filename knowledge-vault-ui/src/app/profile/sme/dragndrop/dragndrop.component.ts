@@ -1,22 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-dragndrop',
+  templateUrl: './dragndrop.component.html',
+  styleUrls: ['./dragndrop.component.css']
 })
-export class AppComponent implements OnInit {
+
+export class DragndropComponent implements OnInit {
+
   constructor() {
 
   }
   ngOnInit() { }
   fileList = [];
   FileName: string;
+  save_success: string;
+  show_success_msg: boolean = false;
   formData: FormData = new FormData();
   IsUploaded: boolean = false;
   //#region file upload drag and drop on intake page
   sendFileDB() {
     this.IsUploaded = false;
+    this.show_success_msg = true;
+    this.save_success = "thank you for your contribution.We have saved your document in our database.We will add it to our knowledge-base once it is approved."
     if (this.fileList.length > 0) {
       for (let i = 0; i < this.fileList.length; i++) {
         this.FileName = this.fileList[i].name;
@@ -39,5 +45,4 @@ export class AppComponent implements OnInit {
       return;
     }
   }
-  //#endregion
 }

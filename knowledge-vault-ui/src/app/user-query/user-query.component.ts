@@ -1,5 +1,6 @@
 import { UserQueryService } from './../user-query.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-query',
@@ -10,7 +11,7 @@ export class UserQueryComponent implements OnInit {
 
   inputText: string;
 
-  constructor(private service: UserQueryService) { }
+  constructor(private router: Router, private service: UserQueryService) { }
 
   ngOnInit() {
   }
@@ -18,6 +19,7 @@ export class UserQueryComponent implements OnInit {
   search() {
     console.log(this.inputText);
     // this.service.postUserQuery(this.inputText);
+    this.router.navigate(['queryresults']);
   }
 
 }
