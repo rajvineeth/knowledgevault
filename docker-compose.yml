@@ -4,7 +4,7 @@ services:
 
   zookeeper:
     container_name: zookeeper
-    image: wurstmeister/zookeeper
+    image: wurstmeister/zookeeper:0.10
     network_mode: host
     ports:
     - "2181:2181"
