@@ -3,7 +3,6 @@ package com.stackroute.knowledgevault.queryEngine.listener;
 import com.stackroute.knowledgevault.domain.ProcessedInput;
 import com.stackroute.knowledgevault.queryEngine.service.DriverInit;
 import com.stackroute.knowledgevault.queryEngine.service.QueryService;
-import org.apache.kafka.clients.producer.KafkaProducer;
 import org.neo4j.driver.v1.Driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +17,9 @@ import java.util.Map;
 @Service
 public class KafkaConsumer {
 
+    @Autowired
+    private KafkaProducer producer;
+
     private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
     private QueryService queryService = new QueryService();
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
@@ -29,9 +31,12 @@ public class KafkaConsumer {
         for(Map.Entry<String,String> entry: processedInput.getKeyValue().entrySet()) {
             LOGGER.info(entry.getKey());
             LOGGER.info(entry.getValue());
-            queryService.runquery(drive,entry.getKey(),entry.getValue());
+            ProcessedInput pi = queryService.runquery(drive,entry.getKey(),entry.getValue());
+
+            producer.post(pi);
         }
-        queryService.close(drive);
+        LOGGER.info("hey i sent the complete data");
+//        queryService.close(drive);
 
     }
 }

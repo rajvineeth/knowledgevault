@@ -19,7 +19,7 @@ public class Processor {
         Map<String, String> map = new HashMap<>();
         map.put("hand","body-part");
         map.put("cough","symptom");
-        map.put("fever", "fever");
+        map.put("Groin pain", "a");
         LOGGER.info("output :{}", new ProcessedInput(map));
         return new ProcessedInput(map);
     }
