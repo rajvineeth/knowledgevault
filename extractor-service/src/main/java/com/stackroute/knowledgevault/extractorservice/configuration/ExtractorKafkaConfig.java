@@ -27,6 +27,7 @@ public class ExtractorKafkaConfig {
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, producing_port);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        config.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 1000000000);
 
         return  new DefaultKafkaProducerFactory<>(config);
     }
