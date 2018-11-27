@@ -25,7 +25,11 @@ public class KafkaProducerConfig {
     }
 
     @Bean
+<<<<<<< HEAD
+    public KafkaTemplate<String,ProcessedInput> kafkaTemplate() {return new KafkaTemplate<>(producerFactory());
+=======
     public KafkaTemplate<String,ProcessedInput> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
+>>>>>>> 95da466924c1afe1b7e35e49ffd24a2b8819830d
     }
 }

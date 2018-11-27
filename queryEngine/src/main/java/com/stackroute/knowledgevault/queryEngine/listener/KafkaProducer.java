@@ -12,12 +12,21 @@ public class KafkaProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducer.class);
 
+<<<<<<< HEAD
+    @Autowired
+    private KafkaTemplate<String, ProcessedInput> kafkaTemplate;
+
+//    public KafkaProducer(KafkaTemplate<String, ProcessedInput> kafkaTemplate) {
+//        this.kafkaTemplate = kafkaTemplate;
+//    }
+=======
     private KafkaTemplate<String, ProcessedInput> kafkaTemplate;
 
     @Autowired
     public KafkaProducer(KafkaTemplate<String, ProcessedInput> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
+>>>>>>> 95da466924c1afe1b7e35e49ffd24a2b8819830d
 
     private static final String TOPIC = "queryOutput";
 

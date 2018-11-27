@@ -10,6 +10,7 @@ import { UserService } from '../_services';
   styleUrls: ['./header.component.css'],
   providers:[User, UserService]
 })
+
 export class HeaderComponent implements OnInit {
   currentUser: User;
   users: User[] = [];

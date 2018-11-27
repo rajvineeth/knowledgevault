@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-dragndrop',
+  templateUrl: './dragndrop.component.html',
+  styleUrls: ['./dragndrop.component.css']
 })
-export class AppComponent implements OnInit {
+
+export class DragndropComponent implements OnInit {
+
   constructor() {
 
   }
@@ -39,5 +41,4 @@ export class AppComponent implements OnInit {
       return;
     }
   }
-  //#endregion
 }
