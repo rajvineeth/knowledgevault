@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { UserQueryComponent } from './user-query/user-query.component';
 import { QueryResultsComponent } from './query-results/query-results.component';
 import { ProfileModule } from './profile/profile.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,17 +35,13 @@ import { ProfileModule } from './profile/profile.module';
     CustomMaterialModule,
     BrowserAnimationsModule,
     SpeechModule,
-    // HttpClientModule,
+    HttpClientModule,
     ProfileModule
   ],
   providers: [
     { provide: 'SPEECH_LANG', useValue: 'en-US' },
     FormsModule,
     ReactiveFormsModule,
-    // HttpClientModule,
-    ProfileModule
-    // ProfileModule,
-    // HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
