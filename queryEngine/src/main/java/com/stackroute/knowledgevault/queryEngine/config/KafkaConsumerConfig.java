@@ -1,7 +1,6 @@
 package com.stackroute.knowledgevault.queryEngine.config;
 
 import com.stackroute.knowledgevault.domain.ProcessedInput;
-//import com.stackroute.knowledgevault.domain.UserInput;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
