@@ -45,13 +45,14 @@ export class UserQueryComponent implements OnInit , OnDestroy {
     search() {
         console.log(this.msg);
         this.service.postUserQuery(this.msg);
+        this.speech.stop();
         this.router.navigate(['queryresults']);
     }
 
     toggleVoiceRecognition(): void {
         if (this.started) {
             this.speech.stop();
-        } else {
+        }else {
             this.speech.start();
         }
     }
