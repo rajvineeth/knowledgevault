@@ -95,4 +95,5 @@ public class MyAnalyzerTest {
 
         assertEquals("cancer\nhave\ni\nin\nlung\nmy\n",sb.toString());
     }
+
 }

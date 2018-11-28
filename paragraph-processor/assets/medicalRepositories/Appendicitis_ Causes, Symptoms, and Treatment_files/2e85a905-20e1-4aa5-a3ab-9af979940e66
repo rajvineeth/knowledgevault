@@ -1,0 +1,1 @@
+Krux.ns.healthline.kxjsonp_consent_get_0({"status":400,"body":{"code":"bad_request","pr":"global","source":"unk","settings":{"dc":0,"al":0,"tg":0,"cd":0,"sh":0,"re":0},"errors":{"idv":"user opted out via (optout or dnt)","query":"no queryable id; user opted out"}}});
