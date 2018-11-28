@@ -14,7 +14,7 @@ mat-toolbar {
 }
 
 button:hover {
-  color: black
+  color: black;
 }
 
 span {
@@ -42,4 +42,12 @@ mat-expansion-panel-header {
 
 .nav-spacer {
   flex: 1 1 auto;
+}
+
+button:visited {
+  color: black;
+}
+
+button:focus {
+  color: black;
 }
