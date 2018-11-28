@@ -17,6 +17,9 @@ import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CardDetailComponent } from './card-detail/card-detail.component';
 import { ShareService } from './share.service';
+import { CardComponent } from './card/card.component';
+import { SymptomsComponent } from './card/symptoms/symptoms.component';
+import { ExpansionPanelsComponent } from './card/expansion-panels/expansion-panels.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { ShareService } from './share.service';
     FooterComponent,
     UserQueryComponent,
     QueryResultsComponent,
-    CardDetailComponent
+    CardDetailComponent,
+    CardComponent,
+    SymptomsComponent,
+    ExpansionPanelsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,7 @@ import { ShareService } from './share.service';
     BrowserAnimationsModule,
     SpeechModule,
     HttpClientModule,
-    ProfileModule
+    ProfileModule,
   ],
   providers: [
     { provide: 'SPEECH_LANG', useValue: 'en-US' },
