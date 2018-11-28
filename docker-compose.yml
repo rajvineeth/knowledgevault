@@ -2,34 +2,9 @@ version:  '2'
 
 services:
 
-  zookeeper:
-    container_name: zookeeper
-    image: wurstmeister/zookeeper
-    network_mode: host
-    ports:
-    - "2181:2181"
-    environment:
-       ZOOKEEPER_CLIENT_PORT: 2181
-       ZOOKEEPER_TICK_TIME: 2000
-
-  kafka:
-    container_name: kafka
-    image: wurstmeister/kafka
-    ports:
-    - "9092"
-    depends_on:
-    - "zookeeper"
-    network_mode: host
-    environment:
-        KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-        KAFKA_ADVERTISED_HOST_NAME: localhost
-        KAFKA_ZOOKEEPER_CONNECT: localhost:2181
-    volumes:
-    - '/var/run/docker.sock:/var/run/docker.sock'
-
   config:
     image: config-server
-    build: config/
+    build: config-server/
     restart: always
     network_mode: host
     container_name: "config-server"
@@ -40,6 +15,43 @@ services:
     expose:
       - "8888"
 
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    hostname: zookeeper
+    ports:
+    - "2181:2181"
+    environment:
+       ZOOKEEPER_CLIENT_PORT: 2181
+       ZOOKEEPER_TICK_TIME: 2000
+    restart: always
+
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka:0.10.2.0
+    ports:
+      - "9092:9092"
+    depends_on:
+    - "zookeeper"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+    restart: always
+
+  eureka:
+    image: eureka-registry
+    build: eureka-registry/
+    restart: always
+    network_mode: host
+    container_name: "eureka-registry"
+    ports:
+      - "8066:8066"
+    expose:
+      - "8066"
+
   input-kafka:
     image: input-kafka
     build: input-kafka/
@@ -47,10 +59,13 @@ services:
     network_mode: host
     depends_on:
     - kafka
+#    - config
+    - eureka
     ports:
     - "8148:8148"
     expose:
     - "8148"
+    restart: always
 
   input-lemmatize:
     image: input-lemmatize
@@ -59,10 +74,13 @@ services:
     network_mode: host
     depends_on:
     - kafka
+#    - config
+    - eureka
     ports:
     - "8140:8140"
     expose:
     - "8140"
+    restart: always
 
   input-postag:
     image: input-postag
@@ -71,10 +89,13 @@ services:
     network_mode: host
     depends_on:
     - kafka
+#    - config
+    - eureka
     ports:
     - "8142:8142"
     expose:
     - "8142"
+    restart: always
 
   input-tagger:
     image: input-tagger
@@ -83,10 +104,13 @@ services:
     network_mode: host
     depends_on:
     - kafka
+    - eureka
+#    - config
     ports:
     - "8144:8144"
     expose:
     - "8144"
+    restart: always
 #
 ##  queryEngine:
 ##    image: queryEngine
@@ -127,16 +151,17 @@ services:
 #    hostname: localhost
 #    restart: always
 
-#  mongodb:
-#    image: mongo:3.2-jessie
-#    ports:
-#    - 27017:27017
-#    container_name: "mongo"
-#    network_mode: host
-#    volumes:
-#    - '../data/mongo:/data/db'
-#    environment:
-#      MONGO_INITDB_DATABASE: userDetails
+  mongodb:
+    image: mongo:3.2-jessie
+    ports:
+    - 27017:27017
+    container_name: "mongo"
+    network_mode: host
+    volumes:
+    - '../data/mongo:/data/db'
+    environment:
+      MONGO_INITDB_DATABASE: userDetails
+    restart: always
 
   user-registration:
     image: user-registration
@@ -146,10 +171,13 @@ services:
     depends_on:
     - kafka
     - mongodb
+    - config
+    - eureka
     ports:
     - "8182:8182"
     expose:
     - "8182"
+    restart: always
 
 #  user-authentication:
 #    image: user-authentication
@@ -183,6 +211,8 @@ services:
     container_name: zuul-container
     network_mode: host
     depends_on:
+    - config
+    - eureka
     - input-kafka
     - input-lemmatize
     - input-postag
