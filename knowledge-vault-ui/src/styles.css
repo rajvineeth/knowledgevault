@@ -6,3 +6,9 @@
 indigo-pink.css
 pink-bluegrey.css
 purple-green.css */
+
+html,body {
+    margin-left: 0;
+    margin-right: 0;
+}
+
