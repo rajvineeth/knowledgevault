@@ -12,13 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ExtractedFileData {
 
-    private static Integer count = 0;
-
     private Integer id;
     private String metadata;
     private String content;
 
-    public ExtractedFileData() {
-        this.id = count++;
-    }
 }

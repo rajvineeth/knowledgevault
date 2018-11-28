@@ -2,11 +2,17 @@ package com.stackroute.knowledgevault.paragraphprocessor.utilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.knowledgevault.domain.JSONld;
+import com.stackroute.knowledgevault.paragraphprocessor.MyAnalyzer;
 import com.stackroute.knowledgevault.paragraphprocessor.algos.NGramTfIdf;
 import com.stackroute.knowledgevault.paragraphprocessor.algos.POSTagging;
 import com.stackroute.knowledgevault.paragraphprocessor.algos.TfIdf;
-import edu.stanford.nlp.simple.Document;
-import edu.stanford.nlp.util.StringUtils;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.index.*;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.RAMDirectory;
+import org.apache.lucene.util.BytesRef;
+import org.apache.lucene.util.Version;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,13 +83,13 @@ public class DocProcessor {
      */
     public static Map<String,Double> performNGramAnalysis(String paragraph)  {
 
-        List<Integer> ns = Arrays.asList(1,2,3);
+        List<Integer> ns = Arrays.asList(1,2);
 
-        TfIdf.Normalization normalization = TfIdf.Normalization.COSINE;
-        boolean smooth = true;
+        TfIdf.Normalization normalization = TfIdf.Normalization.NONE;
+        boolean smooth = false;
         boolean noAddOne = false;
 
-        List<String> text = Arrays.asList(paragraph.trim().split("\\.|\\n"));
+        List<String> text = Arrays.asList(paragraph.trim().split("\\n+"));
 
         Iterable<Collection<String>> documents = NGramTfIdf.ngramDocumentTerms(ns, text);
 
@@ -96,13 +102,52 @@ public class DocProcessor {
             Map<String,Double> tmp = sortByValues(tfIdf);
             int i=0;
             for(Map.Entry<String,Double> entry : tmp.entrySet()) {
-                if(i<Math.min(20,tmp.size())) {
+                if(i<Math.min(50,tmp.size())) {
                     res.put(entry.getKey(),entry.getValue());
                     i++;
                 }
             }
         }
         return res;
+    }
+
+    /**
+     * This function lemmetizes a keyword by using lucene.
+     * @param key: the keyword to be lemmmetized
+     * @return: the String containing lemma of the keyword.
+     */
+    public static String luceneLemmetize(String key) {
+        StringBuilder sb = new StringBuilder();
+        Directory dir = new RAMDirectory();
+        Analyzer analyzer = new MyAnalyzer();
+        IndexWriterConfig config = new IndexWriterConfig(Version.LATEST,analyzer);
+        try {
+            IndexWriter wr = new IndexWriter(dir,config);
+            org.apache.lucene.document.Document doc = new org.apache.lucene.document.Document();
+            doc.add(new Field("content",key, Field.Store.YES, Field.Index.ANALYZED));
+            wr.addDocument(doc);
+            wr.close();
+            IndexReader iReader = IndexReader.open(dir);
+            Fields fields = MultiFields.getFields(iReader);
+            Iterator<String> iterator = fields.iterator();
+
+            while (iterator.hasNext()) {
+                String field = iterator.next();
+                Terms terms = MultiFields.getTerms(iReader, field);
+                TermsEnum it = terms.iterator(null);
+                BytesRef term = it.next();
+                while (term != null) {
+                    String data = term.utf8ToString();
+                    sb.append(data+" ");
+                    term = it.next();
+                }
+            }
+            dir.close();
+        }
+        catch (IOException e) {
+            LOGGER.info(e.getMessage());
+        }
+        return sb.toString();
     }
 
     /**
@@ -113,9 +158,10 @@ public class DocProcessor {
      */
     public static boolean validKey(String key,String txt)  {
         boolean status = false;
-        String l1 = new Document(txt).sentences().get(0).lemmas().get(0);
-        String l2 = new Document(key).sentences().get(0).lemmas().get(0);
-        if(l1!= null && l1.compareToIgnoreCase(l2)==0 || l2.compareToIgnoreCase(txt)==0) status = true;
+        String l1 = luceneLemmetize(txt.trim());
+        String l2 = luceneLemmetize(key.trim());
+        if(l1.compareToIgnoreCase(l2)==0 || l2.compareToIgnoreCase(txt.trim())==0 ||
+                l1.compareToIgnoreCase(key.trim())==0 || txt.trim().compareToIgnoreCase(key.trim())==0) status = true;
         return status;
     }
 
@@ -128,6 +174,7 @@ public class DocProcessor {
      */
 
     public static Map<String,List<Pair>> generateTags(Map<String,Double> keys) {
+
         Map<String,List<Pair>> tags = new HashMap<>();
         for(Map.Entry<String,Double> key: keys.entrySet()) {
 
@@ -136,13 +183,16 @@ public class DocProcessor {
 
                 String filename = f.getName();
                 tags.putIfAbsent(filename,new ArrayList());
+
                 try(BufferedReader br = new BufferedReader(new FileReader(f))) {
                     String txt;
                     while((txt = br.readLine())!=null) {
-                        if(txt.length()>0 && validKey(txt,key.getKey())) {
-                            Pair p = new Pair(key.getKey(),key.getValue());
-                            tags.get(filename).add(p);
-                            break;
+                        if (txt.length() > 0) {
+                            if (txt.trim().compareToIgnoreCase(key.getKey().trim()) == 0 || key.getKey().trim().compareToIgnoreCase(txt.trim()) == 0) {
+                                Pair p = new Pair(txt.trim(), key.getValue());
+                                tags.get(f.getName()).add(p);
+                                break;
+                            }
                         }
                     }
                 }
@@ -173,40 +223,15 @@ public class DocProcessor {
         try {
             HashMap<String,Object> mapData = mapper.readValue(obj.toString(), HashMap.class);
             jsoNld = new JSONld(docId,paraId,mapData);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             LOGGER.error("error found: {} ", e.getStackTrace());
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
 		    LOGGER.error("error found here: {}", e.getStackTrace());
 	    }
         return jsoNld;
     }
 
-    /**
-     * This function filters unnecessary keywords to narrow down the search space.We don't need to search for pronouns,
-     * adjectives,prepositions, etc for named entity Recognition.We first assign tags to the keywords by using stanford NLP pipeline.
-     * And then we criss-cross the undesired ones.
-     * @param keys: Map<keyword,Score> which contains all keys with their tf-idf score.
-     * @return: Valid collection of <KEYWORD,SCORE> pairs.
-     */
-    public static Map<String,Double> processKeys(Map<String,Double> keys) {
 
-        List<String> list = new ArrayList<>();
-
-        Set<Map.Entry<String, Double>> entrySet = keys.entrySet();
-        for(Map.Entry<String,Double> entry: entrySet) {
-            list.add(entry.getKey());
-        }
-
-        String posInput = StringUtils.join(list,"\n");
-        List<String> validKeys = getValidKeys(posInput);
-
-        for(Map.Entry<String,Double> entry: entrySet) {
-            String key = entry.getKey();
-            if(!validKeys.contains(key)) {
-                keys.remove(key);
-            }
-        }
-
-        return keys;
-    }
 }

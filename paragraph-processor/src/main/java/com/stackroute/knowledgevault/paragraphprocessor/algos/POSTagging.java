@@ -29,4 +29,9 @@ public class POSTagging {
         }
         return res;
     }
+
+    public static String individualTag(String key) {
+        Document doc = new Document(key);
+        return doc.sentences().get(0).posTag(0);
+    }
 }
