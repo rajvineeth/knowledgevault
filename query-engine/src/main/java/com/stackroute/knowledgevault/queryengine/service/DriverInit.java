@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.queryEngine.service;
+package com.stackroute.knowledgevault.queryengine.service;
 
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
