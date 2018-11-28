@@ -1,37 +1,26 @@
 server:
     port: 8094
-
-folder:
-    path: /knowledge-vault/extractor-service/src/main/resources/
-    test_path: ./src/main/resources/Doc
-    sub_folder: ./src/main/resources/Doc/new
-    doc_type_messgae: Found a folder while iterating.
-    parse_message: Cannot parse a folder.
-
-README:
-    metadata: Content-Encoding=ISO-8859-1 Content-Type=text/plain; charset=ISO-8859-1
-
-Map:
-    all_files: /extractor-service/Doc
-    extract_all_files: /extractor-service/Doc/extract
-    doc_types: /extractor-service/Doc/docTypes
-    extract_one_file: /extractor-service/Doc/extract/CGI-Reimbursement Mail.pdf.pdf
-
-kafka:
-    port: localhost:9092
-
-#eureka:         #tells about the Eureka server details and its refresh time
-#    instance:
-#        leaseRenewalIntervalInSeconds: 1
-#        leaseExpirationDurationInSeconds: 2
-#    client:
-#        serviceUrl:
-#            defaultZone: http://127.0.0.1:8066/eureka/
-#        healthcheck:
-#            enabled: true
-#        lease:
-#            duration: 5
-management:
-    security:
-        enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
-
+#
+#folder:
+#    path: /knowledge-vault/extractor-service/src/main/resources/
+#    test_path: ./src/main/resources/Doc
+#    sub_folder: ./src/main/resources/Doc/new
+#    doc_type_messgae: Found a folder while iterating.
+#    parse_message: Cannot parse a folder.
+#
+#README:
+#    metadata: Content-Encoding=ISO-8859-1 Content-Type=text/plain; charset=ISO-8859-1
+#
+#Map:
+#    all_files: /extractor-service/Doc
+#    extract_all_files: /extractor-service/Doc/extract
+#    doc_types: /extractor-service/Doc/docTypes
+#    extract_one_file: /extractor-service/Doc/extract/CGI-Reimbursement Mail.pdf.pdf
+#
+#kafka:
+#    port: localhost:9092
+#
+#management:
+#    security:
+#        enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
+#

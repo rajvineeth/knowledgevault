@@ -2,7 +2,7 @@ ribbon:
     eureka:
         enabled: false
 server:
-    port: 8080
+    port: 8090
 zuul:
     routes:
         extractor-service:

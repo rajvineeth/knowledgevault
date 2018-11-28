@@ -1,22 +1,17 @@
-#spring:
-#    data:
-#        mongodb:
-#            database: mydatabase
-#            port: 27017
-#            uri: mongodb://127.0.0.1/mydatabase
+
 server:
   port: 8083
-
-spring:
-  data:
-    mongodb:
-      database: mydatabase
-      port: 27017
-      uri: mongodb://127.0.0.1/mydatabase
-
-kafka:
-  port: localhost:9092
-
-management:
-  security:
-    enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
+#
+#spring:
+#  data:
+#    mongodb:
+#      database: mydatabase
+#      port: 27017
+#      uri: mongodb://127.0.0.1/mydatabase
+#
+#kafka:
+#  port: localhost:9092
+#
+#management:
+#  security:
+#    enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.

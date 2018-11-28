@@ -14,8 +14,7 @@ knowledge-vault-parent.iml
 
 /home/shubham/Documents/knowledge-vault/src/main/java/com/stackroute/knowledgevault/inputprocessor/assets/taggerIndices
 
-config-server/
-eureka-registry/
+
 
 ######################
 # Node

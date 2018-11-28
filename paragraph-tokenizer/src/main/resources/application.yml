@@ -1,13 +1,13 @@
 server:
     port: 8065
-
-kafka:
-    port: localhost:9092
-
-consumed:
-    list: "list of documents: {}"
-    message: i'm in consumer
-
-production_message: published successfully
-
-tokenizer_test_folderPath: /home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/resources/
+#
+#kafka:
+#    port: localhost:9092
+#
+#consumed:
+#    list: "list of documents: {}"
+#    message: i'm in consumer
+#
+#production_message: published successfully
+#
+#tokenizer_test_folderPath: /home/shubham/Documents/knowledge-vault/paragraph-tokenizer/src/main/resources/

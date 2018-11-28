@@ -1,38 +1,36 @@
 version:  '2'
-
 services:
-
-  gateway:
-    image: zuulgateway:v1
-    build: zuulgateway/
+  config-server:
+    image: config-server:v1
+    build: config-server/
     restart: always
-    container_name: zuul-container
+    container_name: config-container
     network_mode: host
-    depends_on:
-    - mongodb
     ports:
-    - 8080:8080
+    - 8092:8092
     expose:
-    - 8080
-
+    - 8092
   zookeeper:
     container_name: zookeeper
     image: wurstmeister/zookeeper
+    restart: always
     network_mode: host
+    depends_on:
+    - config-server
     ports:
     - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-
   kafka:
     container_name: kafka
     image: wurstmeister/kafka
+    restart: always
     mem_limit: 2000000000
     ports:
     - "9092"
     depends_on:
-    - "zookeeper"
+    - zookeeper
     network_mode: host
     environment:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
@@ -41,56 +39,42 @@ services:
       KAFKA_MESSAGE_MAX_BYTES: 1000000000
     volumes:
     - '/var/run/docker.sock:/var/run/docker.sock'
-
-
   neo4j:
     container_name: neo4j
     image: neo4j:latest
+    restart: always
     ports:
     - "7474:7474"
     - "7687:7687"
     network_mode: host
+    depends_on:
+    - kafka
     volumes:
     - '../data/neo4j:/data/db'
     environment:
     - NEO4J_AUTH=neo4j/123456
-
-  document-identifier:
-    image: document-identifier:v1
-    build: document-identifier/
-    #    restart: always
-    container_name: "document-identifier"
-    network_mode: host
-    depends_on:
-    - kafka
-    - mongodb
-    volumes:
-    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
-    ports:
-    - "8080:8080"
-    expose:
-    - "8080"
-
   mongodb:
     image: mongo:3.2-jessie
+    restart: always
     ports:
     - 27017:27017
     container_name: "mongo-knowledgevault"
     network_mode: host
+    depends_on:
+    - neo4j
     volumes:
     - '../data/mongo:/data/db'
     environment:
       MONGO_INITDB_DATABASE: mydatabase
-
-
-
   extractor-service:
     image: extractor-service:v1
     build: extractor-service/
-   # restart: always
+    restart: always
     container_name: "extractor-service"
     network_mode: host
     depends_on:
+    - mongodb
+    - config-server
     - kafka
     volumes:
     - '../knowledge-vault/extractor-service/src/main/resources/:/knowledge-vault/extractor-service/src/main/resources/'
@@ -99,35 +83,50 @@ services:
     expose:
     - "8094"
     mem_limit: 1000000000
-
-  paragraph-processor:
-    image: paragraph-processor:v1
-    build: paragraph-processor/
-  #  restart: always
-    container_name: "paragraph-processor"
+  document-identifier:
+    image: document-identifier:v1
+    build: document-identifier/
+    #    restart: always
+    container_name: "document-identifier"
     network_mode: host
-    volumes:
-    -  '../knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
     depends_on:
+    - config-server
     - kafka
+    - mongodb
+    volumes:
+    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
     ports:
-    - "8433:8433"
+    - "8083:8083"
     expose:
-    - "8433"
-
+    - "8083"
   paragraph-tokenizer:
     image: paragraph-tokenizer:v1
     build: paragraph-tokenizer/
-   # restart: always
+    # restart: always
     container_name: "paragraph-tokenizer"
     network_mode: host
     depends_on:
+    - config-server
     - kafka
     ports:
     - "8065:8065"
     expose:
     - "8065"
-
+  paragraph-processor:
+    image: paragraph-processor:v1
+    build: paragraph-processor/
+    #  restart: always
+    container_name: "paragraph-processor"
+    network_mode: host
+    volumes:
+    - '../knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
+    depends_on:
+    - config-server
+    - kafka
+    ports:
+    - "8433:8433"
+    expose:
+    - "8433"
   populator:
     image: populator:v1
     build: populator/
@@ -135,9 +134,26 @@ services:
     container_name: "populator"
     network_mode: host
     depends_on:
+    - config-server
     - kafka
     - neo4j
     ports:
     - "8067:8067"
     expose:
     - "8067"
+  gateway:
+    image: zuulgateway:v1
+    build: zuulgateway/
+    restart: always
+    container_name: zuul-container
+    network_mode: host
+    depends_on:
+    - extractor-service
+    - document-identifier
+    - paragraph-tokenizer
+    - paragraph-processor
+    - populator
+    ports:
+    - 8090:8090
+    expose:
+    - 8090
