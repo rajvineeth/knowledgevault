@@ -6,10 +6,6 @@ app-footer {
   width: auto;
 }
 
-/* div {
-  background-color: lightgrey;
-  width: 300px;
-  border: 25px solid green;
-  padding: 25px;
-  margin: 25px;
-} */
+div {
+  min-width: 245px;
+}
