@@ -1,7 +1,14 @@
 <p>
   query-results works!
 </p>
-
+<div fxLayout="row wrap" fxLayoutAlign="space-between" >
+    <app-card fxFlex="0 1 calc(33.3% - 35px)"
+     ></app-card>
+     <app-card fxFlex="0 1 calc(33.3% - 35px)"
+     ></app-card>
+     <app-card fxFlex="0 1 calc(33.3% - 35px)"
+     ></app-card>
+</div>
 <ul>
   <li *ngFor="let query of queryResults">{{query.MedicalCondition}}</li>
 </ul>

@@ -1,6 +1,4 @@
-.example-fill-remaining-space {
-  /* This fills the remaining space, by using flexbox. 
-     Every toolbar row uses a flexbox row layout. */
+.nav-fill-remaining-space {
   flex: 1 1 auto;
 }
 
@@ -16,7 +14,17 @@ mat-toolbar {
 }
 
 button:hover {
-  color: black
+  color: black;
+}
+
+span {
+  margin-right: 3%;
+}
+
+#logo {
+  background-image: url("../../assets/logo.jpg");
+  background-size: cover;
+  border: black;
 }
 
 .avatar {
@@ -30,4 +38,16 @@ mat-expansion-panel {
 
 mat-expansion-panel-header {
   height: 1rem;
+}
+
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+button:visited {
+  color: black;
+}
+
+button:focus {
+  color: black;
 }

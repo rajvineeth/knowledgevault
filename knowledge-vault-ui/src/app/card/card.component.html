@@ -1,0 +1,32 @@
+<mat-card class="card">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>Disease Common Name</mat-card-title>
+    <mat-card-subtitle>Disease Scientific name</mat-card-subtitle>
+  </mat-card-header>
+  <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Picture related to disease"> -->
+  <mat-card-content>
+    
+
+    <mat-accordion class="paragraph">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Symptoms
+                </mat-panel-title>
+                <mat-panel-description>
+                  Tap to view symptoms
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <app-symptoms></app-symptoms>
+        </mat-expansion-panel>
+        <app-expansion-panels></app-expansion-panels>
+        <app-expansion-panels></app-expansion-panels>
+        <app-expansion-panels></app-expansion-panels>
+    </mat-accordion>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="detailedView()" >Detailed View</button>
+    <button mat-button>Save Card</button>
+  </mat-card-actions>
+</mat-card>
