@@ -25,11 +25,7 @@ export class DragndropComponent implements OnInit {
   sendFileDB() {
     this.IsUploaded = false;
     this.show_success_msg = true;
-<<<<<<< HEAD
     this.save_success = "Thank you for your contribution.We have saved your document in our database.We will add it to our knowledge-base once it is approved by Paurush Chaudhary."
-=======
-    this.save_success = 'thank you for your contribution. We will add it to knowledge-base once it is approved.';
->>>>>>> 5fcbca88d6034e53b7d42b7c1826c3e5c20c0685
     if (this.fileList.length > 0) {
       for (let i = 0; i < this.fileList.length; i++) {
         this.FileName = this.fileList[i].name;
