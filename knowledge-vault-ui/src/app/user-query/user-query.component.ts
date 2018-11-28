@@ -24,7 +24,6 @@ export class UserQueryComponent implements OnInit , OnDestroy {
     constructor(private router: Router, private service: UserQueryService , public speech: SpeechService) { }
 
   ngOnInit(): void {
-        this.speech.start();
         this.speech.message.pipe(
             takeUntil(this._destroyed)
         ).subscribe(msg => this.msg = msg.message);
