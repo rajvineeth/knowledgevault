@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.queryEngine.service;
+package com.stackroute.knowledgevault.queryengine.service;
 
 import com.stackroute.knowledgevault.domain.OutputResult;
 import org.neo4j.driver.v1.*;
