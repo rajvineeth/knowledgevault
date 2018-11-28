@@ -11,7 +11,7 @@
          <tr>
            <td>
              <mat-form-field class="userInput-full-width">
-             <input matInput placeholder="Enter your Query" type="search" [(ngModel)]="msg" color="primary" name="search" required>
+             <input matInput placeholder="Enter your Query" type="search" [(ngModel)]="msg" color="primary" name="search" (keyup.enter)="search($event)" required>
              </mat-form-field>
            </td>
          </tr>
