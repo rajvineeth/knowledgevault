@@ -17,6 +17,7 @@ import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CardDetailComponent } from './card-detail/card-detail.component';
 import { ShareService } from './share.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ShareService } from './share.service';
     BrowserAnimationsModule,
     SpeechModule,
     HttpClientModule,
-    ProfileModule
+    ProfileModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: 'SPEECH_LANG', useValue: 'en-US' },

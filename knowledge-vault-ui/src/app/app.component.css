@@ -1,7 +1,15 @@
 app-footer {
-  position: relative;
-  flex: 1 1 auto;
+  position: absolute;
+  /* flex: 1 1 auto; */
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: auto;
 }
+
+/* div {
+  background-color: lightgrey;
+  width: 300px;
+  border: 25px solid green;
+  padding: 25px;
+  margin: 25px;
+} */
