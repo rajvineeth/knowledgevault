@@ -4,7 +4,7 @@
 
 mat-toolbar {
   background-color: gray;
-  color: #bbb;
+  color: white;
 }
 
 .example-container {
@@ -49,7 +49,7 @@ mat-expansion-panel-header {
 }
 
 .mat-sidenav-container{
-  min-height: 40vh !important;
+  min-height: 80vh !important;
 }
 
 button:visited {
