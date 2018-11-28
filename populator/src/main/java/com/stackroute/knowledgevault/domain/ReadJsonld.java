@@ -16,10 +16,9 @@ public class ReadJsonld {
     public MedicalCondition getMedicalCondition(Map jsonObject) {
         Map<String, Object> root = jsonObject;
         if ((String) root.get("alternateName") != null && !(((String) root.get("alternateName")).equals("null")) ) {
-            String name = (String) ((String) root.get("alternateName")).toLowerCase();
+            String name =  ((String) root.get("alternateName")).toLowerCase();
             String type = (String) root.get("@type");
-            MedicalCondition medicalCondition = new MedicalCondition(name, type);
-            return medicalCondition;
+            return new MedicalCondition(name, type);
         }
         return null;
     }
@@ -86,32 +85,33 @@ public class ReadJsonld {
         }
         return null;
     }
-    public Content createContent(int id,int paraId, MedicalCondition medicalCondition) throws NullPointerException {
+    public Content createContent(int id,int paraId, MedicalCondition medicalCondition) {
         Content content;
-
-        boolean exists = false;
-        List<Content> contentList = contentService.contentList();
-        for (Content content1 : contentList) {
-            if (content1.getName().equals(medicalCondition.getName())) {
-                content = content1;
-                ArrayList<Integer> list = content.getParaId();
-                if (list != null) {
-                    list.add(paraId);
-                    content.setParaId(list);
-                } else {
-                    ArrayList<Integer> list1 = new ArrayList<>();
-                    list1.add(paraId);
-                    content.setParaId(list1);
+        if(medicalCondition!=null) {
+            boolean exists = false;
+            List<Content> contentList = contentService.contentList();
+            for (Content content1 : contentList) {
+                if (content1.getName().equals(medicalCondition.getName())) {
+                    content = content1;
+                    ArrayList<Integer> list = content.getParaId();
+                    if (list != null) {
+                        list.add(paraId);
+                        content.setParaId(list);
+                    } else {
+                        ArrayList<Integer> list1 = new ArrayList<>();
+                        list1.add(paraId);
+                        content.setParaId(list1);
+                    }
+                    exists = true;
+                    return content;
                 }
-                exists = true;
+            }
+            if (!exists) {
+                ArrayList<Integer> list1 = new ArrayList<>();
+                list1.add(paraId);
+                content = new Content(medicalCondition.getName(), "Content", id, list1);
                 return content;
             }
-        }
-        if (!exists) {
-            ArrayList<Integer> list1 = new ArrayList<>();
-            list1.add(paraId);
-            content = new Content(medicalCondition.getName(), "Content", id,list1);
-            return content;
         }
         return null;
     }

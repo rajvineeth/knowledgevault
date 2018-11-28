@@ -16,7 +16,6 @@ knowledge-vault-parent.iml
 
 config-server/
 eureka-registry/
-zuulgateway/
 
 ######################
 # Node
