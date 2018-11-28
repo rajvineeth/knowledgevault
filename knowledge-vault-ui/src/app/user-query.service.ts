@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class UserQueryService {
 
-  private getRequest = 'http://172.23.239.127:8148/kv/';
+  private getRequest = 'http://localhost:8081/input-kafka/kv/';
 
   constructor(private http: HttpClient) { }
 
