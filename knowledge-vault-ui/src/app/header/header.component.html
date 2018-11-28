@@ -4,11 +4,28 @@
       <span><a routerLink="/">Knowledge Vault</a></span>
       <span class="example-fill-remaining-space"></span>
       <span class="align-center"></span>
-      <span class="example-spacer"></span>
 
-      <button mat-button (click)="home()">Home</button>
-      <button mat-button (click)="login()">Login</button>
-      <button mat-button (click)="register()">Register</button>
+      <span *ngIf="amILoggedOut; else elseBlock;">
+        <button mat-button (click)="home()">Home</button>
+        <button mat-button (click)="login()">Login</button>
+        <button mat-button (click)="register()">Register</button>
+      </span>
+      <ng-template #elseBlock>
+        
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Welcome User
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button mat-button (click)="logout()"> Logout </button>
+          <button mat-button (click)="home()">Home</button>
+        </mat-expansion-panel>
+
+        <span mat-card-avatar class="avatar"> </span>
+
+      </ng-template>
+
     </mat-toolbar-row>
   </mat-toolbar>
 </div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../_models';
 import { UserService } from '../_services';
+import { ShareService } from '../share.service';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +15,15 @@ import { UserService } from '../_services';
 export class HeaderComponent implements OnInit {
   currentUser: User;
   users: User[] = [];
+  amILoggedOut: boolean = true;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService, private srvc: ShareService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-   }
+    this.srvc.getValue()
+      .subscribe(
+        data => this.amILoggedOut = data
+      )
+  }
 
   ngOnInit() {
     this.loadAllUsers();
@@ -28,6 +34,8 @@ export class HeaderComponent implements OnInit {
   }
 
   login(): void {
+    console.log('sending the flag from header button...')
+    this.srvc.setValue(this.amILoggedOut)
     this.router.navigate(['login']);
   }
 
@@ -37,7 +45,16 @@ export class HeaderComponent implements OnInit {
 
   private loadAllUsers() {
     this.userService.getAll().pipe(first()).subscribe(users => {
-        this.users = users;
+      this.users = users;
     });
-}
+  }
+
+  logout(): void {
+    this.amILoggedOut = true;
+    this.router.navigate(['home'])
+  }
+
+  sendMeToQueryPage() {
+
+  }
 }

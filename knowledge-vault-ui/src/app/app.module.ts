@@ -16,6 +16,7 @@ import { QueryResultsComponent } from './query-results/query-results.component';
 import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CardDetailComponent } from './card-detail/card-detail.component';
+import { ShareService } from './share.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CardDetailComponent } from './card-detail/card-detail.component';
     { provide: 'SPEECH_LANG', useValue: 'en-US' },
     FormsModule,
     ReactiveFormsModule,
+    ShareService
   ],
   bootstrap: [AppComponent]
 })
