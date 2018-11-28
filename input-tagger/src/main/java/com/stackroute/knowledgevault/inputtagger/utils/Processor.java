@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @Component
 public class Processor {
 
@@ -42,6 +43,10 @@ public class Processor {
         for (Keyword keyword: keywords) {
             LOGGER.info("inside Processor.process().for(Keyword {}: keywords", keyword);
             LOGGER.info("Keyword POS: {}",keyword.getPos());
+            if (keyword.getLemma().equals("")) {
+                LOGGER.info(" Null keyword so continuing....");
+                continue;
+            }
             switch (keyword.getPos()) {
 
                 case "NNP":
@@ -116,6 +121,11 @@ public class Processor {
             }
         }
         LOGGER.info("\nthe created final keword map:\n {}", keywordMap);
+        if (keywordMap.isEmpty()) {
+            Map<String,String> map = new HashMap<>();
+            map.put("empty", "empty");
+            return new ProcessedInput(map);
+        }
         return new ProcessedInput(keywordMap);
     }
 

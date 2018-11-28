@@ -15,7 +15,7 @@ import { ShareService } from '../share.service';
 export class HeaderComponent implements OnInit {
   currentUser: User;
   users: User[] = [];
-  amILoggedOut: boolean = true;
+  amILoggedOut: boolean;
 
   constructor(private router: Router, private userService: UserService, private srvc: ShareService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.amILoggedOut = true;
     this.loadAllUsers();
   }
 

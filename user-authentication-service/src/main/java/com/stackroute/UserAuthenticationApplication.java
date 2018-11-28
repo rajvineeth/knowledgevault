@@ -11,7 +11,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableJpaRepositories()
+@EnableJpaRepositories
 @SpringBootApplication
 public class UserAuthenticationApplication {
 
@@ -23,11 +23,12 @@ public class UserAuthenticationApplication {
 
         return registrationBean;
     }
+
 	public static void main(String[] args) {
 		SpringApplication.run(UserAuthenticationApplication.class, args);
 	}
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+//    private UserRepository userRepository;
     /*@Override
     public void run(String... args) throws Exception {
           userRepository.save(new User("rajvineeth@gmail.com","12345678","SME"));

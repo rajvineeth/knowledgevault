@@ -36,7 +36,7 @@ public class KafkaConsumer {
         if (inputObject.getLemmas() != null && inputObject.getPoses() != null){
             LOGGER.info("inside pos consumer().if()...");
             InputObject passingVar = this.inputObject;
-            this.inputObject = null;
+            this.inputObject = new InputObject();
             producer.post(processor.process(passingVar));
         }
     }
@@ -51,7 +51,7 @@ public class KafkaConsumer {
         if (inputObject.getLemmas() != null && inputObject.getPoses() != null){
             LOGGER.info("inside lemma consumer().if()...");
             InputObject paasingVar = this.inputObject;
-            this.inputObject = null;
+            this.inputObject = new InputObject();
             producer.post(processor.process(paasingVar));
         }
 

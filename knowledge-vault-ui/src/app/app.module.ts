@@ -15,7 +15,15 @@ import { UserQueryComponent } from './user-query/user-query.component';
 import { QueryResultsComponent } from './query-results/query-results.component';
 import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CardDetailComponent } from './card-detail/card-detail.component';
 import { ShareService } from './share.service';
+<<<<<<< HEAD
+import { FlexLayoutModule } from '@angular/flex-layout';
+=======
+import { CardComponent } from './card/card.component';
+import { SymptomsComponent } from './card/symptoms/symptoms.component';
+import { ExpansionPanelsComponent } from './card/expansion-panels/expansion-panels.component';
+>>>>>>> 71b3703ac8c74f5ddcbc5cbc5d26d0a2b73d0a35
 
 @NgModule({
   declarations: [
@@ -26,7 +34,11 @@ import { ShareService } from './share.service';
     HeaderComponent,
     FooterComponent,
     UserQueryComponent,
-    QueryResultsComponent
+    QueryResultsComponent,
+    CardDetailComponent,
+    CardComponent,
+    SymptomsComponent,
+    ExpansionPanelsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +49,11 @@ import { ShareService } from './share.service';
     BrowserAnimationsModule,
     SpeechModule,
     HttpClientModule,
-    ProfileModule
+    ProfileModule,
+<<<<<<< HEAD
+    FlexLayoutModule
+=======
+>>>>>>> 71b3703ac8c74f5ddcbc5cbc5d26d0a2b73d0a35
   ],
   providers: [
     { provide: 'SPEECH_LANG', useValue: 'en-US' },
