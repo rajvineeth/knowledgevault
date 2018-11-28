@@ -9,7 +9,7 @@ mat-toolbar {
   color: #bbb;
 }
 
-span, a {
+ a {
   color: #5cb85c;
   font-weight: bold;
   text-decoration: none;
