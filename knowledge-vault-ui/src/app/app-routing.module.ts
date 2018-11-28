@@ -7,8 +7,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { QueryResultsComponent } from './query-results/query-results.component';
 import { GeneralUserComponent } from './profile/general-user/general-user.component';
 import { SmeComponent } from './profile/sme/sme.component';
+import { CardDetailComponent } from './card-detail/card-detail.component';
 
 const routes: Routes = [
+  { path: 'carddetail', component: CardDetailComponent},
   { path: 'login', component: LoginComponent},
   { path: 'sme', component: SmeComponent },
   { path: 'register', component: RegisterComponent},
