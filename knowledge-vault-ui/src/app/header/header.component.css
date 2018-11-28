@@ -18,7 +18,7 @@ a {
 }
 
 button:hover {
-  color: black
+  color: black;
 }
 
 span {
@@ -50,4 +50,12 @@ mat-expansion-panel-header {
 
 .mat-sidenav-container{
   min-height: 40vh !important;
+}
+
+button:visited {
+  color: black;
+}
+
+button:focus {
+  color: black;
 }

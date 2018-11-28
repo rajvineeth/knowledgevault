@@ -1,10 +1,7 @@
-package com.stackroute.knowledgevault.queryEngine;
+package com.stackroute.knowledgevault.queryengine;
 
 import java.lang.String;
 
-import com.stackroute.knowledgevault.queryEngine.service.DriverInit;
-import com.stackroute.knowledgevault.queryEngine.service.QueryService;
-import org.neo4j.driver.v1.Driver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

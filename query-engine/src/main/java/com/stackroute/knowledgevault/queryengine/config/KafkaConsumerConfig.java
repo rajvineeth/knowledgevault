@@ -1,4 +1,4 @@
-package com.stackroute.knowledgevault.queryEngine.config;
+package com.stackroute.knowledgevault.queryengine.config;
 
 import com.stackroute.knowledgevault.domain.ProcessedInput;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
