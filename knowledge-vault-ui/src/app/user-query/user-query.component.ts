@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
     templateUrl: './user-query.component.html',
     styleUrls: ['./user-query.component.css']
 })
+
 export class UserQueryComponent implements OnInit, OnDestroy {
 
     msg = '';

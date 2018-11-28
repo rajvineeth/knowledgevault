@@ -35,7 +35,7 @@ import { ExpansionPanelsComponent } from './card/expansion-panels/expansion-pane
     CardDetailComponent,
     CardComponent,
     SymptomsComponent,
-    ExpansionPanelsComponent
+    ExpansionPanelsComponent,
   ],
   imports: [
     BrowserModule,
