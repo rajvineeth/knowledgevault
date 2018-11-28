@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @Component
 public class Processor {
 
@@ -116,6 +117,11 @@ public class Processor {
             }
         }
         LOGGER.info("\nthe created final keword map:\n {}", keywordMap);
+        if (keywordMap.isEmpty()) {
+            Map<String,String> map = new HashMap<>();
+            map.put("empty", "empty");
+            return new ProcessedInput(map);
+        }
         return new ProcessedInput(keywordMap);
     }
 
