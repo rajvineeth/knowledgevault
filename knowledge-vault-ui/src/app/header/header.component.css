@@ -3,11 +3,15 @@
 }
 
 mat-toolbar {
-  background-color: white;
+  background-color: gray;
   color: #bbb;
 }
 
- a {
+.example-container {
+  flex: 1 1 auto;
+}
+
+a {
   color: #5cb85c;
   font-weight: bold;
   text-decoration: none;
@@ -42,4 +46,8 @@ mat-expansion-panel-header {
 
 .nav-spacer {
   flex: 1 1 auto;
+}
+
+.mat-sidenav-container{
+  min-height: 40vh !important;
 }

@@ -54,6 +54,7 @@ export class UserQueryComponent implements OnInit , OnDestroy {
             this.speech.stop();
         }else {
             this.speech.start();
+            this.search();
         }
     }
 
