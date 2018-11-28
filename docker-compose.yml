@@ -2,18 +2,18 @@ version:  '2'
 
 services:
 
-#  gateway:
-#    image: zuulgateway:v1
-#    build: zuulgateway/
-#    restart: always
-#    container_name: zuul-container
-#    network_mode: host
-#    depends_on:
-#    - mongodb
-#    ports:
-#    - 8080:8080
-#    expose:
-#    - 8080
+  gateway:
+    image: zuulgateway:v1
+    build: zuulgateway/
+    restart: always
+    container_name: zuul-container
+    network_mode: host
+    depends_on:
+    - mongodb
+    ports:
+    - 8080:8080
+    expose:
+    - 8080
 
   zookeeper:
     container_name: zookeeper
@@ -131,7 +131,7 @@ services:
   populator:
     image: populator:v1
     build: populator/
-  #  restart: always
+    restart: always
     container_name: "populator"
     network_mode: host
     depends_on:
