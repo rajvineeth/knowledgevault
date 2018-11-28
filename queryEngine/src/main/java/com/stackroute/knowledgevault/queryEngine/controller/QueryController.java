@@ -28,9 +28,10 @@ public class QueryController {
 //    private static final Logger LOGGER=LoggerFactory.getLogger(com.stackroute.knowledgevault.queryEngine.controller.QueryController.class);
 //
     @GetMapping("/results")
-    public ResponseEntity<?> getResults(){
+    public List<OutputResult> getResults(){
         List<OutputResult> list = FrontEndData.list;
-        ResponseEntity<?> responseEntity = new ResponseEntity<>(FrontEndData.list,HttpStatus.OK);
-        return responseEntity;
+        System.out.println(list);
+//        ResponseEntity<?> responseEntity = new ResponseEntity<>(list,HttpStatus.OK);
+        return list;
     }
 }

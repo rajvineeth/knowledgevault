@@ -28,7 +28,7 @@ public class QueryService {
                     Record record = result.next();
                     // Values can be extracted from a record by index or name.
                     map.put(record.get("name").asString(), record.get("name1").asString());
-                    System.out.println(record.get("name").asString() + " " + record.get("name1").asString());
+//                    System.out.println(record.get("name").asString() + " " + record.get("name1").asString());
                     outputResult.MedicalCondition = record.get("name").asString();
                     outputResult.MedicalSymptom = record.get("name1").asString();
                 }

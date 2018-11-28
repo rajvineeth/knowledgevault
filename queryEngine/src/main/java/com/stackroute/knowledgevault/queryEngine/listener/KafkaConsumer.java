@@ -26,12 +26,12 @@ public class KafkaConsumer {
     private QueryService queryService = new QueryService();
     private static final Logger LOGGER = LoggerFactory.getLogger(com.stackroute.knowledgevault.queryEngine.listener.KafkaConsumer.class);
     @KafkaListener(topics = "queryInput", groupId = "group_json_query", containerFactory = "userKafkaListenerFactory")
-    @GetMapping("/results")
     public void consumejson(ProcessedInput processedInput) {
         LOGGER.info("consumed message");
         Driver drive = driver.getDriver();
+        FrontEndData.list.clear();
         for (Map.Entry<String, String> entry : processedInput.getKeyValue().entrySet()) {
-            FrontEndData.list.clear();
+//            FrontEndData.list.clear();
             LOGGER.info(entry.getKey());
             LOGGER.info(entry.getValue());
             FrontEndData.list.add(queryService.runquery(drive, entry.getKey(), entry.getValue()));
