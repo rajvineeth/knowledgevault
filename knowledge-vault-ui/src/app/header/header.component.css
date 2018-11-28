@@ -5,7 +5,7 @@
 }
 
 mat-toolbar {
-  background-color: white;
+  background-color: black;
   color: #bbb;
 }
 
@@ -17,4 +17,17 @@ span, a {
 
 button:hover {
   color: black
+}
+
+.avatar {
+  background-image: url('../../assets/user.png');
+  background-size: cover;
+}
+
+mat-expansion-panel {
+  margin-right: 2%;
+}
+
+mat-expansion-panel-header {
+  height: 1rem;
 }
