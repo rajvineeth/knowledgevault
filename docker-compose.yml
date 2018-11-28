@@ -39,6 +39,7 @@ services:
     expose:
     - "8148"
 
+<<<<<<< HEAD
   input-lemmatize:
     image: input-lemmatize
     build: input-lemmatize/
@@ -79,10 +80,17 @@ services:
 #    image: queryEngine
 #    build: queryEngine/
 #    container_name: "queryEngine"
+=======
+#  input-kafka:
+#    image: input-kafka
+#    build: input-kafka/
+#    container_name: "input-kafka"
+>>>>>>> 3f2c308e980ff578e8e5798cc8574e10c459986e
 #    network_mode: host
 #    depends_on:
 #    - kafka
 #    ports:
+<<<<<<< HEAD
 #    - "8185:8185"
 #    expose:
 #    - "8185"
@@ -113,6 +121,88 @@ services:
 #    hostname: localhost
 ##    restart: always
 #
+=======
+#    - "8148:8148"
+#    expose:
+#    - "8148"
+#
+#  input-lemmatize:
+#    image: input-lemmatize
+#    build: input-lemmatize/
+#    container_name: "input-lemmatize"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    ports:
+#    - "8140:8140"
+#    expose:
+#    - "8140"
+#
+#  input-postag:
+#    image: input-postag
+#    build: input-postag/
+#    container_name: "input-postag"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    ports:
+#    - "8142:8142"
+#    expose:
+#    - "8142"
+#
+#  input-tagger:
+#    image: input-tagger
+#    build: input-tagger/
+#    container_name: "input-tagger"
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    ports:
+#    - "8144:8144"
+#    expose:
+#    - "8144"
+#
+##  queryEngine:
+##    image: queryEngine
+##    build: queryEngine/
+##    container_name: "queryEngine"
+##    network_mode: host
+##    depends_on:
+##    - kafka
+##    ports:
+##    - "8185:8185"
+##    expose:
+##    - "8185"
+#
+##   neo4j:
+##     container_name: neo4j
+##     image: neo4j:latest
+##     ports:
+##     - "7474:7474"
+##     network_mode: host
+##     volumes:
+##     - '../data/neo4j:/data/db'
+##     environment:
+##     - NEO4J_AUTH=neo4j/123456
+#
+
+
+  mysql:
+    image: mysql:5.7
+    ports:
+    - 3306:3306
+    container_name: mysql
+    environment:
+#    - MYSQL_USER =root
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=mydatabase
+    volumes:
+    - '/opt/datasql:/var/lib/mysql'
+    network_mode: "host"
+    hostname: localhost
+#    restart: always
+
+>>>>>>> 3f2c308e980ff578e8e5798cc8574e10c459986e
 #  mongodb:
 #    image: mongo:3.2-jessie
 #    ports:
