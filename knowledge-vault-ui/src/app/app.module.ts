@@ -15,6 +15,7 @@ import { UserQueryComponent } from './user-query/user-query.component';
 import { QueryResultsComponent } from './query-results/query-results.component';
 import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CardDetailComponent } from './card-detail/card-detail.component';
 import { ShareService } from './share.service';
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ShareService } from './share.service';
     HeaderComponent,
     FooterComponent,
     UserQueryComponent,
-    QueryResultsComponent
+    QueryResultsComponent,
+    CardDetailComponent
   ],
   imports: [
     BrowserModule,
