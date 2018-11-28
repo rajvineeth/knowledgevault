@@ -3,9 +3,9 @@ app-footer {
   /* flex: 1 1 auto; */
   bottom: 0;
   left: 0;
-  width: auto;
+  width: 100%;
 }
 
 div {
-  min-width: 245px;
+  min-width: 300px;
 }
