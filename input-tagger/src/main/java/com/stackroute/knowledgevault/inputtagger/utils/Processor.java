@@ -43,6 +43,10 @@ public class Processor {
         for (Keyword keyword: keywords) {
             LOGGER.info("inside Processor.process().for(Keyword {}: keywords", keyword);
             LOGGER.info("Keyword POS: {}",keyword.getPos());
+            if (keyword.getLemma().equals("")) {
+                LOGGER.info(" Null keyword so continuing....");
+                continue;
+            }
             switch (keyword.getPos()) {
 
                 case "NNP":
