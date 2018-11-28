@@ -11,7 +11,7 @@
          <tr>
            <td>
              <mat-form-field class="userInput-full-width">
-             <input matInput placeholder="Enter your Query" type="search" [(ngModel)]="inputText" color="primary" name="inputText" required>
+             <input matInput placeholder="Enter your Query" type="search" [(ngModel)]="msg" color="primary" name="search" required>
              </mat-form-field>
            </td>
          </tr>
@@ -23,9 +23,5 @@
    <button mat-raised-button (click)="toggleVoiceRecognition()">{{ started ? 'Stop voice recognition' : 'Start voice recognition' }}</button>
      <button mat-raised-button (click)="search()">Search</button>
    </mat-card-actions>
-<!--<p>
-      hi
-      I heard {{ msg }}
-    </p>-->
- </mat-card>
 
+ 

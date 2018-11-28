@@ -23,7 +23,7 @@ import { AlertsService } from 'angular-alert-module';
 
 @Component({
   templateUrl: 'register.component.html',
-  providers: [AlertService, AlertsService, UserService]
+  providers:[AlertService, AlertsService, UserService]
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;

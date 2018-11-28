@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class UserQueryComponent implements OnInit , OnDestroy {
 
-  inputText: string;
   msg = '';
   context = '';
   subscription = Subscription.EMPTY;
@@ -45,8 +44,8 @@ export class UserQueryComponent implements OnInit , OnDestroy {
     }
 
     search() {
-        console.log(this.inputText);
-        this.service.postUserQuery(this.inputText);
+        console.log(this.msg);
+        this.service.postUserQuery(this.msg);
         this.router.navigate(['queryresults']);
     }
 
