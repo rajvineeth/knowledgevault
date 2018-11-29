@@ -34,12 +34,8 @@ public class KafkaConsumer {
             LOGGER.info(entry.getValue());
             OutputResult res = queryService.runquery(drive, entry.getKey(), entry.getValue());
             list.add(res);
-
-//            producer.post(pi);
-
         }
         LOGGER.info("hey i sent the complete data");
-//      queryService.close(drive);
     }
 }
 
