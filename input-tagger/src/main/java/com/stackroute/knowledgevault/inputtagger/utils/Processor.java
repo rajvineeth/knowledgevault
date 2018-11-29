@@ -81,7 +81,7 @@ public class Processor {
                     }
                     else if (checkIf(bodyPart, keyword.getLemma())) {
                         LOGGER.info("Tagging {} to body-part...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "body-part");
+                        keywordMap.put(keyword.getLemma(), "AnatomicalStructure");
                         break;
                     }
                     else if (checkIf(personName, keyword.getLemma())){
@@ -107,7 +107,7 @@ public class Processor {
                     else if (checkIf(bodyPart, keyword.getLemma())) {
                         LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NN else if()2", keyword);
                         LOGGER.info("Tagging {} to body-part...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "body-part");
+                        keywordMap.put(keyword.getLemma(), "AnatomicalStructure");
                         break;
                     }
                     else if (checkIf(personName, keyword.getLemma())){

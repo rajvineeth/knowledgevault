@@ -50,7 +50,9 @@ span {
 
 mat-sidenav {
   width: 30vw;
-  background: rgba(0, 255, 106, 0.6);
+  /* background: rgba(0, 255, 106, 0.6); */
+  /* background:rgba(255, 255, 255, 0.3); */
+  background: white;
   background-size: cover;
 }
 

@@ -6,8 +6,8 @@
   height: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
 }
 
 button {

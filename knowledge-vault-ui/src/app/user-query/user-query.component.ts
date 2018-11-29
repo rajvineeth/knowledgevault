@@ -51,7 +51,11 @@ export class UserQueryComponent implements OnInit, OnDestroy {
     }
 
     toggleVoiceRecognition(): void {
-        this.started ? this.speech.stop() : this.speech.start()
+        if (this.started) {
+            this.speech.stop();
+        } else {
+            this.speech.start();
+        }
     }
 
 }
