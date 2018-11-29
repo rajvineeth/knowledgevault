@@ -18,8 +18,7 @@
 	    <module>config-server</module>
         <module>input-kafka</module>
         <module>input-lemmatize</module>
-        <module>queryEngine</module>
-        <!--<module>input-tokenize</module>-->
+        <module>query-engine</module>
         <module>input-postag</module>
         <module>input-tagger</module>
     </modules>
