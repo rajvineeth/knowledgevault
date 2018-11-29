@@ -19,9 +19,16 @@
         <button mat-button (click)="register()">Register</button>
       </span>
       <ng-template #elseBlock>
-        <button mat-button (click)="logout()"> Logout </button>
-        <button mat-button (click)="home()">Home</button>
-        <span mat-card-avatar class="avatar"> </span>
+        <span> Welcome User </span>
+        <a mat-menu [matMenuTriggerFor]="avatarMenu">
+          <button mat-card-avatar class="avatar"></button>
+        </a>
+        <mat-menu #avatarMenu="matMenu">
+          <button mat-menu-item>Profile</button>
+          <button mat-menu-item>Setting</button>
+          <button mat-button (click)="logout()"> Logout </button>
+          <button mat-menu-item>Help</button>
+        </mat-menu>
       </ng-template>
     </div>
   </mat-toolbar>
@@ -37,9 +44,16 @@
           <button mat-button (click)="register()">Register</button>
         </nav>
         <ng-template #elseBlock>
-          <button mat-button (click)="logout()"> Logout </button>
-          <button mat-button (click)="home()">Home</button>
-          <span mat-card-avatar class="avatar"> </span>
+            <span> Welcome User </span>
+          <a mat-menu [matMenuTriggerFor]="avatarMenu">
+            <button mat-card-avatar class="avatar"></button>
+          </a>
+          <mat-menu #avatarMenu="matMenu">
+            <button mat-menu-item>Profile</button>
+            <button mat-menu-item>Setting</button>
+            <button mat-button (click)="logout()"> Logout </button>
+            <button mat-menu-item>Help</button>
+          </mat-menu>
         </ng-template>
       </div>
     </mat-sidenav>
