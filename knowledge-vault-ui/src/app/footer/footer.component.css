@@ -1,15 +1,13 @@
 mat-toolbar {
-  background-color: #f3f3f3;
+  background-color: gray;
   color: #bbb;
   font-size: 1rem;
+  width: 100%;
+  min-width: 300px;
 }
 
 a {
   color: #5cb85c;
   font-weight: bold;
   text-decoration: none;
-}
-
-span {
-  text-align: center;
 }

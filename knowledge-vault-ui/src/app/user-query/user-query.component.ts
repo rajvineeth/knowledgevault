@@ -24,7 +24,6 @@ export class UserQueryComponent implements OnInit , OnDestroy {
     constructor(private router: Router, private service: UserQueryService , public speech: SpeechService) { }
 
   ngOnInit(): void {
-        this.speech.start();
         this.speech.message.pipe(
             takeUntil(this._destroyed)
         ).subscribe(msg => this.msg = msg.message);
@@ -46,14 +45,16 @@ export class UserQueryComponent implements OnInit , OnDestroy {
     search() {
         console.log(this.msg);
         this.service.postUserQuery(this.msg);
+        this.speech.stop();
         this.router.navigate(['queryresults']);
     }
 
     toggleVoiceRecognition(): void {
         if (this.started) {
             this.speech.stop();
-        } else {
+        }else {
             this.speech.start();
+            this.search();
         }
     }
 

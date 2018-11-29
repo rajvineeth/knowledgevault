@@ -1,0 +1,9 @@
+.paragraph .mat-expansion-panel-header-title,
+.paragraph .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.paragraph .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}

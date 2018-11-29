@@ -3,13 +3,9 @@ app-footer {
   /* flex: 1 1 auto; */
   bottom: 0;
   left: 0;
-  width: auto;
+  width: 100%;
 }
 
-/* div {
-  background-color: lightgrey;
-  width: 300px;
-  border: 25px solid green;
-  padding: 25px;
-  margin: 25px;
-} */
+div {
+  min-width: 300px;
+}
