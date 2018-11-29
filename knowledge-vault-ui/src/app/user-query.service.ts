@@ -20,6 +20,11 @@ export class UserQueryService {
 
   postUserQuery(inputText: string) {
     let getUrl = this.getRequest + inputText;
-    this.http.get<string>(getUrl,httpOptions).subscribe(data => { console.log(data); });
+    this.http.get<string>(getUrl,httpOptions)
+      .subscribe(
+        data => {
+         if(data == null) console.log(data); 
+        }
+      );
   }
 }

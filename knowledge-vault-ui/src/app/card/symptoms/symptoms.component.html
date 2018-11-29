@@ -1,6 +1,3 @@
-<mat-list dense>
-  <!-- <h2 mat-subheader>Symptoms</h2> -->
-  <mat-list-item>Cough</mat-list-item>
-  <mat-list-item>Cold</mat-list-item>
-  <mat-list-item>HyperThermia</mat-list-item>
+<mat-list *ngFor = "let symptom of symptoms" dense>
+  <mat-list-item> {{ symptom }} </mat-list-item>
 </mat-list>

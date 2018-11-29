@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { ReceivedQuery } from '../receivedQuery';
 
 @Component({
   selector: 'app-query-results',
@@ -8,13 +9,15 @@ import { DataService } from '../data.service';
 })
 export class QueryResultsComponent implements OnInit {
 
-  public queryResults = [];
+  public queryResults: ReceivedQuery[];
 
   constructor(public _dataservice: DataService) { }
 
   ngOnInit() {
     this._dataservice.getQuery()
-        .subscribe(data => this.queryResults = data);
+        .subscribe(
+          data => this.queryResults = data
+        );
   }
 
 }
