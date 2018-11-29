@@ -1,9 +1,15 @@
-.foot {
-  background-color: rgb(150, 42, 42);
+mat-toolbar {
+  background-color: #f3f3f3;
+  color: #bbb;
+  font-size: 1rem;
+}
+
+/* .foot {
+  color: #f3f3f3;
   position: relative;
   bottom:0;
   width:100%;
-}
+} */
 
 a {
   color: #5cb85c;

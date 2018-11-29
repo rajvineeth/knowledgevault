@@ -3,16 +3,17 @@
 }
 
 mat-toolbar {
-  background-color: rgba(114, 107, 107, 0.705);
-  color: white;
+  background-color:rgba(255, 255, 255, 0.3);
+  color: #bbb;
 }
 
 .example-container {
   flex: 1 1 auto;
+  background-color: white;
 }
 
 a {
-  color: white;
+  color: #5cb85c;
   font-weight: bold;
   font-size: 4vw 4vh;
   text-decoration: none;
