@@ -71,12 +71,12 @@ public class Processor {
                     if (checkIf(disease, keyword.getLemma())) {
                         LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NNS if()", keyword);
                         LOGGER.info("Tagging {} to disease...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "disease");
+                        keywordMap.put(keyword.getLemma(), "MedicalCondition");
                         break;
                     }
                     else if (checkIf(symptom, keyword.getLemma())) {
                         LOGGER.info("Tagging {} to symptom...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "symptom");
+                        keywordMap.put(keyword.getLemma(), "MedicalSymptom");
                         break;
                     }
                     else if (checkIf(bodyPart, keyword.getLemma())) {
@@ -95,13 +95,13 @@ public class Processor {
                     if (checkIf(disease, keyword.getLemma())) {
                         LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NN if()", keyword);
                         LOGGER.info("Tagging {} to disease...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "disease");
+                        keywordMap.put(keyword.getLemma(), "MedicalCondition");
                         break;
                     }
                     else if (checkIf(symptom, keyword.getLemma())) {
                         LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NN else if()", keyword);
                         LOGGER.info("Tagging {} to symptom...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "symptom");
+                        keywordMap.put(keyword.getLemma(), "MedicalSymptom");
                         break;
                     }
                     else if (checkIf(bodyPart, keyword.getLemma())) {
