@@ -1,3 +1,14 @@
-<div *ngFor="let query of queryResults">
-  <app-card [res]="query"></app-card>
-</div>
+<nav *ngIf="queryResults==null; else elseBlock;">
+  <nav>
+    <div class="error"></div>
+  </nav>
+<nav>
+
+<ng-template #elseBlock>
+  <div *ngFor="let query of queryResults">
+    <app-card [res]="query"></app-card>
+  </div>
+</ng-template>
+
+
+

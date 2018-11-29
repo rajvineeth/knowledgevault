@@ -1,4 +1,6 @@
+import { Modal } from './modal';
 export class ReceivedQuery {
-    MedicalCondition: string;
+    // medicalInfo: Modal[];
     MedicalSymptom: string;
+    MedicalCondition: string;
 }
