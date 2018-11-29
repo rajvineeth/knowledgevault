@@ -1,13 +1,13 @@
-<mat-toolbar role="footer">
+<mat-toolbar role="footer" class="footer">
   <mat-toolbar-row class="foot" fxLayout="row wrap" fxLayoutAlign="space between">
-    <span><a routerLink="/">Knowledge Vault</a></span>
-    <span class="foot-spacer"></span>
-    <div fxShow="true" fxHide.lt-md="true">
-      <span class="attribution">
-        &copy; {{ today | date: 'yyyy' }}.
-        2018
-        An interactive learning project from <a href="http://stackroute.in">Stackroute</a>.
-      </span>
+    <div style="margin:auto">
+      <!-- <span class="foot-spacer"></span> -->
+      <div fxShow="true" fxHide.lt-md="true" >
+        <span routerLink="/" class="knowledge"><a>Knowledge Vault</a></span>
+        <span class="attribution">
+          &copy; 2018. An interactive learning project from <a href="http://stackroute.in">Stackroute</a>.
+        </span>
+      </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

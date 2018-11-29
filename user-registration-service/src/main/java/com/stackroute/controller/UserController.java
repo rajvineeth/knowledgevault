@@ -42,7 +42,6 @@ public class UserController {
     @Value("${user-Controller.message.kafkatopic}")
     private String ControllerMessag5;
 
-
     private static final String TOPIC = "user-data";
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -4,12 +4,9 @@ mat-toolbar {
   font-size: 1rem;
 }
 
-/* .foot {
-  color: #f3f3f3;
-  position: relative;
-  bottom:0;
-  width:100%;
-} */
+.knowledge:hover{
+  cursor: pointer;
+}
 
 a {
   color: #5cb85c;

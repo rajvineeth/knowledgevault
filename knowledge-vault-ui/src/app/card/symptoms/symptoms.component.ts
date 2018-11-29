@@ -5,6 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './symptoms.component.html',
   styleUrls: ['./symptoms.component.css']
 })
+
 export class SymptomsComponent implements OnInit {
 
   @Input() private symptoms: string;
