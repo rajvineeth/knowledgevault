@@ -3,17 +3,19 @@
 }
 
 mat-toolbar {
-  background-color: gray;
-  color: #bbb;
+  background-color: rgba(114, 107, 107, 0.705);
+  color: white;
 }
 
 .example-container {
   flex: 1 1 auto;
+  background-color: white;
 }
 
 a {
-  color: #5cb85c;
+  color: white;
   font-weight: bold;
+  font-size: 2vw;
   text-decoration: none;
 }
 
@@ -26,22 +28,17 @@ span {
 }
 
 #logo {
+  object-fit: cover;
   background-image: url("../../assets/logo.jpg");
   background-size: cover;
   border: black;
 }
 
 .avatar {
+  border: black;
+  object-fit: fill;
   background-image: url('../../assets/user.png');
   background-size: cover;
-}
-
-mat-expansion-panel {
-  margin-right: 2%;
-}
-
-mat-expansion-panel-header {
-  height: 1rem;
 }
 
 .nav-spacer {
@@ -49,7 +46,15 @@ mat-expansion-panel-header {
 }
 
 .mat-sidenav-container{
-  min-height: 40vh !important;
+  min-height: 80vh !important;
+}
+
+mat-sidenav {
+  width: 30vw;
+  /* background: rgba(0, 255, 106, 0.6); */
+  /* background:rgba(255, 255, 255, 0.3); */
+  background: white;
+  background-size: cover;
 }
 
 button:visited {

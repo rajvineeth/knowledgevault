@@ -1,12 +1,13 @@
 .login-card {
   background-color: white;
   color: #5cb85c;
-  max-width: 40rem;
+  max-width: 80rem;
   position: inherit;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
 }
 
 button {

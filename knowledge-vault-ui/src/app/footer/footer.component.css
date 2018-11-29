@@ -1,10 +1,20 @@
+<<<<<<< HEAD
 mat-toolbar {
-  background-color: gray;
+  background-color: #f3f3f3;
   color: #bbb;
   font-size: 1rem;
-  width: 100%;
-  min-width: 300px;
 }
+
+/* .foot {
+  color: #f3f3f3;
+=======
+.foot {
+  background-color: rgb(150, 42, 42);
+>>>>>>> f1d933dff2c9f42734aa8358c5248714c5261ed7
+  position: relative;
+  bottom:0;
+  width:100%;
+} */
 
 a {
   color: #5cb85c;
