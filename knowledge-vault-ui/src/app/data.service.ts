@@ -16,8 +16,8 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
 
+export class DataService {
   // change to IP address of query-engine
   private _url = 'http://localhost:0000/query';
 

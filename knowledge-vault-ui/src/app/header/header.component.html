@@ -44,7 +44,6 @@
           <button mat-button (click)="register()">Register</button>
         </nav>
         <ng-template #elseBlock>
-            <span> Welcome User </span>
           <a mat-menu [matMenuTriggerFor]="avatarMenu">
             <button mat-card-avatar class="avatar"></button>
           </a>
@@ -54,6 +53,7 @@
             <button mat-button (click)="logout()"> Logout </button>
             <button mat-menu-item>Help</button>
           </mat-menu>
+          <span> Welcome User </span>
         </ng-template>
       </div>
     </mat-sidenav>
