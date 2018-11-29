@@ -3,8 +3,8 @@
 }
 
 mat-toolbar {
-  background-color: white;
-  color: #bbb;
+  background-color: rgba(114, 107, 107, 0.705);
+  color: white;
 }
 
 .example-container {
@@ -13,8 +13,9 @@ mat-toolbar {
 }
 
 a {
-  color: #5cb85c;
+  color: white;
   font-weight: bold;
+  font-size: 2vw;
   text-decoration: none;
 }
 
@@ -27,12 +28,15 @@ span {
 }
 
 #logo {
+  object-fit: cover;
   background-image: url("../../assets/logo.jpg");
   background-size: cover;
   border: black;
 }
 
 .avatar {
+  border: black;
+  object-fit: fill;
   background-image: url('../../assets/user.png');
   background-size: cover;
 }

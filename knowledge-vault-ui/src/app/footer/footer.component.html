@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <mat-toolbar role="footer">
   <mat-toolbar-row class="foot" fxLayout="row wrap" fxLayoutAlign="space between">
     <span><a routerLink="/">Knowledge Vault</a></span>
@@ -10,4 +11,15 @@
       </span>
     </div>
   </mat-toolbar-row>
+=======
+<mat-toolbar class="foot" fxLayout="row wrap" fxLayoutAlign="center">
+  <span><a routerLink="/">Knowledge Vault</a></span>
+  <span class="foot-spacer"></span>
+  <div fxShow="true" fxHide.lt-md="true">
+    <span class="attribution">
+      &copy; {{ today | date: 'yyyy' }}.
+      An interactive learning project from
+    </span>
+  </div>
+>>>>>>> f1d933dff2c9f42734aa8358c5248714c5261ed7
 </mat-toolbar>
