@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.beans.factory.annotation.Value;
 @RestController
-@RequestMapping(value = "/api/v1")
+@RequestMapping(value = "/api/v1/")
 @CrossOrigin("*")
 public class UserController {
 
