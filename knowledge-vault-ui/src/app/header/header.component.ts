@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     this.srvc.getValue()
       .subscribe(
         data => this.amILoggedOut = data
-      )
+      );
   }
 
   ngOnInit() {
@@ -35,8 +35,8 @@ export class HeaderComponent implements OnInit {
   }
 
   login(): void {
-    console.log('sending the flag from header button...')
-    this.srvc.setValue(this.amILoggedOut)
+    console.log('sending the flag from header button...');
+    this.srvc.setValue(this.amILoggedOut);
     this.router.navigate(['login']);
   }
 
@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.amILoggedOut = true;
-    this.router.navigate(['home'])
+    this.router.navigate(['home']);
   }
 
   sendMeToQueryPage() {
