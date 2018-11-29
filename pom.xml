@@ -18,6 +18,7 @@
         <module>populator</module>
         <module>zuulgateway</module>
         <module>config-server</module>
+        <module>eureka-registry</module>
     </modules>
 
     <parent>

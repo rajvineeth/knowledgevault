@@ -7,7 +7,6 @@ eureka:         #tells about the Eureka server details and its refresh time
     instance:
         leaseRenewalIntervalInSeconds: 1
         leaseExpirationDurationInSeconds: 2
-        hostname: CGI_Shreelekhya
     client:
         serviceUrl:
             defaultZone: http://127.0.0.1:8091/eureka/
