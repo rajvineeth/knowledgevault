@@ -69,7 +69,7 @@ public class UserController {
         return responseEntity;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public Token login(@RequestBody User login) throws ServletException {
 
         String jwtToken = "";

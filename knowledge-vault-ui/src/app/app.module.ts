@@ -1,3 +1,5 @@
+import { LoginService } from './login.service';
+import { DataService } from './data.service';
 import { CustomMaterialModule } from './core/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -6,7 +8,7 @@ import { SpeechModule } from '../lib/';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,6 +19,12 @@ import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CardDetailComponent } from './card-detail/card-detail.component';
 import { ShareService } from './share.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { CardComponent } from './card/card.component';
+import { SymptomsComponent } from './card/symptoms/symptoms.component';
+import { ExpansionPanelsComponent } from './card/expansion-panels/expansion-panels.component';
+import { UserQueryService } from './user-query.service';
+import { RegistrationService } from './registration.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +36,10 @@ import { ShareService } from './share.service';
     FooterComponent,
     UserQueryComponent,
     QueryResultsComponent,
-    CardDetailComponent
+    CardDetailComponent,
+    CardComponent,
+    SymptomsComponent,
+    ExpansionPanelsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,13 +50,18 @@ import { ShareService } from './share.service';
     BrowserAnimationsModule,
     SpeechModule,
     HttpClientModule,
-    ProfileModule
+    ProfileModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: 'SPEECH_LANG', useValue: 'en-US' },
     FormsModule,
     ReactiveFormsModule,
-    ShareService
+    ShareService,
+    UserQueryService,
+    DataService,
+    RegistrationService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

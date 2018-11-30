@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @Component
 public class Processor {
 
@@ -42,6 +43,10 @@ public class Processor {
         for (Keyword keyword: keywords) {
             LOGGER.info("inside Processor.process().for(Keyword {}: keywords", keyword);
             LOGGER.info("Keyword POS: {}",keyword.getPos());
+            if (keyword.getLemma().equals("")) {
+                LOGGER.info(" Null keyword so continuing....");
+                continue;
+            }
             switch (keyword.getPos()) {
 
                 case "NNP":
@@ -66,17 +71,17 @@ public class Processor {
                     if (checkIf(disease, keyword.getLemma())) {
                         LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NNS if()", keyword);
                         LOGGER.info("Tagging {} to disease...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "disease");
+                        keywordMap.put(keyword.getLemma(), "MedicalCondition");
                         break;
                     }
                     else if (checkIf(symptom, keyword.getLemma())) {
                         LOGGER.info("Tagging {} to symptom...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "symptom");
+                        keywordMap.put(keyword.getLemma(), "MedicalSymptom");
                         break;
                     }
                     else if (checkIf(bodyPart, keyword.getLemma())) {
                         LOGGER.info("Tagging {} to body-part...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "body-part");
+                        keywordMap.put(keyword.getLemma(), "AnatomicalStructure");
                         break;
                     }
                     else if (checkIf(personName, keyword.getLemma())){
@@ -90,19 +95,19 @@ public class Processor {
                     if (checkIf(disease, keyword.getLemma())) {
                         LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NN if()", keyword);
                         LOGGER.info("Tagging {} to disease...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "disease");
+                        keywordMap.put(keyword.getLemma(), "MedicalCondition");
                         break;
                     }
                     else if (checkIf(symptom, keyword.getLemma())) {
                         LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NN else if()", keyword);
                         LOGGER.info("Tagging {} to symptom...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "symptom");
+                        keywordMap.put(keyword.getLemma(), "MedicalSymptom");
                         break;
                     }
                     else if (checkIf(bodyPart, keyword.getLemma())) {
                         LOGGER.info("inside Processor.process().for(Keyword {}: keywords case NN else if()2", keyword);
                         LOGGER.info("Tagging {} to body-part...",keyword.getLemma());
-                        keywordMap.put(keyword.getLemma(), "body-part");
+                        keywordMap.put(keyword.getLemma(), "AnatomicalStructure");
                         break;
                     }
                     else if (checkIf(personName, keyword.getLemma())){
@@ -116,6 +121,11 @@ public class Processor {
             }
         }
         LOGGER.info("\nthe created final keword map:\n {}", keywordMap);
+        if (keywordMap.isEmpty()) {
+            Map<String,String> map = new HashMap<>();
+            map.put("empty", "empty");
+            return new ProcessedInput(map);
+        }
         return new ProcessedInput(keywordMap);
     }
 

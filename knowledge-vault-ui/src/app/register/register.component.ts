@@ -1,18 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-register',
-//   templateUrl: './register.component.html',
-//   styleUrls: ['./register.component.css']
-// })
-// export class RegisterComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,10 +5,11 @@ import { first } from 'rxjs/operators';
 
 import { AlertService, UserService } from '../_services';
 import { AlertsService } from 'angular-alert-module';
+import { RegistrationService } from '../registration.service';
 
 @Component({
   templateUrl: 'register.component.html',
-  providers: [AlertService, AlertsService, UserService]
+  providers:[AlertService, AlertsService, UserService]
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
@@ -35,6 +21,7 @@ export class RegisterComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
+        private register: RegistrationService,
         private userService: UserService,
         private alertService: AlertService,
         private alerts: AlertsService) { }
@@ -63,17 +50,19 @@ export class RegisterComponent implements OnInit {
         console.log(this.details);
 
         this.loading = true;
-        this.userService.register(this.registerForm.value)
-            .pipe(first())
+
+        let fn:string = this.registerForm.controls['firstName'].value;
+        let ln:string = this.registerForm.controls['lastName'].value;
+        let un:string = this.registerForm.controls['username'].value;
+        let r:string = this.registerForm.controls['role'].value;
+        let pwd:string = this.registerForm.controls['password'].value;
+        this.register.registerUser(fn,ln,un,r,pwd)
             .subscribe(
                 data => {
-                    console.log('saved');
+                    console.log(data)
                     this.alerts.setMessage('succesfully saved', 'success');
-                    this.router.navigate(['/login']);
-                },
-                error => {
-                    this.alerts.setMessage('not saved', 'error');
-                    this.loading = false;
-                });
+                    this.router.navigate(['/login'])
+                }
+            )
     }
 }

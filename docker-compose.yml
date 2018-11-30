@@ -26,7 +26,7 @@ services:
     - '/var/run/docker.sock:/var/run/docker.sock'
     depends_on:
     - "zookeeper"
-    restart: always
+#    restart: always
 
   input-kafka:
     image: input-kafka
@@ -80,25 +80,25 @@ services:
 #    image: queryEngine
 #    build: queryEngine/
 #    container_name: "queryEngine"
-#    network_mode: host
-#    depends_on:
-#    - kafka
-#    ports:
-#    - "8185:8185"
-#    expose:
-#    - "8185"
-
-#   neo4j:
-#     container_name: neo4j
-#     image: neo4j:latest
-#     ports:
-#     - "7474:7474"
-#     network_mode: host
-#     volumes:
-#     - '../data/neo4j:/data/db'
-#     environment:
-#     - NEO4J_AUTH=neo4j/123456
-
+##    network_mode: host
+##    depends_on:
+##    - kafka
+##    ports:
+##    - "8185:8185"
+##    expose:
+##    - "8185"
+#
+##   neo4j:
+##     container_name: neo4j
+##     image: neo4j:latest
+##     ports:
+##     - "7474:7474"
+##     network_mode: host
+##     volumes:
+##     - '../data/neo4j:/data/db'
+##     environment:
+##     - NEO4J_AUTH=neo4j/123456
+#
 
 
   mysql:
@@ -143,7 +143,7 @@ services:
     image: user-authentication
     build: user-authentication-service/
     container_name: user-authentication
-    restart: always
+#    restart: always
     network_mode: host
     depends_on:
     - kafka
@@ -153,9 +153,9 @@ services:
     expose:
     - "8184"
 
-  angular:
+  knowledge-vault-ui:
     image: angular
-    build: angular/.
+    build: knowledge-vault-ui/.
 #    depends_on:
 #    - gateway
     ports:
@@ -164,15 +164,15 @@ services:
     - "4200"
     container_name: "angular"
 
-  gateway:
-    image: zuulgateway:v1
-    build: zuulgateway/
-    restart: always
-    container_name: zuul-container
-    network_mode: host
-    depends_on:
-    - mongodb
-    ports:
-    - 8081:8081
-    expose:
-    - 8081
+#  gateway:
+#    image: zuulgateway:v1
+#    build: zuulgateway/
+#    restart: always
+#    container_name: zuul-container
+#    network_mode: host
+#    depends_on:
+#    - mongodb
+#    ports:
+#    - 8081:8081
+#    expose:
+#    - 8081
