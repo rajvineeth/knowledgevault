@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 public class OutputResult {
     public String Node1;
     public String Node1label;
+    public String Relation;
     public String Node2;
     public String Node2label;
-    public String Relation;
+
 }

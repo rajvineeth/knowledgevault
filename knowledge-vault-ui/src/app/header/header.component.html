@@ -44,7 +44,10 @@
           <button mat-button (click)="register()">Register</button>
         </nav>
         <ng-template #elseBlock>
-          <span> Welcome User </span>
+          <span *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
+          <ng-template #elseBlock1>
+            <span> Welcome User </span>
+          </ng-template>
           <a mat-menu [matMenuTriggerFor]="avatarMenu">
             <button mat-card-avatar class="avatar"></button>
           </a>
