@@ -1,3 +1,5 @@
+{{dummy1.MedicalSymptoms}}
+<app-card [cardDummy]="dummy1" ></app-card>
 <nav *ngIf="queryResults==null; else elseBlock;">
   <nav>
     <div class="error"></div>
@@ -5,7 +7,7 @@
 <nav>
 
 <ng-template #elseBlock>
-  <div *ngFor="let query of queryResults">
+  <div *ngFor="let query of queryResults" fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="center center" >
     <app-card [res]="query"></app-card>
   </div>
 </ng-template>
