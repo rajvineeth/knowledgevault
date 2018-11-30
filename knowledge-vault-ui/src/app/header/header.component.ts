@@ -1,5 +1,6 @@
-import { Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../_models';
 import { UserService } from '../_services';
 import { ShareService } from '../share.service';
@@ -12,9 +13,10 @@ import { ShareService } from '../share.service';
 })
 
 export class HeaderComponent implements OnInit {
+  currentUser: User;
   username = 'User';
   userThere = false;
-  amILoggedOut = true;
+  amILoggedOut: boolean;
 
   /**
    * private constructor to inject other components and/or services.
@@ -31,13 +33,14 @@ export class HeaderComponent implements OnInit {
 
     const name = localStorage.getItem('userdata');
     console.log(name);
-    if (name !== undefined) {
+    if (name !== undefined && name != null) {
       this.username = name;
       this.userThere = true;
     }
   }
 
   ngOnInit() {
+    // this.amILoggedOut = true;
   }
 
   /**

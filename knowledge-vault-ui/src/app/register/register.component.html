@@ -1,4 +1,42 @@
+<<<<<<< HEAD
+
+<mat-card class="my-card">
+   <mat-card-content>
+       <mat-card-header>
+           <mat-card-title>Register</mat-card-title>        
+       </mat-card-header>
+      <form class="my-form">
+        <mat-form-field class="full-width">
+            <mat-label>First Name</mat-label>
+            <input  matInput  placeholder="First name"  name="fname"  required>
+         </mat-form-field>
+         <mat-form-field class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input  matInput  placeholder="Last Name" name="lname"  required>
+         </mat-form-field>
+         <mat-form-field class="full-width">
+            <mat-label>Username</mat-label>
+            <input  matInput  placeholder="Username" name="username"  required>
+         </mat-form-field>
+         <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input  matInput  placeholder="Email" name="email">
+         </mat-form-field>
+         <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input  matInput  placeholder="Password"  name="password">
+         </mat-form-field>
+      </form>
+   </mat-card-content>
+   <mat-card-actions>
+      <button mat-raised-button (click)="register()" color="primary">REGISTER</button>
+   </mat-card-actions>
+</mat-card>
+
+<!-- <h2>Register</h2>
+=======
 <h2>Register</h2>
+>>>>>>> e50a0359f6e44bdcde5e6aa36f0dfe73f8dd69fe
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
     <div class="form-group">
         <label for="firstName">First Name</label>
@@ -14,7 +52,7 @@
             <div *ngIf="f.lastName.errors.required">Last Name is required</div>
         </div>
         <div class="form-group">
-            <label for="role">Role</label>
+                <label for="role">Role</label>
             <input type="radio"  value="General User"  formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }"> General User<br>
             <input type="radio"  value="SME"  formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">  Subject matter expert <br>
             </div>
@@ -24,7 +62,8 @@
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Username is required</div>
             </div>
-        </div>
+    </div>
+    
     </div>
     <div class="form-group">
         <label for="password">Password</label>
@@ -39,4 +78,5 @@
         <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         <a [routerLink]="['']" class="btn btn-link">Cancel</a>
     </div>
-</form>
+</form> -->
+<!-- <app-alerts></app-alerts> -->
