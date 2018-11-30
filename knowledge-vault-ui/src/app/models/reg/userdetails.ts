@@ -5,7 +5,7 @@ export class UserDetails {
     role: string;
     password: string;
 
-    constructor(fn,ln,un,r,pwd) {
+    constructor(fn, ln, un, r, pwd) {
         this.firstname = fn;
         this.lastname = ln;
         this.username = un;

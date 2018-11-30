@@ -1,5 +1,10 @@
 export class Token {
-    private username: string;
-    private token: string;
-    private role: string;
+    username: string;
+    token: string;
+    role: string;
+
+    constructor(username, token) {
+        this.username = username;
+        this.token = token;
+    }
 }
