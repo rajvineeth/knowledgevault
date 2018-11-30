@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReceivedQuery } from './receivedQuery';
+import { ReceivedQuery } from './models/receivedQuery';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';

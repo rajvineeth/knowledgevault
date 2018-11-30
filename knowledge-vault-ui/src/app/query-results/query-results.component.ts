@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { ReceivedQuery } from '../receivedQuery';
+import { ReceivedQuery } from '../models/receivedQuery';
 
 @Component({
   selector: 'app-query-results',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReceivedQuery } from '../receivedQuery';
+import { ReceivedQuery } from '../models/receivedQuery';
 
 @Component({
   selector: 'app-card',
