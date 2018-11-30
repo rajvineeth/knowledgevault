@@ -1,7 +1,3 @@
-app-card {
-    max-width: calc(33.3% - 5px);
-}
-
 .error {
     color: red;
     background: url('../../assets/robot-error.webp') center center no-repeat;

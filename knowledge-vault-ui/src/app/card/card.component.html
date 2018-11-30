@@ -1,7 +1,8 @@
+<!-- hello {{card.MedicalSymptom}} again -->
 <mat-card class="card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
-    <mat-card-title> {{ res.MedicalCondition }} </mat-card-title>
+    <mat-card-title> {{cardDummy.MedicalCondition}}  res.MedicalCondition  </mat-card-title>
     <mat-card-subtitle>Disease Scientific name</mat-card-subtitle>
   </mat-card-header>
   <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Picture related to disease"> -->
@@ -17,7 +18,8 @@
             Tap to view symptoms
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-symptoms [symptoms]="res.MedicalSymptom"></app-symptoms>
+        <!-- <app-symptoms [symptoms]="res.MedicalSymptom"></app-symptoms> -->
+        <app-symptoms [symptoms]="cardDummy.MedicalSymptoms" ></app-symptoms>
       </mat-expansion-panel>
       <app-expansion-panels></app-expansion-panels>
       <app-expansion-panels></app-expansion-panels>
