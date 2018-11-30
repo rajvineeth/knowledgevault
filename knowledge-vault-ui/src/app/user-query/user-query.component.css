@@ -11,8 +11,9 @@ button {
 }
 
 .userInput-full-width {
-    width: 100%;
-    color: black;
+  margin: auto;
+  width: 85%;
+  color: black;
 }
 
 mat-card-header, mat-card-title {
