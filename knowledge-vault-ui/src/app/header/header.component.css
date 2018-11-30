@@ -3,17 +3,19 @@
 }
 
 mat-toolbar {
-  background-color: gray;
-  color: white;
+  background-color:rgba(255, 255, 255, 0.3);
+  color: #bbb;
 }
 
 .example-container {
   flex: 1 1 auto;
+  background-color: white;
 }
 
 a {
   color: #5cb85c;
   font-weight: bold;
+  font-size: 4vw 4vh;
   text-decoration: none;
 }
 
@@ -26,12 +28,15 @@ span {
 }
 
 #logo {
+  object-fit: cover;
   background-image: url("../../assets/logo.jpg");
   background-size: cover;
   border: black;
 }
 
 .avatar {
+  border: black;
+  object-fit: fill;
   background-image: url('../../assets/user.png');
   background-size: cover;
 }
@@ -46,7 +51,9 @@ span {
 
 mat-sidenav {
   width: 30vw;
-  background: rgba(0, 255, 106, 0.6);
+  /* background: rgba(0, 255, 106, 0.6); */
+  /* background:rgba(255, 255, 255, 0.3); */
+  background: white;
   background-size: cover;
 }
 

@@ -19,6 +19,7 @@
         <module>input-kafka</module>
         <module>input-lemmatize</module>
         <module>query-engine</module>
+        <!--<module>input-tokenize</module>-->
         <module>input-postag</module>
         <module>input-tagger</module>
     </modules>
@@ -62,6 +63,10 @@
             <artifactId>jacoco-maven-plugin</artifactId>
             <!--<version>0.5.5.201112152213</version>-->
             <version>0.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--<dependency>-->
             <!--&lt;!&ndash; Import dependency management from Spring Boot &ndash;&gt;-->

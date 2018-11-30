@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ReceivedQuery } from '../models/receivedQuery';
 
 @Component({
   selector: 'app-card',
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
+
+  @Input() public res: ReceivedQuery;
 
   constructor(private router: Router) { }
 

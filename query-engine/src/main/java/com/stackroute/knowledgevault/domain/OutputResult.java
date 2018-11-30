@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class OutputResult {
-    public String MedicalCondition;
-    public String MedicalSymptom;
+    public String Node1;
+    public String Node1label;
+    public String Node2;
+    public String Node2label;
+    public String Relation;
 }

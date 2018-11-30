@@ -1,12 +1,8 @@
  .userInput-card {
   height: 100%;
-  align-items: center;
-  justify-content: center;
   color: white;
   text-align: center;
   box-shadow: none;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 button {
@@ -15,11 +11,12 @@ button {
 }
 
 .userInput-full-width {
-    width: 100%;
-    color: black;
+  margin: auto;
+  width: 85%;
+  color: black;
 }
 
-mat-card-title {
+mat-card-header, mat-card-title {
   color: black;
   font-family: source sans pro, sans-serif;
 }

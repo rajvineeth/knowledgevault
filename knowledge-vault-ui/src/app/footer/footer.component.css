@@ -1,8 +1,7 @@
-.foot {
-  color: black;
-  position: relative;
-  bottom:0;
-  width:100%;
+mat-toolbar {
+  background-color: #f3f3f3;
+  color: #bbb;
+  font-size: 1rem;
 }
 
 a {

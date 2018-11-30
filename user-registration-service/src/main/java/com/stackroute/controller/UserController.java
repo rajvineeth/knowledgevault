@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.beans.factory.annotation.Value;
 @RestController
-@RequestMapping(value = "/api/v1")
+@RequestMapping(value = "/api/v1/")
 @CrossOrigin("*")
 public class UserController {
 
@@ -41,7 +41,6 @@ public class UserController {
 
     @Value("${user-Controller.message.kafkatopic}")
     private String ControllerMessag5;
-
 
     private static final String TOPIC = "user-data";
 
@@ -82,6 +81,7 @@ public class UserController {
         }
         return responseEntity;
     }
+
     @PutMapping("update/{id}")
     public ResponseEntity<?> updateUserById(@RequestBody UserDetails userDetails, @PathVariable("id") String id){
         ResponseEntity responseEntity;
