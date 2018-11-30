@@ -24,17 +24,17 @@ export class LoginComponent implements OnInit {
         val => {
           this.logInStatus = !val;
         }
-      )
+      );
   }
 
   ngOnInit() { }
 
   bhejdo(): void {
-    this.srvc.setValue(this.logInStatus)
+    this.srvc.setValue(this.logInStatus);
   }
 
   login(): void {
-    console.log('getting the flag value before actually logging in')
+    console.log('getting the flag value before actually logging in');
 
     const user = new User(this.username, this.password);
     this.loginsrvc.validateUser(user)

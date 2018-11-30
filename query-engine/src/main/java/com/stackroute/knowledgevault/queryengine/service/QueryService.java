@@ -46,6 +46,26 @@ public class QueryService {
         }
     }
 
+    public void loadgraph(Driver driver) {
+        LOGGER.info("Loading The Graph");
+        try (Session session = driver.session()) {
+            String g1 = "LOAD CSV WITH HEADERS FROM 'https://gist.githubusercontent.com/anand-jadhav/323d279c7b3ef477c5555a031b00da73/raw/e366c239441db747d507bbc603bb010f5698978c/sym_t.csv' AS line " +
+                    "CREATE (def:MedicalSymptom{syd:line.syd,name:line.symptom})";
+            String g2 = "LOAD CSV WITH HEADERS FROM 'https://gist.githubusercontent.com/anand-jadhav/f20082c9fd9db159cbd7101713ebfd9e/raw/721f1ccebac5fabfdec023aab3b489e1b9f0af96/dianew.csv' AS line " +
+                    "CREATE (def:MedicalCondition{did:line.did,name:line.diagnose})";
+            String g3 = "MATCH(a:MedicalCondition),(b:MedicalSymptom),(n:Matchers) " +
+                    "WHERE n.did=a.did AND n.syd=b.syd " +
+                    "CREATE (a)-[r:has_symptom]->(b)";
+            try (Transaction tx = session.beginTransaction()) {
+                tx.run(g1);
+                tx.run(g2);
+                tx.run(g3);
+                tx.success();  // Mark this write as successful.
+                LOGGER.info("Graph Loaded Succesfully");
+
+            }
+        }
+    }
 
     public void close(Driver driver) {
         // Closing a driver immediately shuts down all open connections.
