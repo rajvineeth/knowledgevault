@@ -28,18 +28,18 @@ public class QueryService {
                     Record record = result.next();
                     // Values can be extracted from a record by index or name.
 //                    String r = record.get("name1label").asString();
-//
-                    outputResult.Node1 = record.get("name1").asString();
-                    outputResult.Node1label = record.get("name1label").asString();
-                    outputResult.Relation = record.get("ril").asString();
-                    outputResult.Node2 = record.get("name2").asString();
-                    outputResult.Node2label = record.get("name2label").asString();
+                LOGGER.info("query run");
+                    outputResult.Node1 = record.get("name1").toString();
+                    outputResult.Node1label = record.get("name1label").toString();
+                    outputResult.Relation = record.get("ril").toString();
+                    outputResult.Node2 = record.get("name2").toString();
+                    outputResult.Node2label = record.get("name2label").toString();
 
 
                 }
-                LOGGER.info("output :{}", map);
+//                LOGGER.info("output :{}", map);
                 LOGGER.info("Out of string loop");
-
+                System.out.println(outputResult);
                 tx.success();  // Mark this write as successful.
                 return outputResult;
             }

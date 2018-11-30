@@ -32,8 +32,8 @@ public class KafkaConsumer {
         for (Map.Entry<String, String> entry : processedInput.getKeyValue().entrySet()) {
             LOGGER.info(entry.getKey());
             LOGGER.info(entry.getValue());
-//            OutputResult res = queryService.runquery(drive, entry.getKey(), entry.getValue());
-            OutputResult res = new OutputResult("cancer","disease","pain","symptom", "indicated by");
+            OutputResult res = queryService.runquery(drive, entry.getKey(), entry.getValue());
+//            OutputResult res = new OutputResult("cancer","disease","pain","symptom", "indicated by");
             list.add(res);
 
 //            producer.post(pi);
