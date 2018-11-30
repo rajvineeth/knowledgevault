@@ -19,7 +19,7 @@ public class KafkaConsumer {
 
 //    @Autowired
 //    private KafkaProducer producer;
-    private DriverInit driver = new DriverInit("bolt://172.23.239.143:7687", "neo4j", "123456");
+    private DriverInit driver = new DriverInit("bolt://0.0.0.0:7687", "neo4j", "123456");
     private QueryService queryService = new QueryService();
     private static final Logger LOGGER = LoggerFactory.getLogger(com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer.class);
     @KafkaListener(topics = "queryInput", groupId = "group_json_query", containerFactory = "userKafkaListenerFactory")
