@@ -29,6 +29,7 @@ public class UserImpl implements UserService {
         }
         else {
             UserDetails saveduser = userRepository.save(userDetails);
+            System.out.println("from serviceimpl after saving"+saveduser);
             return saveduser;
         }
     }
@@ -53,6 +54,7 @@ public class UserImpl implements UserService {
     @Override
     public UserDetails getUserById(String id) {
         UserDetails userDetails = userRepository.findById(id).get();
+        System.out.println("from service"+userDetails);
         return userDetails;
     }
 
