@@ -1,38 +1,8 @@
-ribbon:
-    eureka:
-        enabled: false
-
-zuul:
-    routes:
-        input-kafka:
-            #            path: /input/**
-            url: http://localhost:8148
-        input-lemmatize:
-            path: /lemmatizing/**
-            url: http://localhost:8140
-        input-postag:
-            path: /pos/**
-            url: http://localhost:8142
-        input-tagger:
-            path: /tagger/**
-            url: http://localhost:8144
-    host:
-        socket-timeout-millis: 30000
-#eureka:         #tells about the Eureka server details and its refresh time
-#    instance:
-#        leaseRenewalIntervalInSeconds: 1
-#        leaseExpirationDurationInSeconds: 2
-#    client:
-#        serviceUrl:
-#            defaultZone: http://127.0.0.1:8091/eureka/
-#        healthcheck:
-#            enabled: true
-#        lease:
-#            duration: 5
-management:
-    security:
-        enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
-
-spring:
-    application:
-        name: zuul-gateway
+#spring:
+#  application:
+#    name: zuul-gateway
+#  cloud:
+#    config:
+#      uri: http://localhost:8092
+server:
+  port: 8081

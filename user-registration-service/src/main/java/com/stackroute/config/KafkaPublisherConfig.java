@@ -15,12 +15,12 @@ import java.util.Map;
 
 @Configuration
 public class KafkaPublisherConfig {
-    @Value("${kafka-config.message.ipaddress}")
-    private String kafkaMessage1;
+//    @Value("${kafka-config.message.ipaddress}")
+//    private String kafkaMessage1;
     @Bean
     public ProducerFactory<String, User> producerFactory(){
         Map<String,Object> configs = new HashMap<>();
-        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaMessage1);
+        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
         configs.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);

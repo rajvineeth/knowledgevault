@@ -1,3 +1,5 @@
+import { LoginService } from './login.service';
+import { DataService } from './data.service';
 import { CustomMaterialModule } from './core/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,6 +23,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CardComponent } from './card/card.component';
 import { SymptomsComponent } from './card/symptoms/symptoms.component';
 import { ExpansionPanelsComponent } from './card/expansion-panels/expansion-panels.component';
+import { UserQueryService } from './user-query.service';
+import { RegistrationService } from './registration.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,7 @@ import { ExpansionPanelsComponent } from './card/expansion-panels/expansion-pane
     CardDetailComponent,
     CardComponent,
     SymptomsComponent,
-    ExpansionPanelsComponent
+    ExpansionPanelsComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,11 @@ import { ExpansionPanelsComponent } from './card/expansion-panels/expansion-pane
     { provide: 'SPEECH_LANG', useValue: 'en-US' },
     FormsModule,
     ReactiveFormsModule,
-    ShareService
+    ShareService,
+    UserQueryService,
+    DataService,
+    RegistrationService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,8 +2,10 @@ mat-toolbar {
   background-color: #f3f3f3;
   color: #bbb;
   font-size: 1rem;
-  width: 100%;
-  min-width: 300px;
+}
+
+.knowledge:hover{
+  cursor: pointer;
 }
 
 a {

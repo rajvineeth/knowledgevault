@@ -19,3 +19,12 @@ button {
   background-color: #5cb85c;
   color: white;
 }
+
+mat-card {
+  max-width: 40rem;
+  position: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+}

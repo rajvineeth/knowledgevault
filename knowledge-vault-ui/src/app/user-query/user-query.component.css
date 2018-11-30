@@ -2,7 +2,6 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
   color: white;
   text-align: center;
   box-shadow: none;
@@ -20,7 +19,10 @@ button {
     color: black;
 }
 
-mat-card-title {
+mat-card-header, mat-card-title {
   color: black;
   font-family: source sans pro, sans-serif;
+  align-content: center;
+  align-items: center;
+  text-align: center;
 }

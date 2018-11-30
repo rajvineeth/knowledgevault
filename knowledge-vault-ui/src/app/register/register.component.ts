@@ -1,18 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-register',
-//   templateUrl: './register.component.html',
-//   styleUrls: ['./register.component.css']
-// })
-// export class RegisterComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,6 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { AlertService, UserService } from '../_services';
 import { AlertsService } from 'angular-alert-module';
+import { RegistrationService } from '../registration.service';
 
 @Component({
   templateUrl: 'register.component.html',
@@ -35,6 +21,7 @@ export class RegisterComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
+        private register: RegistrationService,
         private userService: UserService,
         private alertService: AlertService,
         private alerts: AlertsService) { }
@@ -63,17 +50,30 @@ export class RegisterComponent implements OnInit {
         console.log(this.details);
 
         this.loading = true;
-        this.userService.register(this.registerForm.value)
-            .pipe(first())
+        
+        let fn:string = this.registerForm.controls['firstname'].value;
+        let ln:string = this.registerForm.controls['lastname'].value;
+        let un:string = this.registerForm.controls['username'].value;
+        let r:string = this.registerForm.controls['role'].value;
+        let pwd:string = this.registerForm.controls['password'].value;
+        this.register.registerUser(fn,ln,un,r,pwd)
             .subscribe(
                 data => {
-                    console.log('saved');
-                    this.alerts.setMessage('succesfully saved', 'success');
-                    this.router.navigate(['/login']);
-                },
-                error => {
-                    this.alerts.setMessage('not saved', 'error');
-                    this.loading = false;
-                });
+                    console.log('yey! i got it....')
+                    console.log(data)
+                }
+            )
+        // this.userService.register(this.registerForm.value)
+        //     .pipe(first())
+        //     .subscribe(
+        //         data => {
+        //             console.log('saved');
+        //             this.alerts.setMessage('succesfully saved', 'success');
+        //             this.router.navigate(['/login']);
+        //         },
+        //         error => {
+        //             this.alerts.setMessage('not saved', 'error');
+        //             this.loading = false;
+        //         });
     }
 }

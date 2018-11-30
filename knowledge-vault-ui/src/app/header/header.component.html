@@ -1,41 +1,62 @@
-<div class="head">
-  <mat-toolbar role="heading">
-    <mat-toolbar-row>
-      <button mat-icon-button (click)="sidenav.toggle()" fxshow="true" fxHide.gt-sm>
+<div>
+  <mat-toolbar>
+    <nav fxshow="true" fxHide.gt-xs="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      
-      <span mat-card-avatar id="logo"></span>
-      <span><a routerLink="/">Knowledge Vault</a></span>
-      <span class="nav-fill-remaining-space"></span>
-      <span class="align-center"></span>
-      <span class="nav-spacer"></span>
+    </nav>
 
-      <div fxShow="true" fxHide.lt-md="true">
+    <span mat-card-avatar id="logo"></span>
+    <span><a routerLink="/">Knowledge Vault</a></span>
+    <span class="nav-fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="nav-spacer"></span>
 
-        <span *ngIf="amILoggedOut; else elseBlock;">
+    <div fxShow="true" fxHide.lt-sm="true">
+      <span *ngIf="amILoggedOut; else elseBlock;">
+        <button mat-button (click)="home()">Home</button>
+        <button mat-button (click)="login()">Login</button>
+        <button mat-button (click)="register()">Register</button>
+      </span>
+      <ng-template #elseBlock>
+        <span> Welcome User </span>
+        <a mat-menu [matMenuTriggerFor]="avatarMenu">
+          <button mat-card-avatar class="avatar"></button>
+        </a>
+        <mat-menu #avatarMenu="matMenu">
+          <button mat-menu-item>Profile</button>
+          <button mat-menu-item>Setting</button>
+          <button mat-button (click)="logout()"> Logout </button>
+          <button mat-menu-item>Help</button>
+        </mat-menu>
+      </ng-template>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column">
+        <nav *ngIf="amILoggedOut; else elseBlock;">
           <button mat-button (click)="home()">Home</button>
+          <br>
           <button mat-button (click)="login()">Login</button>
+          <br>
           <button mat-button (click)="register()">Register</button>
-        </span>
-
-        <ng-template #elseBlock> 
-
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Welcome User
-              </mat-panel-title>
-            </mat-expansion-panel-header>
+        </nav>
+        <ng-template #elseBlock>
+          <span> Welcome User </span>
+          <a mat-menu [matMenuTriggerFor]="avatarMenu">
+            <button mat-card-avatar class="avatar"></button>
+          </a>
+          <mat-menu #avatarMenu="matMenu">
+            <button mat-menu-item>Profile</button>
+            <button mat-menu-item>Setting</button>
             <button mat-button (click)="logout()"> Logout </button>
-            <button mat-button (click)="home()">Home</button>
-          </mat-expansion-panel>
-
-          <span mat-card-avatar class="avatar"> </span>
-
+            <button mat-menu-item>Help</button>
+          </mat-menu>
         </ng-template>
       </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
 </div>
-
