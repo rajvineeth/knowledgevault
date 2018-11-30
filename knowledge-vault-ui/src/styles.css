@@ -10,5 +10,6 @@ purple-green.css */
 html,body {
     margin:0;
     /* overflow: scroll; */
+    min-width: 300px;
 }
 
