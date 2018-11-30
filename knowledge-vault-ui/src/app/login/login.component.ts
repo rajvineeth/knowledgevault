@@ -40,15 +40,18 @@ export class LoginComponent implements OnInit {
     this.loginsrvc.validateUser(user)
       .subscribe(
         data => {
-          if( data.username === this.username) {
+          if (data.username === this.username) {
             this.bhejdo();
-            if( data.role === 'General User') {
+            if (data.role === 'General User') {
               this.router.navigate(['sme']);
+            } else {
+              this.router.navigate(['user']);
             }
-            else this.router.navigate(['user'])
+            window.location.reload();
+          } else {
+            alert('Invalid Credentials');
           }
-          else alert('Invalid Credentials');
         }
-      )
+      );
   }
 }
