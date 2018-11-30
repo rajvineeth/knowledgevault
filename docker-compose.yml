@@ -37,16 +37,16 @@ services:
             ZOOKEEPER_TICK_TIME: 2000
         restart: always
 
-    neo4j:
-        container_name: neo4j
-        image: neo4j:latest
-        ports:
-            - "7474:7474"
-        network_mode: host
-        volumes:
-            - '../data/neo4j:/data/db'
-        environment:
-            - NEO4J_AUTH=neo4j/123456
+#    neo4j:
+#        container_name: neo4j
+#        image: neo4j:latest
+#        ports:
+#            - "7474:7474"
+#        network_mode: host
+#        volumes:
+#            - '../data/neo4j:/data/db'
+#        environment:
+#            - NEO4J_AUTH=neo4j/123456
 
     kafka:
         image: wurstmeister/kafka:0.10.2.0
@@ -127,7 +127,7 @@ services:
         network_mode: host
         depends_on:
             - kafka
-            - neo4j
+#            - neo4j
         ports:
             - "8185:8185"
         expose:
