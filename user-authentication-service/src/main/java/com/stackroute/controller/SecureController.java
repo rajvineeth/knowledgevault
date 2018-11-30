@@ -3,13 +3,11 @@ package com.stackroute.controller;
 import com.stackroute.domain.User;
 import com.stackroute.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/secure")
+@CrossOrigin("*")
 public class SecureController {
 
    private UserService userService;
@@ -24,12 +22,11 @@ public class SecureController {
         return "Login Successful!";
     }
 
-    @RequestMapping(value = "/user/email", method = RequestMethod.POST)
-    public User findByUsername(@RequestBody String email)
-    {
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
+    public User findByUsername(@PathVariable String username) {
         System.out.println("secure");
-        System.out.println(userService.findByEmail(email));
-        return userService.findByEmail(email);
+//        System.out.println(userService.findByEmail(username));
+        return userService.findByEmail(username);
     }
 
     @RequestMapping(value = "/user/update", method = RequestMethod.POST)

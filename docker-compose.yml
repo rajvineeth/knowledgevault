@@ -2,16 +2,6 @@ version:  '2'
 
 services:
 
-  zookeeper:
-    container_name: zookeeper
-    image: wurstmeister/zookeeper
-    hostname: zookeeper
-    ports:
-      - "2181:2181"
-    environment:
-     ZOOKEEPER_CLIENT_PORT: 2181
-     ZOOKEEPER_TICK_TIME: 2000
-
   kafka:
     image: wurstmeister/kafka:0.10.2.0
     container_name: kafka
@@ -39,6 +29,28 @@ services:
     - "8148:8148"
     expose:
     - "8148"
+
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    hostname: zookeeper
+    ports:
+    - "2181:2181"
+    environment:
+     ZOOKEEPER_CLIENT_PORT: 2181
+     ZOOKEEPER_TICK_TIME: 2000
+    restart: always
+
+  neo4j:
+    container_name: neo4j
+    image: neo4j:latest
+    ports:
+    - "7474:7474"
+    network_mode: host
+    volumes:
+    - '../data/neo4j:/data/db'
+    environment:
+    - NEO4J_AUTH=neo4j/123456
 
   input-lemmatize:
     image: input-lemmatize
@@ -115,6 +127,19 @@ services:
     hostname: localhost
 #    restart: always
 
+  query-engine:
+        image: query-engine
+        build: query-engine/
+        container_name: "query-engine"
+        network_mode: host
+        depends_on:
+            - kafka
+            - neo4j
+        ports:
+            - "8185:8185"
+        expose:
+            - "8185"
+
   mongodb:
     image: mongo:3.2-jessie
     ports:
@@ -124,7 +149,7 @@ services:
     volumes:
     - '../data/mongo:/data/db'
     environment:
-      MONGO_INITDB_DATABASE: userDetails
+     MONGO_INITDB_DATABASE: userDetails
 
   user-registration:
     image: user-registration
@@ -176,3 +201,22 @@ services:
 #    - 8081:8081
 #    expose:
 #    - 8081
+
+#    gateway:
+#        image: zuulgateway:v1
+#        build: zuulgateway/
+#        restart: always
+#        container_name: zuulgateway
+#        network_mode: host
+#        depends_on:
+#            - eureka
+#            - config
+#            - input-kafka
+#            - input-lemmatize
+#            - input-postag
+#            - input-tagger
+#        ports:
+#            - 8081:8081
+#        expose:
+#            - 8081
+

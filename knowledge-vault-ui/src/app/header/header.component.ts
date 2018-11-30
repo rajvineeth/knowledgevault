@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
   login(): void {
     console.log('sending the flag from header button...');
     this.srvc.setValue(this.amILoggedOut);
+    if (localStorage.getItem('currentuser') != null) {  console.log('it is there'); }
     this.router.navigate(['login']);
   }
 
@@ -75,6 +76,8 @@ export class HeaderComponent implements OnInit {
    */
   logout(): void {
     this.amILoggedOut = true;
+    localStorage.removeItem('currentuser');
+    if (localStorage.getItem('currentuser') == null) { console.log('it is not there'); }
     this.router.navigate(['home']);
   }
 }
