@@ -14,9 +14,10 @@ import java.util.Arrays;
 @Data
 @Document
 public class UserDetails {
-    @Id
+
     private String firstname;
     private String lastname;
+    @Id
     private String username;
 
     public String getFirstname() {

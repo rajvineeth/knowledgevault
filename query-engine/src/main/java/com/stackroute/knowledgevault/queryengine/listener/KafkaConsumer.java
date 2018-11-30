@@ -21,7 +21,7 @@ public class KafkaConsumer {
 
 //    @Autowired
 //    private KafkaProducer producer;
-    private DriverInit driver = new DriverInit("bolt://0.0.0.0:7687", "neo4j", "123456");
+    private DriverInit driver = new DriverInit("bolt://localhost", "neo4j", "123456");
     private QueryService queryService = new QueryService();
     private static final Logger LOGGER = LoggerFactory.getLogger(com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer.class);
     @KafkaListener(topics = "queryInput", groupId = "group_json_query", containerFactory = "userKafkaListenerFactory")
@@ -33,6 +33,7 @@ public class KafkaConsumer {
             LOGGER.info(entry.getKey());
             LOGGER.info(entry.getValue());
             OutputResult res = queryService.runquery(drive, entry.getKey(), entry.getValue());
+//            OutputResult res = new OutputResult("cancer","disease","pain","symptom", "indicated by");
             list.add(res);
 
 //            producer.post(pi);

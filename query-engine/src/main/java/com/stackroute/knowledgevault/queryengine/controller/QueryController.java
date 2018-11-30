@@ -24,7 +24,6 @@ public class QueryController {
 //    private QueryService queryService = new QueryService();
 //    private static final Logger LOGGER=LoggerFactory.getLogger(com.stackroute.knowledgevault.queryEngine.controller.QueryController.class);
 //
-
     ParaContentService paraContentService;
     ExtractedDataService extractedDataService;
     @Autowired
@@ -36,7 +35,7 @@ public class QueryController {
     @GetMapping("/results")
     public ResponseEntity<?> getResults(){
 //        Set<OutputResult> list = FrontEndData.list;
-//        System.out.println(list);
+        System.out.println(KafkaConsumer.list);
         ResponseEntity<?> responseEntity = new ResponseEntity<>(KafkaConsumer.list, HttpStatus.OK);
         return responseEntity;
     }

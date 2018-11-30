@@ -1,6 +1,9 @@
+
+import { LoginService } from './../login.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ShareService } from '../share.service';
+import { User } from '../models/auth/user';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   logInStatus: boolean;
 
-  constructor(private router: Router, private srvc: ShareService) {
+  constructor(private router: Router, private srvc: ShareService, private loginsrvc: LoginService) {
     this.srvc.getValue()
       .subscribe(
         val => {
@@ -33,15 +36,19 @@ export class LoginComponent implements OnInit {
   login(): void {
     console.log('getting the flag value before actually logging in');
 
-    if (this.username === 'admin' && this.password === 'admin') {
-      this.bhejdo();
-      this.router.navigate(['user']);
-    } else if (this.username === 'sme' && this.password === 'sme') {
-      console.log('flag after calling the login() button : ' + this.logInStatus);
-      this.bhejdo();
-      this.router.navigate(['sme']);
-    } else {
-      alert('Invalid credentials');
-    }
+    const user = new User(this.username, this.password);
+    this.loginsrvc.validateUser(user)
+      .subscribe(
+        data => {
+          if( data.username === this.username) {
+            this.bhejdo();
+            if( data.role === 'General User') {
+              this.router.navigate(['sme']);
+            }
+            else this.router.navigate(['user'])
+          }
+          else alert('Invalid Credentials');
+        }
+      )
   }
 }
