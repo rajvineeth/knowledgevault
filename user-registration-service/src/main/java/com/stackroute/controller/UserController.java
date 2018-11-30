@@ -81,6 +81,7 @@ public class UserController {
         }
         return responseEntity;
     }
+
     @PutMapping("update/{id}")
     public ResponseEntity<?> updateUserById(@RequestBody UserDetails userDetails, @PathVariable("id") String id){
         ResponseEntity responseEntity;
