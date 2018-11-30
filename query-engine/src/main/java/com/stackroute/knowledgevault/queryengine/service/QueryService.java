@@ -53,13 +53,18 @@ public class QueryService {
                     "CREATE (def:MedicalSymptom{syd:line.syd,name:line.symptom})";
             String g2 = "LOAD CSV WITH HEADERS FROM 'https://gist.githubusercontent.com/anand-jadhav/f20082c9fd9db159cbd7101713ebfd9e/raw/721f1ccebac5fabfdec023aab3b489e1b9f0af96/dianew.csv' AS line " +
                     "CREATE (def:MedicalCondition{did:line.did,name:line.diagnose})";
-            String g3 = "MATCH(a:MedicalCondition),(b:MedicalSymptom),(n:Matchers) " +
+            String g3 ="LOAD CSV WITH HEADERS FROM 'https://gist.githubusercontent.com/anand-jadhav/00eb984889a4b73247c336862bf79dfb/raw/286f104715cc41d0d04432f43a744aa1d1dd54d2/diffsydiw.csv' AS line " +
+                    "CREATE (def:Matchers{did:line.did,syd:line.syd})";
+            String g4 = "MATCH(a:MedicalCondition),(b:MedicalSymptom),(n:Matchers) " +
                     "WHERE n.did=a.did AND n.syd=b.syd " +
                     "CREATE (a)-[r:has_symptom]->(b)";
+            String g5= "MATCH(A:Matchers) DELETE A";
             try (Transaction tx = session.beginTransaction()) {
                 tx.run(g1);
                 tx.run(g2);
                 tx.run(g3);
+                tx.run(g4);
+                tx.run(g5);
                 tx.success();  // Mark this write as successful.
                 LOGGER.info("Graph Loaded Succesfully");
 
