@@ -21,25 +21,24 @@ export class LoginComponent implements OnInit {
         val => {
           this.logInStatus = !val;
         }
-      )
+      );
   }
 
   ngOnInit() { }
 
   bhejdo(): void {
-    this.srvc.setValue(this.logInStatus)
+    this.srvc.setValue(this.logInStatus);
   }
 
   login(): void {
-    console.log('getting the flag value before actually logging in')
+    console.log('getting the flag value before actually logging in');
 
     if (this.username === 'admin' && this.password === 'admin') {
-      this.bhejdo()
+      this.bhejdo();
       this.router.navigate(['user']);
-    }
-    else if (this.username === 'sme' && this.password === 'sme') {
-      console.log('flag after calling the login() button : ' + this.logInStatus)
-      this.bhejdo()
+    } else if (this.username === 'sme' && this.password === 'sme') {
+      console.log('flag after calling the login() button : ' + this.logInStatus);
+      this.bhejdo();
       this.router.navigate(['sme']);
     } else {
       alert('Invalid credentials');
