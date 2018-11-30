@@ -1,3 +1,4 @@
+import { ShareService } from './share.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from './models/auth/user';
@@ -16,15 +17,16 @@ const httpOptions = {
 
 export class LoginService {
 
-  private loginUrl: string = 'http://localhost:8184/user/login';
-  private validateURL: string = 'http://localhost:8184/secure/user/';
+  private loginUrl = 'http://localhost:8184/user/login';
+  private validateURL = 'http://localhost:8184/secure/user/';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private srvc: ShareService) { }
 
   public login(user: User) {
     this.http.post<any>(this.loginUrl , user, httpOptions).subscribe(
       data => {
         localStorage.setItem('currentuser', data.token);
+        localStorage.setItem('userdata', data.username);
       }
     );
   }
@@ -32,7 +34,7 @@ export class LoginService {
   public validateUser(user: User): Observable<any> {
     this.login(user);
     const url: string = this.validateURL + user.username;
-    console.log(localStorage.getItem('currentuser'));
+    console.log(localStorage.getItem('userdata'));
     const httpoption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
