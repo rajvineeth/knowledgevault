@@ -1,6 +1,5 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { first } from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../_models';
 import { UserService } from '../_services';
 import { ShareService } from '../share.service';
@@ -13,10 +12,9 @@ import { ShareService } from '../share.service';
 })
 
 export class HeaderComponent implements OnInit {
-  currentUser: User;
   username = 'User';
   userThere = false;
-  amILoggedOut: boolean;
+  amILoggedOut = true;
 
   /**
    * private constructor to inject other components and/or services.
@@ -39,7 +37,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   /**
    * this function provides the routing for home component

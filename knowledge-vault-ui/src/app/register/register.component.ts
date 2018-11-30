@@ -9,7 +9,7 @@ import { RegistrationService } from '../registration.service';
 
 @Component({
   templateUrl: 'register.component.html',
-  providers:[AlertService, AlertsService, UserService]
+  providers:[ AlertService, AlertsService, UserService]
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
@@ -17,11 +17,11 @@ export class RegisterComponent implements OnInit {
     submitted = false;
     details = [];
     msg;
-    fn: string;
-    ln: string;
-    un: string;
-    r: string;
-    pwd: string;
+    // fn: string;
+    // ln: string;
+    // un: string;
+    // r: string;
+    // pwd: string;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -56,12 +56,12 @@ export class RegisterComponent implements OnInit {
 
         this.loading = true;
 
-        // let fn:string = this.registerForm.controls['firstName'].value;
-        // let ln:string = this.registerForm.controls['lastName'].value;
-        // let un:string = this.registerForm.controls['username'].value;
-        // let r:string = this.registerForm.controls['role'].value;
-        // let pwd:string = this.registerForm.controls['password'].value;
-        this.register.registerUser(this.fn, this.ln, this.un, this.r, this.pwd)
+        const fn: string = this.registerForm.controls['firstName'].value;
+        const ln: string = this.registerForm.controls['lastName'].value;
+        const un: string = this.registerForm.controls['username'].value;
+        const r: string = this.registerForm.controls['role'].value;
+        const pwd: string = this.registerForm.controls['password'].value;
+        this.register.registerUser(fn, ln, un, r, pwd)
             .subscribe(
                 data => {
                     this.alerts.setMessage('succesfully saved', 'success');
