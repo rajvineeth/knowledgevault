@@ -4,9 +4,9 @@ mat-toolbar {
   font-size: 1rem;
 }
 
-.knowledge:hover{
+/* .knowledge:hover{
   cursor: pointer;
-}
+} */
 
 a {
   color: #5cb85c;
