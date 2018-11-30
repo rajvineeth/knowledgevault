@@ -14,7 +14,7 @@ const httpOptions = {
 
 export class RegisterService {
 
-  private registerUrl: string = 'http://localhost:8181/api/v1/saveuser';
+  private registerUrl = 'http://localhost:8181/api/v1/saveuser';
 
   constructor(private http: HttpClient) { }
 
