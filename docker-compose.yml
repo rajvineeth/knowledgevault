@@ -176,6 +176,48 @@ services:
 #    expose:
 #    - "8182"
 #
+
+
+
+#  mysql:
+#    image: mysql:5.7
+#    ports:
+#      - 3306:3306
+#    container_name: mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "12345"
+#      MYSQL_DATABASES: login
+#    volumes:
+#      - '/opt/datasql:/var/lib/data'
+#    network_mode: "host"
+#    hostname: localhost
+  #    restart: always
+
+#  mongodb:
+#    image: mongo:3.2-jessie
+#    ports:
+#      - 27017:27017
+#    container_name: "mongo-knowledgevault"
+#    network_mode: host
+#    volumes:
+#      - '../data/mongo:/data/db'
+#    environment:
+#      MONGO_INITDB_DATABASE: userDetails
+
+#  user-registration:
+#    image: user-registration
+#    build: user-registration-service/
+#    container_name: user-registration
+#    network_mode: host
+#    depends_on:
+#      - kafka
+#      - mongodb
+#    ports:
+#      - "8182:8182"
+#    expose:
+#      - "8182"
+
+
 #  user-authentication:
 #    image: user-authentication
 #    build: user-authentication-service/
@@ -199,6 +241,25 @@ services:
 #    - "4200:4200"
 #    expose:
 #    - "4200"
+#    container_name: "angular"
+
+
+#      - kafka
+#      - mysql
+#    ports:
+#      - "8184:8184"
+#    expose:
+#      - "8184"
+
+#  knowledge-vault-ui:
+#    image: angular
+#    build: knowledge-vault-ui/.
+#    #    depends_on:
+#    #    - gateway
+#    ports:
+#      - "4200:4200"
+#    expose:
+#      - "4200"
 #    container_name: "angular"
 
 

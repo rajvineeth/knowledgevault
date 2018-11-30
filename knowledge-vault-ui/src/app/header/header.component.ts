@@ -33,13 +33,15 @@ export class HeaderComponent implements OnInit {
 
     const name = localStorage.getItem('userdata');
     console.log(name);
-    if (name !== undefined) {
+    if (name !== undefined && name != null) {
       this.username = name;
       this.userThere = true;
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // this.amILoggedOut = true;
+  }
 
   /**
    * this function provides the routing for home component

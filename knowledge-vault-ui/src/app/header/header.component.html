@@ -13,12 +13,13 @@
     <span class="nav-spacer"></span>
 
     <div fxShow="true" fxHide.lt-sm="true">
-      <span *ngIf="amILoggedOut; else elseBlock;">
+      <span *ngIf="!userThere; else elseBlock;">
         <button mat-button (click)="home()">Home</button>
         <button mat-button (click)="login()">Login</button>
         <button mat-button (click)="register()">Register</button>
       </span>
       <ng-template #elseBlock>
+
         <span> Welcome User </span>
         <a mat-menu [matMenuTriggerFor]="avatarMenu">
           <button mat-card-avatar class="avatar"></button>
@@ -36,7 +37,7 @@
   <mat-sidenav-container fxFlexFill class="example-container">
     <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
       <div fxLayout="column">
-        <nav *ngIf="amILoggedOut; else elseBlock;">
+        <nav *ngIf="!userThere; else elseBlock;">
           <button mat-button (click)="home()">Home</button>
           <br>
           <button mat-button (click)="login()">Login</button>
