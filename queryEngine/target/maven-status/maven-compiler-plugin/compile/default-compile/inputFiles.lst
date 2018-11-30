@@ -1,0 +1,9 @@
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/domain/FrontEndData.java
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/queryEngine/service/DriverInit.java
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/queryEngine/config/KafkaConsumerConfig.java
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/queryEngine/QueryEngineApplication.java
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/domain/OutputResult.java
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/queryEngine/listener/KafkaConsumer.java
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/queryEngine/controller/QueryController.java
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/domain/ProcessedInput.java
+/home/cgi/Knowledge-vault-frontend/knowledge-vault/queryEngine/src/main/java/com/stackroute/knowledgevault/queryEngine/service/QueryService.java

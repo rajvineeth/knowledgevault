@@ -1,37 +1,3 @@
-<!--
-<mat-card class="my-card">
-   <mat-card-content>
-       <mat-card-header>
-           <mat-card-title>Register</mat-card-title>        
-       </mat-card-header>
-      <form class="my-form">
-        <mat-form-field class="full-width">
-            <mat-label>First Name</mat-label>
-            <input  matInput  placeholder="First name"  name="fname"  required>
-         </mat-form-field>
-         <mat-form-field class="full-width">
-            <mat-label>Last Name</mat-label>
-            <input  matInput  placeholder="Last Name" name="lname"  required>
-         </mat-form-field>
-         <mat-form-field class="full-width">
-            <mat-label>Username</mat-label>
-            <input  matInput  placeholder="Username" name="username"  required>
-         </mat-form-field>
-         <mat-form-field class="full-width">
-            <mat-label>Email</mat-label>
-            <input  matInput  placeholder="Email" name="email">
-         </mat-form-field>
-         <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
-            <input  matInput  placeholder="Password"  name="password">
-         </mat-form-field>
-      </form>
-   </mat-card-content>
-   <mat-card-actions>
-      <button mat-raised-button (click)="register()" color="primary">REGISTER</button>
-   </mat-card-actions>
-</mat-card>
--->
 <h2>Register</h2>
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
     <div class="form-group">

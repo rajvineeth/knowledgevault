@@ -50,9 +50,10 @@ public class UserController {
     public ResponseEntity<?> saveUser(@RequestBody UserDetails userDetails){
         ResponseEntity responseEntity;
         System.out.println("got request");
-        System.out.println(userDetails);
+
         User User = new User(userDetails.getUsername(), userDetails.getPassword());
         try{
+            System.out.println(userDetails);
            UserDetails u = userService.saveUser(userDetails);
            kafkaTemplate.send(TOPIC, User);
             responseEntity= new ResponseEntity<UserDetails>(u, HttpStatus.CREATED);
