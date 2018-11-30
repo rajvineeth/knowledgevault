@@ -13,7 +13,7 @@ const httpOptions = {
 
 export class LoginService {
 
-  private loginUrl = 'http://localhost:8184/user/login'
+  private loginUrl = 'http://localhost:8184/user/login';
 
   constructor(private http: HttpClient) { }
 
