@@ -6,6 +6,6 @@ spring:
     name: paragraph-processor
   cloud:
     config:
-      uri: http://localhost:8092
+      uri: http://127.0.0.1:8092
 
 

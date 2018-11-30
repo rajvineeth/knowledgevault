@@ -46,7 +46,7 @@ public class KafkaConsumer {
         JSONObject obj = FillUpData.fillOntology(tags);
 
         JSONld jsoNld = DocProcessor.json2jsonld(obj,data.getId(),paraId);
-        paraContent=new ParaContent(data.getId(),paraId,data.getText());
+        paraContent=new ParaContent(paraId,data.getId(),data.getText());
         paraContentService.saveContent(paraContent);
 	    paraId++;
         this.producer.post(jsoNld);

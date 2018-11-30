@@ -149,6 +149,7 @@ services:
     - config-server
     - kafka
     - mongodb
+    - paragraph-tokenizer
     ports:
     - "8433:8433"
     expose:
