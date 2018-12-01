@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class SymptomsComponent implements OnInit {
 
-  @Input() private symptoms: string;
+  @Input() private symptoms: string[];
   constructor() { }
 
   ngOnInit() {

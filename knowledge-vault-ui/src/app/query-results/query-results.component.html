@@ -1,16 +1,27 @@
-{{dummy1.MedicalSymptoms}}
-<app-card [cardDummy]="dummy1" ></app-card>
-<nav *ngIf="queryResults==null; else elseBlock;">
+<!-- {{dummy1.MedicalCondition}}<br>
+<div *ngFor="let symptom of dummy1.MedicalSymptoms" >
+  {{symptom}}
+</div>
+<div *ngFor="let bodyPart of dummy1.AnatomicalStructures" >
+  {{bodyPart}}
+</div>
+<div *ngFor="let paragraph of dummy1.Paragraphs" >
+  {{paragraph.DocumentId}}<br>
+  {{paragraph.Content}}
+</div> -->
+
+<app-card [res]='dummy1' ></app-card>
+<!-- <nav *ngIf="queryResults == null; else elseBlock;">
   <nav>
     <div class="error"></div>
   </nav>
-<nav>
+<nav> -->
 
-<ng-template #elseBlock>
-  <div *ngFor="let query of queryResults" fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="center center" >
+<!-- <ng-template #elseBlock> -->
+  <!-- <div *ngFor="let query of queryResults" fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="start center" >
     <app-card [res]="query"></app-card>
-  </div>
-</ng-template>
+  </div> -->
+<!-- </ng-template> -->
 
 
 

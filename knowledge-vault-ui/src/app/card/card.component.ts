@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReceivedQuery } from '../models/receivedQuery';
-import { Dummy1 } from '../models/dummy1';
 
 @Component({
   selector: 'app-card',
@@ -10,10 +9,10 @@ import { Dummy1 } from '../models/dummy1';
 })
 export class CardComponent implements OnInit {
 
-  @Input() private cardDummy: Dummy1;
-  @Input() public res: ReceivedQuery;
+  @Input() private res: ReceivedQuery;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+   }
 
   ngOnInit() {
   }
