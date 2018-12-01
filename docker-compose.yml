@@ -2,201 +2,276 @@ version:  '2'
 
 services:
 
-    eureka:
-        image: eureka-registry
-        build: eureka-registry/
-        restart: always
-        network_mode: host
-        container_name: "eureka-registry"
-        ports:
-        - "8066:8066"
-        expose:
-        - "8066"
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    hostname: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
 
-    config:
-        image: config-server
-        build: config-server/
-        restart: always
-        network_mode: host
-        container_name: "config-server"
-        depends_on:
-            - eureka
-        ports:
-            - "8888:8888"
-        expose:
-            - "8888"
+  kafka:
+    image: wurstmeister/kafka:0.10.2.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_CREATE_TOPICS: "education:1:1"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+    depends_on:
+    - "zookeeper"
+    restart: always
 
-    zookeeper:
-        container_name: zookeeper
-        image: wurstmeister/zookeeper
-        hostname: zookeeper
-        ports:
-            - "2181:2181"
-        environment:
-            ZOOKEEPER_CLIENT_PORT: 2181
-            ZOOKEEPER_TICK_TIME: 2000
-        restart: always
+#  eureka:
+#    image: eureka-registry:v1
+#    build: eureka-registry/
+#    restart: always
+#    network_mode: host
+#    container_name: eureka-registry
+#    ports:
+#    - 8066:8066
+#    expose:
+#    - 8066
 
-    neo4j:
-        container_name: neo4j
-        image: neo4j:latest
-        ports:
-            - "7474:7474"
-        network_mode: host
-        volumes:
-            - '../data/neo4j:/data/db'
-        environment:
-            - NEO4J_AUTH=neo4j/123456
+#  config:
+#    image: config-server:v1
+#    build: config-server/
+#    restart: always
+#    network_mode: host
+#    container_name: config-server
+#    depends_on:
+#    - "eureka"
+#    ports:
+#    - 8888:8888
+#    expose:
+#    - 8888
 
-    kafka:
-        image: wurstmeister/kafka:0.10.2.0
-        container_name: kafka
-        ports:
-            - "9092:9092"
-        environment:
-            KAFKA_ADVERTISED_HOST_NAME: localhost
-#            KAFKA_CREATE_TOPICS: "education:1:1"
-            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-        volumes:
-            - '/var/run/docker.sock:/var/run/docker.sock'
-        depends_on:
-            - "zookeeper"
-        restart: always
+  input-kafka:
+    image: input-kafka
+    build: input-kafka/
+    container_name: "input-kafka"
+    network_mode: host
+#    depends_on:
+#    - config
+#    - eureka
+#    - kafka
+    ports:
+    - "8148:8148"
+    expose:
+    - "8148"
+    restart: always
 
-    input-kafka:
-        image: input-kafka
-        build: input-kafka/
-        container_name: "input-kafka"
-        network_mode: host
-        depends_on:
-            - eureka
-            - kafka
-        ports:
-            - "8148:8148"
-        expose:
-            - "8148"
-        restart: always
+  input-lemmatize:
+    image: input-lemmatize
+    build: input-lemmatize/
+    container_name: "input-lemmatize"
+    network_mode: host
+    depends_on:
+    - kafka
+    ports:
+    - "8140:8140"
+    expose:
+    - "8140"
+    restart: always
 
-    input-lemmatize:
-        image: input-lemmatize
-        build: input-lemmatize/
-        container_name: "input-lemmatize"
-        restart: always
-        network_mode: host
-        depends_on:
-            - eureka
-            - kafka
-        ports:
-            - "8140:8140"
-        expose:
-            - "8140"
+  input-postag:
+    image: input-postag
+    build: input-postag/
+    container_name: "input-postag"
+    network_mode: host
+    depends_on:
+    - kafka
+    ports:
+    - "8142:8142"
+    expose:
+    - "8142"
+    restart: always
 
-    input-postag:
-        image: input-postag
-        build: input-postag/
-        container_name: "input-postag"
-        restart: always
-        network_mode: host
-        depends_on:
-            - eureka
-            - kafka
-        ports:
-            - "8142:8142"
-        expose:
-            - "8142"
+  input-tagger:
+    image: input-tagger
+    build: input-tagger/
+    container_name: "input-tagger"
+    network_mode: host
+    depends_on:
+    - kafka
+    ports:
+    - "8144:8144"
+    expose:
+    - "8144"
+    restart: always
+    volumes:
+      - '../knowledge-vault/input-tagger/assets/taggerResource/:/knowledge-vault/input-tagger/assets/taggerResource/'
 
-    input-tagger:
-        image: input-tagger
-        build: input-tagger/
-        container_name: "input-tagger"
-        network_mode: host
-        depends_on:
-            - eureka
-            - kafka
-        ports:
-            - "8144:8144"
-        expose:
-            - "8144"
-        restart: always
+  query-engine:
+    image: query-engine
+    build: query-engine/
+    container_name: "query-engine"
+    network_mode: host
+    depends_on:
+    - kafka
+    - neo4j
+    ports:
+    - "8185:8185"
+    expose:
+    - "8185"
+    restart: always
 
-    query-engine:
-        image: query-engine
-        build: query-engine/
-        container_name: "query-engine"
-        network_mode: host
-        depends_on:
-            - kafka
-            - neo4j
-        ports:
-            - "8185:8185"
-        expose:
-            - "8185"
+  neo4j:
+    container_name: neo4j
+    image: neo4j:latest
+    ports:
+    - "7474:7474"
+    - "7687:7687"
+    network_mode: host
+    volumes:
+    - '../data/neo4j:/data/db'
+    environment:
+    - NEO4J_AUTH=neo4j/123456
+    restart: always
 
-#    mysql:
-#        image: mysql:5.7
-#        ports:
-#            - 3306:3306
-#        container_name: mysql
-#        environment:
-#            #    - MYSQL_USER =root
-#            - MYSQL_ROOT_PASSWORD=root
-#            - MYSQL_DATABASE=mydatabase
-#        volumes:
-#            - '/opt/datasql:/var/lib/mysql'
-#        network_mode: "host"
-#        hostname: localhost
+
+
+#  mysql:
+#    image: mysql:5.7
+#    ports:
+#    - 3306:3306
+#    container_name: mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "12345"
+#      MYSQL_DATABASES: login
+#    volumes:
+#    - '/opt/datasql:/var/lib/data'
+#    network_mode: "host"
+#    hostname: localhost
+#  #    restart: always
+#
+#  mongodb:
+#    image: mongo:3.2-jessie
+#    ports:
+#    - 27017:27017
+#    container_name: "mongo-knowledgevault"
+#    network_mode: host
+#    volumes:
+#    - '../data/mongo:/data/db'
+#    environment:
+#      MONGO_INITDB_DATABASE: userDetails
+
+#  user-registration:
+#    image: user-registration
+#    build: user-registration-service/
+#    container_name: user-registration
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    - mongodb
+#    ports:
+#    - "8182:8182"
+#    expose:
+#    - "8182"
+#
+
+
+
+#  mysql:
+#    image: mysql:5.7
+#    ports:
+#      - 3306:3306
+#    container_name: mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "12345"
+#      MYSQL_DATABASES: login
+#    volumes:
+#      - '/opt/datasql:/var/lib/data'
+#    network_mode: "host"
+#    hostname: localhost
+  #    restart: always
+
+#  mongodb:
+#    image: mongo:3.2-jessie
+#    ports:
+#      - 27017:27017
+#    container_name: "mongo-knowledgevault"
+#    network_mode: host
+#    volumes:
+#      - '../data/mongo:/data/db'
+#    environment:
+#      MONGO_INITDB_DATABASE: userDetails
+
+#  user-registration:
+#    image: user-registration
+#    build: user-registration-service/
+#    container_name: user-registration
+#    network_mode: host
+#    depends_on:
+#      - kafka
+#      - mongodb
+#    ports:
+#      - "8182:8182"
+#    expose:
+#      - "8182"
+
+
+#  user-authentication:
+#    image: user-authentication
+#    build: user-authentication-service/
+#    container_name: user-authentication
 #    #    restart: always
+#    network_mode: host
+#    depends_on:
+#    - kafka
+#    - mysql
+#    ports:
+#    - "8184:8184"
+#    expose:
+#    - "8184"
 
-#    mongodb:
-#        image: mongo:3.2-jessie
-#        ports:
-#            - 27017:27017
-#        container_name: "mongo-knowledgevault"
-#        network_mode: host
-#        volumes:
-#            - '../data/mongo:/data/db'
-#        environment:
-#            MONGO_INITDB_DATABASE: userDetails
+#  knowledge-vault-ui:
+#    image: angular
+#    build: knowledge-vault-ui/.
+#    #    depends_on:
+#    #    - gateway
+#    ports:
+#    - "4200:4200"
+#    expose:
+#    - "4200"
+#    container_name: "angular"
 
-#    user-authentication:
-#        image: user-authentication
-#        build: user-authentication-service/
-#        container_name: user-authentication
-#        network_mode: host
-#        depends_on:
-#            - kafka
-#            - mysql
-#        ports:
-#            - "8184:8184"
-#        expose:
-#            - "8184"
 
-#    angular:
-#        image: angular
-#        build: angular/.
-#        #    depends_on:
-#        #    - gateway
-#        ports:
-#            - "4200:4200"
-#        expose:
-#            - "4200"
-#        container_name: "angular"
+#      - kafka
+#      - mysql
+#    ports:
+#      - "8184:8184"
+#    expose:
+#      - "8184"
 
-#    gateway:
-#        image: zuulgateway:v1
-#        build: zuulgateway/
-#        restart: always
-#        container_name: zuulgateway
-#        network_mode: host
-#        depends_on:
-#            - eureka
-#            - config
-#            - input-kafka
-#            - input-lemmatize
-#            - input-postag
-#            - input-tagger
-#        ports:
-#            - 8081:8081
-#        expose:
-#            - 8081
+#  knowledge-vault-ui:
+#    image: angular
+#    build: knowledge-vault-ui/.
+#    #    depends_on:
+#    #    - gateway
+#    ports:
+#      - "4200:4200"
+#    expose:
+#      - "4200"
+#    container_name: "angular"
+
+
+#  gateway:
+#    image: zuulgateway:v1
+#    build: zuulgateway/
+#    restart: always
+#    container_name: zuul-container
+#    network_mode: host
+#    depends_on:
+#    - mongodb
+#    ports:
+#    - 8081:8081
+#    expose:
+#    - 8081

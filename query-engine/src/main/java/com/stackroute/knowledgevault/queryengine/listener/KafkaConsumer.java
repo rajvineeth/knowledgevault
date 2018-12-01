@@ -10,18 +10,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class KafkaConsumer {
 
-    public static Set<OutputResult> list = new HashSet<>();
+    public static List<OutputResult> list = new ArrayList<>();
 
 //    @Autowired
 //    private KafkaProducer producer;
-    private DriverInit driver = new DriverInit("bolt://localhost", "neo4j", "123456");
+    private DriverInit driver = new DriverInit("bolt://0.0.0.0:7687", "neo4j", "123456");
     private QueryService queryService = new QueryService();
     private static final Logger LOGGER = LoggerFactory.getLogger(com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer.class);
     @KafkaListener(topics = "queryInput", groupId = "group_json_query", containerFactory = "userKafkaListenerFactory")
@@ -32,9 +30,8 @@ public class KafkaConsumer {
         for (Map.Entry<String, String> entry : processedInput.getKeyValue().entrySet()) {
             LOGGER.info(entry.getKey());
             LOGGER.info(entry.getValue());
-//            OutputResult res = queryService.runquery(drive, entry.getKey(), entry.getValue());
-            OutputResult res = new OutputResult("cancer","disease","pain","symptom", "indicated by");
-            list.add(res);
+            list = queryService.runquery(drive, entry.getKey(), entry.getValue());
+//            OutputResult res = new OutputResult("cancer","disease","pain","symptom", "indicated by");
 
 //            producer.post(pi);
 

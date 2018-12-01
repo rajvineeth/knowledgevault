@@ -1,7 +1,7 @@
 eureka:         #tells about the Eureka server details and its refresh time
     client:
         service-url:
-            defaultZone: http://localhost:8066/eureka/
+            defaultZone: http://127.0.0.1:8066/eureka/
         register-with-eureka: true
         fetch-registry: true
 server:

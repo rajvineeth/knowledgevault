@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../_models';
@@ -13,9 +13,9 @@ import { ShareService } from '../share.service';
 })
 
 export class HeaderComponent implements OnInit {
-  
   currentUser: User;
-  users: User[] = [];
+  username = 'User';
+  userThere = false;
   amILoggedOut: boolean;
 
   /**
@@ -25,17 +25,22 @@ export class HeaderComponent implements OnInit {
    * @param srvc the service typescript class to share data from one component to another
    * component irrespective of their relationship
    */
-  constructor(private router: Router, private userService: UserService, private srvc: ShareService) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  constructor(private router: Router, private srvc: ShareService) {
     this.srvc.getValue()
       .subscribe(
         data => this.amILoggedOut = data
       );
+
+    const name = localStorage.getItem('userdata');
+    console.log(name);
+    if (name !== undefined && name != null) {
+      this.username = name;
+      this.userThere = true;
+    }
   }
 
   ngOnInit() {
-    this.amILoggedOut = true;
-    this.loadAllUsers();
+    // this.amILoggedOut = true;
   }
 
   /**
@@ -51,7 +56,6 @@ export class HeaderComponent implements OnInit {
   login(): void {
     console.log('sending the flag from header button...');
     this.srvc.setValue(this.amILoggedOut);
-    if (localStorage.getItem('currentuser') != null) {  console.log('it is there'); }
     this.router.navigate(['login']);
   }
 
@@ -63,21 +67,13 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * this function loads all the users stored in the database.
-   */
-  private loadAllUsers() {
-    this.userService.getAll().pipe(first()).subscribe(users => {
-      this.users = users;
-    });
-  }
-
-  /**
    * this function provides the routing for logout component
    */
   logout(): void {
     this.amILoggedOut = true;
     localStorage.removeItem('currentuser');
-    if (localStorage.getItem('currentuser') == null) { console.log('it is not there'); }
+    localStorage.removeItem('userdata');
+    this.userThere = false;
     this.router.navigate(['home']);
   }
 }
