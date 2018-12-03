@@ -1,6 +1,6 @@
 .login-card {
   background-color: white;
-  color: #5cb85c;
+  /* color: #5cb85c; */
   max-width: 80rem;
   position: inherit;
   box-shadow: none;
@@ -37,6 +37,7 @@ button {
 
 mat-card-header {
   justify-content: center;
+  color: #5cb85c;
 }
 
 .login-full-width {
