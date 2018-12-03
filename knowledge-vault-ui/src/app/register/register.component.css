@@ -5,6 +5,7 @@
   position: inherit;
   width: auto;
   margin: auto;
+  margin-left: 100rem;
 }
 
 button {
@@ -23,4 +24,16 @@ button {
 .register-form {
   width: 100%;
   font-size: 1.2rem;
+}
+
+.center{
+  width: 75%;
+  margin: 10px auto;
+}
+
+.registration{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

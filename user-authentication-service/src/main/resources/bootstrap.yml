@@ -2,6 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
+<<<<<<< HEAD
     url: jdbc:mysql://localhost:3306/userCredentials
     username: root
     password: 123456
@@ -26,6 +27,31 @@ spring:
 #theatre-service-impl.messages.added  :  Added Theatre
 #theatre-service-impl.messages.deleted:  Deleted Theatre
 
+=======
+    url: jdbc:mysql://localhost:3306/login
+    username: root
+    password: 12345
+
+  jpa:
+    openInView: false
+    show_sql: true
+    generate-ddl: false
+    hibernate.ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+# kafka.consumer.properties. json.trusted.packages :  co.orders.feedme.feed.domain
+#Hard Coded String Values
+#theatre-service-impl.messages.exception1:  Theatre Already Exists
+#theatre-service-impl.messages.exception2:  Theatre Not Found
+#
+#producer-service-impl.messages.exception1:  Producer Already Exists
+#producer-service-impl.messages.exception2:  NotFound
+#
+#theatre-service-impl.messages.updated:  Updated Theatre
+#theatre-service-impl.messages.added  :  Added Theatre
+#theatre-service-impl.messages.deleted:  Deleted Theatre
+
+>>>>>>> 8cb0ec05cfbae9f27e71ea4f2c9f9f56b938bae8
 usercontroller:
   messages:
     exception1: User Not Found
