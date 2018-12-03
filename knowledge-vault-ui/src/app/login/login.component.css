@@ -4,6 +4,8 @@
   max-width: 80rem;
   position: inherit;
   box-shadow: none;
+  justify-content: center;
+  text-align: center;
 }
 
 button {
@@ -13,11 +15,12 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  justify-content: center;
+
 }
 
 .login-form {
   width: 100%;
-  font-size: 1.2rem;
 }
 
 .center{
@@ -26,8 +29,16 @@ button {
 }
 
 .login{
-  height: 100vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+mat-card-header {
+  justify-content: center;
+}
+
+.login-full-width {
+  width: 50vh;
 }
