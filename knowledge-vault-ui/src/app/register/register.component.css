@@ -1,11 +1,10 @@
 .register-card {
   background-color: white;
-  color: #5cb85c;
   max-width: 80rem;
   position: inherit;
-  width: auto;
-  margin: auto;
-  margin-left: 100rem;
+  box-shadow: none;
+  justify-content: center;
+  text-align: center;
 }
 
 button {
@@ -36,4 +35,9 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+mat-card-header {
+  justify-content: center;
+  color: #5cb85c;
 }
