@@ -14,7 +14,7 @@
 		<groupId>com.stackroute</groupId>
 		<artifactId>knowledge-vault-parent</artifactId>
 		<version>1.0.0</version>
-		<relativePath>../../knowledge-vault</relativePath>
+		<!--<relativePath>../../knowledge-vault</relativePath>-->
 	</parent>
 
 	<properties>
