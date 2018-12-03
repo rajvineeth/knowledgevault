@@ -14,7 +14,7 @@ const httpOptions = {
 export class UserQueryService {
 
   // nlp-pipeline service url-path
-  private getRequest: string = 'http://172.23.239.127:8148/kv/';
+  private getRequest: string = 'http://localhost:8148/kv/';
 
   constructor(private http: HttpClient) { }
 

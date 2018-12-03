@@ -10,18 +10,23 @@
   {{paragraph.Content}}
 </div> -->
 
-<app-card [res]='dummy1' ></app-card>
-<!-- <nav *ngIf="queryResults == null; else elseBlock;">
+<!-- <app-card [res]='dummy1' ></app-card> -->
+<nav *ngIf="queryRes == null; else elseBlock;">
   <nav>
     <div class="error"></div>
   </nav>
-<nav> -->
-
-<!-- <ng-template #elseBlock> -->
-  <!-- <div *ngFor="let query of queryResults" fxLayout="row wrap" fxLayout.sm="column" fxLayoutAlign="start center" >
-    <app-card [res]="query"></app-card>
-  </div> -->
-<!-- </ng-template> -->
+<nav> 
+<ng-template #elseBlock>
+  <div *ngFor="let query of queryRes" >
+    <!-- <app-card [res]="query"></app-card> -->
+    {{ query.Node1 }} <br>
+    {{ query.Node1Label }} <br>
+    {{ query.Relation }} <br>
+    {{ query.Node2 }} <br>
+    {{ query.Node2Label }} <br>
+    
+  </div>
+</ng-template>
 
 
 

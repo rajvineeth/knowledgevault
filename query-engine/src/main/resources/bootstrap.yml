@@ -3,4 +3,4 @@ spring:
     mongodb:
       database: mydatabase
       port: 27017
-      uri: mongodb://127.0.0.1/mydatabase
+      uri: mongodb://localhost/mydatabase
