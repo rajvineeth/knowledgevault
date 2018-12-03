@@ -1,30 +1,27 @@
-.my-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.title {
-    margin-left: auto;
-    margin-right: auto; 
+.register-card {
+  background-color: white;
+  color: #5cb85c;
+  max-width: 80rem;
+  position: inherit;
+  width: auto;
+  margin: auto;
+  margin-left: 50vh;
 }
 
 button {
   background-color: #5cb85c;
   color: white;
-}
-
-mat-card {
-  max-width: 40rem;
-  position: inherit;
+  border: none;
+  padding: 8px 26px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20vh;
-  margin-bottom: 20vh;
+}
+
+.login-form {
+  width: 100%;
+  font-size: 1.2rem;
 }
