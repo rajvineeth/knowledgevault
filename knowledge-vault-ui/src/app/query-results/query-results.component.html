@@ -10,14 +10,14 @@
   {{paragraph.Content}}
 </div> -->
 
-<!-- <app-card [res]='dummy1' ></app-card> -->
-<nav *ngIf="queryRes == null; else elseBlock;">
+<app-card [card]='dummy1' ></app-card>
+<!-- <nav *ngIf="queryResults == null; else elseBlock;">
   <nav>
     <div class="error"></div>
   </nav>
 <nav> 
 <ng-template #elseBlock>
-  <div *ngFor="let query of queryRes" >
+  <div *ngFor="let query of queryRes" >!-->
     <!-- <app-card [res]="query"></app-card> -->
     {{ query.Node1 }} <br>
     {{ query.Node1Label }} <br>

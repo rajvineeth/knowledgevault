@@ -15,7 +15,10 @@ export class QueryResultsComponent implements OnInit {
   private bodyParts = Array.of<String>('blood', 'lungs', 'mouth');
   private paragraph1: Paragraph = {
     DocumentId: 1,
-    Content: 'This is a dummy paragraph to tell you that if you have cancer then there is no way saving you.'
+    Content: 'I am paragraph. I want ro be fit  so that i dont cause this card to'
+    + ' be very big. i want to hide my own contents so thatit doesnt'
+    + ' make much troble he he he he i am fully visible now. This is a dummy paragraph'
+    + ' to tell you that if you have cancer then there is no way saving you.'
   };
   private paragraph2: Paragraph = {
     DocumentId: 2,

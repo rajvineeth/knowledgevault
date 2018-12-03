@@ -9,7 +9,7 @@ import { SmeComponent } from './profile/sme/sme.component';
 import { CardDetailComponent } from './card-detail/card-detail.component';
 
 const routes: Routes = [
-  { path: 'carddetail', component: CardDetailComponent},
+  { path: 'carddetail/:medicalCondition', component: CardDetailComponent},
   { path: 'login', component: LoginComponent},
   { path: 'sme', component: SmeComponent },
   { path: 'register', component: RegisterComponent},
