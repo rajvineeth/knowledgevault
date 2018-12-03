@@ -20,9 +20,9 @@ export class CardDetailComponent implements OnInit {
     this.getCard();
   }
   getCard(): any {
-    const medicalCondition =
-    +this.route.snapshot.paramMap.get('medicalCondition')
-    this.userQuery.getDisease(medicalCondition)
+    const medicalConditionId =
+    +this.route.snapshot.paramMap.get('medicalCondition');
+    this.userQuery.getDisease(medicalConditionId)
     .subscribe(data => this.card = data);
   }
 

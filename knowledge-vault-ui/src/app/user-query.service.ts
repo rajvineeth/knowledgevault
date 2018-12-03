@@ -18,8 +18,8 @@ export class UserQueryService {
     // nlp-pipeline service url-path
     private getRequest = 'http://172.23.239.127:8148/kv/';
 
-  getDisease(medicalCondition: string): any {
-    return this.http.get<ReceivedQuery>(this.getRequest + medicalCondition);
+  getDisease(medicalConditionId: number): any {
+    return this.http.get<ReceivedQuery>(this.getRequest + medicalConditionId);
   }
 
   constructor(private http: HttpClient) { }
