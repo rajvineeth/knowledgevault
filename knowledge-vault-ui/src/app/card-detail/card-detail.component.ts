@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ReceivedQuery } from '../models/receivedQuery';
+import { ActivatedRoute } from '@angular/router';
+import { UserQueryService } from '../user-query.service';
 
 
 
@@ -9,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardDetailComponent implements OnInit {
 
-  constructor() { }
+  private card: ReceivedQuery;
+
+  constructor(private route: ActivatedRoute, private userQuery: UserQueryService) { }
 
   ngOnInit() {
+    this.getCard();
+  }
+  getCard(): any {
+    const medicalCondition =
+    +this.route.snapshot.paramMap.get('medicalCondition')
+    this.userQuery.getDisease(medicalCondition)
+    .subscribe(data => this.card = data);
   }
 
 }

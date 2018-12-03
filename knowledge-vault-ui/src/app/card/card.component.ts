@@ -9,7 +9,8 @@ import { ReceivedQuery } from '../models/receivedQuery';
 })
 export class CardComponent implements OnInit {
 
-  @Input() private res: ReceivedQuery;
+  @Input() private card: ReceivedQuery;
+  private selectedCard: ReceivedQuery;
 
   constructor(private router: Router) {
    }
@@ -17,7 +18,8 @@ export class CardComponent implements OnInit {
   ngOnInit() {
   }
 
-  detailedView() {
-    this.router.navigate(['carddetail']);
+  detailedView(card: ReceivedQuery) {
+    this.selectedCard = card;
+    this.router.navigate(['carddetail/{{card.MedicalCondition}}']);
   }
 }
