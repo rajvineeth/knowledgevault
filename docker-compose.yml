@@ -74,17 +74,11 @@ services:
     ports:
     - 27017:27017
     network_mode: host
-    container_name:
-    - "mongo-docs"
-      volumes:
-      - '../data/mongo/docs:/data/db/docs'
-      environment:
-        MONGO_INITDB_DATABASE: mydatabase
-    - "mongo-user"
-      volumes:
-        - '../data/mongo/user-details:/data/db/user-details'
-      environment:
-        MONGO_INITDB_DATABASE: userDetails
+    container_name: "mongo-docs"
+    volumes:
+    - '../data/mongo/docs:/data/db/docs'
+    environment:
+      MONGO_INITDB_DATABASE: mydatabase
 
   mysql:
     image: mysql:5.7
