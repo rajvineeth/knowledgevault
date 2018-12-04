@@ -11,27 +11,24 @@ button {
   background-color: #5cb85c;
   color: white;
   border: none;
-  padding: 8px 26px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1.2rem;
-  margin-left: auto;
-  margin-right: auto;
+  justify-content: center;
+
 }
 
 .register-form {
   width: 100%;
-  font-size: 1.2rem;
 }
 
-.center{
+.center {
   width: 75%;
   margin: 10px auto;
 }
 
-.registration{
-  height: 100vh;
+.register {
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,4 +37,13 @@ button {
 mat-card-header {
   justify-content: center;
   color: #5cb85c;
+}
+
+.register-full-width {
+  width: 50vh;
+}
+
+a {
+  color: #5cb85c;
+  font-size: 1rem;
 }

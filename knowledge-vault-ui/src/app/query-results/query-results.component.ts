@@ -10,7 +10,7 @@ import { ReceivedQuery2 } from '../models/received-query2';
   styleUrls: ['./query-results.component.css']
 })
 export class QueryResultsComponent implements OnInit {
-  private queryRes: any;
+  private queryRes: ReceivedQuery2;
   private symptoms = Array.of<String>('pain', 'death', 'suffering');
   private bodyParts = Array.of<String>('blood', 'lungs', 'mouth');
   private paragraph1: Paragraph = {
@@ -33,9 +33,10 @@ export class QueryResultsComponent implements OnInit {
   constructor(public _dataservice: DataService) { }
 
   ngOnInit() {
+    console.log('getting query results');
+
     this._dataservice.getQuery()
         .subscribe(
-          // data => this.queryResults = data
           data => this.queryRes = data
         );
   }

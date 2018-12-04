@@ -44,7 +44,7 @@ export class UserQueryComponent implements OnInit, OnDestroy {
     }
 
     search() {
-        console.log(this.msg);
+        console.log('message: ' , this.msg);
         this.service.postUserQuery(this.msg);
         this.speech.stop();
         this.router.navigate(['queryresults']);
