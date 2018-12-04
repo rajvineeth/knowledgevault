@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,11 +18,13 @@ import org.springframework.beans.factory.annotation.Value;
 @CrossOrigin("*")
 public class UserController {
 
-   private UserService userService;
+    private UserService userService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Autowired
@@ -51,11 +54,11 @@ public class UserController {
         ResponseEntity responseEntity;
         System.out.println("got request");
 
-        User User = new User(userDetails.getUsername(), userDetails.getPassword());
+        User User = new User(userDetails.getUsername(), bCryptPasswordEncoder.encode(userDetails.getPassword()));
         try{
             System.out.println(userDetails);
-           UserDetails u = userService.saveUser(userDetails);
-           kafkaTemplate.send(TOPIC, User);
+            UserDetails u = userService.saveUser(userDetails);
+            kafkaTemplate.send(TOPIC, User);
             responseEntity= new ResponseEntity<UserDetails>(u, HttpStatus.CREATED);
         }catch (UserAlreadyExistsException e){
             responseEntity = new ResponseEntity<String>(e.getMessage(),HttpStatus.CONFLICT);
