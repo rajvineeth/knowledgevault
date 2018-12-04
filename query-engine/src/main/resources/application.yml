@@ -9,6 +9,12 @@ spring:
             port: 27017
             uri: mongodb://127.0.0.1/mydatabase
 
+eureka:
+    client:
+        service-url:
+            defaultZone: http://127.0.0.1:8091/eureka/
+    register-with-eureka: true
+    fetch-registry: true
 #
 #        neo4j:
 #            password: 123456
