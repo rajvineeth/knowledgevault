@@ -110,7 +110,6 @@ services:
     - "8094:8094"
     expose:
     - "8094"
-    mem_limit: 1000000000
 
   document-identifier:
     image: document-identifier:v1
