@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
   })
 };
 
@@ -23,7 +24,7 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router, private srvc: ShareService) { }
 
   public login(user: User) {
-    this.http.post<any>(this.loginUrl , user, httpOptions).subscribe(
+    this.http.post<any>(this.loginUrl, user, httpOptions).subscribe(
       data => {
         localStorage.setItem('currentuser', data.token);
         localStorage.setItem('userdata', data.username);
@@ -38,6 +39,7 @@ export class LoginService {
     const httpoption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         'Authorization': 'Bearer ' + localStorage.getItem('currentuser')
       })
     };

@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { ReceivedQuery2 } from './models/received-query2';
 
 
 const httpOptions = {
@@ -24,9 +23,9 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getQuery(): Observable<ReceivedQuery2> {
-    console.log(this.http.get<ReceivedQuery2>('recieved data: ' + this._url));
-    return this.http.get<ReceivedQuery2>(this._url).pipe(catchError(err => {
+  getQuery(): Observable<ReceivedQuery[]> {
+    console.log(this.http.get<ReceivedQuery[]>('recieved data: ' + this._url));
+    return this.http.get<ReceivedQuery[]>(this._url).pipe(catchError(err => {
       console.log(err.error);
       return throwError(err.error);
     }));

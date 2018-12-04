@@ -1,9 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-user-authentication-service,com.stackroute.service,UserServiceImpl,26,0,0,0,8,0,4,0,4,0
-user-authentication-service,com.stackroute.domain,User,181,0,30,0,6,0,27,0,12,0
-user-authentication-service,com.stackroute.domain,Token,181,0,30,0,4,0,27,0,12,0
-user-authentication-service,com.stackroute.controller,SecureController,24,0,0,0,8,0,4,0,4,0
-user-authentication-service,com.stackroute.controller,UserController,125,0,8,0,31,0,8,0,4,0
-user-authentication-service,com.stackroute,UserAuthenticationApplication,41,0,0,0,10,0,4,0,4,0
-user-authentication-service,com.stackroute.config,JwtFilter,65,0,6,0,17,0,5,0,2,0
-user-authentication-service,com.stackroute.config,KafkaConsumerConfig,88,0,0,0,19,0,5,0,5,0

@@ -1,9 +1,12 @@
+management:
+  security:
+    enabled: false
+
 spring:
-  application:
-    name: user-registration-service
-  cloud:
-    config:
-      uri: http://127.0.0.1:8092
+  data:
+    mongodb:
+      uri: mongodb://localhost/userDetails
+
 #  application:
 #    name: user-registration-service
 #user-Controller:

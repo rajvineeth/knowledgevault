@@ -57,6 +57,7 @@ export class RegisterComponent implements OnInit {
         const un: string = this.registerForm.controls['username'].value;
         const r: string = this.registerForm.controls['role'].value;
         const pwd: string = this.registerForm.controls['password'].value;
+
         this.register.registerUser(fn, ln, un, r, pwd)
             .subscribe(
                 data => {

@@ -8,18 +8,16 @@ import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.Session;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-@EnableDiscoveryClient
-<span class="nc" id="L15">public class QueryEngineApplication {</span>
+<span class="nc" id="L13">public class QueryEngineApplication {</span>
 
 	public static void main(String[] args) {
-<span class="nc" id="L18">		QueryService queryService = new QueryService();</span>
-<span class="nc" id="L19">		DriverInit driver = new DriverInit(&quot;bolt://localhost:7687&quot;, &quot;neo4j&quot;, &quot;123456&quot;);</span>
-<span class="nc" id="L20">		Driver drive = driver.getDriver();</span>
-<span class="nc" id="L21">		queryService.loadgraph(drive);</span>
-<span class="nc" id="L22">		SpringApplication.run(QueryEngineApplication.class, args);</span>
-<span class="nc" id="L23">	}</span>
+<span class="nc" id="L16">		QueryService queryService = new QueryService();</span>
+<span class="nc" id="L17">		DriverInit driver = new DriverInit(&quot;bolt://localhost:7687&quot;, &quot;neo4j&quot;, &quot;123456&quot;);</span>
+<span class="nc" id="L18">		Driver drive = driver.getDriver();</span>
+<span class="nc" id="L19">		queryService.loadgraph(drive);</span>
+<span class="nc" id="L20">		SpringApplication.run(QueryEngineApplication.class, args);</span>
+<span class="nc" id="L21">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

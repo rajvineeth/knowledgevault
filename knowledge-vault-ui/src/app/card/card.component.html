@@ -1,25 +1,20 @@
-<mat-card class="card">
+<mat-card fxFlex="1 1 auto" fxFlexAlign="center" class="card" fxLayout="column" fxLayoutAlign="space-between" >
   <mat-card-header>
-    <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>{{card.MedicalCondition}}</mat-card-title>
-    <mat-card-subtitle>Disease Scientific name</mat-card-subtitle>
+    <mat-card-title>{{card.diseaseName}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel *ngIf="card.symptoms" [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title >
           Symptoms
         </mat-panel-title>
-        <!-- <mat-panel-description>
-          Tap to view symptoms
-        </mat-panel-description> -->
       </mat-expansion-panel-header>
-      <app-symptoms [symptoms]="card.MedicalSymptoms" ></app-symptoms>
+      <app-symptoms [symptoms]="card.symptoms" ></app-symptoms>
     </mat-expansion-panel>
-    <app-accordion [paragraphs]="card.Paragraphs" ></app-accordion>
+    <app-accordion [paragraphs]="paragraphs" ></app-accordion>
   </mat-card-content>
-  <mat-card-actions>
+<mat-card-footer class="foot">
     <button mat-button routerLink="carddetail/{{card.medicalCondition}}" >Detailed View</button>
     <button mat-button>Save Card</button>
-  </mat-card-actions>
+</mat-card-footer>
 </mat-card>

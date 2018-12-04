@@ -8,10 +8,16 @@ import { Paragraph } from 'src/app/models/paragraph';
 })
 export class AccordionComponent implements OnInit {
 
-  @Input() private paragraphs: Paragraph[];
+  @Input() private paragraphs: string[];
   constructor() { }
 
   ngOnInit() {
   }
 
+  excessPara() {
+    if ( this.paragraphs.length > 2) {
+      return true;
+    }
+    return false;
+  }
 }
