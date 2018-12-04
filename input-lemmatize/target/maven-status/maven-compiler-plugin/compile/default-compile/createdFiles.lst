@@ -1,0 +1,7 @@
+com/stackroute/knowledgevault/inputlemmatize/communicator/KafkaConsumer.class
+com/stackroute/knowledgevault/inputlemmatize/communicator/KafkaProducer.class
+com/stackroute/knowledgevault/domain/InputLemma.class
+com/stackroute/knowledgevault/inputlemmatize/config/KafkaConsumerConfig.class
+com/stackroute/knowledgevault/domain/UserInput.class
+com/stackroute/knowledgevault/inputlemmatize/config/KafkaProducerConfig.class
+com/stackroute/knowledgevault/inputlemmatize/InputLemmatizeApplication.class

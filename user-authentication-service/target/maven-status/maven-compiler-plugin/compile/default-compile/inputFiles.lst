@@ -1,0 +1,10 @@
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/controller/SecureController.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/domain/User.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/service/UserServiceImpl.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/domain/Token.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/UserAuthenticationApplication.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/service/UserService.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/config/JwtFilter.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/repository/UserRepository.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/config/KafkaConsumerConfig.java
+/home/cgi/Documents/knowledge-vault/user-authentication-service/src/main/java/com/stackroute/controller/UserController.java

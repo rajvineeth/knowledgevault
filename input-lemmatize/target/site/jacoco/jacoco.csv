@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+input-lemmatize,com.stackroute.knowledgevault.inputlemmatize.communicator,KafkaProducer,11,10,0,0,3,4,1,2,1,2
+input-lemmatize,com.stackroute.knowledgevault.inputlemmatize.communicator,KafkaConsumer,78,7,4,0,16,2,3,2,1,2
+input-lemmatize,com.stackroute.knowledgevault.inputlemmatize.config,KafkaConsumerConfig,0,88,0,0,0,19,0,5,0,5
+input-lemmatize,com.stackroute.knowledgevault.inputlemmatize.config,KafkaProducerConfig,0,39,0,0,0,8,0,3,0,3
+input-lemmatize,com.stackroute.knowledgevault.inputlemmatize,InputLemmatizeApplication,5,3,0,0,2,1,1,1,1,1
+input-lemmatize,com.stackroute.knowledgevault.domain,InputLemma,118,0,16,0,5,0,18,0,10,0
+input-lemmatize,com.stackroute.knowledgevault.domain,UserInput,127,0,16,0,9,0,20,0,12,0

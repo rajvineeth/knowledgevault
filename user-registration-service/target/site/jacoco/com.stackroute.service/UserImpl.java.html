@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">user-registration-service</a> &gt; <a href="index.source.html" class="el_package">com.stackroute.service</a> &gt; <span class="el_source">UserImpl.java</span></div><h1>UserImpl.java</h1><pre class="source lang-java linenums">package com.stackroute.service;
+import com.stackroute.exception.UserAlreadyExistsException;
+import com.stackroute.domain.UserDetails;
+import com.stackroute.exception.NoSuchUserException;
+import com.stackroute.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
+@Service
+public class UserImpl implements UserService {
+
+    private UserRepository userRepository;
+
+    @Autowired
+<span class="fc" id="L15">    public UserImpl(UserRepository userRepository) {</span>
+<span class="fc" id="L16">        this.userRepository = userRepository;</span>
+<span class="fc" id="L17">    }</span>
+
+    @Value(&quot;${user-Service.message.exception1}&quot;)
+    private String serviceException1;
+
+    @Value(&quot;${user-Service.message.exception2}&quot;)
+    private String serviceException2;
+
+    @Override
+    public UserDetails saveUser(UserDetails userDetails) throws UserAlreadyExistsException {
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if(userRepository.existsById(userDetails.getUsername())){</span>
+<span class="nc" id="L28">            throw new UserAlreadyExistsException(serviceException2);</span>
+        }
+        else {
+<span class="nc" id="L31">            UserDetails saveduser = userRepository.save(userDetails);</span>
+<span class="nc" id="L32">            System.out.println(&quot;from serviceimpl after saving&quot;+saveduser);</span>
+<span class="nc" id="L33">            return saveduser;</span>
+        }
+    }
+
+    @Override
+    public UserDetails updateUserById(String id, UserDetails userDetails)throws NoSuchUserException {
+<span class="nc" id="L39">        UserDetails newuser=null;</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if(userRepository.existsById(id)) {</span>
+<span class="nc" id="L41">            newuser = getUserById(id);</span>
+<span class="nc" id="L42">            newuser.setFirstname(userDetails.getFirstname());</span>
+<span class="nc" id="L43">            newuser.setLastname(userDetails.getLastname());</span>
+<span class="nc" id="L44">            newuser.setUsername(userDetails.getUsername());</span>
+<span class="nc" id="L45">            newuser.setRole(userDetails.getRole());</span>
+<span class="nc" id="L46">            UserDetails savedmovie=userRepository.save(userDetails);</span>
+<span class="nc" id="L47">            return savedmovie;</span>
+        }
+        else{
+<span class="nc" id="L50">            throw new NoSuchUserException(serviceException1);</span>
+        }
+    }
+
+    @Override
+    public UserDetails getUserById(String id) {
+<span class="nc" id="L56">        UserDetails userDetails = userRepository.findById(id).get();</span>
+<span class="nc" id="L57">        System.out.println(&quot;from service&quot;+userDetails);</span>
+<span class="nc" id="L58">        return userDetails;</span>
+    }
+
+    @Override
+    public Boolean deleteUserById(String id) throws NoSuchUserException {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if(userRepository.existsById(id)==false){</span>
+<span class="nc" id="L64">            throw new NoSuchUserException(serviceException1);</span>
+        }
+        else{
+<span class="nc" id="L67">            UserDetails deletedUserDetails =getUserById(id);</span>
+<span class="nc" id="L68">            userRepository.delete(deletedUserDetails);</span>
+<span class="nc" id="L69">            return true;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

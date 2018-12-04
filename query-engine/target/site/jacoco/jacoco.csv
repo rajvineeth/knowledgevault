@@ -1,0 +1,15 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+queryEngine,com.stackroute.knowledgevault.queryengine.listener,KafkaConsumer,71,0,2,0,15,0,4,0,3,0
+queryEngine,com.stackroute.knowledgevault.queryengine.config,KafkaConsumerConfig,88,0,0,0,19,0,5,0,5,0
+queryEngine,com.stackroute.knowledgevault.queryengine.controller,QueryController,72,0,0,0,15,0,3,0,3,0
+queryEngine,com.stackroute.knowledgevault.queryengine,QueryEngineApplication,25,0,0,0,7,0,2,0,2,0
+queryEngine,com.stackroute.knowledgevault.queryengine.service,QueryService,389,0,6,0,85,0,11,0,8,0
+queryEngine,com.stackroute.knowledgevault.queryengine.service,DriverInit,13,0,0,0,4,0,2,0,2,0
+queryEngine,com.stackroute.knowledgevault.queryengine.service,ExtractedDataService,14,0,0,0,5,0,2,0,2,0
+queryEngine,com.stackroute.knowledgevault.queryengine.service,ParaContentService,14,0,0,0,5,0,2,0,2,0
+queryEngine,com.stackroute.knowledgevault.domain,ExtractedFileData.ExtractedFileDataBuilder,50,0,0,0,1,0,6,0,6,0
+queryEngine,com.stackroute.knowledgevault.domain,ExtractedFileData,182,0,30,0,6,0,27,0,12,0
+queryEngine,com.stackroute.knowledgevault.domain,OutputResult.OutputResultBuilder,98,0,0,0,1,0,10,0,10,0
+queryEngine,com.stackroute.knowledgevault.domain,OutputResult,369,0,62,0,11,0,52,0,21,0
+queryEngine,com.stackroute.knowledgevault.domain,ProcessedInput,89,0,14,0,4,0,15,0,8,0
+queryEngine,com.stackroute.knowledgevault.domain,ParaContent,181,0,30,0,6,0,27,0,12,0

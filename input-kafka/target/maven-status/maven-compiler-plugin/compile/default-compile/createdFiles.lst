@@ -1,0 +1,5 @@
+com/stackroute/knowledgevault/inputkafka/producer/KafkaProducer.class
+com/stackroute/knowledgevault/inputkafka/InputKafkaApplication.class
+com/stackroute/knowledgevault/inputkafka/controller/InputController.class
+com/stackroute/knowledgevault/inputkafka/config/KafkaProducerConfig.class
+com/stackroute/knowledgevault/domain/UserInput.class

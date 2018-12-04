@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NGram.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">input-tagger</a> &gt; <a href="index.source.html" class="el_package">com.stackroute.knowledgevault.inputtagger.utils</a> &gt; <span class="el_source">NGram.java</span></div><h1>NGram.java</h1><pre class="source lang-java linenums">package com.stackroute.knowledgevault.inputtagger.utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NGram {
+    private final int n;
+    private final String text;
+
+    private final int[] indexes;
+<span class="nc" id="L11">    private int index = -1;</span>
+<span class="nc" id="L12">    private int found = 0;</span>
+
+<span class="nc" id="L14">    public NGram(String text, int n) {</span>
+<span class="nc" id="L15">        this.text = text;</span>
+<span class="nc" id="L16">        this.n = n;</span>
+<span class="nc" id="L17">        indexes = new int[n];</span>
+<span class="nc" id="L18">    }</span>
+
+    private boolean seek() {
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        if (index &gt;= text.length()) {</span>
+<span class="nc" id="L22">            return false;</span>
+        }
+<span class="nc" id="L24">        push();</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        while(++index &lt; text.length()) {</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            if (text.charAt(index) == ' ') {</span>
+<span class="nc" id="L27">                found++;</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">                if (found&lt;n) {</span>
+<span class="nc" id="L29">                    push();</span>
+                } else {
+<span class="nc" id="L31">                    return true;</span>
+                }
+            }
+        }
+<span class="nc" id="L35">        return true;</span>
+    }
+
+    private void push() {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        for (int i = 0; i &lt; n-1; i++) {</span>
+<span class="nc" id="L40">            indexes[i] = indexes[i+1];</span>
+        }
+<span class="nc" id="L42">        indexes[n-1] = index+1;</span>
+<span class="nc" id="L43">    }</span>
+
+    public List&lt;String&gt; list() {
+<span class="nc" id="L46">        List&lt;String&gt; ngrams = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        while (seek()) {</span>
+<span class="nc" id="L48">            ngrams.add(get());</span>
+        }
+<span class="nc" id="L50">        return ngrams;</span>
+    }
+
+    private String get() {
+<span class="nc" id="L54">        return text.substring(indexes[0], index);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

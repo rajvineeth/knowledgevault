@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: input-postag
+  cloud:
+    config:
+      uri: http://0.0.0.0:8092

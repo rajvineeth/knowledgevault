@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+input-kafka,com.stackroute.knowledgevault.inputkafka.producer,KafkaProducer,23,10,0,0,5,4,1,2,1,2
+input-kafka,com.stackroute.knowledgevault.inputkafka.config,KafkaProducerConfig,0,39,0,0,0,8,0,3,0,3
+input-kafka,com.stackroute.knowledgevault.inputkafka,InputKafkaApplication,5,3,0,0,2,1,1,1,1,1
+input-kafka,com.stackroute.knowledgevault.inputkafka.controller,InputController,20,7,0,0,4,2,1,2,1,2
+input-kafka,com.stackroute.knowledgevault.domain,UserInput,134,0,16,0,10,0,20,0,12,0

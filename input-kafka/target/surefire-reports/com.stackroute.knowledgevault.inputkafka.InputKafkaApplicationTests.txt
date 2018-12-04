@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.stackroute.knowledgevault.inputkafka.InputKafkaApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.387 s - in com.stackroute.knowledgevault.inputkafka.InputKafkaApplicationTests

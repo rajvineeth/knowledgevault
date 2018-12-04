@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">queryEngine</a> &gt; <a href="index.source.html" class="el_package">com.stackroute.knowledgevault.queryengine.service</a> &gt; <span class="el_source">QueryService.java</span></div><h1>QueryService.java</h1><pre class="source lang-java linenums">package com.stackroute.knowledgevault.queryengine.service;
+
+import com.stackroute.knowledgevault.domain.ExtractedFileData;
+import com.stackroute.knowledgevault.domain.OutputResult;
+import com.stackroute.knowledgevault.domain.ParaContent;
+import org.neo4j.driver.v1.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.*;
+
+<span class="nc" id="L12">public class QueryService {</span>
+<span class="nc" id="L13">    private static final Logger LOGGER = LoggerFactory.getLogger(QueryService.class);</span>
+    private ExtractedDataService extractedDataService;
+    private ParaContentService paraContentService;
+
+    public List&lt;OutputResult&gt; runquery(Driver driver, String k1, String k2) {
+<span class="nc" id="L18">        LOGGER.info(&quot;received keywords from tagger&quot;);</span>
+<span class="nc" id="L19">        Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L20">        List&lt;OutputResult&gt; res = new ArrayList();</span>
+
+        // Sessions are lightweight and disposable connection wrappers.
+<span class="nc" id="L23">        try (Session session = driver.session()) {</span>
+            // Wrapping Cypher in an explicit transaction provides atomicity
+            // and makes handling errors much easier.
+<span class="nc" id="L26">            String q = &quot;MATCH (A:&quot; + k2 + &quot;),p=(B)-[r]-(A) WHERE A.name contains '&quot; + k1 + &quot;' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name2, labels(B) as name2label LIMIT 10&quot;;</span>
+<span class="nc" id="L27">            try (Transaction tx = session.beginTransaction()) {</span>
+<span class="nc" id="L28">                OutputResult outputResult = new OutputResult();</span>
+<span class="nc" id="L29">                LOGGER.info(q);</span>
+<span class="nc" id="L30">                StatementResult result = tx.run(q);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">                while (result.hasNext()) {</span>
+<span class="nc" id="L32">                    Record record = result.next();</span>
+                    // Values can be extracted from a record by index or name.
+//                    String r = record.get(&quot;name1label&quot;).asString();
+<span class="nc" id="L35">                LOGGER.info(&quot;query run&quot;);</span>
+<span class="nc" id="L36">                    outputResult.Node1 = record.get(&quot;name1&quot;).toString();</span>
+<span class="nc" id="L37">                    outputResult.Node1label = record.get(&quot;name1label&quot;).toString();</span>
+<span class="nc" id="L38">                    outputResult.Relation = record.get(&quot;ril&quot;).toString();</span>
+<span class="nc" id="L39">                    outputResult.Node2 = record.get(&quot;name2&quot;).toString();</span>
+<span class="nc" id="L40">                    outputResult.Node2label = record.get(&quot;name2label&quot;).toString();</span>
+
+
+<span class="nc" id="L43">                }</span>
+//                LOGGER.info(&quot;output :{}&quot;, map);
+<span class="nc" id="L45">                LOGGER.info(&quot;Out of string loop&quot;);</span>
+<span class="nc" id="L46">                System.out.println(outputResult);</span>
+<span class="nc" id="L47">                tx.success();  // Mark this write as successful.</span>
+<span class="nc" id="L48">                res.add(outputResult);</span>
+            }
+        }
+<span class="nc" id="L51">        return res;</span>
+    }
+
+    public List&lt;OutputResult&gt; runquery2(Driver driver, String k1, String k2) {
+<span class="nc" id="L55">        LOGGER.info(&quot;received keywords from tagger&quot;);</span>
+<span class="nc" id="L56">        Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L57">        List&lt;OutputResult&gt; res = new ArrayList();</span>
+        String q;
+        // Sessions are lightweight and disposable connection wrappers.
+<span class="nc" id="L60">        try (Session session = driver.session()) {</span>
+            // Wrapping Cypher in an explicit transaction provides atomicity
+            // and makes handling errors much easier.
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            if(k2.equals(&quot;MedicalCondition&quot;)){</span>
+<span class="nc" id="L64">             q = &quot;MATCH (A:&quot; + k2 + &quot;),p=(B)-[r]-(A) WHERE A.name contains '&quot; + k1 + &quot;' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name2, labels(B) as name2label LIMIT 10&quot;;</span>
+            }
+            else{
+<span class="nc" id="L67">                q=&quot;MATCH (A:&quot; + k2 + &quot;),p=(B)-[r]-(A),j=(C:Document)-[s]-(B),k=(D:Content)-[t]-(B) WHERE A.name contains '&quot; + k1 + &quot;' UNWIND D.paraId As paraid UNWIND C.id as docids RETURN A.name As name, labels(A) as label, TYPE(r) as rel, B.name As diseasename, labels(B) as diseaselabel, TYPE(s) AS diseaserel, C.name As docname, labels(C) As doclabel,D.name As contentname,D.id as docid, TYPE(t) As contentrel,paraid,docids LIMIT 10&quot;;</span>
+            }
+<span class="nc" id="L69">            try (Transaction tx = session.beginTransaction()) {</span>
+<span class="nc" id="L70">                OutputResult outputResult = new OutputResult();</span>
+<span class="nc" id="L71">                LOGGER.info(q);</span>
+<span class="nc" id="L72">                StatementResult result = tx.run(q);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                while (result.hasNext()) {</span>
+<span class="nc" id="L74">                    Record record = result.next();</span>
+                    // Values can be extracted from a record by index or name.
+//                    String r = record.get(&quot;name1label&quot;).asString();
+<span class="nc" id="L77">                LOGGER.info(&quot;query run&quot;);</span>
+<span class="nc" id="L78">                    outputResult.Node1 = record.get(&quot;name1&quot;).toString();</span>
+<span class="nc" id="L79">                    outputResult.Node1label = record.get(&quot;name1label&quot;).toString();</span>
+<span class="nc" id="L80">                    outputResult.Relation = record.get(&quot;ril&quot;).toString();</span>
+<span class="nc" id="L81">                    outputResult.Node2 = record.get(&quot;name2&quot;).toString();</span>
+<span class="nc" id="L82">                    outputResult.Node2label = record.get(&quot;name2label&quot;).toString();</span>
+<span class="nc" id="L83">                    Integer paraid=Integer.parseInt(record.get(&quot;paraid&quot;).toString());</span>
+<span class="nc" id="L84">                    Integer docids=Integer.parseInt(record.get(&quot;docids&quot;).toString());</span>
+<span class="nc" id="L85">                    Integer docid=Integer.parseInt(record.get(&quot;docid&quot;).toString());</span>
+<span class="nc" id="L86">                    outputResult.doc=getdoc(docid, extractedDataService);</span>
+<span class="nc" id="L87">                    outputResult.para=getpara(paraid);</span>
+<span class="nc" id="L88">                }</span>
+//                LOGGER.info(&quot;output :{}&quot;, map);
+<span class="nc" id="L90">                LOGGER.info(&quot;Out of string loop&quot;);</span>
+<span class="nc" id="L91">                System.out.println(outputResult);</span>
+<span class="nc" id="L92">                tx.success();  // Mark this write as successful.</span>
+<span class="nc" id="L93">                res.add(outputResult);</span>
+            }
+        }
+<span class="nc" id="L96">        return res;</span>
+    }
+    public String getpara(Integer paraId){
+<span class="nc" id="L99">        Optional&lt;ParaContent&gt; savedList = paraContentService.getParaById(paraId);</span>
+<span class="nc" id="L100">        Integer id=savedList.get().getDocId();</span>
+<span class="nc" id="L101">        Optional&lt;ExtractedFileData&gt; doc=extractedDataService.getDocById(id);</span>
+<span class="nc" id="L102">        String content=doc.get().getContent();</span>
+<span class="nc" id="L103">        System.out.println(&quot;Para: &quot;+savedList.get().getData());</span>
+<span class="nc" id="L104">        System.out.println(&quot;Contnet: &quot;+content);</span>
+<span class="nc" id="L105">        return savedList.get().getData();</span>
+    }
+    public String getdoc(Integer id, ExtractedDataService extractedDataService){
+<span class="nc" id="L108">        Optional&lt;ExtractedFileData&gt; doc=extractedDataService.getDocById(id);</span>
+<span class="nc" id="L109">        String content=doc.get().getContent();</span>
+<span class="nc" id="L110">        System.out.println(&quot;Contnet: &quot;+content);</span>
+<span class="nc" id="L111">        return content;</span>
+    }
+    public void loadgraph(Driver driver) {
+<span class="nc" id="L114">        LOGGER.info(&quot;Loading The Graph&quot;);</span>
+<span class="nc" id="L115">        try (Session session = driver.session()) {</span>
+<span class="nc" id="L116">            String g1 = &quot;LOAD CSV WITH HEADERS FROM 'https://gist.githubusercontent.com/anand-jadhav/323d279c7b3ef477c5555a031b00da73/raw/e366c239441db747d507bbc603bb010f5698978c/sym_t.csv' AS line &quot; +</span>
+                    &quot;CREATE (def:MedicalSymptom{syd:line.syd,name:line.symptom})&quot;;
+<span class="nc" id="L118">            String g2 = &quot;LOAD CSV WITH HEADERS FROM 'https://gist.githubusercontent.com/anand-jadhav/f20082c9fd9db159cbd7101713ebfd9e/raw/721f1ccebac5fabfdec023aab3b489e1b9f0af96/dianew.csv' AS line &quot; +</span>
+                    &quot;CREATE (def:MedicalCondition{did:line.did,name:line.diagnose})&quot;;
+<span class="nc" id="L120">            String g3 =&quot;LOAD CSV WITH HEADERS FROM 'https://gist.githubusercontent.com/anand-jadhav/00eb984889a4b73247c336862bf79dfb/raw/286f104715cc41d0d04432f43a744aa1d1dd54d2/diffsydiw.csv' AS line &quot; +</span>
+                    &quot;CREATE (def:Matchers{did:line.did,syd:line.syd})&quot;;
+<span class="nc" id="L122">            String g4 = &quot;MATCH(a:MedicalCondition),(b:MedicalSymptom),(n:Matchers) &quot; +</span>
+                    &quot;WHERE n.did=a.did AND n.syd=b.syd &quot; +
+                    &quot;CREATE (a)-[r:has_symptom]-&gt;(b)&quot;;
+<span class="nc" id="L125">            String g5= &quot;MATCH(A:Matchers) DELETE A&quot;;</span>
+<span class="nc" id="L126">            try (Transaction tx = session.beginTransaction()) {</span>
+<span class="nc" id="L127">                tx.run(g1);</span>
+<span class="nc" id="L128">                tx.run(g2);</span>
+<span class="nc" id="L129">                tx.run(g3);</span>
+<span class="nc" id="L130">                tx.run(g4);</span>
+<span class="nc" id="L131">                tx.run(g5);</span>
+<span class="nc" id="L132">                tx.success();  // Mark this write as successful.</span>
+<span class="nc" id="L133">                LOGGER.info(&quot;Graph Loaded Succesfully&quot;);</span>
+
+            }
+        }
+<span class="nc" id="L137">    }</span>
+
+    public void close(Driver driver) {
+        // Closing a driver immediately shuts down all open connections.
+<span class="nc" id="L141">        LOGGER.info(&quot;Closing Driver Session&quot;);</span>
+<span class="nc" id="L142">        driver.close();</span>
+<span class="nc" id="L143">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

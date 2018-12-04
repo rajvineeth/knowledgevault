@@ -1,0 +1,7 @@
+/home/cgi/Documents/knowledge-vault/input-lemmatize/src/main/java/com/stackroute/knowledgevault/inputlemmatize/communicator/KafkaProducer.java
+/home/cgi/Documents/knowledge-vault/input-lemmatize/src/main/java/com/stackroute/knowledgevault/inputlemmatize/InputLemmatizeApplication.java
+/home/cgi/Documents/knowledge-vault/input-lemmatize/src/main/java/com/stackroute/knowledgevault/inputlemmatize/config/KafkaConsumerConfig.java
+/home/cgi/Documents/knowledge-vault/input-lemmatize/src/main/java/com/stackroute/knowledgevault/inputlemmatize/communicator/KafkaConsumer.java
+/home/cgi/Documents/knowledge-vault/input-lemmatize/src/main/java/com/stackroute/knowledgevault/domain/InputLemma.java
+/home/cgi/Documents/knowledge-vault/input-lemmatize/src/main/java/com/stackroute/knowledgevault/inputlemmatize/config/KafkaProducerConfig.java
+/home/cgi/Documents/knowledge-vault/input-lemmatize/src/main/java/com/stackroute/knowledgevault/domain/UserInput.java

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KeywordFilter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">input-tagger</a> &gt; <a href="index.source.html" class="el_package">com.stackroute.knowledgevault.inputtagger.utils</a> &gt; <span class="el_source">KeywordFilter.java</span></div><h1>KeywordFilter.java</h1><pre class="source lang-java linenums">package com.stackroute.knowledgevault.inputtagger.utils;
+
+import com.stackroute.knowledgevault.domain.InputObject;
+import com.stackroute.knowledgevault.domain.Keyword;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L11">public class KeywordFilter {</span>
+<span class="nc" id="L12">    private static final Logger LOGGER = LoggerFactory.getLogger(KeywordFilter.class);</span>
+
+<span class="nc" id="L14">    private static final String[] VALID_POS = new String[]{</span>
+            &quot;NNP&quot;,
+            &quot;CD&quot;,
+            &quot;NNS&quot;,
+            &quot;NN&quot;
+    };
+
+    public static List filterKeywords (InputObject inputObject) {
+<span class="nc" id="L22">        LOGGER.info(&quot;Filtering keywords...&quot;);</span>
+<span class="nc" id="L23">        List&lt;Keyword&gt; keywords = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L24">        int sentenceId = 1;</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        for (int i = 0; i &lt; inputObject.getLemmas().size(); i++) {</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            if (inputObject.getLemmas().get(i).equals(&quot;.&quot;)) {</span>
+<span class="nc" id="L27">                sentenceId++;</span>
+<span class="nc" id="L28">                LOGGER.info(&quot;increment Sentence id: {}&quot;, sentenceId);</span>
+<span class="nc" id="L29">                continue;</span>
+            }
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            for (String pos: VALID_POS) {</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">                if(pos.equals(inputObject.getPoses().get(i))) {</span>
+<span class="nc" id="L33">                    LOGGER.info(&quot;Adding keyword: {}&quot;, inputObject.getLemmas().get(i));</span>
+<span class="nc" id="L34">                    keywords.add(new Keyword(inputObject.getId(), sentenceId, inputObject.getLemmas().get(i), pos));</span>
+<span class="nc" id="L35">                    break;</span>
+                }
+            }
+        }
+<span class="nc" id="L39">        LOGGER.info(&quot;Returning kewords list...&quot;);</span>
+<span class="nc" id="L40">        return keywords;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
