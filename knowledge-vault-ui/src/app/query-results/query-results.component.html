@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="search-results" fxLayout="row wrap" fxLayoutAlign="space-evenly">
   <app-card [card]='dummy1' ></app-card>
   <app-card [card]='dummy1' ></app-card>
@@ -11,7 +11,7 @@
   <app-card [card]='dummy1' ></app-card>
   <app-card [card]='dummy1' ></app-card>
   <app-card [card]='dummy1' ></app-card>
-</div>
+</div> -->
 
 <nav *ngIf="queryResults == null; else elseBlock;">
   <nav>
@@ -19,21 +19,7 @@
   </nav>
 <nav> 
 <ng-template #elseBlock>
-  <div *ngFor="let query of queryRes" >
+  <div *ngFor="let query of queryResults" class="search-results" fxLayout="row wrap" fxLayoutAlign="space-evenly" >
     <app-card [card]="query"></app-card>
-   {{ query.Node1 }} <br>
-    {{ query.Node1Label }} <br>
-    {{ query.Relation }} <br>
-    {{ query.Node2 }} <br>
-    {{ query.Node2Label }} <br>
-    
   </div>
 </ng-template>
-
-{{ queryRes.Node1 }} <br>
-{{ queryRes.Node1Label }} <br>
-{{ queryRes.Relation }} <br>
-{{ queryRes.Node2 }} <br>
-{{ queryRes.Node2Label }} <br>
-    
-

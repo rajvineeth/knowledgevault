@@ -8,19 +8,19 @@ import { Paragraph } from 'src/app/models/paragraph';
 })
 export class ExpansionPanelsComponent implements OnInit {
 
-  @Input() private paragraph: Paragraph;
-  private visiblePara: String;
-  private hiddenPara: String;
+  @Input() private paragraph: string;
+  private visiblePara: string;
+  private hiddenPara: string;
   private valuePara = 'none';
   private valueDots = 'inline';
   constructor() {   }
 
   ngOnInit() {
-    if (this.paragraph.Content.length > 150) {
-      this.visiblePara =  this.paragraph.Content.substr(0, 150);
-      this.hiddenPara = this.paragraph.Content.substr(150);
+    if (this.paragraph.length > 150) {
+      this.visiblePara =  this.paragraph.substr(0, 150);
+      this.hiddenPara = this.paragraph.substr(150);
     } else {
-      this.visiblePara = this.paragraph.Content;
+      this.visiblePara = this.paragraph;
       this.hiddenPara = null;
     }
   }

@@ -10,16 +10,17 @@ import { ReceivedQuery } from '../models/receivedQuery';
 export class CardComponent implements OnInit {
 
   @Input() private card: ReceivedQuery;
-  private selectedCard: ReceivedQuery;
+  private paragraphs: string[];
 
   constructor(private router: Router) {
    }
 
   ngOnInit() {
+    this.paragraphs = this.paragraphs.concat(this.card.para);
+    this.paragraphs = this.paragraphs.concat(this.card.doc);
   }
 
   detailedView(card: ReceivedQuery) {
-    this.selectedCard = card;
     this.router.navigate(['carddetail/{{card.MedicalCondition}}']);
   }
 }
