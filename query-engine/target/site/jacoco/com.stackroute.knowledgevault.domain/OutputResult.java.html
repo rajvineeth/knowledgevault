@@ -6,18 +6,28 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-<span class="nc bnc" id="L9" title="All 62 branches missed.">@Data</span>
-<span class="nc" id="L10">@NoArgsConstructor</span>
-<span class="nc" id="L11">@AllArgsConstructor</span>
-<span class="nc" id="L12">@Builder</span>
+import java.util.List;
+
+<span class="nc bnc" id="L11" title="All 86 branches missed.">@Data</span>
+<span class="nc" id="L12">@NoArgsConstructor</span>
+<span class="nc" id="L13">@AllArgsConstructor</span>
+<span class="nc" id="L14">@Builder</span>
 public class OutputResult {
-<span class="nc" id="L14">    public String Node1;</span>
-<span class="nc" id="L15">    public String Node1label;</span>
-<span class="nc" id="L16">    public String Relation;</span>
-<span class="nc" id="L17">    public String Node2;</span>
-<span class="nc" id="L18">    public String Node2label;</span>
-<span class="nc" id="L19">public String para;</span>
-<span class="nc" id="L20">public String doc;</span>
+<span class="nc" id="L16">    private String diseaseName;</span>
+//    public String Node1label;
+//    public String Relation;
+<span class="nc" id="L19">    private List&lt;String&gt; anatomy;</span>
+<span class="nc" id="L20">    private List&lt;String&gt; symptoms;</span>
+//    public String Node2label;
+<span class="nc" id="L22">private List&lt;String&gt; para;</span>
+<span class="nc" id="L23">private List&lt;String&gt; doc;</span>
+
+
+<span class="nc" id="L26">    public String Node1label;</span>
+<span class="nc" id="L27">    public String Relation;</span>
+<span class="nc" id="L28">    public String Node2label;</span>
+<span class="nc" id="L29">    public String Node1;</span>
+<span class="nc" id="L30">    public String Node2;</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

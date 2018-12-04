@@ -1,6 +1,14 @@
 spring:
-  application:
-    name: query-engine
-  cloud:
-    config:
-      uri: http://127.0.0.1:8092
+  data:
+    mongodb:
+      database: mydatabase
+      port: 27017
+      uri: mongodb://localhost/mydatabase
+
+#tells about the Eureka server details and its refresh time
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8091/eureka/
+    register-with-eureka: true
+    fetch-registry: true

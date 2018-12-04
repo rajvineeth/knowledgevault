@@ -73,12 +73,32 @@ services:
     restart: always
     ports:
     - 27017:27017
-    container_name: "mongo-knowledgevault"
     network_mode: host
-    volumes:
-    - '../data/mongo:/data/db'
+    container_name:
+    - "mongo-docs"
+      volumes:
+      - '../data/mongo/docs:/data/db/docs'
+      environment:
+        MONGO_INITDB_DATABASE: mydatabase
+    - "mongo-user"
+      volumes:
+        - '../data/mongo/user-details:/data/db/user-details'
+      environment:
+        MONGO_INITDB_DATABASE: userDetails
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    container_name: mysql
     environment:
-      MONGO_INITDB_DATABASE: mydatabase
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASES: userCredentials
+    volumes:
+      - '/opt/datasql:/var/lib/data'
+    network_mode: "host"
+    hostname: localhost
+    restart: always
 
   extractor-service:
     image: extractor-service:v1
@@ -185,6 +205,8 @@ services:
     container_name: "input-lemmatize"
     network_mode: host
     depends_on:
+      - config-server
+      - eureka
       - kafka
     ports:
       - "8140:8140"
@@ -198,6 +220,8 @@ services:
     container_name: "input-postag"
     network_mode: host
     depends_on:
+      - config-server
+      - eureka
       - kafka
     ports:
       - "8142:8142"
@@ -246,20 +270,6 @@ services:
     expose:
       - "8181"
 
-  mysql:
-    image: mysql:5.7
-    ports:
-      - 3306:3306
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: "123456"
-      MYSQL_DATABASES: userCredentials
-    volumes:
-      - '/opt/datasql:/var/lib/data'
-    network_mode: "host"
-    hostname: localhost
-    restart: always
-
   user-authentication:
     image: user-authentication
     build: user-authentication-service/
@@ -281,6 +291,7 @@ services:
     container_name: "query-engine"
     network_mode: host
     depends_on:
+      - eureka
       - kafka
       - neo4j
     ports:
@@ -296,6 +307,7 @@ services:
     container_name: zuul-container
     network_mode: host
     depends_on:
+    - config-server
     - eureka
     - user-registration
     - extractor-service

@@ -1,3 +1,9 @@
+spring:
+  application:
+    name: zuul-gateway
+  cloud:
+    config:
+      uri: http://127.0.0.1:8092
 #management:
 #  security:
 #    enabled: false

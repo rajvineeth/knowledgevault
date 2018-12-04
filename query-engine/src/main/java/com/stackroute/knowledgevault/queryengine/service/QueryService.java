@@ -6,13 +6,30 @@ import com.stackroute.knowledgevault.domain.ParaContent;
 import org.neo4j.driver.v1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
 public class QueryService {
+
+    @Autowired
+    private ParaContentService paraContentService;
+    @Autowired
+    private ExtractedDataService extractedDataService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryService.class);
-//    private ExtractedDataService extractedDataService;
-//    private ParaContentService paraContentService;
+//    ParaContentService paraContentService;
+//    ExtractedDataService extractedDataService;
+    @Autowired
+    OutputResult outputResult;
+ //   @Autowired
+//    public QueryService(ParaContentService paraContentService,ExtractedDataService extractedDataService) {
+//        this.paraContentService = paraContentService;
+//        this.extractedDataService=extractedDataService;
+//    }
+//    public QueryService(){
+//
+//    }
 
     public List<OutputResult> runquery(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger");
@@ -51,7 +68,7 @@ public class QueryService {
         return res;
     }
 
-//    public List<OutputResult> runquery2(Driver driver, String k1, String k2) {
+//    public List<OutputResult> runquery(Driver driver, String k1, String k2) {
 //        LOGGER.info("received keywords from tagger");
 //        Map<String, String> map = new HashMap<>();
 //        List<OutputResult> res = new ArrayList();
@@ -72,9 +89,11 @@ public class QueryService {
 //                StatementResult result = tx.run(q);
 //                while (result.hasNext()) {
 //                    Record record = result.next();
-//                    // Values can be extracted from a record by index or name.
-////                    String r = record.get("name1label").asString();
 //                LOGGER.info("query run");
+//                outputResult.setDiseaseName(record.get("diseasename").toString());
+//                if(k2.equals("AnatomicalStructure"))
+//                    outputResult.setAnatomy(new ArrayList<String>()[]);
+//                outputResult.setAnatomy();
 //                    outputResult.Node1 = record.get("name1").toString();
 //                    outputResult.Node1label = record.get("name1label").toString();
 //                    outputResult.Relation = record.get("ril").toString();
@@ -83,7 +102,7 @@ public class QueryService {
 //                    Integer paraid=Integer.parseInt(record.get("paraid").toString());
 //                    Integer docids=Integer.parseInt(record.get("docids").toString());
 //                    Integer docid=Integer.parseInt(record.get("docid").toString());
-//                    outputResult.doc=getdoc(docid, extractedDataService);
+//                    outputResult.doc=getdoc(docid);
 //                    outputResult.para=getpara(paraid);
 //                }
 ////                LOGGER.info("output :{}", map);
@@ -95,21 +114,22 @@ public class QueryService {
 //        }
 //        return res;
 //    }
-//    public String getpara(Integer paraId){
-//        Optional<ParaContent> savedList = paraContentService.getParaById(paraId);
-//        Integer id=savedList.get().getDocId();
-//        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
-//        String content=doc.get().getContent();
-//        System.out.println("Para: "+savedList.get().getData());
-//        System.out.println("Contnet: "+content);
-//        return savedList.get().getData();
-//    }
-//    public String getdoc(Integer id, ExtractedDataService extractedDataService){
-//        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
-//        String content=doc.get().getContent();
-//        System.out.println("Contnet: "+content);
-//        return content;
-//    }
+    public String getpara(Integer paraId){
+        Optional<ParaContent> savedList;
+        savedList = paraContentService.getParaById(paraId);
+        Integer id=savedList.get().getDocId();
+        Optional<ExtractedFileData> doc = extractedDataService.getDocById(id);
+        String content=doc.get().getContent();
+        System.out.println("Para: "+savedList.get().getData());
+        System.out.println("Contnet: "+content);
+        return savedList.get().getData();
+    }
+    public String getdoc(Integer id){
+        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
+        String content=doc.get().getContent();
+        System.out.println("Contnet: "+content);
+        return content;
+    }
     public void loadgraph(Driver driver) {
         LOGGER.info("Loading The Graph");
         try (Session session = driver.session()) {
