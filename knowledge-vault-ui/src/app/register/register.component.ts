@@ -9,7 +9,8 @@ import { RegistrationService } from '../registration.service';
 
 @Component({
   templateUrl: 'register.component.html',
-  providers: [AlertService, AlertsService, UserService]
+  providers: [AlertService, AlertsService, UserService],
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
@@ -50,7 +51,7 @@ export class RegisterComponent implements OnInit {
         console.log(this.details);
 
         this.loading = true;
-        
+
         const fn: string = this.registerForm.controls['firstName'].value;
         const ln: string = this.registerForm.controls['lastName'].value;
         const un: string = this.registerForm.controls['username'].value;
