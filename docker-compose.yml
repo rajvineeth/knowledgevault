@@ -156,6 +156,7 @@ services:
     depends_on:
     - eureka
     - config-server
+    - mongodb
     - kafka
     ports:
     - "8433:8433"
