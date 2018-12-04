@@ -1,0 +1,22 @@
+.home-page .banner {
+  background: #5cb85c;
+  box-sizing: inherit;
+}
+
+.banner {
+  color: #fff;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-family: source sans pro, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.logo-font {
+  font-size: 4vw;
+}
+
+p {
+  font-size: 2vw;
+}

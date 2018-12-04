@@ -9,6 +9,12 @@ zuul:
             url: http://localhost:8094
         document-identifier:
             url: http://localhost:8083
+        input-kafka:
+            url: http://localhost:8148
+        user-registration-service:
+            url: http://localhost:8182
+        query-engine:
+            url: http://localhost:8185
 eureka:         #tells about the Eureka server details and its refresh time
     instance:
         leaseRenewalIntervalInSeconds: 1

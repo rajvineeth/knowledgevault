@@ -9,7 +9,7 @@ eureka:         #tells about the Eureka server details and its refresh time
         leaseExpirationDurationInSeconds: 2
     client:
         serviceUrl:
-            defaultZone: http://127.0.0.1:8091/eureka/
+            defaultZone: http://localhost:8091/eureka/
         healthcheck:
             enabled: true
         lease:
@@ -17,7 +17,7 @@ eureka:         #tells about the Eureka server details and its refresh time
 spring:
     cloud:
         config:
-            enabled: false
+#            enabled: false
             server:
                 git:
                     uri: https://github.com/arpitmishra02/config-server-repo.git

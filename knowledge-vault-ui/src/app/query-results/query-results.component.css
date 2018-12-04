@@ -1,0 +1,8 @@
+.error {
+    color: red;
+    background: url('../../assets/robot-error.webp') center center no-repeat;
+    background-size: cover;
+    text-align: center;
+    height: 600px;
+    width: 100%;
+}

@@ -19,6 +19,13 @@
         <module>zuulgateway</module>
         <module>config-server</module>
         <module>eureka-registry</module>
+	    <module>input-kafka</module>
+        <module>input-lemmatize</module>
+        <module>input-postag</module>
+        <module>input-tagger</module>
+        <module>user-authentication-service</module>
+        <module>user-registration-service</module>
+        <module>query-engine</module>
     </modules>
 
     <parent>

@@ -8,9 +8,9 @@ services:
     container_name: eureka-container
     network_mode: host
     ports:
-    - 8091:8091
+      - 8091:8091
     expose:
-    - 8091
+      - 8091
 
   config-server:
     image: config-server:v1
@@ -19,11 +19,11 @@ services:
     container_name: config-container
     network_mode: host
     depends_on:
-    - eureka
+      - eureka
     ports:
-    - 8092:8092
+      - 8092:8092
     expose:
-    - 8092
+      - 8092
 
   zookeeper:
     container_name: zookeeper
@@ -31,9 +31,9 @@ services:
     restart: always
     network_mode: host
     depends_on:
-    - config-server
+      - config-server
     ports:
-    - "2181:2181"
+      - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -43,9 +43,9 @@ services:
     restart: always
     mem_limit: 2000000000
     ports:
-    - "9092"
+      - "9092"
     depends_on:
-    - zookeeper
+      - zookeeper
     network_mode: host
     environment:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
@@ -53,34 +53,34 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: localhost:2181
       KAFKA_MESSAGE_MAX_BYTES: 1000000000
     volumes:
-    - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/var/run/docker.sock:/var/run/docker.sock'
 
   neo4j:
     container_name: neo4j
     image: neo4j:latest
     restart: always
     ports:
-    - "7474:7474"
-    - "7687:7687"
+      - "7474:7474"
+      - "7687:7687"
     network_mode: host
     depends_on:
-    - kafka
+      - kafka
     volumes:
-    - '../data/neo4j:/data/db'
+      - '../data/neo4j:/data/db'
     environment:
-    - NEO4J_AUTH=neo4j/123456
+      - NEO4J_AUTH=neo4j/123456
 
   mongodb:
     image: mongo:3.2-jessie
     restart: always
     ports:
-    - 27017:27017
+      - 27017:27017
     container_name: "mongo-knowledgevault"
     network_mode: host
     depends_on:
-    - neo4j
+      - neo4j
     volumes:
-    - '../data/mongo:/data/db'
+      - '../data/mongo:/data/db'
     environment:
       MONGO_INITDB_DATABASE: mydatabase
 
@@ -91,16 +91,16 @@ services:
     container_name: "extractor-service"
     network_mode: host
     depends_on:
-    - mongodb
-    - eureka
-    - config-server
-    - kafka
+      - mongodb
+      - eureka
+      - config-server
+      - kafka
     volumes:
-    - '../knowledge-vault/extractor-service/src/main/resources/:/knowledge-vault/extractor-service/src/main/resources/'
+      - '../knowledge-vault/extractor-service/src/main/resources/:/knowledge-vault/extractor-service/src/main/resources/'
     ports:
-    - "8094:8094"
+      - "8094:8094"
     expose:
-    - "8094"
+      - "8094"
     mem_limit: 1000000000
 
   document-identifier:
@@ -110,16 +110,16 @@ services:
     container_name: "document-identifier"
     network_mode: host
     depends_on:
-    - eureka
-    - config-server
-    - kafka
-    - mongodb
+      - eureka
+      - config-server
+      - kafka
+      - mongodb
     volumes:
-    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
+      - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
     ports:
-    - "8083:8083"
+      - "8083:8083"
     expose:
-    - "8083"
+      - "8083"
 
   paragraph-tokenizer:
     image: paragraph-tokenizer:v1
@@ -128,13 +128,13 @@ services:
     container_name: "paragraph-tokenizer"
     network_mode: host
     depends_on:
-    - eureka
-    - config-server
-    - kafka
+      - eureka
+      - config-server
+      - kafka
     ports:
-    - "8065:8065"
+      - "8065:8065"
     expose:
-    - "8065"
+      - "8065"
 
   paragraph-processor:
     image: paragraph-processor:v1
@@ -143,17 +143,17 @@ services:
     container_name: "paragraph-processor"
     network_mode: host
     volumes:
-    - '../knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
+      - '../knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
     depends_on:
-    - eureka
-    - config-server
-    - kafka
-    - mongodb
-    - paragraph-tokenizer
+      - eureka
+      - config-server
+      - kafka
+      - mongodb
+      - paragraph-tokenizer
     ports:
-    - "8433:8433"
+      - "8433:8433"
     expose:
-    - "8433"
+      - "8433"
 
   populator:
     image: populator:v1
@@ -162,14 +162,14 @@ services:
     container_name: "populator"
     network_mode: host
     depends_on:
-    - eureka
-    - config-server
-    - kafka
-    - neo4j
+      - eureka
+      - config-server
+      - kafka
+      - neo4j
     ports:
-    - "8067:8067"
+      - "8067:8067"
     expose:
-    - "8067"
+      - "8067"
 
   gateway:
     image: zuulgateway:v1
@@ -178,13 +178,13 @@ services:
     container_name: zuul-container
     network_mode: host
     depends_on:
-    - eureka
-    - extractor-service
-    - document-identifier
-    - paragraph-tokenizer
-    - paragraph-processor
-    - populator
+      - eureka
+      - extractor-service
+      - document-identifier
+      - paragraph-tokenizer
+      - paragraph-processor
+      - populator
     ports:
-    - 8090:8090
+      - 8090:8090
     expose:
-    - 8090
+      - 8090
