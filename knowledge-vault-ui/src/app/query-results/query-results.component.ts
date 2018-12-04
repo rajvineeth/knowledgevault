@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { ReceivedQuery } from '../models/receivedQuery';
 import { Paragraph } from '../models/paragraph';
+import { ReceivedQuery2 } from '../models/received-query2';
 
 @Component({
   selector: 'app-query-results',
@@ -9,6 +10,7 @@ import { Paragraph } from '../models/paragraph';
   styleUrls: ['./query-results.component.css']
 })
 export class QueryResultsComponent implements OnInit {
+  private queryRes: any;
   private symptoms = Array.of<String>('pain', 'death', 'suffering');
   private bodyParts = Array.of<String>('blood', 'lungs', 'mouth');
   private paragraph1: Paragraph = {
@@ -35,7 +37,8 @@ export class QueryResultsComponent implements OnInit {
   ngOnInit() {
     this._dataservice.getQuery()
         .subscribe(
-          data => this.queryResults = data
+          // data => this.queryResults = data
+          data => this.queryRes = data
         );
   }
 

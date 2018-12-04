@@ -17,11 +17,6 @@ export class RegisterComponent implements OnInit {
     submitted = false;
     details = [];
     msg;
-    fn: string;
-    ln: string;
-    un: string;
-    r: string;
-    pwd: string;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -56,12 +51,12 @@ export class RegisterComponent implements OnInit {
 
         this.loading = true;
 
-        // let fn:string = this.registerForm.controls['firstName'].value;
-        // let ln:string = this.registerForm.controls['lastName'].value;
-        // let un:string = this.registerForm.controls['username'].value;
-        // let r:string = this.registerForm.controls['role'].value;
-        // let pwd:string = this.registerForm.controls['password'].value;
-        this.register.registerUser(this.fn, this.ln, this.un, this.r, this.pwd)
+        let fn:string = this.registerForm.controls['firstName'].value;
+        let ln:string = this.registerForm.controls['lastName'].value;
+        let un:string = this.registerForm.controls['username'].value;
+        let r:string = this.registerForm.controls['role'].value;
+        let pwd:string = this.registerForm.controls['password'].value;
+        this.register.registerUser(fn, ln, un, r, pwd)
             .subscribe(
                 data => {
                     this.alerts.setMessage('succesfully saved', 'success');

@@ -19,7 +19,7 @@ const httpOptions = {
 
 export class DataService {
   // change to IP address of query-engine
-  private _url = 'http://172.23.239.127:8185/api/v1/results';
+  private _url = 'http://localhost:8185/api/v1/results';
 
   constructor(private http: HttpClient) { }
 
