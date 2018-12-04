@@ -20,7 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableJpaRepositories
 @SpringBootApplication
 @EnableDiscoveryClient
-
 public class UserAuthenticationApplication implements ApplicationRunner {
 
     @Autowired
