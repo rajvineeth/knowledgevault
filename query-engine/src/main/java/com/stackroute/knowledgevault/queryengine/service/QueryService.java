@@ -7,103 +7,59 @@ import org.neo4j.driver.v1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class QueryService {
 
-    @Autowired
     private ParaContentService paraContentService;
-    @Autowired
     private ExtractedDataService extractedDataService;
+    Map<String,Object> root=new HashMap<>();
+    Set<String> symset;
+    Set<String> anaset;
+    Set<String> docset;
+    Set<String> paraset;
+
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryService.class);
-//    ParaContentService paraContentService;
-//    ExtractedDataService extractedDataService;
+
     @Autowired
-    OutputResult outputResult;
- //   @Autowired
-//    public QueryService(ParaContentService paraContentService,ExtractedDataService extractedDataService) {
-//        this.paraContentService = paraContentService;
-//        this.extractedDataService=extractedDataService;
-//    }
-//    public QueryService(){
-//
-//    }
-
-    public List<OutputResult> runquery(Driver driver, String k1, String k2) {
-        LOGGER.info("received keywords from tagger");
-        Map<String, String> map = new HashMap<>();
-        List<OutputResult> res = new ArrayList();
-
-        // Sessions are lightweight and disposable connection wrappers.
-        try (Session session = driver.session()) {
-            // Wrapping Cypher in an explicit transaction provides atomicity
-            // and makes handling errors much easier.
-            String q = "MATCH (A:" + k2 + "),p=(B)-[r]-(A) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name2, labels(B) as name2label LIMIT 10";
-            try (Transaction tx = session.beginTransaction()) {
-                OutputResult outputResult = new OutputResult();
-                LOGGER.info(q);
-                StatementResult result = tx.run(q);
-                while (result.hasNext()) {
-                    Record record = result.next();
-                    // Values can be extracted from a record by index or name.
-//                    String r = record.get("name1label").asString();
-                LOGGER.info("query run");
-                    outputResult.Node1 = record.get("name1").toString();
-                    outputResult.Node1label = record.get("name1label").toString();
-                    outputResult.Relation = record.get("ril").toString();
-                    outputResult.Node2 = record.get("name2").toString();
-                    outputResult.Node2label = record.get("name2label").toString();
-
-
-                }
-//                LOGGER.info("output :{}", map);
-                LOGGER.info("Out of string loop");
-                System.out.println(outputResult);
-                tx.success();  // Mark this write as successful.
-                res.add(outputResult);
-            }
-        }
-        return res;
+    public QueryService(ParaContentService paraContentService,ExtractedDataService extractedDataService) {
+        this.paraContentService = paraContentService;
+        this.extractedDataService=extractedDataService;
     }
+    public QueryService(){
 
+    }
+//
 //    public List<OutputResult> runquery(Driver driver, String k1, String k2) {
 //        LOGGER.info("received keywords from tagger");
 //        Map<String, String> map = new HashMap<>();
 //        List<OutputResult> res = new ArrayList();
-//        String q;
+//
 //        // Sessions are lightweight and disposable connection wrappers.
 //        try (Session session = driver.session()) {
 //            // Wrapping Cypher in an explicit transaction provides atomicity
 //            // and makes handling errors much easier.
-//            if(k2.equals("MedicalCondition")){
-//             q = "MATCH (A:" + k2 + "),p=(B)-[r]-(A) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name2, labels(B) as name2label LIMIT 10";
-//            }
-//            else{
-//                q="MATCH (A:" + k2 + "),p=(B)-[r]-(A),j=(C:Document)-[s]-(B),k=(D:Content)-[t]-(B) WHERE A.name contains '" + k1 + "' UNWIND D.paraId As paraid UNWIND C.id as docids RETURN A.name As name, labels(A) as label, TYPE(r) as rel, B.name As diseasename, labels(B) as diseaselabel, TYPE(s) AS diseaserel, C.name As docname, labels(C) As doclabel,D.name As contentname,D.id as docid, TYPE(t) As contentrel,paraid,docids LIMIT 10";
-//            }
+//            String q = "MATCH (A:" + k2 + "),p=(B)-[r]-(A) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name2, labels(B) as name2label LIMIT 10";
 //            try (Transaction tx = session.beginTransaction()) {
 //                OutputResult outputResult = new OutputResult();
 //                LOGGER.info(q);
 //                StatementResult result = tx.run(q);
 //                while (result.hasNext()) {
 //                    Record record = result.next();
+//                    // Values can be extracted from a record by index or name.
+////                    String r = record.get("name1label").asString();
 //                LOGGER.info("query run");
-//                outputResult.setDiseaseName(record.get("diseasename").toString());
-//                if(k2.equals("AnatomicalStructure"))
-//                    outputResult.setAnatomy(new ArrayList<String>()[]);
-//                outputResult.setAnatomy();
 //                    outputResult.Node1 = record.get("name1").toString();
 //                    outputResult.Node1label = record.get("name1label").toString();
 //                    outputResult.Relation = record.get("ril").toString();
 //                    outputResult.Node2 = record.get("name2").toString();
 //                    outputResult.Node2label = record.get("name2label").toString();
-//                    Integer paraid=Integer.parseInt(record.get("paraid").toString());
-//                    Integer docids=Integer.parseInt(record.get("docids").toString());
-//                    Integer docid=Integer.parseInt(record.get("docid").toString());
-//                    outputResult.doc=getdoc(docid);
-//                    outputResult.para=getpara(paraid);
+//
+//
 //                }
 ////                LOGGER.info("output :{}", map);
 //                LOGGER.info("Out of string loop");
@@ -114,20 +70,103 @@ public class QueryService {
 //        }
 //        return res;
 //    }
-    public String getpara(Integer paraId){
+boolean flag=false;
+    OutputResult outputResult=null;
+List<OutputResult> res = new ArrayList();
+    public List<OutputResult> runquery(Driver driver, String k1, String k2) {
+        LOGGER.info("received keywords from tagger");
+        Map<String, String> map = new HashMap<>();
+
+        String q;
+        try (Session session = driver.session()) {
+            q="MATCH (A:" + k2 + "),p=(B:MedicalCondition)-[r]-(A),j=(C)-[s]-(B:MedicalCondition) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As diseaseName, labels(B) as diseaseLabel, TYPE(s) AS sil, C.name As name3,C.id as docId,C.paraId as paraId, labels(C) As Ctype LIMIT 10";
+
+            try (Transaction tx = session.beginTransaction()) {
+
+
+                StatementResult result = tx.run(q);
+                while (result.hasNext()) {
+                    Record record = result.next();
+                    flag=false;
+                LOGGER.info("query run");
+                for(OutputResult outputResult1:res){
+
+                    System.out.println("aaa"+ outputResult1.getDiseaseName()+" "+record.get("diseaseName").toString());
+                    if(outputResult1.getDiseaseName().compareTo(record.get("diseaseName").toString())==0){
+                        outputResult=outputResult1;
+                        symset=outputResult1.getSymptoms();
+                        anaset=outputResult1.getAnatomy();
+                        docset=outputResult1.getDoc();
+                        paraset=outputResult1.getPara();
+
+                        flag=true;
+                    }
+                }
+                if(!flag){
+                    System.out.println("b");
+                    outputResult = new OutputResult();
+                    symset=new HashSet<>();
+                    anaset=new HashSet<>();
+                    docset=new HashSet<>();
+                    paraset=new HashSet<>();
+                    outputResult.setDiseaseName(record.get("diseaseName").toString());
+                }
+                String ctype=record.get("Ctype").toString().substring(1,record.get("Ctype").toString().length()-1);
+                    System.out.println("ctype:"+ctype);
+                if(ctype.equals("\"MedicalSymptom\"")){
+                    symset.add(record.get("name3").toString());
+                }
+                if(ctype.equals("\"AnatomicalStructure\"")){
+                    anaset.add(record.get("name3").toString());
+                }
+                if(ctype.equals("\"Document\"")){
+                    String[] strlist =  record.get("docId").toString().substring(1,record.get("docId").toString().length()-1).split(",");
+                    List<Integer> docs=new ArrayList<>();
+                    for(String s:strlist){
+                        docs.add(Integer.valueOf(s.trim()));
+                    }
+                    for(Integer i:docs){
+                        docset.add(getdoc(i));
+                    }
+                }
+                if(ctype.equals("\"Content\"")) {
+                    String[] strlist =  record.get("paraId").toString().substring(1,record.get("paraId").toString().length()-1).split(",");
+                    List<Integer> para=new ArrayList<>();
+                    for(String s:strlist){
+                        para.add(Integer.valueOf(s.trim()));
+                    }
+                    for(Integer i:para){
+                        paraset.add(getpara(i));
+                    }
+                    Integer doc=  Integer.parseInt(record.get("docId").toString());
+                    docset.add(getdoc(doc));
+                }
+                    LOGGER.info("Out of string loop");
+                    tx.success();  // Mark this write as successful.
+                    outputResult.setSymptoms(symset);
+                    outputResult.setAnatomy(anaset);
+                    outputResult.setDoc(docset);
+                    outputResult.setPara(paraset);
+                    if(flag)
+                        res.remove(outputResult);
+                    res.add(outputResult);
+                }
+
+            }
+        }
+        return res;
+    }
+    public String getpara(int paraId){
         Optional<ParaContent> savedList;
         savedList = paraContentService.getParaById(paraId);
         Integer id=savedList.get().getDocId();
         Optional<ExtractedFileData> doc = extractedDataService.getDocById(id);
         String content=doc.get().getContent();
-        System.out.println("Para: "+savedList.get().getData());
-        System.out.println("Contnet: "+content);
         return savedList.get().getData();
     }
     public String getdoc(Integer id){
         Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
         String content=doc.get().getContent();
-        System.out.println("Contnet: "+content);
         return content;
     }
     public void loadgraph(Driver driver) {

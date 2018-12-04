@@ -5,28 +5,31 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class OutputResult {
+    @Id
     private String diseaseName;
 //    public String Node1label;
 //    public String Relation;
-    private List<String> anatomy;
-    private List<String> symptoms;
+    private Set<String> anatomy;
+    private Set<String> symptoms;
 //    public String Node2label;
-private List<String> para;
-private List<String> doc;
+private Set<String> para;
+private Set<String> doc;
 
 
-    public String Node1label;
-    public String Relation;
-    public String Node2label;
-    public String Node1;
-    public String Node2;
+//    public String Node1label;
+//    public String Relation;
+//    public String Node2label;
+//    public String Node1;
+//    public String Node2;
 
 }

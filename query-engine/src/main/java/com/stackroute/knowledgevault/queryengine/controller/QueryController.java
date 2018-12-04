@@ -2,10 +2,15 @@ package com.stackroute.knowledgevault.queryengine.controller;
 
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
+import com.stackroute.knowledgevault.domain.OutputResult;
 import com.stackroute.knowledgevault.domain.ParaContent;
+//import com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer;
 import com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer;
+import com.stackroute.knowledgevault.queryengine.service.DriverInit;
 import com.stackroute.knowledgevault.queryengine.service.ExtractedDataService;
 import com.stackroute.knowledgevault.queryengine.service.ParaContentService;
+import com.stackroute.knowledgevault.queryengine.service.QueryService;
+import org.neo4j.driver.v1.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +26,13 @@ public class QueryController {
 
 
 //    private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
-//    private QueryService queryService = new QueryService();
+    private DriverInit driver = new DriverInit("bolt://172.23.239.75:7687", "neo4j", "123456");
+    Driver drive = driver.getDriver();
+
+
+
+
+    //    private QueryService queryService = new QueryService();
 //    private static final Logger LOGGER=LoggerFactory.getLogger(com.stackroute.knowledgevault.queryEngine.controller.QueryController.class);
 //
     ParaContentService paraContentService;
@@ -31,12 +42,14 @@ public class QueryController {
         this.paraContentService = paraContentService;
         this.extractedDataService=extractedDataService;
     }
+    @Autowired
+    private QueryService queryService;
 
     @GetMapping("/results")
     public ResponseEntity<?> getResults(){
 //        Set<OutputResult> list = FrontEndData.list;
         System.out.println(KafkaConsumer.list);
-        ResponseEntity<?> responseEntity = new ResponseEntity<>(KafkaConsumer.list, HttpStatus.OK);
+        ResponseEntity<?> responseEntity = new ResponseEntity<List<OutputResult>>((List<OutputResult>) KafkaConsumer.list, HttpStatus.OK);
         return responseEntity;
     }
     @GetMapping("/para/{id}")
@@ -50,6 +63,13 @@ public class QueryController {
             System.out.println("Contnet: "+content);
             responseEntity = new ResponseEntity<Optional<ParaContent>>(savedList, HttpStatus.OK);
 
+        return responseEntity;
+    }
+    @GetMapping("/results1/{a}/{b}")
+    public ResponseEntity<?> getResults5(@PathVariable(value ="a")String a,@PathVariable (value="b")String b){
+//        Set<OutputResult> list = FrontEndData.list;
+//        System.out.println(KafkaConsumer.list);
+        ResponseEntity<?> responseEntity = new ResponseEntity<List<OutputResult>>( queryService.runquery(drive,a,b), HttpStatus.OK);
         return responseEntity;
     }
 }
