@@ -42,3 +42,8 @@ mat-card-header {
 .register-full-width {
   width: 50vh;
 }
+
+a {
+  color: #5cb85c;
+  font-size: 1rem;
+}
