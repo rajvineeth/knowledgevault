@@ -1,16 +1,22 @@
 package com.stackroute.knowledgevault.queryengine.service;
 
+import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import com.stackroute.knowledgevault.domain.OutputResult;
+import com.stackroute.knowledgevault.domain.ParaContent;
 import org.neo4j.driver.v1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class QueryService {
+
+    @Autowired
+    private ParaContentService paraContentService;
+    @Autowired
+    private ExtractedDataService extractedDataService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryService.class);
 
     public List<OutputResult> runquery(Driver driver, String k1, String k2) {
@@ -97,7 +103,7 @@ public class QueryService {
     public String getpara(Integer paraId){
         Optional<ParaContent> savedList = paraContentService.getParaById(paraId);
         Integer id=savedList.get().getDocId();
-        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
+        Optional<ExtractedFileData> doc = extractedDataService.getDocById(id);
         String content=doc.get().getContent();
         System.out.println("Para: "+savedList.get().getData());
         System.out.println("Contnet: "+content);
