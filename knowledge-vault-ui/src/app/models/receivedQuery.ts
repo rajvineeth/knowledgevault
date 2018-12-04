@@ -1,14 +1,15 @@
-export class ReceivedQuery {
-    private diseaseName: string;
-    private anatomy: string[];
-    private symptoms: string[];
-    public para: string[];
-    public doc: string[];
+import { Paragraph } from './paragraph';
 
-    // constructor(cond, symp, struc, para) {
-    //     this.MedicalCondition = cond;
-    //     this.MedicalSymptoms = symp;
-    //     this.AnatomicalStructures = struc;
-    //     this.Paragraphs = para;
-    // }
+export class ReceivedQuery {
+    MedicalCondition: String;
+    MedicalSymptoms: String[];
+    AnatomicalStructures: String[];
+    Paragraphs: Paragraph[];
+
+    constructor(cond, symp, struc, para) {
+        this.MedicalCondition = cond;
+        this.MedicalSymptoms = symp;
+        this.AnatomicalStructures = struc;
+        this.Paragraphs = para;
+    }
 }

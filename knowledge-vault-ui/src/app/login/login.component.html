@@ -17,14 +17,14 @@
             </tr>
             <tr>
             <td><mat-form-field class="login-full-width">
-              <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
+              <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required (keyup.enter)="shurukaro()">
             </mat-form-field></td>
           </tr></table>
         </form>
         <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button (click)="login()">Login</button>
+        <button mat-raised-button (click)="shurukaro()">Login</button>
       </mat-card-actions>
     </div>
   </mat-card>

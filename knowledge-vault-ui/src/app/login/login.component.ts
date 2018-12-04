@@ -33,6 +33,10 @@ export class LoginComponent implements OnInit {
     this.srvc.setValue(this.logInStatus);
   }
 
+  shurukaro() {
+    this.login();
+  }
+
   login(): void {
     console.log('getting the flag value before actually logging in');
 
@@ -42,7 +46,9 @@ export class LoginComponent implements OnInit {
         data => {
           if (data.username === this.username) {
             this.bhejdo();
-            if (data.role === 'General User') {
+            const role: string = data.role;
+            console.log('role name',role)
+            if(role === 'General User') {
               this.router.navigate(['sme']);
             } else {
               this.router.navigate(['user']);

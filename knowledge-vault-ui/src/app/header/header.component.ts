@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../_models';
 import { UserService } from '../_services';
 import { ShareService } from '../share.service';
+import { UserDetails } from '../models/reg/userdetails';
 
 @Component({
   selector: 'app-header',
@@ -75,5 +76,10 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('userdata');
     this.userThere = false;
     this.router.navigate(['home']);
+  }
+
+  goToProfile() {
+    const userDetail = localStorage.getItem('userdata');
+    this.router.navigate(['profile'],{queryParams: {userDetail}});
   }
 }

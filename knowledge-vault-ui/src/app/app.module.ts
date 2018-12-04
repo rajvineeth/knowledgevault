@@ -26,6 +26,7 @@ import { ExpansionPanelsComponent } from './card/expansion-panels/expansion-pane
 import { UserQueryService } from './user-query.service';
 import { RegistrationService } from './registration.service';
 import { AccordionComponent } from './card/accordion/accordion.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AccordionComponent } from './card/accordion/accordion.component';
     SymptomsComponent,
     ExpansionPanelsComponent,
     AccordionComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
