@@ -7,7 +7,7 @@ spring:
         mongodb:
             database: mydatabase
             port: 27017
-            uri: mongodb://172.23.239.75/mydatabase
+            uri: mongodb://127.0.0.1/mydatabase
 
 #
 #        neo4j:
