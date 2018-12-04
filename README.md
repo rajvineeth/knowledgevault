@@ -6,7 +6,7 @@
 
 # Knowledge Vault Product.
 
-# Steps to download and run the product
+# Steps to download and run the product1
 ## Clone the repository
 `git clone https://gitlab.stackroute.in/cgi-2018/knowledge-vault.git`
 
