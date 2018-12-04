@@ -18,18 +18,18 @@ public class QueryService {
     private ExtractedDataService extractedDataService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryService.class);
-    ParaContentService paraContentService;
-    ExtractedDataService extractedDataService;
+//    ParaContentService paraContentService;
+//    ExtractedDataService extractedDataService;
     @Autowired
     OutputResult outputResult;
-    @Autowired
-    public QueryService(ParaContentService paraContentService,ExtractedDataService extractedDataService) {
-        this.paraContentService = paraContentService;
-        this.extractedDataService=extractedDataService;
-    }
-    public QueryService(){
-
-    }
+ //   @Autowired
+//    public QueryService(ParaContentService paraContentService,ExtractedDataService extractedDataService) {
+//        this.paraContentService = paraContentService;
+//        this.extractedDataService=extractedDataService;
+//    }
+//    public QueryService(){
+//
+//    }
 
     public List<OutputResult> runquery(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger");
