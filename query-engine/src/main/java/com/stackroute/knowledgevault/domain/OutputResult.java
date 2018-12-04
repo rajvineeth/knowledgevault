@@ -16,5 +16,7 @@ public class OutputResult {
     public String Relation;
     public String Node2;
     public String Node2label;
+public String para;
+public String doc;
 
 }

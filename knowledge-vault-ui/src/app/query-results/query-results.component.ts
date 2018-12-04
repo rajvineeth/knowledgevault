@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { ReceivedQuery } from '../models/receivedQuery';
 import { Paragraph } from '../models/paragraph';
+import { ReceivedQuery2 } from '../models/received-query2';
 
 @Component({
   selector: 'app-query-results',
@@ -9,11 +10,15 @@ import { Paragraph } from '../models/paragraph';
   styleUrls: ['./query-results.component.css']
 })
 export class QueryResultsComponent implements OnInit {
+  private queryRes: ReceivedQuery2;
   private symptoms = Array.of<String>('pain', 'death', 'suffering');
   private bodyParts = Array.of<String>('blood', 'lungs', 'mouth');
   private paragraph1: Paragraph = {
     DocumentId: 1,
-    Content: 'This is a dummy paragraph to tell you that if you have cancer then there is no way saving you.'
+    Content: 'I am paragraph. I want ro be fit  so that i dont cause this card to'
+    + ' be very big. i want to hide my own contents so thatit doesnt'
+    + ' make much troble he he he he i am fully visible now. This is a dummy paragraph'
+    + ' to tell you that if you have cancer then there is no way saving you.'
   };
   private paragraph2: Paragraph = {
     DocumentId: 2,
@@ -30,9 +35,11 @@ export class QueryResultsComponent implements OnInit {
   constructor(public _dataservice: DataService) { }
 
   ngOnInit() {
+    console.log('getting query results');
+
     this._dataservice.getQuery()
         .subscribe(
-          data => this.queryResults = data
+          data => this.queryRes = data
         );
   }
 

@@ -51,11 +51,19 @@ export class RegisterComponent implements OnInit {
 
         this.loading = true;
 
+<<<<<<< HEAD
         const fn: string = this.registerForm.controls['firstName'].value;
         const ln: string = this.registerForm.controls['lastName'].value;
         const un: string = this.registerForm.controls['username'].value;
         const r: string = this.registerForm.controls['role'].value;
         const pwd: string = this.registerForm.controls['password'].value;
+=======
+        let fn:string = this.registerForm.controls['firstName'].value;
+        let ln:string = this.registerForm.controls['lastName'].value;
+        let un:string = this.registerForm.controls['username'].value;
+        let r:string = this.registerForm.controls['role'].value;
+        let pwd:string = this.registerForm.controls['password'].value;
+>>>>>>> 14ce3cdf223f10bbf136964882c527d3b80246a4
         this.register.registerUser(fn, ln, un, r, pwd)
             .subscribe(
                 data => {

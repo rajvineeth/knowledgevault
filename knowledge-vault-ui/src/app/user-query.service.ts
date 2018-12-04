@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { of } from 'rxjs';
+import { ReceivedQuery } from './models/receivedQuery';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,17 +15,23 @@ const httpOptions = {
 
 export class UserQueryService {
 
-  // nlp-pipeline service url-path
-  private getRequest: string = 'http://172.23.239.127:8148/kv/';
+    // nlp-pipeline service url-path
+    private getRequest = 'http://localhost:8148/kv/';
+
+  getDisease(medicalConditionId: number): any {
+    return this.http.get<ReceivedQuery>(this.getRequest + medicalConditionId);
+  }
 
   constructor(private http: HttpClient) { }
 
   postUserQuery(inputText: string) {
-    let getUrl = this.getRequest + inputText;
-    this.http.get<string>(getUrl,httpOptions)
+    const getUrl = this.getRequest + inputText;
+    this.http.get<string>(getUrl, httpOptions)
       .subscribe(
         data => {
-         if(data == null) console.log(data); 
+         if (data == null) {
+          console.log(data);
+         }
         }
       );
   }
