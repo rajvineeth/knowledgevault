@@ -5,12 +5,17 @@ import com.stackroute.domain.User;
 import com.stackroute.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.servlet.ServletException;
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +25,9 @@ import java.util.List;
 public class UserController {
 
     private UserRepository userRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
    // @Value("${producer-service-impl.messages.exception1}")
 
@@ -39,8 +47,9 @@ public class UserController {
     private String exceptionMessage5;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository,BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @GetMapping("getall")
@@ -81,6 +90,8 @@ public class UserController {
         String email = login.getUsername();
         String password = login.getPassword();
 
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        
         User user = userRepository.findByusername(email);
 
         if (user == null) {
@@ -88,10 +99,15 @@ public class UserController {
         }
 
         String pwd = user.getPassword();
+        String encoded = encoder.encode(password);
+        LOGGER.info("user password: {}", encoded);
+        LOGGER.info("db password: {} ", pwd);
 
-        if (!password.equals(pwd)) {
+        if (!encoder.matches(password,pwd)) {
+            JOptionPane.showMessageDialog(null, "login failure", "please enter a valid username and password", JOptionPane.INFORMATION_MESSAGE);
             throw new ServletException( exceptionMessage5);
         }
+
         System.out.println("got request");
         jwtToken = Jwts.builder().setSubject(email).claim("roles", email).setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, "secretkey").compact();

@@ -15,8 +15,8 @@ const httpOptions = {
 
 export class UserQueryService {
 
-    // nlp-pipeline service url-path
-    private getRequest = 'http://localhost:8148/kv/';
+  // nlp-pipeline service url-path
+  private getRequest = 'http://localhost:8148/kv/';
 
   getDisease(medicalConditionId: number): any {
     return this.http.get<ReceivedQuery>(this.getRequest + medicalConditionId);
@@ -29,9 +29,9 @@ export class UserQueryService {
     this.http.get<string>(getUrl, httpOptions)
       .subscribe(
         data => {
-         if (data == null) {
-          console.log(data);
-         }
+          if (data == null) {
+            console.log(data);
+          }
         }
       );
   }

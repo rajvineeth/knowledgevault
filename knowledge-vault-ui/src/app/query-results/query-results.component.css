@@ -6,3 +6,9 @@
     height: 600px;
     width: 100%;
 }
+app-card {
+    margin: 10px 10px 10px 10px;
+}
+.search-results {
+    background-color: rgba(112,209,104,0.075);
+}

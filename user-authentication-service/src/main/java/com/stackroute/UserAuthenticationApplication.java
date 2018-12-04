@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableJpaRepositories
 @SpringBootApplication
@@ -31,6 +32,11 @@ public class UserAuthenticationApplication implements ApplicationRunner {
         registrationBean.setFilter(new JwtFilter());
         registrationBean.addUrlPatterns("/secure/*");
         return registrationBean;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 	public static void main(String[] args) {
