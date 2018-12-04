@@ -11,8 +11,8 @@ import java.util.*;
 
 public class QueryService {
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryService.class);
-    private ExtractedDataService extractedDataService;
-    private ParaContentService paraContentService;
+//    private ExtractedDataService extractedDataService;
+//    private ParaContentService paraContentService;
 
     public List<OutputResult> runquery(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger");
@@ -51,65 +51,65 @@ public class QueryService {
         return res;
     }
 
-    public List<OutputResult> runquery2(Driver driver, String k1, String k2) {
-        LOGGER.info("received keywords from tagger");
-        Map<String, String> map = new HashMap<>();
-        List<OutputResult> res = new ArrayList();
-        String q;
-        // Sessions are lightweight and disposable connection wrappers.
-        try (Session session = driver.session()) {
-            // Wrapping Cypher in an explicit transaction provides atomicity
-            // and makes handling errors much easier.
-            if(k2.equals("MedicalCondition")){
-             q = "MATCH (A:" + k2 + "),p=(B)-[r]-(A) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name2, labels(B) as name2label LIMIT 10";
-            }
-            else{
-                q="MATCH (A:" + k2 + "),p=(B)-[r]-(A),j=(C:Document)-[s]-(B),k=(D:Content)-[t]-(B) WHERE A.name contains '" + k1 + "' UNWIND D.paraId As paraid UNWIND C.id as docids RETURN A.name As name, labels(A) as label, TYPE(r) as rel, B.name As diseasename, labels(B) as diseaselabel, TYPE(s) AS diseaserel, C.name As docname, labels(C) As doclabel,D.name As contentname,D.id as docid, TYPE(t) As contentrel,paraid,docids LIMIT 10";
-            }
-            try (Transaction tx = session.beginTransaction()) {
-                OutputResult outputResult = new OutputResult();
-                LOGGER.info(q);
-                StatementResult result = tx.run(q);
-                while (result.hasNext()) {
-                    Record record = result.next();
-                    // Values can be extracted from a record by index or name.
-//                    String r = record.get("name1label").asString();
-                LOGGER.info("query run");
-                    outputResult.Node1 = record.get("name1").toString();
-                    outputResult.Node1label = record.get("name1label").toString();
-                    outputResult.Relation = record.get("ril").toString();
-                    outputResult.Node2 = record.get("name2").toString();
-                    outputResult.Node2label = record.get("name2label").toString();
-                    Integer paraid=Integer.parseInt(record.get("paraid").toString());
-                    Integer docids=Integer.parseInt(record.get("docids").toString());
-                    Integer docid=Integer.parseInt(record.get("docid").toString());
-                    outputResult.doc=getdoc(docid, extractedDataService);
-                    outputResult.para=getpara(paraid);
-                }
-//                LOGGER.info("output :{}", map);
-                LOGGER.info("Out of string loop");
-                System.out.println(outputResult);
-                tx.success();  // Mark this write as successful.
-                res.add(outputResult);
-            }
-        }
-        return res;
-    }
-    public String getpara(Integer paraId){
-        Optional<ParaContent> savedList = paraContentService.getParaById(paraId);
-        Integer id=savedList.get().getDocId();
-        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
-        String content=doc.get().getContent();
-        System.out.println("Para: "+savedList.get().getData());
-        System.out.println("Contnet: "+content);
-        return savedList.get().getData();
-    }
-    public String getdoc(Integer id, ExtractedDataService extractedDataService){
-        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
-        String content=doc.get().getContent();
-        System.out.println("Contnet: "+content);
-        return content;
-    }
+//    public List<OutputResult> runquery2(Driver driver, String k1, String k2) {
+//        LOGGER.info("received keywords from tagger");
+//        Map<String, String> map = new HashMap<>();
+//        List<OutputResult> res = new ArrayList();
+//        String q;
+//        // Sessions are lightweight and disposable connection wrappers.
+//        try (Session session = driver.session()) {
+//            // Wrapping Cypher in an explicit transaction provides atomicity
+//            // and makes handling errors much easier.
+//            if(k2.equals("MedicalCondition")){
+//             q = "MATCH (A:" + k2 + "),p=(B)-[r]-(A) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name2, labels(B) as name2label LIMIT 10";
+//            }
+//            else{
+//                q="MATCH (A:" + k2 + "),p=(B)-[r]-(A),j=(C:Document)-[s]-(B),k=(D:Content)-[t]-(B) WHERE A.name contains '" + k1 + "' UNWIND D.paraId As paraid UNWIND C.id as docids RETURN A.name As name, labels(A) as label, TYPE(r) as rel, B.name As diseasename, labels(B) as diseaselabel, TYPE(s) AS diseaserel, C.name As docname, labels(C) As doclabel,D.name As contentname,D.id as docid, TYPE(t) As contentrel,paraid,docids LIMIT 10";
+//            }
+//            try (Transaction tx = session.beginTransaction()) {
+//                OutputResult outputResult = new OutputResult();
+//                LOGGER.info(q);
+//                StatementResult result = tx.run(q);
+//                while (result.hasNext()) {
+//                    Record record = result.next();
+//                    // Values can be extracted from a record by index or name.
+////                    String r = record.get("name1label").asString();
+//                LOGGER.info("query run");
+//                    outputResult.Node1 = record.get("name1").toString();
+//                    outputResult.Node1label = record.get("name1label").toString();
+//                    outputResult.Relation = record.get("ril").toString();
+//                    outputResult.Node2 = record.get("name2").toString();
+//                    outputResult.Node2label = record.get("name2label").toString();
+//                    Integer paraid=Integer.parseInt(record.get("paraid").toString());
+//                    Integer docids=Integer.parseInt(record.get("docids").toString());
+//                    Integer docid=Integer.parseInt(record.get("docid").toString());
+//                    outputResult.doc=getdoc(docid, extractedDataService);
+//                    outputResult.para=getpara(paraid);
+//                }
+////                LOGGER.info("output :{}", map);
+//                LOGGER.info("Out of string loop");
+//                System.out.println(outputResult);
+//                tx.success();  // Mark this write as successful.
+//                res.add(outputResult);
+//            }
+//        }
+//        return res;
+//    }
+//    public String getpara(Integer paraId){
+//        Optional<ParaContent> savedList = paraContentService.getParaById(paraId);
+//        Integer id=savedList.get().getDocId();
+//        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
+//        String content=doc.get().getContent();
+//        System.out.println("Para: "+savedList.get().getData());
+//        System.out.println("Contnet: "+content);
+//        return savedList.get().getData();
+//    }
+//    public String getdoc(Integer id, ExtractedDataService extractedDataService){
+//        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
+//        String content=doc.get().getContent();
+//        System.out.println("Contnet: "+content);
+//        return content;
+//    }
     public void loadgraph(Driver driver) {
         LOGGER.info("Loading The Graph");
         try (Session session = driver.session()) {
