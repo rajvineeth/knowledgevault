@@ -11,6 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 
 public class QueryService {
+
+    @Autowired
+    private ParaContentService paraContentService;
+    @Autowired
+    private ExtractedDataService extractedDataService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(QueryService.class);
     ParaContentService paraContentService;
     ExtractedDataService extractedDataService;
@@ -112,7 +118,7 @@ public class QueryService {
         Optional<ParaContent> savedList;
         savedList = paraContentService.getParaById(paraId);
         Integer id=savedList.get().getDocId();
-        Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
+        Optional<ExtractedFileData> doc = extractedDataService.getDocById(id);
         String content=doc.get().getContent();
         System.out.println("Para: "+savedList.get().getData());
         System.out.println("Contnet: "+content);
