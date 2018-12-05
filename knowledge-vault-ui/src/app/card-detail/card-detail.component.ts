@@ -17,13 +17,6 @@ export class CardDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userQuery: UserQueryService) { }
 
   ngOnInit() {
-    this.getCard();
-  }
-  getCard(): any {
-    const medicalConditionId =
-    +this.route.snapshot.paramMap.get('medicalCondition');
-    this.userQuery.getDisease(medicalConditionId)
-    .subscribe(data => this.card = data);
   }
 
 }

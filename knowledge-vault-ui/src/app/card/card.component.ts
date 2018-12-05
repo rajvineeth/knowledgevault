@@ -10,16 +10,13 @@ import { ReceivedQuery } from '../models/receivedQuery';
 export class CardComponent implements OnInit {
 
   @Input() private card: ReceivedQuery;
-  private selectedCard: ReceivedQuery;
 
   constructor(private router: Router) {
    }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
   detailedView(card: ReceivedQuery) {
-    this.selectedCard = card;
     this.router.navigate(['carddetail/{{card.MedicalCondition}}']);
   }
 }
