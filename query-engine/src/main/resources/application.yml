@@ -5,13 +5,13 @@ spring:
         mongodb:
             database: mydatabase
             port: 27017
-            uri: mongodb://172.23.239.75/mydatabase
+            uri: mongodb://127.0.0.1/mydatabase
 
 #tells about the Eureka server details and its refresh time
 eureka:
     client:
         service-url:
-            defaultZone: http://172.23.239.75:8091/eureka/
+            defaultZone: http://127.0.0.1:8091/eureka/
     register-with-eureka: true
     fetch-registry: true
 
