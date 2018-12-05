@@ -294,21 +294,21 @@ services:
       - "8185"
     restart: always
 
-#  gateway:
-#    image: zuulgateway:v1
-#    build: zuulgateway/
-#    restart: always
-#    container_name: zuul-container
-#    network_mode: host
-#    depends_on:
-#    - config-server
-#    - eureka
-#    - user-registration
-#    - extractor-service
-#    - document-identifier
-#    - input-kafka
-#    - query-engine
-#    ports:
-#      - 8090:8090
-#    expose:
-#      - 8090
+  gateway:
+    image: zuulgateway:v1
+    build: zuulgateway/
+    restart: always
+    container_name: zuul-container
+    network_mode: host
+    depends_on:
+    - config-server
+    - eureka
+    - user-registration
+    - extractor-service
+    - document-identifier
+    - input-kafka
+    - query-engine
+    ports:
+      - 8090:8090
+    expose:
+      - 8090

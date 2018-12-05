@@ -1,11 +1,6 @@
 package com.stackroute.zuulgateway;
 
-import filters.ErrorFilter;
-import filters.PostFilter;
-import filters.PreFilter;
-import filters.RouteFilter;
-
-import com.stackroute.config.JwtFilter;
+import filters.*;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
