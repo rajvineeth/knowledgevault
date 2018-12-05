@@ -15,7 +15,7 @@ const httpOptions = {
 
 export class RegistrationService {
 
-  private registerUrl: string = 'https://35.154.72.182:8090/user-registration-service/api/v1/saveuser'
+  private registerUrl: string = 'https://knowledge-vault.stackroute.in/user-registration-service/api/v1/saveuser'
 
   constructor(private http: HttpClient) { }
 
