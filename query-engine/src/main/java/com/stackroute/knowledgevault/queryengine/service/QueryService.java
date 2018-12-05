@@ -76,11 +76,12 @@ List<OutputResult> res = new ArrayList();
     public List<OutputResult> runquery(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger");
         Map<String, String> map = new HashMap<>();
-
+        if(res.size()!=0){
+            res.clear();
+        }
         String q;
         try (Session session = driver.session()) {
-            q="MATCH (A:" + k2 + "),p=(B:MedicalCondition)-[r]-(A),j=(C)-[s]-(B:MedicalCondition) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As diseaseName, labels(B) as diseaseLabel, TYPE(s) AS sil, C.name As name3,C.id as docId,C.paraId as paraId, labels(C) As Ctype LIMIT 10";
-
+            q="MATCH (A:" + k2 + "),p=(B:MedicalCondition)-[r]-(A),j=(C)-[s]-(B:MedicalCondition) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As diseaseName, labels(B) as diseaseLabel, TYPE(s) AS sil, C.name As name3,C.id as docId,C.paraId as paraId, labels(C) As Ctype LIMIT 1000";
             try (Transaction tx = session.beginTransaction()) {
 
 
