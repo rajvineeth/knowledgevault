@@ -18,8 +18,8 @@ const httpOptions = {
 
 export class LoginService {
 
-  private loginUrl = 'http://35.154.72.182:8090/user-authentication/user/login';
-  private validateURL = 'http://35.154.72.182:8090/user-authentication/secure/user/';
+  private loginUrl = 'https://35.154.72.182:8090/user-authentication/user/login';
+  private validateURL = 'https://35.154.72.182:8090/user-authentication/secure/user/';
 
   constructor(private http: HttpClient, private router: Router, private srvc: ShareService) { }
 
