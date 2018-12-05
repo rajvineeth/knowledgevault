@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.GenericFilterBean;
 
-import io.jsonwebtoken.Claims;
+/*import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.SignatureException;*/
 public class JwtFilter  extends GenericFilterBean {
 
     public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
@@ -34,12 +34,12 @@ public class JwtFilter  extends GenericFilterBean {
 
             final String token = authHeader.substring(7);
 
-            try {
+           /* try {
                 final Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).getBody();
                 request.setAttribute("claims", claims);
             } catch (final SignatureException e) {
                 throw new ServletException("Invalid token");
-            }
+            }*/
 
             chain.doFilter(req, res);
         }
