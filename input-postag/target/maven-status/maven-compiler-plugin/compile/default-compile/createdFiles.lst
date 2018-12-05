@@ -1,7 +1,0 @@
-com/stackroute/knowledgevault/inputpostag/config/KafkaProducerConfig.class
-com/stackroute/knowledgevault/inputpostag/communicator/KafkaConsumer.class
-com/stackroute/knowledgevault/inputpostag/config/KafkaConsumerConfig.class
-com/stackroute/knowledgevault/inputpostag/communicator/KafkaProducer.class
-com/stackroute/knowledgevault/domain/UserInput.class
-com/stackroute/knowledgevault/domain/InputPOS.class
-com/stackroute/knowledgevault/inputpostag/InputPostagApplication.class

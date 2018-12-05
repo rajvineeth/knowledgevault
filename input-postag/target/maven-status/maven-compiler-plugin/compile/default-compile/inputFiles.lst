@@ -1,7 +1,0 @@
-/home/shubham/Documents/knowledge-vault/input-postag/src/main/java/com/stackroute/knowledgevault/inputpostag/communicator/KafkaProducer.java
-/home/shubham/Documents/knowledge-vault/input-postag/src/main/java/com/stackroute/knowledgevault/inputpostag/communicator/KafkaConsumer.java
-/home/shubham/Documents/knowledge-vault/input-postag/src/main/java/com/stackroute/knowledgevault/inputpostag/InputPostagApplication.java
-/home/shubham/Documents/knowledge-vault/input-postag/src/main/java/com/stackroute/knowledgevault/inputpostag/config/KafkaProducerConfig.java
-/home/shubham/Documents/knowledge-vault/input-postag/src/main/java/com/stackroute/knowledgevault/domain/InputPOS.java
-/home/shubham/Documents/knowledge-vault/input-postag/src/main/java/com/stackroute/knowledgevault/domain/UserInput.java
-/home/shubham/Documents/knowledge-vault/input-postag/src/main/java/com/stackroute/knowledgevault/inputpostag/config/KafkaConsumerConfig.java

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ShareService } from '../share.service';
 import { User } from '../models/auth/user';
+import { MongoService } from '../mongo.service';
+import { UserDetails } from '../models/reg/userdetails';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +18,11 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
+  userDetails: UserDetails;
+
   logInStatus: boolean;
 
-  constructor(private router: Router, private srvc: ShareService, private loginsrvc: LoginService) {
+  constructor(private router: Router, private srvc: ShareService, private loginsrvc: LoginService, private mongo: MongoService) {
     this.srvc.getValue()
       .subscribe(
         val => {
@@ -34,6 +38,11 @@ export class LoginComponent implements OnInit {
   }
 
   shurukaro() {
+    // if (this.username === 'abc') {
+    //   this.router.navigate(['sme']);
+    // } else {
+    //   this.router.navigate(['user']);
+    // }
     this.login();
   }
 
@@ -41,17 +50,21 @@ export class LoginComponent implements OnInit {
     console.log('getting the flag value before actually logging in');
 
     const user = new User(this.username, this.password);
+    this.mongo.fetchUserData(this.username)
+      .subscribe(data => {
+        this.userDetails = data;
+      });
+
     this.loginsrvc.validateUser(user)
       .subscribe(
         data => {
           if (data.username === this.username) {
             this.bhejdo();
-            const role: string = data.role;
-            console.log('role name',role)
-            if(role === 'General User') {
-              this.router.navigate(['sme']);
-            } else {
+            console.log('role name', this.userDetails.role);
+            if (this.userDetails.role === 'General User') {
               this.router.navigate(['user']);
+            } else {
+              this.router.navigate(['sme']);
             }
             window.location.reload();
           } else {
