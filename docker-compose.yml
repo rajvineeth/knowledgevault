@@ -77,8 +77,8 @@ services:
     container_name: "mongo-docs"
     volumes:
     - '../data/mongo/docs:/data/db/docs'
-#    environment:
-#      MONGO_INITDB_DATABASE: mydatabase
+    environment:
+      MONGO_INITDB_DATABASE: mydatabase
 
   mysql:
     image: mysql:5.7
