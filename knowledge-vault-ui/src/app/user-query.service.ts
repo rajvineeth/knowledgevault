@@ -16,7 +16,7 @@ const httpOptions = {
 export class UserQueryService {
 
   // nlp-pipeline service url-path
-  private getRequest = 'http://35.154.72.182:8148/kv/';
+  private getRequest = 'https://35.154.72.182:8148/kv/';
 
   getDisease(medicalConditionId: number): any {
     return this.http.get<ReceivedQuery>(this.getRequest + medicalConditionId);
