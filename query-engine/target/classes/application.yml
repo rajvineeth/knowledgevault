@@ -1,6 +1,20 @@
 server:
     port: 8185
+spring:
+    application:
+      name: query-engine
+    data:
+        mongodb:
+            database: mydatabase
+            port: 27017
+            uri: mongodb://172.23.239.75/mydatabase
 
+eureka:
+    client:
+        service-url:
+            defaultZone: http://172.23.239.75:8091/eureka/
+    register-with-eureka: true
+    fetch-registry: true
 #
 #        neo4j:
 #            password: 123456

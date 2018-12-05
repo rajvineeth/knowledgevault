@@ -9,7 +9,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./query-results.component.css']
 })
 export class QueryResultsComponent implements OnInit {
-  
   public queryResults: Array<ReceivedQuery>;
 
   constructor(public _dataservice: DataService) { }

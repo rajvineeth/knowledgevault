@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @Builder
-
+@NoArgsConstructor
 /**
  * POJO class for consuming input sent by Extractor Service.
  */

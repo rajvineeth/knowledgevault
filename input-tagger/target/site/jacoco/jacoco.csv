@@ -12,4 +12,3 @@ input-tagger,com.stackroute.knowledgevault.domain,InputPOS,118,0,16,0,5,0,18,0,1
 input-tagger,com.stackroute.knowledgevault.domain,Keyword,193,0,26,0,7,0,27,0,14,0
 input-tagger,com.stackroute.knowledgevault.domain,InputObject,161,3,24,0,5,1,23,1,11,1
 input-tagger,com.stackroute.knowledgevault.domain,ProcessedInput,89,0,14,0,4,0,15,0,8,0
-input-tagger,com.stackroute.knowledgevault.domain,InputToken,118,0,16,0,5,0,18,0,10,0

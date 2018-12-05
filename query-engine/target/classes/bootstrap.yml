@@ -1,13 +1,6 @@
-spring:
-  application:
-    name: query-engine
-  cloud:
-    config:
-      uri: http://127.0.0.1:8092
-
 #spring:
 #  data:
 #    mongodb:
 #      database: mydatabase
 #      port: 27017
-#      uri: mongodb://localhost/mydatabase
+#      uri: mongodb://172.23.239.75/mydatabase
