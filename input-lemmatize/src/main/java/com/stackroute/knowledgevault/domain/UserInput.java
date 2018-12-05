@@ -13,7 +13,6 @@ public class UserInput {
     private String text;
 
     public UserInput(String text) {
-//        this.id = ++count;
         this.text = text;
     }
 }

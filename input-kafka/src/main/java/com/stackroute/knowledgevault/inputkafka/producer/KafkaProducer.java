@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 public class KafkaProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducer.class);
-    private static final String TOPIC_TOKEN = "user-input-token";
     private static final String TOPIC_POS = "user-input-POS";
     private static final String TOPIC_LEMMA = "user-input-lemma";
 
@@ -28,8 +27,6 @@ public class KafkaProducer {
         this.kafkaTemplate.send(TOPIC_LEMMA, userInput);
 
         this.kafkaTemplate.send(TOPIC_POS, userInput);
-
-        this.kafkaTemplate.send(TOPIC_TOKEN, userInput);
         return "published successfully";
     }
 }

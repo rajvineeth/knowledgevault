@@ -56,11 +56,5 @@ public class KafkaConsumer {
         }
 
     }
-//
-//    @KafkaListener(topics = "input-token", groupId = "group_json", containerFactory = "tokenKafkaListenerFactory")
-//    public void consumejson(InputToken inputToken){
-//        LOGGER.info("TaggerLemmaUserInput: {}",inputToken.toString());
-//    }
-
 
 }

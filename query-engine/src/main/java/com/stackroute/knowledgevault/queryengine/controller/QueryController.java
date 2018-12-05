@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -24,7 +25,8 @@ import java.util.Optional;
 public class QueryController {
 
 
-    private DriverInit driver = new DriverInit("bolt://127.0.0.1:7687", "neo4j", "123456");
+//    private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
+    private DriverInit driver = new DriverInit("bolt://172.23.239.75:7687", "neo4j", "123456");
     Driver drive = driver.getDriver();
 
     ParaContentService paraContentService;
@@ -40,8 +42,8 @@ public class QueryController {
     @GetMapping("/results")
     public ResponseEntity<?> getResults(){
 //        Set<OutputResult> list = FrontEndData.list;
-        System.out.println(KafkaConsumer.list);
-        ResponseEntity<?> responseEntity = new ResponseEntity<List<OutputResult>>((List<OutputResult>) KafkaConsumer.list, HttpStatus.OK);
+        System.out.println(KafkaConsumer.set);
+        ResponseEntity<?> responseEntity = new ResponseEntity<Set<OutputResult>>((Set<OutputResult>) KafkaConsumer.set, HttpStatus.OK);
         return responseEntity;
     }
     @GetMapping("/para/{id}")
@@ -57,7 +59,9 @@ public class QueryController {
     }
     @GetMapping("/results1/{a}/{b}")
     public ResponseEntity<?> getResults5(@PathVariable(value ="a")String a,@PathVariable (value="b")String b){
-        ResponseEntity<?> responseEntity = new ResponseEntity<List<OutputResult>>( queryService.runquery(drive,a,b), HttpStatus.OK);
+//        Set<OutputResult> list = FrontEndData.list;
+//        System.out.println(KafkaConsumer.list);
+        ResponseEntity<?> responseEntity = new ResponseEntity<Set<OutputResult>>( queryService.runquery(drive,a,b), HttpStatus.OK);
         return responseEntity;
     }
 }

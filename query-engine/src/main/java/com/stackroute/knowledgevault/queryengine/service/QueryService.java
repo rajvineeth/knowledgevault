@@ -39,8 +39,8 @@ public class QueryService {
 
 boolean flag2=false;
     OutputResult outputResult2=null;
-    List<OutputResult> res2 = new ArrayList();
-    public List<OutputResult> runquery2(Driver driver, String k1, String k2) {
+    Set<OutputResult> res2 = new HashSet<>();
+    public Set<OutputResult> runquery2(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger2");
         if(!res2.isEmpty()){
             res2.clear();
@@ -122,8 +122,8 @@ boolean flag2=false;
     }
 boolean flag=false;
     OutputResult outputResult=null;
-List<OutputResult> res = new ArrayList();
-    public List<OutputResult> runquery(Driver driver, String k1, String k2) {
+    Set<OutputResult> res = new HashSet<>();
+    public Set<OutputResult> runquery(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger");
         if(!res.isEmpty()){
             res.clear();
