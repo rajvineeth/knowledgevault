@@ -47,7 +47,7 @@ public class QueryService {
         }
         String q;
 <span class="nc" id="L49">        try (Session session = driver.session()) {</span>
-<span class="nc" id="L50">            q=&quot;MATCH (A:&quot; + k2 + &quot;),p=(B)-[r]-(A) WHERE A.name contains '&quot; + k1 + &quot;' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name, labels(B) as label, B.id as docId, B.paraId as paraId LIMIT 1000&quot;;</span>
+<span class="nc" id="L50">            q=&quot;MATCH (A:&quot; + k2 + &quot;),p=(B)-[r]-(A) WHERE A.name contains '&quot; + k1 + &quot;' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As name, labels(B) as label, B.id as docId, B.paraId as paraId LIMIT 500&quot;;</span>
 
 <span class="nc" id="L52">            try (Transaction tx = session.beginTransaction()) {</span>
 <span class="nc" id="L53">                StatementResult result = tx.run(q);</span>
@@ -130,7 +130,7 @@ public class QueryService {
         }
         String q;
 <span class="nc" id="L132">        try (Session session = driver.session()) {</span>
-<span class="nc" id="L133">            q=&quot;MATCH (A:&quot; + k2 + &quot;),p=(B:MedicalCondition)-[r]-(A),j=(C)-[s]-(B:MedicalCondition) WHERE A.name contains '&quot; + k1 + &quot;' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As diseaseName, labels(B) as diseaseLabel, TYPE(s) AS sil, C.name As name3,C.id as docId,C.paraId as paraId, labels(C) As Ctype LIMIT 1000&quot;;</span>
+<span class="nc" id="L133">            q=&quot;MATCH (A:&quot; + k2 + &quot;),p=(B:MedicalCondition)-[r]-(A),j=(C)-[s]-(B:MedicalCondition) WHERE A.name contains '&quot; + k1 + &quot;' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As diseaseName, labels(B) as diseaseLabel, TYPE(s) AS sil, C.name As name3,C.id as docId,C.paraId as paraId, labels(C) As Ctype LIMIT 500&quot;;</span>
 <span class="nc" id="L134">            try (Transaction tx = session.beginTransaction()) {</span>
 
 

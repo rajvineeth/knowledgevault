@@ -3,4 +3,4 @@ spring:
     name: input-postag
   cloud:
     config:
-      uri: http://0.0.0.0:8092
+      uri: http://127.0.0.1:8092
