@@ -53,11 +53,13 @@ export class LoginComponent implements OnInit {
     this.mongo.fetchUserData(this.username)
       .subscribe(data => {
         this.userDetails = data;
+        console.log('user details', Object.values(this.userDetails));
       });
 
     this.loginsrvc.validateUser(user)
       .subscribe(
         data => {
+          console.log('data from validation ', data);
           if (data.username === this.username) {
             this.bhejdo();
             console.log('role name', this.userDetails.role);
