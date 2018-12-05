@@ -19,15 +19,14 @@ const httpOptions = {
 
 export class DataService {
   // change to IP address of query-engine
-  private _url = 'http://localhost:8185/api/v1/results';
+  private _url = 'http://172.23.239.143:8185/api/v1/results';
 
   constructor(private http: HttpClient) { }
 
-  getQuery(): Observable<ReceivedQuery[]> {
-    console.log(this.http.get<ReceivedQuery[]>('recieved data: ' + this._url));
-    return this.http.get<ReceivedQuery[]>(this._url).pipe(catchError(err => {
-      console.log(err.error);
-      return throwError(err.error);
-    }));
+  getQuery(): Observable<Array<ReceivedQuery>> {
+    // console.log(this.http.get('recieved data: ' + this._url));
+    return this.http.get<Array<ReceivedQuery>>(this._url);
   }
 }
+
+

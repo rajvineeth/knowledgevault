@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Paragraph } from 'src/app/models/paragraph';
 
 @Component({
   selector: 'app-accordion',

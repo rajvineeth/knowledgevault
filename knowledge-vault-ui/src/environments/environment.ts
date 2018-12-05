@@ -7,6 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost:8184',
   apiUrl2: 'http://localhost:8182',
   apiUrl3: 'http://localhost:8080',
+  apiUrl4: 'http://172.23.239.143:8185'
 };
 
 /*

@@ -1,25 +1,9 @@
-<!-- 
-<div class="search-results" fxLayout="row wrap" fxLayoutAlign="space-evenly">
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-  <app-card [card]='dummy1' ></app-card>
-</div> -->
-
-<nav *ngIf="queryResults == null; else elseBlock;">
-  <nav>
-    <div class="error"></div>
+<div
+  class="search-results"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-evenly center"
+>
+  <nav *ngFor="let res of queryResults">
+    <app-card [card]="res"> </app-card>
   </nav>
-<nav> 
-<ng-template #elseBlock>
-  <div *ngFor="let query of queryResults" class="search-results" fxLayout="row wrap" fxLayoutAlign="space-evenly" >
-    <app-card [card]="query"></app-card>
-  </div>
-</ng-template>
+</div>

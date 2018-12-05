@@ -1,14 +1,15 @@
 export class ReceivedQuery {
-    private diseaseName: string;
-    private anatomy: string[];
-    private symptoms: string[];
-    public para: string[];
-    public doc: string[];
+    public diseaseName: string;
+    public anatomy: Array<string>;
+    public symptoms: Array<string>;
+    public para: Array<string>;
+    public doc: Array<string>;
 
-    // constructor(cond, symp, struc, para) {
-    //     this.MedicalCondition = cond;
-    //     this.MedicalSymptoms = symp;
-    //     this.AnatomicalStructures = struc;
-    //     this.Paragraphs = para;
-    // }
+    constructor(name, ana, sym, par, docu) {
+        this.diseaseName = name;
+        this.anatomy = ana;
+        this.symptoms = sym;
+        this.para = par;
+        this.doc = docu;
+    }
 }
