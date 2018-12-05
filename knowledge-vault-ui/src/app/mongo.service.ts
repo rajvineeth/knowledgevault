@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 @Injectable({
   providedIn: 'root'
 })
+
 export class MongoService {
 
   private fetchUrl: string = 'https://KnowledgeVault-zuul.stackroute.in/user-registration-service/api/v1/user/'
@@ -12,6 +13,7 @@ export class MongoService {
   constructor(private http: HttpClient) { }
 
   fetchUserData(name: string): Observable<any> {
+    
     const httpoption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

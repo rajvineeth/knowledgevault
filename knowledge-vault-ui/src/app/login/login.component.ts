@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     console.log('getting the flag value before actually logging in');
 
     const user = new User(this.username, this.password);
+
     this.mongo.fetchUserData(this.username)
       .subscribe(data => {
         this.userDetails = data;
@@ -64,9 +65,16 @@ export class LoginComponent implements OnInit {
             this.bhejdo();
             console.log('role name', this.userDetails.role);
             if (this.userDetails.role === 'General User') {
-              this.router.navigate(['user']);
+              this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true})
+                .then(
+                  () => this.router.navigate(['user'])
+                );
             } else {
-              this.router.navigate(['sme']);
+
+                this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true})
+                  .then(
+                    () => this.router.navigate(['sme'])
+                  );
             }
             window.location.reload();
           } else {

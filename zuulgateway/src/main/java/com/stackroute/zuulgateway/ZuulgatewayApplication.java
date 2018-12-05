@@ -4,6 +4,9 @@ import filters.ErrorFilter;
 import filters.PostFilter;
 import filters.PreFilter;
 import filters.RouteFilter;
+
+import com.stackroute.config.JwtFilter;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -35,4 +38,8 @@ public class ZuulgatewayApplication {
 		return new RouteFilter();
 	}
 
+	@Bean
+	public JwtFilter JwtFilter() {
+		return new JwtFilter();
+	}
 }
