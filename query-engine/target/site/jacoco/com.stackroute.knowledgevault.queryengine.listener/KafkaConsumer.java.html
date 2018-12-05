@@ -7,38 +7,40 @@ import com.stackroute.knowledgevault.queryengine.service.QueryService;
 import org.neo4j.driver.v1.Driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-<span class="nc" id="L16">public class KafkaConsumer {</span>
+<span class="nc" id="L17">public class KafkaConsumer {</span>
 
-<span class="nc" id="L18">    public static List&lt;OutputResult&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L19">    public static List&lt;OutputResult&gt; list = new ArrayList&lt;&gt;();</span>
 
-//    @Autowired
-//    private KafkaProducer producer;
-<span class="nc" id="L22">    private DriverInit driver = new DriverInit(&quot;bolt://localhost:7687&quot;, &quot;neo4j&quot;, &quot;123456&quot;);</span>
-<span class="nc" id="L23">    private QueryService queryService = new QueryService();</span>
+<span class="nc" id="L21">    private DriverInit driver = new DriverInit(&quot;bolt://172.23.239.75:7687&quot;, &quot;neo4j&quot;, &quot;123456&quot;);</span>
+    @Autowired
+    private QueryService queryService;
 <span class="nc" id="L24">    private static final Logger LOGGER = LoggerFactory.getLogger(com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer.class);</span>
     @KafkaListener(topics = &quot;queryInput&quot;, groupId = &quot;group_json_query&quot;, containerFactory = &quot;userKafkaListenerFactory&quot;)
     public void consumejson(ProcessedInput processedInput) {
 <span class="nc" id="L27">        LOGGER.info(&quot;consumed message&quot;);</span>
 <span class="nc" id="L28">        Driver drive = driver.getDriver();</span>
-<span class="nc" id="L29">        list.clear();</span>
-<span class="nc bnc" id="L30" title="All 2 branches missed.">        for (Map.Entry&lt;String, String&gt; entry : processedInput.getKeyValue().entrySet()) {</span>
-<span class="nc" id="L31">            LOGGER.info(entry.getKey());</span>
-<span class="nc" id="L32">            LOGGER.info(entry.getValue());</span>
-<span class="nc" id="L33">            list = queryService.runquery(drive, entry.getKey(), entry.getValue());</span>
-//            OutputResult res = new OutputResult(&quot;cancer&quot;,&quot;disease&quot;,&quot;pain&quot;,&quot;symptom&quot;, &quot;indicated by&quot;);
 
-//            producer.post(pi);
+<span class="nc" id="L30">        list.clear();</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        for (Map.Entry&lt;String, String&gt; entry : processedInput.getKeyValue().entrySet()) {</span>
+<span class="nc" id="L32">            LOGGER.info(entry.getKey());</span>
+<span class="nc" id="L33">            LOGGER.info(entry.getValue());</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">            if(entry.getValue().compareTo(&quot;MedicalCondition&quot;)!=0) {</span>
+<span class="nc" id="L35">               list = queryService.runquery(drive, entry.getKey(), entry.getValue());</span>
+            }
+           else{
+<span class="nc" id="L38">                list = queryService.runquery2(drive, entry.getKey(), entry.getValue());</span>
+            }
 
-<span class="nc" id="L38">        }</span>
-<span class="nc" id="L39">        LOGGER.info(&quot;hey i sent the complete data&quot;);</span>
-//      queryService.close(drive);
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L41">        }</span>
+<span class="nc" id="L42">        LOGGER.info(&quot;hey i sent the complete data&quot;);</span>
+<span class="nc" id="L43">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

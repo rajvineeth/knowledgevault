@@ -2,10 +2,14 @@
 
 
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
+import com.stackroute.knowledgevault.domain.OutputResult;
 import com.stackroute.knowledgevault.domain.ParaContent;
 import com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer;
+import com.stackroute.knowledgevault.queryengine.service.DriverInit;
 import com.stackroute.knowledgevault.queryengine.service.ExtractedDataService;
 import com.stackroute.knowledgevault.queryengine.service.ParaContentService;
+import com.stackroute.knowledgevault.queryengine.service.QueryService;
+import org.neo4j.driver.v1.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,37 +24,41 @@ import java.util.Optional;
 public class QueryController {
 
 
-//    private DriverInit driver = new DriverInit(&quot;bolt://localhost:7687&quot;, &quot;neo4j&quot;, &quot;123456&quot;);
-//    private QueryService queryService = new QueryService();
-//    private static final Logger LOGGER=LoggerFactory.getLogger(com.stackroute.knowledgevault.queryEngine.controller.QueryController.class);
-//
+<span class="nc" id="L27">    private DriverInit driver = new DriverInit(&quot;bolt://172.23.239.75:7687&quot;, &quot;neo4j&quot;, &quot;123456&quot;);</span>
+<span class="nc" id="L28">    Driver drive = driver.getDriver();</span>
+
     ParaContentService paraContentService;
     ExtractedDataService extractedDataService;
     @Autowired
-<span class="nc" id="L30">    public QueryController(ParaContentService paraContentService,ExtractedDataService extractedDataService) {</span>
-<span class="nc" id="L31">        this.paraContentService = paraContentService;</span>
-<span class="nc" id="L32">        this.extractedDataService=extractedDataService;</span>
-<span class="nc" id="L33">    }</span>
+<span class="nc" id="L33">    public QueryController(ParaContentService paraContentService,ExtractedDataService extractedDataService) {</span>
+<span class="nc" id="L34">        this.paraContentService = paraContentService;</span>
+<span class="nc" id="L35">        this.extractedDataService=extractedDataService;</span>
+<span class="nc" id="L36">    }</span>
+    @Autowired
+    private QueryService queryService;
 
     @GetMapping(&quot;/results&quot;)
     public ResponseEntity&lt;?&gt; getResults(){
 //        Set&lt;OutputResult&gt; list = FrontEndData.list;
-<span class="nc" id="L38">        System.out.println(KafkaConsumer.list);</span>
-<span class="nc" id="L39">        ResponseEntity&lt;?&gt; responseEntity = new ResponseEntity&lt;&gt;(KafkaConsumer.list, HttpStatus.OK);</span>
-<span class="nc" id="L40">        return responseEntity;</span>
+<span class="nc" id="L43">        System.out.println(KafkaConsumer.list);</span>
+<span class="nc" id="L44">        ResponseEntity&lt;?&gt; responseEntity = new ResponseEntity&lt;List&lt;OutputResult&gt;&gt;((List&lt;OutputResult&gt;) KafkaConsumer.list, HttpStatus.OK);</span>
+<span class="nc" id="L45">        return responseEntity;</span>
     }
     @GetMapping(&quot;/para/{id}&quot;)
     public ResponseEntity&lt;?&gt; getResults2(@PathVariable(value=&quot;id&quot;) int paraId){
      ResponseEntity responseEntity;
-<span class="nc" id="L45">            Optional&lt;ParaContent&gt; savedList = paraContentService.getParaById(paraId);</span>
-<span class="nc" id="L46">            Integer id=savedList.get().getDocId();</span>
-<span class="nc" id="L47">            Optional&lt;ExtractedFileData&gt; doc=extractedDataService.getDocById(id);</span>
-<span class="nc" id="L48">            String content=doc.get().getContent();</span>
-<span class="nc" id="L49">            System.out.println(&quot;Para: &quot;+savedList.get().getData());</span>
-<span class="nc" id="L50">            System.out.println(&quot;Contnet: &quot;+content);</span>
-<span class="nc" id="L51">            responseEntity = new ResponseEntity&lt;Optional&lt;ParaContent&gt;&gt;(savedList, HttpStatus.OK);</span>
+<span class="nc" id="L50">            Optional&lt;ParaContent&gt; savedList = paraContentService.getParaById(paraId);</span>
+<span class="nc" id="L51">            Integer id=savedList.get().getDocId();</span>
+<span class="nc" id="L52">            Optional&lt;ExtractedFileData&gt; doc=extractedDataService.getDocById(id);</span>
+<span class="nc" id="L53">            String content=doc.get().getContent();</span>
+<span class="nc" id="L54">            responseEntity = new ResponseEntity&lt;Optional&lt;ParaContent&gt;&gt;(savedList, HttpStatus.OK);</span>
 
-<span class="nc" id="L53">        return responseEntity;</span>
+<span class="nc" id="L56">        return responseEntity;</span>
+    }
+    @GetMapping(&quot;/results1/{a}/{b}&quot;)
+    public ResponseEntity&lt;?&gt; getResults5(@PathVariable(value =&quot;a&quot;)String a,@PathVariable (value=&quot;b&quot;)String b){
+<span class="nc" id="L60">        ResponseEntity&lt;?&gt; responseEntity = new ResponseEntity&lt;List&lt;OutputResult&gt;&gt;( queryService.runquery(drive,a,b), HttpStatus.OK);</span>
+<span class="nc" id="L61">        return responseEntity;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

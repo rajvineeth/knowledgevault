@@ -4,7 +4,6 @@ package com.stackroute.knowledgevault.queryengine.controller;
 import com.stackroute.knowledgevault.domain.ExtractedFileData;
 import com.stackroute.knowledgevault.domain.OutputResult;
 import com.stackroute.knowledgevault.domain.ParaContent;
-//import com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer;
 import com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer;
 import com.stackroute.knowledgevault.queryengine.service.DriverInit;
 import com.stackroute.knowledgevault.queryengine.service.ExtractedDataService;
@@ -25,16 +24,9 @@ import java.util.Optional;
 public class QueryController {
 
 
-//    private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
-    private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
+    private DriverInit driver = new DriverInit("bolt://172.23.239.75:7687", "neo4j", "123456");
     Driver drive = driver.getDriver();
 
-
-
-
-    //    private QueryService queryService = new QueryService();
-//    private static final Logger LOGGER=LoggerFactory.getLogger(com.stackroute.knowledgevault.queryEngine.controller.QueryController.class);
-//
     ParaContentService paraContentService;
     ExtractedDataService extractedDataService;
     @Autowired
@@ -59,16 +51,12 @@ public class QueryController {
             Integer id=savedList.get().getDocId();
             Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
             String content=doc.get().getContent();
-            System.out.println("Para: "+savedList.get().getData());
-            System.out.println("Contnet: "+content);
             responseEntity = new ResponseEntity<Optional<ParaContent>>(savedList, HttpStatus.OK);
 
         return responseEntity;
     }
     @GetMapping("/results1/{a}/{b}")
     public ResponseEntity<?> getResults5(@PathVariable(value ="a")String a,@PathVariable (value="b")String b){
-//        Set<OutputResult> list = FrontEndData.list;
-//        System.out.println(KafkaConsumer.list);
         ResponseEntity<?> responseEntity = new ResponseEntity<List<OutputResult>>( queryService.runquery(drive,a,b), HttpStatus.OK);
         return responseEntity;
     }

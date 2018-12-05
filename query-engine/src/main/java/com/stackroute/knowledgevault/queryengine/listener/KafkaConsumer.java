@@ -18,7 +18,7 @@ public class KafkaConsumer {
 
     public static List<OutputResult> list = new ArrayList<>();
 
-    private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
+    private DriverInit driver = new DriverInit("bolt://172.23.239.75:7687", "neo4j", "123456");
     @Autowired
     private QueryService queryService;
     private static final Logger LOGGER = LoggerFactory.getLogger(com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer.class);
@@ -32,9 +32,9 @@ public class KafkaConsumer {
             LOGGER.info(entry.getKey());
             LOGGER.info(entry.getValue());
             if(entry.getValue().compareTo("MedicalCondition")!=0) {
-                list = queryService.runquery(drive, entry.getKey(), entry.getValue());
+               list = queryService.runquery(drive, entry.getKey(), entry.getValue());
             }
-            else{
+           else{
                 list = queryService.runquery2(drive, entry.getKey(), entry.getValue());
             }
 

@@ -4,22 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-<span class="nc bnc" id="L11" title="All 30 branches missed.">@Data</span>
-<span class="nc" id="L12">@AllArgsConstructor</span>
-<span class="nc" id="L13">@Builder</span>
-
+<span class="pc bnc" id="L12" title="All 30 branches missed.">@Data</span>
+<span class="nc" id="L13">@AllArgsConstructor</span>
+<span class="nc" id="L14">@Builder</span>
+<span class="fc" id="L15">@NoArgsConstructor</span>
 /**
  * POJO class for consuming input sent by Extractor Service.
  */
 
 public class ExtractedFileData {
-<span class="nc" id="L20">    private Integer id; //Id of the document</span>
-<span class="nc" id="L21">    private String metadata; //Will contain the metadata of the document</span>
-<span class="nc" id="L22">    private String content; //Will contain all the content of the document</span>
+<span class="nc" id="L21">    private Integer id; //Id of the document</span>
+<span class="nc" id="L22">    private String metadata; //Will contain the metadata of the document</span>
+<span class="nc" id="L23">    private String content; //Will contain all the content of the document</span>
 
 }
 

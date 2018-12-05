@@ -12,13 +12,13 @@ public class ParaContentService {
 
     private ParaContentRepo paraContentRepo;
     @Autowired
-<span class="nc" id="L15">    public ParaContentService(ParaContentRepo paraContentRepo){</span>
-<span class="nc" id="L16">        this.paraContentRepo=paraContentRepo;</span>
-<span class="nc" id="L17">    }</span>
+<span class="fc" id="L15">    public ParaContentService(ParaContentRepo paraContentRepo){</span>
+<span class="fc" id="L16">        this.paraContentRepo=paraContentRepo;</span>
+<span class="fc" id="L17">    }</span>
     public Optional&lt;ParaContent&gt; getParaById(int id)  {
         Optional&lt;ParaContent&gt; paraContent;
-<span class="nc" id="L20">        paraContent=paraContentRepo.findById(id);</span>
-<span class="nc" id="L21">        return paraContent;</span>
+<span class="fc" id="L20">        paraContent=paraContentRepo.findById(id);</span>
+<span class="fc" id="L21">        return paraContent;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -11,13 +11,13 @@ import java.util.Optional;
 public class ExtractedDataService {
     private ExtractedFileDataRepo extractedFileDataRepo;
     @Autowired
-<span class="nc" id="L14">    public ExtractedDataService(ExtractedFileDataRepo extractedFileDataRepo) {</span>
-<span class="nc" id="L15">        this.extractedFileDataRepo = extractedFileDataRepo;</span>
-<span class="nc" id="L16">    }</span>
+<span class="fc" id="L14">    public ExtractedDataService(ExtractedFileDataRepo extractedFileDataRepo) {</span>
+<span class="fc" id="L15">        this.extractedFileDataRepo = extractedFileDataRepo;</span>
+<span class="fc" id="L16">    }</span>
     public Optional&lt;ExtractedFileData&gt; getDocById(int id)  {
         Optional&lt;ExtractedFileData&gt; doc;
-<span class="nc" id="L19">        doc=extractedFileDataRepo.findById(id);</span>
-<span class="nc" id="L20">        return doc;</span>
+<span class="fc" id="L19">        doc=extractedFileDataRepo.findById(id);</span>
+<span class="fc" id="L20">        return doc;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
