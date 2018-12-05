@@ -15,7 +15,7 @@ const httpOptions = {
 
 export class RegistrationService {
 
-  private registerUrl: string = 'https://knowledge-vault.stackroute.in/user-registration-service/api/v1/saveuser'
+  private registerUrl: string = 'https://KnowledgeVault-zuul.stackroute.in/user-registration-service/api/v1/saveuser'
 
   constructor(private http: HttpClient) { }
 
