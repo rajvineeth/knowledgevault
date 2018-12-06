@@ -127,6 +127,8 @@ public class ExtractorController {
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
 
+        System.out.println("reached extractor");
+
         for (File file : files) {
 
             try {
