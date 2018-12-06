@@ -59,8 +59,6 @@ public class KafkaConsumer {
                 intersect(l);
             }
         }
-        System.out.println("v size1: "+setList.get(0).size());
-        System.out.println("v size2: "+setList.get(1).size());
         LOGGER.info("hey i sent the complete data");
     }
     public LinkedHashSet<OutputResult> intersect(List<Set<OutputResult>> setList){
@@ -68,7 +66,6 @@ public class KafkaConsumer {
         resCross.addAll(setList.get(0));
         for (int i = 1; i < setList.size(); i++) {
             resCross.retainAll(setList.get(i));
-            System.out.println("result "+resCross);
         }
         for (OutputResult outputResult : resCross) {
             res.add(outputResult);
