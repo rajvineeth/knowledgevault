@@ -274,8 +274,8 @@ services:
     depends_on:
       - config-server
       - eureka
-      - mysql
       - kafka
+      - mysql
     ports:
       - "8184:8184"
     expose:

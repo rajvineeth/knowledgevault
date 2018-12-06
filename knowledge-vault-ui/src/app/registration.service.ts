@@ -15,12 +15,12 @@ const httpOptions = {
 
 export class RegistrationService {
 
-  private registerUrl: string = 'https://KnowledgeVault-zuul.stackroute.in/user-registration-service/api/v1/saveuser'
+  private registerUrl = 'http://localhost:8181/api/v1/saveuser';
 
   constructor(private http: HttpClient) { }
 
   public registerUser(fn: string, ln: string, username: string, role: string, pass: string): Observable<any> {
-    let details = new UserDetails(fn,ln,username,role,pass);
-    return this.http.post(this.registerUrl,details,httpOptions);
+    const details = new UserDetails(fn, ln, username, role, pass);
+    return this.http.post(this.registerUrl, details, httpOptions);
   }
 }

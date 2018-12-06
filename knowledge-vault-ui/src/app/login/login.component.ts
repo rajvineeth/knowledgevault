@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
+  token: string;
 
   userDetails: UserDetails;
 
@@ -46,37 +47,36 @@ export class LoginComponent implements OnInit {
     this.login();
   }
 
+  getUserDetails() {
+    console.log('inside getUserDetails: ', this.username);
+    this.mongo.fetchUserData(this.username, this.token)
+      .subscribe(data => {
+        this.userDetails = data;
+        localStorage.setItem('userrole', this.userDetails.role);
+        console.log('user details', Object.values(this.userDetails));
+      });
+  }
+
   login(): void {
     console.log('getting the flag value before actually logging in');
 
     const user = new User(this.username, this.password);
 
-    this.mongo.fetchUserData(this.username)
-      .subscribe(data => {
-        this.userDetails = data;
-        console.log('user details', Object.values(this.userDetails));
-      });
-
-    this.loginsrvc.validateUser(user)
+    this.loginsrvc.login(user)
       .subscribe(
         data => {
-          console.log('data from validation ', data);
-          if (data.username === this.username) {
+          this.token = data.token;
+          // console.log('data from validation ', data);
+          this.getUserDetails();
+          if (!data.username.localCompare(this.username)) {
             this.bhejdo();
-            console.log('role name', this.userDetails.role);
-            if (this.userDetails.role === 'General User') {
-              this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true})
-                .then(
-                  () => this.router.navigate(['user'])
-                );
+            const role = localStorage.getItem('userrole');
+            console.log(role);
+            if (!role.localeCompare('General User')) {
+              this.router.navigate(['user']);
             } else {
-
-                this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true})
-                  .then(
-                    () => this.router.navigate(['sme'])
-                  );
+              this.router.navigate(['sme']);
             }
-            window.location.reload();
           } else {
             alert('Invalid Credentials');
           }
