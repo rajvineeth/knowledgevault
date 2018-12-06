@@ -84,13 +84,12 @@ services:
       - 3306:3306
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "123456"
-      MYSQL_DATABASES: userCredentials
+      - MYSQL_ROOT_PASSWORD: "root123"
+      - MYSQL_DATABASE: userCredentials
     volumes:
       - '/opt/datasql:/var/lib/mysql'
     network_mode: "host"
     hostname: localhost
-    restart: always
 
   extractor-service:
     image: extractor-service:v1
