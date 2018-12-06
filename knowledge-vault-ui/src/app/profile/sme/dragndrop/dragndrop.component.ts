@@ -39,7 +39,7 @@ export class DragndropComponent implements OnInit {
           // if file saved in DB set true.
         // this.IsUploaded = true;
       }
-      console.log(this.formData.getAll('File'));
+      console.log(this.formData.getAll('File').valueOf());
       this.upload_service.extractFile(this.formData);
       //console.log(this.formData.getAll('File'));
     }

@@ -122,7 +122,7 @@ public class ExtractorController {
     }
 
     @PostMapping("upload")
-    public ResponseEntity<?> sendSME_files(@RequestParam("files") File[] files) {
+    public ResponseEntity<?> sendSME_files(@RequestBody File[] files) {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
@@ -134,9 +134,9 @@ public class ExtractorController {
             try {
                 data = service.extractOneFile(file);
 
-                kafkaTemplate.send(TOPIC, data);
+//                kafkaTemplate.send(TOPIC, data);
 
-                kafkaTemplate.send("extracted2", data);
+//                kafkaTemplate.send("extracted2", data);
 
                 responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
             } catch (IOException e) {

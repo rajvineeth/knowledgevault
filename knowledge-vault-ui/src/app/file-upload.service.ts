@@ -21,7 +21,8 @@ export class FileUploadService {
   extractFile(formData: FormData) {
 //      const getUrl = this.getRequest + files;
       console.log('in service');
-      this.http.post(this.getRequest, formData, httpOptions);
+      console.log(formData.getAll('File'));
+      console.log('dsfds'+this.http.post(this.getRequest, formData, httpOptions));
       // .subscribe(
       //   data => {
       //     //if (data == null) {
