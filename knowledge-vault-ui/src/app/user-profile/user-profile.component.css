@@ -1,0 +1,8 @@
+.main-content {
+    justify-content: center;
+}
+
+mat-grid-tile {
+    border: black;
+    background: lightblue;
+}
