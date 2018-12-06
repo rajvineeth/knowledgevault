@@ -27,14 +27,11 @@ public class Processor {
 
     public ProcessedInput process (InputObject inputObject) {
         LOGGER.info("inside Processor.process()");
-        LOGGER.info("********InputObject*******");
-        LOGGER.info("Inside Processor.process() method");
-        LOGGER.info("{}",inputObject.toString());
-//        List<Keyword> keywords = KeywordFilter.filterKeywords(inputObject);
-        List<Keyword> nGramTokens = produceNGram(inputObject);
-//        for (Keyword k: nGramTokens) {
-//            keywords.add(k);
-//        }
+        LOGGER.info("Object recieved: {}",inputObject.toString());
+        List<String> sentences = makeSentences(inputObject);
+        List<String> nGrams = getNGrams(sentences);
+        List<Keyword> nGramTokens = produceNGramTokens(nGrams);
+        LOGGER.info("The ngrams returned: {}", nGramTokens);
         Map<String, String> keywordMap = new HashMap<>();
         boolean ageFlag = true;
 
@@ -154,33 +151,63 @@ public class Processor {
         return new ProcessedInput(finalMap);
     }
 
-    private List<Keyword> produceNGram(InputObject inputObject) {
-        LOGGER.info("inside Processor.produceNGram()...");
-        List<Keyword> keywords = new ArrayList<>();
-        String sentence;
-        int sentenceID = 0;
-        int sentStart = 0;
-        int sentEnd;
-        List<String> ngrams;
-        for (int j = 6; j >= 1; j--){
-            LOGGER.info("inside Processor.produceNGram for()...");
-            sentenceID = 0;
-            for (int i = 0; i < inputObject.getLemmas().size(); i++) {
-                LOGGER.info("inside Processor.produceNGram for() for()...");
-                sentence = "";
-                sentenceID++;
-                while (!(inputObject.getLemmas().get(i).equals(".")) && i < inputObject.getLemmas().size()-1){
-                    LOGGER.info("inside Processor.produceNGram for() for() while()...");
-                    sentence += " " + inputObject.getLemmas().get(i++);
-                }
-
-                ngrams = new NGram(sentence, j).list();
-                for (String s: ngrams){
-                    LOGGER.info("inside Processor.produceNGram for() for() for()...");
-                    keywords.add(new Keyword(inputObject.getId(),sentenceID, s, "NN" ));
-                }
+    private List<String> getNGrams(List<String> sentences) {
+        List<String> ngrams = new ArrayList<>();
+        int length;
+        for (String s: sentences) {
+            length = s.trim().split(" ").length;
+            if (length > 6) {
+                    ngrams.addAll(nGramForSentence(s, 6));
+            }
+            else {
+                    ngrams.addAll(nGramForSentence(s, length));
             }
         }
+        LOGGER.info("returning from getNgrams() \" {} \"", ngrams);
+
+        return ngrams;
+    }
+
+    private List<String> nGramForSentence(String s, int i) {
+        List<String> ngrams = new ArrayList<>();
+        while (i > 0) {
+            ngrams.addAll(new NGram(s.trim(), i--).list());
+        }
+        LOGGER.info("for {} ngrams are {}", s, i, ngrams);
+        return  ngrams;
+    }
+
+    private List<String> makeSentences(InputObject inputObject) {
+        List<String> sentenceList = new ArrayList<>();
+        String sentence = "";
+        for (String s: inputObject.getLemmas()) {
+            LOGGER.info("For lemma: {}", s);
+            sentence = sentence + " " + s;
+            LOGGER.info("now sentence is \" {} \"", sentence);
+        }
+        if (sentence.contains(".")) {
+            LOGGER.info("sentence contains a full stop");
+            for (String s: sentence.split("\\.")) {
+                LOGGER.info("Adding {} to list", s);
+                sentenceList.add(s);
+            }
+        }
+        else {
+            LOGGER.info("sentence doesnt have full stop");
+            sentenceList.add(sentence);
+        }
+        LOGGER.info("returning following sentences {}", sentenceList);
+        return  sentenceList;
+    }
+
+    private List<Keyword> produceNGramTokens(List<String> inputObject) {
+        LOGGER.info("produceGram() gets Input Object: {}", inputObject);
+        List<Keyword> keywords = new ArrayList<>();
+        int sentenceID = 0;
+        for (String s: inputObject) {
+            keywords.add(new Keyword(1,++sentenceID, s, "NN" ));
+        }
+        LOGGER.info("Returning Keywords: {}", keywords);
         return keywords;
     }
 
