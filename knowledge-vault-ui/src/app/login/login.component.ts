@@ -21,30 +21,29 @@ export class LoginComponent implements OnInit {
 
   userDetails: UserDetails;
 
-  logInStatus: boolean;
+  logInStatus: boolean = true;
 
   constructor(private router: Router, private srvc: ShareService, private loginsrvc: LoginService, private mongo: MongoService) {
+  }
+
+  ngOnInit() {
     this.srvc.getValue()
       .subscribe(
         val => {
-          this.logInStatus = !val;
+          console.log('got the status: ', val)
+          this.logInStatus = val;
         }
       );
   }
 
-  ngOnInit() { }
-
   bhejdo(): void {
+    this.logInStatus = false;
     this.srvc.setValue(this.logInStatus);
   }
 
   shurukaro() {
-    // if (this.username === 'abc') {
-    //   this.router.navigate(['sme']);
-    // } else {
-    //   this.router.navigate(['user']);
-    // }
-    this.login();
+    // if(this.username === 'abc') this.router.navigate(['sme'])
+    this.logIn();
   }
 
   getUserDetails() {
@@ -57,7 +56,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  login(): void {
+  logIn(): void {
     console.log('getting the flag value before actually logging in');
 
     const user = new User(this.username, this.password);
@@ -67,20 +66,24 @@ export class LoginComponent implements OnInit {
         data => {
           this.token = data.token;
           // console.log('data from validation ', data);
-          this.getUserDetails();
-          if (data.username === this.username) {
-            this.bhejdo();
-            const role: string = localStorage.getItem('userrole');
-            console.log(role);
-            if (role === 'General User'){
-              this.router.navigate(['user']);
-            } else {
-              this.router.navigate(['sme']);
-            }
-          } else {
-            alert('Invalid Credentials');
-          }
         }
       );
+
+    localStorage.setItem('tokenVal', this.token)
+
+    this.getUserDetails();
+    if (this.userDetails.username === this.username) {
+      this.bhejdo();
+      const role = localStorage.getItem('userrole');
+      console.log(this.userDetails.role);
+      if (this.userDetails.role === 'General User') {
+        this.router.navigate(['user']);
+      } else {
+        this.router.navigate(['sme']);
+      }
+    } else {
+      alert('Invalid Credentials');
+    }
   }
+
 }

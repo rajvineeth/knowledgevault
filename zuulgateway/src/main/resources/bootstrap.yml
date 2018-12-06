@@ -1,14 +1,3 @@
-#management:
-#  security:
-#    enabled: false
-#spring:
-#  application:
-#    name: config-server-client
-#  profiles:
-#    active: gateway
-#  cloud:
-#    config:
-#      uri: http://localhost:8092
 management:
   security:
     enabled: false
@@ -18,42 +7,3 @@ spring:
   cloud:
     config:
       uri: http://localhost:8092
-#  cloud:
-#    config:
-#      uri: http://localhost:8888
-#ribbon:
-#  eureka:
-#    enabled: false
-#zuul:
-#  routes:
-#    input-kafka:
-#      url: http://localhost:8148
-#    input-lemmatize:
-#      url: http://localhost:8140
-#    input-postag:
-#      url: http://localhost:8142
-#    input-tagger:
-#      url: http://localhost:8144
-#    user-registration-service:
-#      url: http://localhost:8182
-#  # host:
-#  #     socket-timeout-millis: 30000
-#eureka:         #tells about the Eureka server details and its refresh time
-#  instance:
-#    leaseRenewalIntervalInSeconds: 10
-#    leaseExpirationDurationInSeconds: 2
-#  client:
-#    serviceUrl:
-#      defaultZone: http://localhost:8066/eureka/
-#    register-with-eureka: true
-#    fetch-registry: true
-#    healthcheck:
-#      enabled: true
-#      lease:
-#        duration: 5
-#spring:
-#  application:
-#    name: zuul-gateway
-#  cloud:
-#    config:
-#      uri: http://localhost:8888

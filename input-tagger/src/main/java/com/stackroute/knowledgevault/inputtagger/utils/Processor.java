@@ -11,18 +11,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Component
 public class Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
-//    private static String commonPath = "/knowledge-vault/input-tagger/assets/taggerResource/";
     private static String commonPath = "/knowledge-vault/input-tagger/assets/taggerResource/";
+//    private static String commonPath = "../knowledge-vault/input-tagger/assets/taggerResource/";
     private static String personName = commonPath + "person-name";
     private static String disease = commonPath + "diseases";
     private static String symptom = commonPath + "symptom";
@@ -33,15 +30,15 @@ public class Processor {
         LOGGER.info("********InputObject*******");
         LOGGER.info("Inside Processor.process() method");
         LOGGER.info("{}",inputObject.toString());
-        List<Keyword> keywords = KeywordFilter.filterKeywords(inputObject);
+//        List<Keyword> keywords = KeywordFilter.filterKeywords(inputObject);
         List<Keyword> nGramTokens = produceNGram(inputObject);
-        for (Keyword k: nGramTokens) {
-            keywords.add(k);
-        }
+//        for (Keyword k: nGramTokens) {
+//            keywords.add(k);
+//        }
         Map<String, String> keywordMap = new HashMap<>();
         boolean ageFlag = true;
 
-        for (Keyword keyword: keywords) {
+        for (Keyword keyword: nGramTokens) {
             LOGGER.info("inside Processor.process().for(Keyword {}: keywords", keyword);
             LOGGER.info("Keyword POS: {}",keyword.getPos());
             if (keyword.getLemma().equals("")) {
@@ -121,13 +118,40 @@ public class Processor {
                     LOGGER.info("inside Processor.process().for(Keyword {}: keywords default", keyword);
             }
         }
-        LOGGER.info("\nthe created final keword map:\n {}", keywordMap);
+        LOGGER.info("the created intermediate keword map: {}", keywordMap);
         if (keywordMap.isEmpty()) {
+            LOGGER.info("keywordMap is empty!!");
             Map<String,String> map = new HashMap<>();
             map.put("empty", "empty");
             return new ProcessedInput(map);
         }
-        return new ProcessedInput(keywordMap);
+        List<String> keyList = new ArrayList();
+        LOGGER.info("Initialized a new keylist.");
+        for (String s: keywordMap.keySet()) {
+            LOGGER.info("Adding keyword {} to the list", s);
+            keyList.add(s);
+        }
+        LOGGER.info("List of keys: {}", keyList);
+        for (int j = 0; j < keyList.size(); j++) {
+            LOGGER.info("Checking substrings in {}", keyList.get(j));
+            for (int k = j+1; k < keyList.size(); k++) {
+                LOGGER.info("Searching for {} in {}", keyList.get(k), keyList.get(j));
+                if (keyList.get(j).contains(keyList.get(k))) {
+                    LOGGER.info("{} is substring so removing {}", keyList.get(k), keyList.get(k));
+                    keyList.remove(k--);
+                }
+            }
+        }
+        LOGGER.info("Final list of keys: {}", keyList);
+        Map finalMap = new HashMap();
+        for (Map.Entry<String, String> entry: keywordMap.entrySet()) {
+            if (keyList.contains(entry.getKey())) {
+                LOGGER.info("Adding {}", entry.getKey());
+                finalMap.put(entry.getKey(),entry.getValue());
+            }
+        }
+        LOGGER.info("the created final keword map: {}", finalMap);
+        return new ProcessedInput(finalMap);
     }
 
     private List<Keyword> produceNGram(InputObject inputObject) {
@@ -135,8 +159,10 @@ public class Processor {
         List<Keyword> keywords = new ArrayList<>();
         String sentence;
         int sentenceID = 0;
+        int sentStart = 0;
+        int sentEnd;
         List<String> ngrams;
-        for (int j = 2; j <= 5; j++){
+        for (int j = 6; j >= 1; j--){
             LOGGER.info("inside Processor.produceNGram for()...");
             sentenceID = 0;
             for (int i = 0; i < inputObject.getLemmas().size(); i++) {
@@ -147,6 +173,7 @@ public class Processor {
                     LOGGER.info("inside Processor.produceNGram for() for() while()...");
                     sentence += " " + inputObject.getLemmas().get(i++);
                 }
+
                 ngrams = new NGram(sentence, j).list();
                 for (String s: ngrams){
                     LOGGER.info("inside Processor.produceNGram for() for() for()...");

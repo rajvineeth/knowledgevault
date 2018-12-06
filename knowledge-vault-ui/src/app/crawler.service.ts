@@ -5,23 +5,19 @@ import { Observable } from 'rxjs/internal/Observable';
 @Injectable({
   providedIn: 'root'
 })
+export class CrawlerService {
 
-export class MongoService {
-
-  private fetchUrl = 'https://KnowledgeVault-zuul.stackroute.in/user-registration-service/api/v1/user/';
+  private crawlerUrl = 'https://KnowledgeVault-zuul.stackroute.in/web-adapter/api/v1/webscraper';
 
   constructor(private http: HttpClient) { }
 
-  fetchUserData(name: string, token: string): Observable<any> {
-
-    console.log('token: ', token);
-    const httpoption = {
+  scrapeUrl(url:string, token: string){
+    const httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       })
     };
-
-    return this.http.get(this.fetchUrl + name, httpoption);
+    this.http.post(this.crawlerUrl,url,httpOption);
   }
 }
