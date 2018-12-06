@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/internal/Observable';
 
 export class MongoService {
 
-  private fetchUrl = 'http://localhost:8181/api/v1/user/';
+  private fetchUrl = 'https://KnowledgeVault-zuul.stackroute.in/user-registration-service/api/v1/user/';
 
   constructor(private http: HttpClient) { }
 
