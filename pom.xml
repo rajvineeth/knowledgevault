@@ -26,6 +26,7 @@
         <module>user-authentication-service</module>
         <module>user-registration-service</module>
         <module>query-engine</module>
+	<module>web-scraping</module>
     </modules>
 
     <parent>

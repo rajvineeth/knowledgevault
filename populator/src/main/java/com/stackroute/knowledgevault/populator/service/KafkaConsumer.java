@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,18 @@ public class KafkaConsumer {
             List<MedicalSymptom> medicalSymptomList = readJsonld.getSymptoms(root);
             Content content=readJsonld.createContent(id,paraId,medicalCondition);
             medicalGraphService.populateFromPara(content, medicalCondition, anatomicalStructure, medicalSymptomList);
+        }
+    }
+
+    @KafkaListener(topics="scraperOutput",groupId = "group_json", containerFactory= "userKafkaListenerFactory3")
+    public void consumeFromAdapter(ScrapedData res) {
+        if(res!=null) {
+            LOGGER.info("consumed message from para {}", res);
+            ArrayList<Integer> id=new ArrayList<>();
+            id.add(1);
+            MedicalCondition medicalCondition = new MedicalCondition(res.getTitle(),"MedicalCondition");
+            Document document=new Document(res.getUrl(),"Document",id);
+            medicalGraphService.populate(document, medicalCondition, null,null);
         }
     }
 

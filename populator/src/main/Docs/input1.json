@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "HIV/AIDS",
+  "alternateName": "Malaria",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
@@ -11,31 +11,47 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "Pain areas in the abdomen"
+        "name": "fever"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "dry cough"
+        "name": "sweating (occurs few weeks after being bitten)"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Whole body: fatigue, fever, loss of appetite, malaise, night sweats, or sweating"
+        "name": "Pain in the abdomen or muscles"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Gastrointestinal: nausea, persistent diarrhoea, vomiting, or watery diarrhoea"
+        "name": "fatigue"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Mouth: ulcers or white tongue"
+        "name": "night sweats"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Groin: sores or swelling"
+        "name": "shivering"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Throat: difficulty swallowing or soreness"
+        "name": "Gastrointestinal: diarrhoea, nausea, or vomitin"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "fast heart rate"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "headache"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "mental confusion"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "pallor"
       }
     ]
 

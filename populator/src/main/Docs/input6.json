@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "HIV/AIDS",
+  "alternateName": "typhoid",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
@@ -11,31 +11,47 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "Pain areas in the abdomen"
+        "name": "High fever"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "dry cough"
+        "name": "headache"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Whole body: fatigue, fever, loss of appetite, malaise, night sweats, or sweating"
+        "name": "stomach pain"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Gastrointestinal: nausea, persistent diarrhoea, vomiting, or watery diarrhoea"
+        "name": "weakness"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Mouth: ulcers or white tongue"
+        "name": "vomiting"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Groin: sores or swelling"
+        "name": "loose stools"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Throat: difficulty swallowing or soreness"
+        "name": "pain in the abdomen or muscles"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "bloating"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "constipation"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "diarrhoea"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "loss of appetite"
       }
     ]
 

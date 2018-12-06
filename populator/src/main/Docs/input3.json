@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "HIV/AIDS",
+  "alternateName": "Type 2 Diabetes",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
@@ -11,31 +11,47 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "Pain areas in the abdomen"
+        "name": "increased thirst"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "dry cough"
+        "name": "frequent urination"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Whole body: fatigue, fever, loss of appetite, malaise, night sweats, or sweating"
+        "name": "hunger"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Gastrointestinal: nausea, persistent diarrhoea, vomiting, or watery diarrhoea"
+        "name": "fatigue"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Mouth: ulcers or white tongue"
+        "name": "blurred vision."
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Groin: sores or swelling"
+        "name": "excessive thirst"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Throat: difficulty swallowing or soreness"
+        "name": "weight gain"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "weight loss"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "frequent urination"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "blurred vision"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "poor wound healing"
       }
     ]
 

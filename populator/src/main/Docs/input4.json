@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "HIV/AIDS",
+  "alternateName": "Dengue",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
@@ -11,31 +11,47 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "Pain areas in the abdomen"
+        "name": "high fever"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "dry cough"
+        "name": "headache"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Whole body: fatigue, fever, loss of appetite, malaise, night sweats, or sweating"
+        "name": "rash"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Gastrointestinal: nausea, persistent diarrhoea, vomiting, or watery diarrhoea"
+        "name": "muscle"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Mouth: ulcers or white tongue"
+        "name": "joint pain"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Groin: sores or swelling"
+        "name": "there is serious bleeding and shock (severe)"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Throat: difficulty swallowing or soreness"
+        "name": "Pain areas: in the abdomen, back, back of the eyes, bones, joints, or muscles"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "chills"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "loss of appetite"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "vomiting"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "red spots"
       }
     ]
 
