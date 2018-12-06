@@ -18,8 +18,8 @@ import java.util.*;
 public class Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Processor.class);
-//    private static String commonPath = "/knowledge-vault/input-tagger/assets/taggerResource/";
-    private static String commonPath = "../knowledge-vault/input-tagger/assets/taggerResource/";
+    private static String commonPath = "/knowledge-vault/input-tagger/assets/taggerResource/";
+//    private static String commonPath = "../knowledge-vault/input-tagger/assets/taggerResource/";
     private static String personName = commonPath + "person-name";
     private static String disease = commonPath + "diseases";
     private static String symptom = commonPath + "symptom";
