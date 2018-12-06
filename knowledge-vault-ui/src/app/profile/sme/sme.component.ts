@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CrawlerService } from 'src/app/crawler.service';
 
 @Component({
   selector: 'app-sme',
@@ -8,12 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class SmeComponent implements OnInit {
 
   urlPath: string;
-  constructor() { }
+  constructor(private crawler: CrawlerService) { }
 
   ngOnInit() { }
 
-  fetchResource(input: string) {
+  sendUrl(input: string) {
     console.log(input)
+    console.log(localStorage.getItem('tokenVal');
+    this.crawler.scrapeUrl(input,localStorage.getItem('tokenVal')));
   }
 
 }

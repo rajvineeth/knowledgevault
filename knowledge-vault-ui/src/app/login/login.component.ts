@@ -42,10 +42,8 @@ export class LoginComponent implements OnInit {
   }
 
   shurukaro() {
-    if(this.username === 'abc') {
-      this.router.navigate(['sme'])
-    }
-    // this.logIn();
+    // if(this.username === 'abc') this.router.navigate(['sme'])
+    this.logIn();
   }
 
   getUserDetails() {
@@ -70,6 +68,8 @@ export class LoginComponent implements OnInit {
           // console.log('data from validation ', data);
         }
       );
+
+    localStorage.setItem('tokenVal', this.token)
 
     this.getUserDetails();
     if (this.userDetails.username === this.username) {
