@@ -124,11 +124,11 @@ public class ExtractorController {
     }
 
     @PostMapping("upload")
-    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile multipartFile) {
+    public ResponseEntity<?> sendSME_files(@RequestParam("File") MultipartFile multipartFile) {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
-
+        System.out.println("reached");
         System.out.println(multipartFile);
 
 /*        for (File file : files) {
