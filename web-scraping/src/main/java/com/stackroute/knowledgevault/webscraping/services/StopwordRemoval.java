@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class StopwordRemoval {
 
 
-    private String stopWords="stopwords.txt";
+    private String stopWords="/knowledge-vault/web-scraping/stopwords.txt";
 
     private static Logger logger;
 
