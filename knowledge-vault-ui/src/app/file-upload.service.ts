@@ -13,21 +13,21 @@ const httpOptions = {
 })
 export class FileUploadService {
 
-  private getRequest = 'https://KnowledgeVault-zuul.stackroute.in/extractor-service/api/upload';
+  private getRequest = 'http://35.154.72.182:8094/api/upload';
 //  private postRequest = 'http://localhost:8094/api/';
 
   constructor(private http: HttpClient) { }
 
   extractFile(formData: FormData) {
 //      const getUrl = this.getRequest + files;
-      this.http.post(this.getRequest, formData, httpOptions)
-      .subscribe(
-        data => {
-          //if (data == null) {
-            console.log(data);
-            console.log("sent data");
-        }
-      );
+      this.http.post(this.getRequest, formData, httpOptions);
+      // .subscribe(
+      //   data => {
+      //     //if (data == null) {
+      //       console.log(data);
+      //       console.log("sent data");
+      //   }
+      // );
   }
   }
 
