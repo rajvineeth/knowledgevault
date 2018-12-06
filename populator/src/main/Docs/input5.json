@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "Tuberculosis",
+  "alternateName": "Heart Attack",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
@@ -11,31 +11,7 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "Usually symptoms include cough (blood-tinged)"
-      },
-      {
-        "@type": "MedicalSymptom",
-        "name": "weight loss"
-      },
-      {
-        "@type": "MedicalSymptom",
-        "name": "night sweats"
-      },
-      {
-        "@type": "MedicalSymptom",
-        "name": "fever"
-      },
-      {
-        "@type": "MedicalSymptom",
-        "name": "Pain in the chest"
-      },
-      {
-        "@type": "MedicalSymptom",
-        "name": "Pain can occur while breathing"
-      },
-      {
-        "@type": "MedicalSymptom",
-        "name": "Cough: can be chronic or with blood"
+        "name": "tightness or pain in the chest, neck, back or arms"
       },
       {
         "@type": "MedicalSymptom",
@@ -43,15 +19,67 @@
       },
       {
         "@type": "MedicalSymptom",
-        "name": "swollen lymph nodes"
+        "name": "lightheadedness"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "shortness of breath"
+        "name": "abnormal heartbeat"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "loss of muscle"
+        "name": "anxiety"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "pair during rest"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "dizziness"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "clammy skin"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "cold sweat"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "sweating"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "indigestion"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "nausea"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "vomiting"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "discomfort or tightness in neck"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "discomfort or tightness in arm"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "chest pressure"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "feeling of impending doom"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "palpitations"
       }
     ]
 

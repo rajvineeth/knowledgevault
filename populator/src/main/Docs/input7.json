@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "HIV/AIDS",
+  "alternateName": "Cholera",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
@@ -11,31 +11,43 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "Pain areas in the abdomen"
+        "name": "diarrhoea and dehydration"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "dry cough"
+        "name": "Shock (severe)"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Whole body: fatigue, fever, loss of appetite, malaise, night sweats, or sweating"
+        "name": "Seizures (severe)"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Gastrointestinal: nausea, persistent diarrhoea, vomiting, or watery diarrhoea"
+        "name": "pain in the abdomen"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Mouth: ulcers or white tongue"
+        "name": "nausea"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Groin: sores or swelling"
+        "name": "vomiting"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Throat: difficulty swallowing or soreness"
+        "name": "watery diarrhoea"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "dehydration"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "lethargy"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "water-electrolyte imbalance"
       }
     ]
 

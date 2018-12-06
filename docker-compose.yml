@@ -168,6 +168,8 @@ services:
     restart: always
     container_name: "populator"
     network_mode: host
+    volumes:
+    - '../knowledge-vault/populator/src/main/Docs/:/knowledge-vault/populator/src/main/Docs/'
     depends_on:
     - eureka
     - config-server
