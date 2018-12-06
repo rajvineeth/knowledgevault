@@ -74,11 +74,11 @@ public class UserController {
     }
 
     @GetMapping(path = "/user/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable("id") String id){
+    public ResponseEntity<?> getUserById(@PathVariable String id){
         ResponseEntity responseEntity;
         try{
             UserDetails userDetails = userService.getUserById(id);
-            responseEntity= new ResponseEntity<UserDetails>(userDetails,HttpStatus.FOUND);
+            responseEntity= new ResponseEntity<UserDetails>(userDetails,HttpStatus.OK);
         }catch (Exception e){
             logger.error(e.getMessage()) ;
             responseEntity= new ResponseEntity<String>(ControllerMessage4,HttpStatus.NOT_FOUND);

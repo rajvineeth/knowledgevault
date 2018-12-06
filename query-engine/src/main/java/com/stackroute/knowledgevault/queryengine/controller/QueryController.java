@@ -25,8 +25,8 @@ import java.util.Set;
 public class QueryController {
 
 
-//    private DriverInit driver = new DriverInit("bolt://localhost:7687", "neo4j", "123456");
-    private DriverInit driver = new DriverInit("bolt://172.23.239.75:7687", "neo4j", "123456");
+    private DriverInit driver = new DriverInit("bolt://127.0.0.1:7687", "neo4j", "123456");
+
     Driver drive = driver.getDriver();
 
     ParaContentService paraContentService;

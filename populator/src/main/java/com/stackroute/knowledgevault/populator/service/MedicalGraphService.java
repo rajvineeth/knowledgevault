@@ -1,11 +1,18 @@
 package com.stackroute.knowledgevault.populator.service;
 
+import com.github.jsonldjava.utils.JsonUtils;
 import com.stackroute.knowledgevault.domain.*;
 import com.stackroute.knowledgevault.populator.repository.MTRRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MedicalGraphService {
@@ -21,6 +28,8 @@ public class MedicalGraphService {
     private DocumentService documentService;
     @Autowired
     private ContentService contentService;
+    @Autowired
+    ReadJsonld readJsonld;
 
     public MedicalGraphService(MTRRepo mtrRepo, MedicalConditionService medicalConditionService, AnatomyService anatomyService, SymptomService symptomService, DocumentService documentService, ContentService contentService) {
         this.mtrRepo = mtrRepo;
@@ -29,6 +38,18 @@ public class MedicalGraphService {
         this.symptomService = symptomService;
         this.documentService = documentService;
         this.contentService = contentService;
+    }
+    public void input(String input, int id) throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        InputStream inputStream = new FileInputStream("/knowledge-vault/populator/src/main/Docs/"+input+".json");
+        Object jsonObject = JsonUtils.fromInputStream(inputStream);
+        Map context = new HashMap();
+        Map<String, Object> root = (Map) jsonObject;
+        MedicalCondition medicalCondition=readJsonld.getMedicalCondition(root);
+        Document document=readJsonld.createDoc(id,medicalCondition);
+        Content content=readJsonld.createContent(id,id,medicalCondition);
+        List<MedicalSymptom> medicalSymptomList =readJsonld.getSymptoms(root);
+        populate(document,medicalCondition, new AnatomicalStructure(), medicalSymptomList);
+        populateFromPara(content, medicalCondition, new AnatomicalStructure(), medicalSymptomList);
     }
 
     public Boolean populate(Document document, MedicalCondition medicalCondition, AnatomicalStructure anatomicalStructure, List<MedicalSymptom> medicalSymptomList)  {

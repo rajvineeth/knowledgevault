@@ -1,0 +1,75 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "Type 2 Diabetes",
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "increased thirst"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "frequent urination"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "hunger"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "fatigue"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "blurred vision."
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "excessive thirst"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "weight gain"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "weight loss"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "frequent urination"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "blurred vision"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "poor wound healing"
+      }
+    ]
+
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}

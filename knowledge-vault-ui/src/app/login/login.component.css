@@ -2,7 +2,8 @@
   background-color: white;
   max-width: 80rem;
   position: inherit;
-  box-shadow: none;
+
+  box-shadow: rgb(76, 0, 255);
   justify-content: center;
   text-align: center;
 }

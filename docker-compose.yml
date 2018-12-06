@@ -76,9 +76,7 @@ services:
     network_mode: host
     container_name: "mongo-docs"
     volumes:
-    - '../data/mongo/docs:/data/db/docs'
-#    environment:
-#      MONGO_INITDB_DATABASE: mydatabase
+    - '../data/mongo/docs:/data/db'
 
   mysql:
     image: mysql:5.7
@@ -89,7 +87,7 @@ services:
       MYSQL_ROOT_PASSWORD: "123456"
       MYSQL_DATABASES: userCredentials
     volumes:
-      - '/opt/datasql:/var/lib/data'
+      - '/opt/datasql:/var/lib/mysql'
     network_mode: "host"
     hostname: localhost
     restart: always
@@ -168,6 +166,8 @@ services:
     restart: always
     container_name: "populator"
     network_mode: host
+    volumes:
+    - '../knowledge-vault/populator/src/main/Docs/:/knowledge-vault/populator/src/main/Docs/'
     depends_on:
     - eureka
     - config-server
@@ -272,8 +272,8 @@ services:
     depends_on:
       - config-server
       - eureka
-      - mysql
       - kafka
+      - mysql
     ports:
       - "8184:8184"
     expose:

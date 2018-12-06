@@ -27,6 +27,7 @@ import { UserQueryService } from './user-query.service';
 import { RegistrationService } from './registration.service';
 import { AccordionComponent } from './card/accordion/accordion.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MongoService } from './mongo.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     UserQueryService,
     DataService,
     RegistrationService,
-    LoginService
+    LoginService,
+    MongoService
   ],
   bootstrap: [AppComponent]
 })

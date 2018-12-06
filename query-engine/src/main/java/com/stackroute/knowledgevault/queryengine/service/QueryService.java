@@ -39,8 +39,8 @@ public class QueryService {
 
 boolean flag2=false;
     OutputResult outputResult2=null;
-    Set<OutputResult> res2 = new HashSet<>();
-    public Set<OutputResult> runquery2(Driver driver, String k1, String k2) {
+    LinkedHashSet<OutputResult> res2 = new LinkedHashSet<>();
+    public LinkedHashSet<OutputResult> runquery2(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger2");
         if(!res2.isEmpty()){
             res2.clear();
@@ -122,8 +122,8 @@ boolean flag2=false;
     }
 boolean flag=false;
     OutputResult outputResult=null;
-    Set<OutputResult> res = new HashSet<>();
-    public Set<OutputResult> runquery(Driver driver, String k1, String k2) {
+    LinkedHashSet<OutputResult> res = new LinkedHashSet<>();
+    public LinkedHashSet<OutputResult> runquery(Driver driver, String k1, String k2) {
         LOGGER.info("received keywords from tagger");
         if(!res.isEmpty()){
             res.clear();
@@ -132,13 +132,13 @@ boolean flag=false;
         try (Session session = driver.session()) {
             q="MATCH (A:" + k2 + "),p=(B:MedicalCondition)-[r]-(A),j=(C)-[s]-(B:MedicalCondition) WHERE A.name contains '" + k1 + "' RETURN A.name As name1, labels(A) as name1label, TYPE(r) as ril, B.name As diseaseName, labels(B) as diseaseLabel, TYPE(s) AS sil, C.name As name3,C.id as docId,C.paraId as paraId, labels(C) As Ctype LIMIT 500";
             try (Transaction tx = session.beginTransaction()) {
-
+                LOGGER.info("query run");
 
                 StatementResult result = tx.run(q);
                 while (result.hasNext()) {
                     Record record = result.next();
                     flag=false;
-                LOGGER.info("query run");
+
                 for(OutputResult outputResult1:res){
                     if(outputResult1.getDiseaseName().compareTo(record.get("diseaseName").toString())==0){
                         outputResult=outputResult1;
@@ -189,7 +189,7 @@ boolean flag=false;
                     Integer doc=  Integer.parseInt(record.get("docId").toString());
                     docset.add(getdoc(doc));
                 }
-                    LOGGER.info("Out of string loop");
+
                     tx.success();  // Mark this write as successful.
                     outputResult.setSymptoms(symset);
                     outputResult.setAnatomy(anaset);
@@ -199,6 +199,7 @@ boolean flag=false;
                         res.remove(outputResult);
                     res.add(outputResult);
                 }
+                LOGGER.info("Out of string loop");
 
             }
         }

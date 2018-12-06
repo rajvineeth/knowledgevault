@@ -1,21 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "angina pectoris",
-  "associatedAnatomy": {
-    "@type": "AnatomicalStructure",
-    "name": "heart"
-  },
-  "cause": [
-    {
-      "@type": "MedicalCause",
-      "name": "atherosclerosis"
-    },
-    {
-      "@type": "MedicalCause",
-      "name": "spasms of the epicardial artery"
-    }
-  ],
+  "alternateName": "HIV/AIDS",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
@@ -25,15 +11,31 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "chest pain lasting at least 10 minutes at rest"
+        "name": "Pain areas in the abdomen"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "repeated episodes of chest pain at rest lasting 5 or more minutes"
+        "name": "dry cough"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "an accelerating pattern of chest discomfort (episodes that are more frequent, severe, longer in duration, and precipitated by minimal exertion)"
+        "name": "Whole body: fatigue, fever, loss of appetite, malaise, night sweats, or sweating"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Gastrointestinal: nausea, persistent diarrhoea, vomiting, or watery diarrhoea"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Mouth: ulcers or white tongue"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Groin: sores or swelling"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Throat: difficulty swallowing or soreness"
       }
     ]
 
