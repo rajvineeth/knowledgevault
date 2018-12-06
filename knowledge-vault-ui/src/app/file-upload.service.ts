@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
+    'Content-Type': 'multipart/form-data',
+    'Accept': 'application/json'
   })
 };
 
@@ -12,14 +13,14 @@ const httpOptions = {
 })
 export class FileUploadService {
 
-  private getRequest = 'https://KnowledgeVault-zuul.stackroute.in/extractor-service/api/';
+  private getRequest = 'https://KnowledgeVault-zuul.stackroute.in/extractor-service/api/upload';
 //  private postRequest = 'http://localhost:8094/api/';
 
   constructor(private http: HttpClient) { }
 
-  extractFile(files: File[]) {
-      const getUrl = this.getRequest + files;
-      this.http.get<any>(getUrl, httpOptions)
+  extractFile(formData: FormData) {
+//      const getUrl = this.getRequest + files;
+      this.http.post(this.getRequest, formData, httpOptions)
       .subscribe(
         data => {
           //if (data == null) {

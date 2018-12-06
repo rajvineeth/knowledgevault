@@ -29,8 +29,10 @@ export class DragndropComponent implements OnInit {
     if (this.fileList.length > 0) {
       for (let i = 0; i < this.fileList.length; i++) {
         this.FileName = this.fileList[i].name;
+//        console.log(this.fileList[i]);
+        this.formData.append('File', this.fileList[i]);
 
-//        this.formData.append('File', this.fileList[i]);
+        this.upload_service.extractFile(this.formData);
         
         // append more item in FormData and send to server
         // call service to send file on server via FormData.
@@ -38,7 +40,6 @@ export class DragndropComponent implements OnInit {
           // if file saved in DB set true.
         // this.IsUploaded = true;
       }
-      this.upload_service.extractFile(this.fileList);
     }
   }
   getFiles(files) {

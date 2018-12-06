@@ -121,13 +121,13 @@ public class ExtractorController {
         return responseEntity;
     }
 
-    @GetMapping("{files}")
-    public ResponseEntity<?> sendSME_files(@PathVariable("files") File[] files) {
+    @PostMapping("upload")
+    public ResponseEntity<?> sendSME_files(@RequestParam("file") File file) {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
 
-        for (File file : files) {
+//        for (File file : files) {
 
             try {
                 data = service.extractOneFile(file);
@@ -144,7 +144,7 @@ public class ExtractorController {
             catch (TikaException | SAXException e) {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
-        }
+        
 
         return responseEntity;
     }
