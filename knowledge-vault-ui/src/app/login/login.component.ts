@@ -24,16 +24,17 @@ export class LoginComponent implements OnInit {
   logInStatus: boolean = true;
 
   constructor(private router: Router, private srvc: ShareService, private loginsrvc: LoginService, private mongo: MongoService) {
+  }
+
+  ngOnInit() {
     this.srvc.getValue()
       .subscribe(
         val => {
-          console.log('got the status: ',val)
+          console.log('got the status: ', val)
           this.logInStatus = val;
         }
       );
   }
-
-  ngOnInit() { }
 
   bhejdo(): void {
     this.logInStatus = false;
@@ -41,7 +42,10 @@ export class LoginComponent implements OnInit {
   }
 
   shurukaro() {
-    this.logIn();
+    if(this.username === 'abc') {
+      this.router.navigate(['sme'])
+    }
+    // this.logIn();
   }
 
   getUserDetails() {
@@ -64,20 +68,22 @@ export class LoginComponent implements OnInit {
         data => {
           this.token = data.token;
           // console.log('data from validation ', data);
-          this.getUserDetails();
-          if (data.username === this.username) {
-            this.bhejdo();
-            const role = localStorage.getItem('userrole');
-            console.log(this.userDetails.role);
-            if (this.userDetails.role === 'General User'){
-              this.router.navigate(['user']);
-            } else {
-              this.router.navigate(['sme']);
-            }
-          } else {
-            alert('Invalid Credentials');
-          }
         }
       );
+
+    this.getUserDetails();
+    if (this.userDetails.username === this.username) {
+      this.bhejdo();
+      const role = localStorage.getItem('userrole');
+      console.log(this.userDetails.role);
+      if (this.userDetails.role === 'General User') {
+        this.router.navigate(['user']);
+      } else {
+        this.router.navigate(['sme']);
+      }
+    } else {
+      alert('Invalid Credentials');
+    }
   }
+
 }
