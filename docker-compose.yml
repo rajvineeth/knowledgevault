@@ -246,6 +246,7 @@ services:
     network_mode: host
     depends_on:
       - kafka
+      - eureka
     ports:
       - "8100:8100"
     expose:
