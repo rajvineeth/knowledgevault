@@ -22,6 +22,7 @@ export class FileUploadService {
 //      const getUrl = this.getRequest + files;
       console.log('in service');
       console.log(formData.getAll('File'));
+      this.http.post(this.getRequest, formData, httpOptions)
       console.log('dsfds'+this.http.post(this.getRequest, formData, httpOptions));
       // .subscribe(
       //   data => {
