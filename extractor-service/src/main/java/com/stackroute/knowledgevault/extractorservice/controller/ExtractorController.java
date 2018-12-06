@@ -38,6 +38,7 @@ public class ExtractorController {
     @GetMapping("{path}")
     public ResponseEntity<?> displayAllFiles(@PathVariable("path") String path) {
 
+        System.out.println("all files");
         List<File> allFiles = service.getAllFiles(initialPath + path); //Fetching all files from the specified path
 
         return new ResponseEntity<>(allFiles, HttpStatus.OK);
@@ -124,12 +125,12 @@ public class ExtractorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> sendSME_files(@RequestParam("File") MultipartFile multipartFile) {
+    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
         System.out.println("reached");
-        System.out.println(multipartFile);
+        System.out.println(file);
 
 /*        for (File file : files) {
 
