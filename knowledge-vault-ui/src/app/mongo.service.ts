@@ -14,7 +14,7 @@ export class MongoService {
 
   fetchUserData(name: string, token: string): Observable<any> {
 
-    console.log('token: ', token);
+    console.log('token for mongo access: ', localStorage.getItem('usertoken'));
     const httpoption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

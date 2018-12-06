@@ -11,13 +11,13 @@ export class CrawlerService {
 
   constructor(private http: HttpClient) { }
 
-  scrapeUrl(url:string, token: string){
+  scrapeUrl(url:string,token: string){
     const httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
+        'Authorisation': 'Bearer '+ token
       })
     };
-    this.http.post(this.crawlerUrl,url,httpOption);
+    return this.http.post(this.crawlerUrl,url,httpOption);
   }
 }
