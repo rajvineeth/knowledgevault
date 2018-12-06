@@ -12,8 +12,8 @@ const httpOptions = {
 })
 export class FileUploadService {
 
-//  private postRequest = 'https://KnowledgeVault-zuul.stackroute.in/extractor-service/api/';
-  private postRequest = 'http://localhost:8094/api/';
+  private postRequest = 'https://KnowledgeVault-zuul.stackroute.in/extractor-service/api/';
+//  private postRequest = 'http://localhost:8094/api/';
 
   constructor(private http: HttpClient) { }
 
