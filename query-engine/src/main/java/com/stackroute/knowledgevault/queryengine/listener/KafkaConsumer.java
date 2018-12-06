@@ -16,10 +16,12 @@ import java.util.*;
 @Service
 public class KafkaConsumer {
 
-    public static Set<OutputResult> set = new HashSet<>();
-    public static Set<OutputResult> set2 = new HashSet<>();
+    public  static Set<OutputResult> set = new HashSet<>();
+    public  Set<OutputResult> set2 = new HashSet<>();
+    private  List<Set<OutputResult>> setList=new ArrayList<>();
 
     private DriverInit driver = new DriverInit("bolt://127.0.0.1:7687", "neo4j", "123456");
+
     @Autowired
     private QueryService queryService;
     private static final Logger LOGGER = LoggerFactory.getLogger(com.stackroute.knowledgevault.queryengine.listener.KafkaConsumer.class);
@@ -36,15 +38,20 @@ public class KafkaConsumer {
             if(entry.getValue().compareTo("MedicalCondition")!=0) {
                 LOGGER.info("inside if");
                 set2 = queryService.runquery(drive, entry.getKey(), entry.getValue());
+                setList.add(set2);
                 set.addAll(set2);
+                //set.retainAll(set2);
             }
             else{
                 LOGGER.info("inside else");
                 set2 = queryService.runquery2(drive, entry.getKey(), entry.getValue());
+                setList.add(set2);
                 set.addAll(set2);
             }
 
         }
+        System.out.println(setList.get(0));
+        System.out.println(setList.get(1));
         LOGGER.info("hey i sent the complete data");
     }
 }
