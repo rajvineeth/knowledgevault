@@ -13,9 +13,9 @@ export class FileUploadDragDropComponent implements OnInit {
   dragAreaClass = 'dragarea';
   fileList = [];
 
-  @Input() fileExt = 'PDF';
+//  @Input() fileExt = 'PDF';
   @Input() maxFiles = 10;
-  @Input() maxSize = 10;
+  @Input() maxSize = 50;
   @Output() uploadStatus = new EventEmitter<any>();
 
   @Input() set IsuploadSucess(isUploaded: boolean) {
@@ -86,32 +86,37 @@ export class FileUploadDragDropComponent implements OnInit {
       this.errors.push('Error: At a time you can upload only ' + this.maxFiles + ' files');
       return;
     }
-    this.isValidFileExtension(files);
+//    this.isValidFileExtension(files);
+    this.isValidFileSize(files)
     return this.errors.length === 0;
   }
 
-  private isValidFileExtension(files) {
-    // Make array of file extensions
-    const extensions = (this.fileExt.split(','))
-      .map(function (x) { return x.toLocaleUpperCase().trim(); });
-    for (let i = 0; i < files.length; i++) {
-      // Get file extension
-      const ext = files[i].name.toUpperCase().split('.').pop() || files[i].name;
-      // Check the extension exists
-      const exists = extensions.includes(ext);
-      if (!exists) {
-        this.errors.push('Invalid file : ' + files[i].name + ', Upload only ' + this.fileExt + ' file.');
-      }
-      this.isValidFileSize(files[i]);
-    }
-  }
+  // private isValidFileExtension(files) {
+  //   // Make array of file extensions
+  //   const extensions = (this.fileExt.split(','))
+  //     .map(function (x) { return x.toLocaleUpperCase().trim(); });
+  //   for (let i = 0; i < files.length; i++) {
+  //     // Get file extension
+  //     const ext = files[i].name.toUpperCase().split('.').pop() || files[i].name;
+  //     // Check the extension exists
+  //     const exists = extensions.includes(ext);
+  //     if (!exists) {
+  //       this.errors.push('Invalid file : ' + files[i].name + ', Upload only ' + this.fileExt + ' file.');
+  //     }
+  //     this.isValidFileSize(files[i]);
+  //   }
+  // }
 
-  private isValidFileSize(file) {
-    const fileSizeinMB = file.size / (1024 * 1000);
+  private isValidFileSize(files) {
+
+    for (let i = 0; i < files.length; i++) {
+
+    const fileSizeinMB = files[i].size / (1024 * 1000);
     const size = Math.round(fileSizeinMB * 100) / 100;
     if (size > this.maxSize) {
-      this.errors.push('Error (File Size): ' + file.name + ': exceed file size limit of ' + this.maxSize + 'MB ( ' + size + 'MB )');
+      this.errors.push('Error (File Size): ' + files[i].name + ': exceed file size limit of ' + this.maxSize + 'MB ( ' + size + 'MB )');
     }
+  }
   }
 
   clearFiles() {
