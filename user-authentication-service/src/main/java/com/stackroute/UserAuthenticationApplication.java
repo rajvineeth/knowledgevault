@@ -44,7 +44,7 @@ public class UserAuthenticationApplication implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        userRepository.save(new User("rajvineeth@gmail.com","12345678","SME"));
+        userRepository.save(new User("jshyperx","123456","null"));
         System.out.println("done....");
     }
 }

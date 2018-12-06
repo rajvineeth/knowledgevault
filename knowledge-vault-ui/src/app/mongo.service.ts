@@ -8,19 +8,21 @@ import { Observable } from 'rxjs/internal/Observable';
 
 export class MongoService {
 
-  private fetchUrl: string = 'https://KnowledgeVault-zuul.stackroute.in/user-registration-service/api/v1/user/'
+  private fetchUrl = 'http://localhost:8181/api/v1/user/';
 
   constructor(private http: HttpClient) { }
 
-  fetchUserData(name: string): Observable<any> {
-    
+  fetchUserData(name: string, token: string): Observable<any> {
+
+    console.log('token: ', token);
     const httpoption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Authorization': 'Bearer ' + localStorage.getItem('currentuser')
+        // 'Access-Control-Allow-Origin': '*',
+        'Authorization': 'Bearer ' + token
       })
     };
-    return this.http.get(this.fetchUrl+name,httpoption);
+
+    return this.http.get(this.fetchUrl + name, httpoption);
   }
 }
