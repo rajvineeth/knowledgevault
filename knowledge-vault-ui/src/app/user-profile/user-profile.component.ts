@@ -14,7 +14,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userDetail = JSON.parse(localStorage.getItem('userdetail'));
-    console.log(this.userDetail.username);
+    console.log('user details: ', this.userDetail);
   }
 
 }
