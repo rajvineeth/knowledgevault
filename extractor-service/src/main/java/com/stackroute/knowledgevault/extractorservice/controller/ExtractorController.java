@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api")
+@CrossOrigin("*")
 public class ExtractorController {
 
     @Autowired
