@@ -1,4 +1,5 @@
-package com.stackroute.zuulgateway;
+/*
+package com.stackroute.knowledgevault.zuulgateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,3 +15,4 @@ public class ZuulgatewayApplicationTests {
 	}
 
 }
+*/
