@@ -11,11 +11,11 @@ export class CrawlerService {
 
   constructor(private http: HttpClient) { }
 
-  scrapeUrl(url:string,token: string){
+  scrapeUrl(url:string) : Observable<any>{
     const httpOption = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorisation': 'Bearer '+ token
+        'Content-Type': 'text'
+        // 'Authorisation': 'Bearer '+ token
       })
     };
     return this.http.post(this.crawlerUrl,url,httpOption);

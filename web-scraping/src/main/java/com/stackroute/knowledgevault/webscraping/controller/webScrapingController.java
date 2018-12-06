@@ -1,5 +1,6 @@
 package com.stackroute.knowledgevault.webscraping.controller;
 
+import com.stackroute.knowledgevault.domain.UrlClass;
 import com.stackroute.knowledgevault.webscraping.services.Scores;
 import com.stackroute.knowledgevault.webscraping.services.webScraping;
 import com.stackroute.knowledgevault.domain.ScrapedData;
@@ -43,8 +44,8 @@ public class webScrapingController {
     */
 
     @PostMapping()
-    public ResponseEntity<?> gettingUrl(@RequestBody String url){
-        this.url = url;
+    public ResponseEntity<?> gettingUrl(@RequestBody UrlClass urlClass){
+        this.url = urlClass.getUrl();
         LOGGER.info(url);
         return new ResponseEntity<>(url, HttpStatus.OK);
     }
