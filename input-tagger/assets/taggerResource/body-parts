@@ -1,6 +1,5 @@
 abdomen
 Skull
-
     Cranium
     (holds the brain)
     Mandibles
@@ -10,9 +9,7 @@ Skull
     Nasal bone
     Zygomatic bone
     (eye sockets)
-
 Face
-
     Eyes
     Nose
     Ears
@@ -21,43 +18,32 @@ Face
         Teeth
     Cheeks
     Chin
-
 Neck
-
     Trachea
     Esophagus
     Cervical vertebrae
 Shoulders
 Chest
-
     Pectoralis
     (upper chest)
     Ribcage
         Lungs
         Heart
-
 Upper Abdomen
-
     Abdominal muscles
     Stomach
     Kidneys
     Liver
-
 Lower Abdomen
-
     Small Intestines
     Large Intestines
     Colon
     Rectum
-
 Posterior
-
     Spine
     Gluteus maximus
     (buttocks)
-
 Arms
-
     Brachium
     (upper arm)
         Humerus
@@ -70,9 +56,7 @@ Arms
         Hand
             Carpals
             Metacarpals
-
 Legs
-
     Thigh
         Quadriceps
         Hamstring
@@ -86,27 +70,22 @@ Legs
         Foot
             Tarsals
             Metatarsals
-
     Trachea
     Bronchioles
     Lungs
         Alveoli
     Diaphragm
-
-
     Trachea
     Bronchioles
     Lungs
         Alveoli
     Diaphragm
-
     Heart
     Blood Vessels
         Arteries
         Veins
         Capillaries
     Blood
-
     Skull
     Vertebrae (spine)
     Scapula (shoulder blades)
@@ -121,14 +100,12 @@ Legs
     Tibia (front of the shin)
     Fibia
     Tarsals/Metatarsals (foot bones)
-
     Mouth
     Esophagus
     Stomach
     Small Intestines
     Large Intestine
     Rectum
-
 head
 arm
 back
@@ -142,7 +119,6 @@ stomach
 hip
 hand
 foot
-
 eye
 eyebrow
 nose
@@ -152,7 +128,6 @@ hair
 ear
 lips
 neck
-
 nail
 thumb
 finger
@@ -162,7 +137,6 @@ shoulder
 forearm
 upper arm
 elbow
-
 knee
 thigh
 shin
@@ -170,7 +144,6 @@ calf
 ankle
 heel
 toe
-
 forehead
 temple
 eyebrow
@@ -204,7 +177,6 @@ backbone
 hip-bone
 pelvis
 kneecap
-
 face
 mouth
 chin
