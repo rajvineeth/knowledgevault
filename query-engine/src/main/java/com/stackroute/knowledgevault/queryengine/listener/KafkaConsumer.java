@@ -35,18 +35,19 @@ public class KafkaConsumer {
             LOGGER.info("entry : {}", entry);
             LOGGER.info(entry.getKey());
             LOGGER.info(entry.getValue());
+            set2.clear();
             if(entry.getValue().compareTo("MedicalCondition")!=0) {
                 LOGGER.info("inside if");
                 set2 = queryService.runquery(drive, entry.getKey(), entry.getValue());
                 setList.add(set2);
-                set.addAll(set2);
-                //set.retainAll(set2);
+               // set.addAll(set2);
+                set.retainAll(set2);
             }
             else{
                 LOGGER.info("inside else");
                 set2 = queryService.runquery2(drive, entry.getKey(), entry.getValue());
                 setList.add(set2);
-                set.addAll(set2);
+                //set.addAll(set2);
             }
 
         }

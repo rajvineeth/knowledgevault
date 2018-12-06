@@ -123,7 +123,7 @@ public class ScoresImpl implements Scores {
     @Override
     public void readJSON() {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("scoringscheme.json")){
+        try (FileReader reader = new FileReader("/knowledge-vault/web-scraping/scoringscheme.json")){
             Object obj = jsonParser.parse(reader);
             JSONArray jsonArray = new JSONArray();
             jsonArray.add(obj);

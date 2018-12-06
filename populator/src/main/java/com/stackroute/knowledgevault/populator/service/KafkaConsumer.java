@@ -55,7 +55,8 @@ public class KafkaConsumer {
             id.add(1);
             MedicalCondition medicalCondition = new MedicalCondition(res.getTitle(),"MedicalCondition");
             Document document=new Document(res.getUrl(),"Document",id);
-            medicalGraphService.populate(document, medicalCondition, null,null);
+            List<MedicalSymptom> medicalSymptomList=new ArrayList<>();
+            medicalGraphService.populate(document, medicalCondition, new AnatomicalStructure(),medicalSymptomList);
         }
     }
 
