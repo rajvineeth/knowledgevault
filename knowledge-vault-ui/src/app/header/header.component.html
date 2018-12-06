@@ -27,8 +27,8 @@
           <button mat-card-avatar class="avatar"></button>
         </a>
         <mat-menu #avatarMenu="matMenu">
-          <button mat-menu-item (onclick)="goToProfile()"> Profile</button>
-          <button mat-menu-item (onclick)="goToSetting()"> Setting </button>
+          <button mat-menu-item routerLink="/profile"> Profile</button>
+          <button mat-menu-item (click)="goToSetting()"> Setting </button>
           <button mat-button (click)="logout()"> Logout </button>
           <button mat-menu-item>Help</button>
         </mat-menu>
@@ -55,7 +55,7 @@
             <button mat-card-avatar class="avatar"></button>
           </a>
           <mat-menu #avatarMenu="matMenu">
-            <button mat-menu-item>Profile</button>
+            <button mat-menu-item routerLink='/profile'>Profile</button>
             <button mat-menu-item>Setting</button>
             <button mat-button (click)="logout()"> Logout </button>
             <button mat-menu-item>Help</button>
