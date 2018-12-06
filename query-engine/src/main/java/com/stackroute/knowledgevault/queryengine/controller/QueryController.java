@@ -42,8 +42,8 @@ public class QueryController {
     @GetMapping("/results")
     public ResponseEntity<?> getResults(){
 //        Set<OutputResult> list = FrontEndData.list;
-        System.out.println(KafkaConsumer.set);
-        ResponseEntity<?> responseEntity = new ResponseEntity<Set<OutputResult>>((Set<OutputResult>) KafkaConsumer.set, HttpStatus.OK);
+        System.out.println(KafkaConsumer.res);
+        ResponseEntity<?> responseEntity = new ResponseEntity<Set<OutputResult>>((Set<OutputResult>) KafkaConsumer.res, HttpStatus.OK);
         return responseEntity;
     }
     @GetMapping("/para/{id}")

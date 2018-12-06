@@ -39,8 +39,9 @@ public class QueryService {
 
 boolean flag2=false;
     OutputResult outputResult2=null;
-    LinkedHashSet<OutputResult> res2 = new LinkedHashSet<>();
+    //LinkedHashSet<OutputResult> res2 = new LinkedHashSet<>();
     public LinkedHashSet<OutputResult> runquery2(Driver driver, String k1, String k2) {
+        LinkedHashSet<OutputResult> res2 = new LinkedHashSet<>();
         LOGGER.info("received keywords from tagger2");
         if(!res2.isEmpty()){
             res2.clear();
@@ -122,8 +123,9 @@ boolean flag2=false;
     }
 boolean flag=false;
     OutputResult outputResult=null;
-    LinkedHashSet<OutputResult> res = new LinkedHashSet<>();
+   // LinkedHashSet<OutputResult> res = new LinkedHashSet<>();
     public LinkedHashSet<OutputResult> runquery(Driver driver, String k1, String k2) {
+        LinkedHashSet<OutputResult> res = new LinkedHashSet<>();
         LOGGER.info("received keywords from tagger");
         if(!res.isEmpty()){
             res.clear();
