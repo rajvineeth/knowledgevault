@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8100
 
 kafka:
   port: localhost:9092

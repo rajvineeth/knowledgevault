@@ -239,6 +239,21 @@ services:
     volumes:
       - '../knowledge-vault/input-tagger/assets/taggerResource/:/knowledge-vault/input-tagger/assets/taggerResource/'
 
+  web-adapter:
+    image: web-adapter
+    build: web-scraping/
+    container_name: web-adapter
+    network_mode: host
+    depends_on:
+      - kafka
+    ports:
+      - "8100:8100"
+    expose:
+      - "8100"
+    restart: always
+    volumes:
+      - '../knowledge-vault/web-scraping/:/knowledge-vault/web-scraping/'
+
   knowledge-vault-ui:
     image: angular
     build: knowledge-vault-ui/
