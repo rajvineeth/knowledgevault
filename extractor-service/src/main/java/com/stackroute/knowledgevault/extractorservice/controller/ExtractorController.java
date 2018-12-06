@@ -123,7 +123,7 @@ public class ExtractorController {
         return responseEntity;
     }
 
-    @PostMapping("upload")
+    @PostMapping("/upload")
     public ResponseEntity<?> sendSME_files(@RequestParam("File") MultipartFile multipartFile) {
 
         ExtractedFileData data;

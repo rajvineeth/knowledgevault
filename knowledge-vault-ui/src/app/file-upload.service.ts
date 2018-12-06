@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'multipart/form-data',
-    'Accept': 'application/json'
+//    'Content-Type': 'application/json'
+        'Content-Type': 'multipart/form-data',
+//    'Accept': 'application/json'
   })
 };
 
@@ -23,7 +24,7 @@ export class FileUploadService {
       console.log('in service');
       console.log(formData.getAll('File'));
       this.http.post(this.getRequest, formData, httpOptions)
-      console.log('dsfds'+this.http.post(this.getRequest, formData, httpOptions));
+//      console.log('dsfds'+this.http.post(this.getRequest, formData, httpOptions));
       // .subscribe(
       //   data => {
       //     //if (data == null) {
