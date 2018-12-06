@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CrawlerService } from 'src/app/crawler.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sme',
@@ -9,14 +10,16 @@ import { CrawlerService } from 'src/app/crawler.service';
 export class SmeComponent implements OnInit {
 
   urlPath: string;
-  constructor(private crawler: CrawlerService) { }
+  token: string;
 
-  ngOnInit() { }
+  constructor(private crawler: CrawlerService, private route: ActivatedRoute) {}
+
+  ngOnInit() {}
 
   sendUrl(input: string) {
     console.log(input)
-    console.log(localStorage.getItem('tokenVal'));
-    this.crawler.scrapeUrl(input,localStorage.getItem('tokenVal'));
+    const token = localStorage.getItem('usertoken');
+    console.log(token)
+    this.crawler.scrapeUrl(input,token);
   }
-
 }
