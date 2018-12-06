@@ -24,6 +24,7 @@ export class FileUploadService {
         data => {
           //if (data == null) {
             console.log(data);
+            console.log("sent data");
         }
       );
   }
