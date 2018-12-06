@@ -17,7 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "extractor-service")
+@RequestMapping(value = "api")
+@CrossOrigin("*")
 public class ExtractorController {
 
     @Autowired
@@ -50,19 +51,17 @@ public class ExtractorController {
 
         try {
             for (File instance : allFiles) {
-                    ExtractedFileData data = service.extractOneFile(instance); //Fetching metadata and content
-                    extractedDocs.put(data.getId(), instance.getName());
+                ExtractedFileData data = service.extractOneFile(instance); //Fetching metadata and content
+                extractedDocs.put(data.getId(), instance.getName());
 
                     /* The following line will send our ExtractedFileData object containing all the information about
                     the document to the Kafka server */
-                    //kafkaTemplate.send(TOPIC, data);
+                //kafkaTemplate.send(TOPIC, data);
             }
             responseEntity = new ResponseEntity<HashMap<Integer, String>>(extractedDocs, HttpStatus.OK);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        catch (TikaException | SAXException e) {
+        } catch (TikaException | SAXException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
         }
 
@@ -113,15 +112,37 @@ public class ExtractorController {
                 }
 
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        catch (TikaException | SAXException e) {
+        } catch (TikaException | SAXException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
         }
 
         return responseEntity;
+    }
+
+    @PostMapping("{files}")
+    public ExtractedFileData sendSME_files(@PathVariable("files") File[] files) {
+
+        ExtractedFileData data = new ExtractedFileData();
+
+        for (File file : files) {
+
+            try {
+                data = service.extractOneFile(file);
+
+                kafkaTemplate.send(TOPIC, data);
+
+                kafkaTemplate.send("extracted2", data);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (TikaException | SAXException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return data;
     }
 
 }

@@ -6,6 +6,7 @@ import { ShareService } from '../share.service';
 import { User } from '../models/auth/user';
 import { MongoService } from '../mongo.service';
 import { UserDetails } from '../models/reg/userdetails';
+import { CrawlerService } from '../crawler.service';
 
 @Component({
   selector: 'app-login',
@@ -23,22 +24,12 @@ export class LoginComponent implements OnInit {
 
   logInStatus: boolean = true;
 
-  constructor(private router: Router, private srvc: ShareService, private loginsrvc: LoginService, private mongo: MongoService) {
-    this.srvc.getValue()
-      .subscribe(
-        val => {
-          console.log('got the status: ',val)
-          this.logInStatus = val;
-        }
-      );
-  }
+  constructor(
+    private router: Router, private srvc: ShareService,
+    private loginsrvc: LoginService, private mongo: MongoService
+  ) {}
 
-  ngOnInit() { }
-
-  bhejdo(): void {
-    this.logInStatus = false;
-    this.srvc.setValue(this.logInStatus);
-  }
+  ngOnInit() {}
 
   shurukaro() {
     this.logIn();
@@ -49,9 +40,11 @@ export class LoginComponent implements OnInit {
     this.mongo.fetchUserData(this.username, this.token)
       .subscribe(data => {
         this.userDetails = data;
+        localStorage.setItem('username',this.userDetails.username)
         localStorage.setItem('userrole', this.userDetails.role);
-        console.log('user details', Object.values(this.userDetails));
-      });
+        // console.log('user details', Object.values(this.userDetails));
+      }
+    );
   }
 
   logIn(): void {
@@ -63,21 +56,22 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.token = data.token;
-          // console.log('data from validation ', data);
-          this.getUserDetails();
-          if (data.username === this.username) {
-            this.bhejdo();
-            const role = localStorage.getItem('userrole');
-            console.log(this.userDetails.role);
-            if (this.userDetails.role === 'General User'){
-              this.router.navigate(['user']);
-            } else {
-              this.router.navigate(['sme']);
-            }
-          } else {
-            alert('Invalid Credentials');
-          }
+          localStorage.setItem('usertoken',this.token)
+          console.log(this.token)
         }
       );
+
+    this.getUserDetails();
+    if (this.userDetails.username === this.username) {
+      console.log(this.userDetails.role);
+      if (this.userDetails.role === 'General User') {
+        this.router.navigate(['home']);
+      } else {
+        this.router.navigate(['sme']);
+      }
+      window.location.reload();
+    } else {
+      alert('Invalid Credentials');
+    }
   }
 }

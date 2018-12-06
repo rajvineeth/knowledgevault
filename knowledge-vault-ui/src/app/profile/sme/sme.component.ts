@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CrawlerService } from 'src/app/crawler.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sme',
@@ -7,8 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SmeComponent implements OnInit {
 
-  constructor() { }
+  urlPath: string;
+  token: string;
 
-  ngOnInit() { }
+  constructor(private crawler: CrawlerService, private route: ActivatedRoute) {}
+
+  ngOnInit() {}
+
+  sendUrl(input: string) {
+    console.log(input)
+    this.crawler.scrapeUrl(input).subscribe(
+      url => {
+        console.log('sent url : ', url)
+      }
+    );
+  }
 
 }

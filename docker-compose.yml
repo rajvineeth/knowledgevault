@@ -84,13 +84,12 @@ services:
       - 3306:3306
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "123456"
-      MYSQL_DATABASES: userCredentials
+       MYSQL_ROOT_PASSWORD: 123456
+       MYSQL_DATABASE: userCredentials
     volumes:
       - '/opt/datasql:/var/lib/mysql'
     network_mode: "host"
     hostname: localhost
-    restart: always
 
   extractor-service:
     image: extractor-service:v1
@@ -239,6 +238,22 @@ services:
     restart: always
     volumes:
       - '../knowledge-vault/input-tagger/assets/taggerResource/:/knowledge-vault/input-tagger/assets/taggerResource/'
+
+  web-adapter:
+    image: web-adapter
+    build: web-scraping/
+    container_name: web-adapter
+    network_mode: host
+    depends_on:
+      - kafka
+      - eureka
+    ports:
+      - "8100:8100"
+    expose:
+      - "8100"
+    restart: always
+    volumes:
+      - '../knowledge-vault/web-scraping/:/knowledge-vault/web-scraping/'
 
   knowledge-vault-ui:
     image: angular

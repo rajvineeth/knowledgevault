@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
   currentUser: User;
   username = 'User';
   userThere = false;
-  amILoggedOut: boolean;
 
   /**
    * private constructor to inject other components and/or services.
@@ -26,23 +25,20 @@ export class HeaderComponent implements OnInit {
    * @param srvc the service typescript class to share data from one component to another
    * component irrespective of their relationship
    */
-  constructor(private router: Router, private srvc: ShareService) {
-    this.srvc.getValue()
-      .subscribe(
-        data => this.amILoggedOut = data
-      );
 
-    const name = localStorage.getItem('userdata');
-    console.log(name);
-    if (name !== undefined && name != null) {
-      this.username = name;
+  constructor(private router: Router, private srvc: ShareService) {
+
+    const name = localStorage.getItem('username');
+    console.log(name)
+    if (name === null || name === undefined) { }
+    else {
+      console.log('here....')
       this.userThere = true;
+      this.username = name;
     }
   }
 
-  ngOnInit() {
-    this.amILoggedOut = true;
-  }
+  ngOnInit() {}
 
   /**
    * this function provides the routing for home component
@@ -55,8 +51,6 @@ export class HeaderComponent implements OnInit {
    * this function provides the routing for login component
    */
   login(): void {
-    console.log('sending the flag from header button with value :',this.amILoggedOut);
-    this.srvc.setValue(this.amILoggedOut);
     this.router.navigate(['login']);
   }
 
@@ -64,6 +58,10 @@ export class HeaderComponent implements OnInit {
    * this function provides the routing for register component
    */
   register(): void {
+    // localStorage.removeItem('username');
+    // localStorage.removeItem('usertoken');
+    // localStorage.removeItem('userrole');
+    // this.userThere = false;
     this.router.navigate(['register']);
   }
 
@@ -71,15 +69,14 @@ export class HeaderComponent implements OnInit {
    * this function provides the routing for logout component
    */
   logout(): void {
-    this.amILoggedOut = true;
-    localStorage.removeItem('currentuser');
-    localStorage.removeItem('userdata');
+    localStorage.removeItem('username');
+    localStorage.removeItem('usertoken');
+    localStorage.removeItem('userrole')
     this.userThere = false;
     this.router.navigate(['home']);
   }
 
   goToProfile() {
-    const userDetail = localStorage.getItem('userdata');
-    this.router.navigate(['profile'],{queryParams: {userDetail}});
+    console.log('kaarya pragati pe hai....')
   }
 }
