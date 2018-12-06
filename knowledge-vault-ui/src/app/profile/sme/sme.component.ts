@@ -15,8 +15,8 @@ export class SmeComponent implements OnInit {
 
   sendUrl(input: string) {
     console.log(input)
-    console.log(localStorage.getItem('tokenVal');
-    this.crawler.scrapeUrl(input,localStorage.getItem('tokenVal')));
+    console.log(localStorage.getItem('tokenVal'));
+    this.crawler.scrapeUrl(input,localStorage.getItem('tokenVal'));
   }
 
 }
