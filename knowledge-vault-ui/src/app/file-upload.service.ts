@@ -12,14 +12,14 @@ const httpOptions = {
 })
 export class FileUploadService {
 
-  private postRequest = 'https://KnowledgeVault-zuul.stackroute.in/extractor-service/api/';
+  private getRequest = 'https://KnowledgeVault-zuul.stackroute.in/extractor-service/api/';
 //  private postRequest = 'http://localhost:8094/api/';
 
   constructor(private http: HttpClient) { }
 
   extractFile(files: File[]) {
-      const postUrl = this.postRequest + files;
-      this.http.post<any>(postUrl, httpOptions)
+      const getUrl = this.getRequest + files;
+      this.http.get<any>(getUrl, httpOptions)
       .subscribe(
         data => {
           //if (data == null) {

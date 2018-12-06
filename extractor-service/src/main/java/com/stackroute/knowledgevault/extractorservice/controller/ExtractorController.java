@@ -121,7 +121,7 @@ public class ExtractorController {
         return responseEntity;
     }
 
-    @PostMapping("{files}")
+    @GetMapping("{files}")
     public ResponseEntity<?> sendSME_files(@PathVariable("files") File[] files) {
 
         ExtractedFileData data;
