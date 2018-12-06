@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
   })
 };
 
@@ -26,18 +25,4 @@ export class LoginService {
   public login(user: User): Observable<any> {
     return this.http.post<any>(this.loginUrl, user, httpOptions);
   }
-
-  // public validateUser(user: User): Observable<any> {
-  //   this.login(user);
-  //   const url: string = this.validateURL + user.username;
-  //   console.log(localStorage.getItem('userdata'));
-  //   const httpoption = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json',
-  //       'Access-Control-Allow-Origin': '*',
-  //       'Authorization': 'Bearer ' + localStorage.getItem('currentuser')
-  //     })
-  //   };
-  //   return this.http.get(url, httpoption);
-  // }
 }

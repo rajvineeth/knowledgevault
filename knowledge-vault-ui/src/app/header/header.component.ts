@@ -64,6 +64,10 @@ export class HeaderComponent implements OnInit {
    * this function provides the routing for register component
    */
   register(): void {
+    this.amILoggedOut = true;
+    localStorage.removeItem('currentuser');
+    localStorage.removeItem('userdata');
+    this.userThere = false;
     this.router.navigate(['register']);
   }
 
