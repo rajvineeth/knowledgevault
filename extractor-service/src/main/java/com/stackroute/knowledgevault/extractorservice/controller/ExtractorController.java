@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -122,14 +124,14 @@ public class ExtractorController {
     }
 
     @PostMapping("upload")
-    public ResponseEntity<?> sendSME_files(@RequestBody File[] files) {
+    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile multipartFile) {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
 
-        System.out.println("reached extractor");
+        System.out.println(multipartFile);
 
-        for (File file : files) {
+/*        for (File file : files) {
 
             try {
                 data = service.extractOneFile(file);
@@ -145,7 +147,7 @@ public class ExtractorController {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
 
-        }
+        }*/
         return responseEntity;
 
     }
