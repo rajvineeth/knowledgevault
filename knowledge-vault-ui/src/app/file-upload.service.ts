@@ -19,7 +19,7 @@ export class FileUploadService {
 
   extractFile(files: File[]) {
       const postUrl = this.postRequest + files;
-      this.http.post<File[]>(postUrl, httpOptions)
+      this.http.post<any>(postUrl, httpOptions)
       .subscribe(
         data => {
           //if (data == null) {
