@@ -122,9 +122,10 @@ public class ExtractorController {
     }
 
     @PostMapping("{files}")
-    public ExtractedFileData sendSME_files(@PathVariable("files") File[] files) {
+    public ResponseEntity<?> sendSME_files(@PathVariable("files") File[] files) {
 
-        ExtractedFileData data = new ExtractedFileData();
+        ExtractedFileData data;
+        ResponseEntity responseEntity = null;
 
         for (File file : files) {
 
@@ -135,14 +136,17 @@ public class ExtractorController {
 
                 kafkaTemplate.send("extracted2", data);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (TikaException | SAXException e) {
-                e.printStackTrace();
+                responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
+            }
+            catch (IOException e) {
+                responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
+            catch (TikaException | SAXException e) {
+                responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
         }
 
-        return data;
+        return responseEntity;
     }
 
 }

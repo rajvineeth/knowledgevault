@@ -29,10 +29,9 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private srvc: ShareService) {
 
     const name = localStorage.getItem('username');
-    console.log(name)
-    if (name === null || name === undefined) { }
-    else {
-      console.log('here....')
+    console.log(name);
+    if (name === null || name === undefined) { } else {
+      console.log('here....');
       this.userThere = true;
       this.username = name;
     }
@@ -71,12 +70,8 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     localStorage.removeItem('username');
     localStorage.removeItem('usertoken');
-    localStorage.removeItem('userrole')
+    localStorage.removeItem('userrole');
     this.userThere = false;
     this.router.navigate(['home']);
-  }
-
-  goToProfile() {
-    console.log('kaarya pragati pe hai....')
   }
 }

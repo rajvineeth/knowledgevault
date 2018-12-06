@@ -6,7 +6,6 @@ import { ShareService } from '../share.service';
 import { User } from '../models/auth/user';
 import { MongoService } from '../mongo.service';
 import { UserDetails } from '../models/reg/userdetails';
-import { CrawlerService } from '../crawler.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   userDetails: UserDetails;
 
-  logInStatus: boolean = true;
+  logInStatus = true;
 
   constructor(
     private router: Router, private srvc: ShareService,
@@ -32,6 +31,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   shurukaro() {
+    // if (this.username === 'abc') {
+    //   this.router.navigate(['sme']);
+    // }
     this.logIn();
   }
 
@@ -40,7 +42,8 @@ export class LoginComponent implements OnInit {
     this.mongo.fetchUserData(this.username, this.token)
       .subscribe(data => {
         this.userDetails = data;
-        localStorage.setItem('username',this.userDetails.username)
+        localStorage.setItem('userdetail', JSON.stringify(this.userDetails));
+        localStorage.setItem('username', this.userDetails.username);
         localStorage.setItem('userrole', this.userDetails.role);
         // console.log('user details', Object.values(this.userDetails));
       }
@@ -56,8 +59,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.token = data.token;
-          localStorage.setItem('usertoken',this.token)
-          console.log(this.token)
+          localStorage.setItem('usertoken', this.token);
+          console.log(this.token);
         }
       );
 
