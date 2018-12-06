@@ -18,8 +18,11 @@ export class SmeComponent implements OnInit {
 
   sendUrl(input: string) {
     console.log(input)
-    const token = localStorage.getItem('usertoken');
-    console.log(token)
-    this.crawler.scrapeUrl(input,token);
+    this.crawler.scrapeUrl(input).subscribe(
+      url => {
+        console.log('sent url : ', url)
+      }
+    );
   }
+
 }
