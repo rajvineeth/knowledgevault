@@ -17,7 +17,8 @@ const httpOptions = {
 
 export class DataService {
   // change to IP address of query-engine
-  private _url = 'https://KnowledgeVault-zuul.stackroute.in/query-engine/api/v1/results';
+  // private _url = 'https://KnowledgeVault-zuul.stackroute.in/query-engine/api/v1/results';
+  private _url = 'http://172.23.239.143:8185/api/v1/results';
 
   constructor(private http: HttpClient) { }
 

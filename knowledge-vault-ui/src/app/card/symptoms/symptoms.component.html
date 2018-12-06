@@ -1,3 +1,3 @@
 <div *ngFor="let symptom of symptoms" class="symp">
-  <div class="symptom">{{ symptom }}</div>
+  <div *ngIf="symptom !== 'NULL'" class="symptom">{{ symptom.substr(1, symptom.length - 2) }}</div>
 </div>
