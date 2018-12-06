@@ -18,8 +18,8 @@ const httpOptions = {
 
 export class LoginService {
 
-  private loginUrl = 'http://localhost:8184/user/login';
-  private validateURL = 'http://localhost:8184/secure/user/';
+  private loginUrl = 'https://KnowledgeVault-zuul.stackroute.in/user-authentication/user/login';
+  private validateURL = 'https://KnowledgeVault-zuul.stackroute.in/user-authentication/secure/user/';
 
   constructor(private http: HttpClient, private router: Router, private srvc: ShareService) { }
 

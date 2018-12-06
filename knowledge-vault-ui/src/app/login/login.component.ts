@@ -68,11 +68,11 @@ export class LoginComponent implements OnInit {
           this.token = data.token;
           // console.log('data from validation ', data);
           this.getUserDetails();
-          if (!data.username.localCompare(this.username)) {
+          if (data.username === this.username) {
             this.bhejdo();
-            const role = localStorage.getItem('userrole');
+            const role: string = localStorage.getItem('userrole');
             console.log(role);
-            if (!role.localeCompare('General User')) {
+            if (role === 'General User'){
               this.router.navigate(['user']);
             } else {
               this.router.navigate(['sme']);

@@ -14,7 +14,7 @@ management:
     enabled: false
 spring:
   application:
-    name: api-gateway
+    name: zuul-gateway
   cloud:
     config:
       uri: http://localhost:8092
