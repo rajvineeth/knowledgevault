@@ -135,7 +135,6 @@ public class ExtractorController {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
-        System.out.println("reached");
 
         File convFile = new File( file.getOriginalFilename());
         convFile.createNewFile();
@@ -144,14 +143,7 @@ public class ExtractorController {
         fos.write(file.getBytes());
         fos.close();
 
-        System.out.println(convFile.canRead() + " name:" + convFile.getName());
-
-//        responseEntity =new ResponseEntity<String>("success", HttpStatus.OK);
-
-//        for (File file : files) {
-
             try {
-                //Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
 
                 data = service.extractOneFile(convFile);
 
@@ -166,7 +158,6 @@ public class ExtractorController {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
 
-//        }
         return responseEntity;
 
     }
