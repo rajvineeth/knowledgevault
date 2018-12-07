@@ -32,13 +32,13 @@
 }
 
 a {
-    color: rgb(33, 150, 243);
+    /* color: rgb(33, 150, 243); */
 }
 
 mat-card-footer {
     background-color: rgba(249, 248, 252, 0.925);
 }
 
-ul, li {
+ul {
     list-style-type: none;
 }
