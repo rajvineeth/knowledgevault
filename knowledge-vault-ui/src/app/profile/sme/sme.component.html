@@ -1,9 +1,14 @@
-<div class="home">
-  <h1 style="text-align:center;color: green">
-          <p>Welcome to the SME Landing page</p>
-    Feel free to contribute to our knowledge-base.
-  </h1>
+<div class="home" fxLayout="column" fxLayoutAlign="center center">
+
   <div class="bg"></div>
+                          <mat-card class="role-card" fxLayoutAlign="center center" fxLayout="column" style="box-shadow: none; margin: none">
+
+                            <mat-card-header>
+                                <mat-card-title style="font-size: 1rem">Role</mat-card-title>
+                            </mat-card-header>
+                            <span><input type="radio"  value="General User"  formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }"> General User</span><br>
+                            <span><input type="radio"  value="Subject Matter Expert"  formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">  Subject matter expert</span><br>
+                        </mat-card>
   <h2 style="text-align:center;color: green"> You can provide url for your resource</h2>
   
   <nav>
@@ -18,3 +23,4 @@
   </h2>
   <app-dragndrop> </app-dragndrop>
 </div>
+
