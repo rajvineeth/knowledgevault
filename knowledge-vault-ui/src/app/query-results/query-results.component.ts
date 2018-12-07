@@ -13,23 +13,34 @@ export class QueryResultsComponent implements OnInit {
   public queryResults: Array<ReceivedQuery>;
   processingDone = false;
 
-  constructor(public _dataservice: DataService) { }
+  constructor(public _dataservice: DataService) {
+
+  }
 
   ngOnInit() {
+    this.queryResults = null;
     this._dataservice.getQuery()
-        .subscribe(
-          data => {
-            console.log('got the data: ', Object.values(data));
-            this.queryResults = data;
-            this.processingDone = true;
-          }
-        );
-        console.log(this.queryResults);
+      .subscribe(
+        data => {
+          console.log('got the data: ', Object.values(data));
+          this.queryResults = data;
+          // if (this.queryResults != null && this.queryResults !== undefined) {
+          //   this.processingDone = true;
+          // }
+          // while (this.queryResults === null || this.queryResults === undefined) {
+          //   console.log('waiting for results...');
+          // }
+          
+          this.processingDone = true;
+        }
+      );
+    console.log('current data: ', this.queryResults);
 
-    // const inactivity = setTimeout(function() {
-    //   this.processingDone = true;
-    // }, 3000);
-    // clearTimeout(inactivity);
+    const inactivity = setTimeout(function () {
+      this.processingDone = true;
+    }, 3000);
+    clearTimeout(inactivity);
+    console.log(this.queryResults);
   }
 
 }
