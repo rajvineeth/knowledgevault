@@ -143,12 +143,7 @@ public class ExtractorController {
         fos.write(file.getBytes());
         fos.close();
 
-//        responseEntity =new ResponseEntity<String>("success", HttpStatus.OK);
-
-//        for (File file : files) {
-
             try {
-                //Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
 
                 data = service.extractOneFile(convFile);
 
@@ -163,7 +158,6 @@ public class ExtractorController {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
 
-//        }
         return responseEntity;
 
     }

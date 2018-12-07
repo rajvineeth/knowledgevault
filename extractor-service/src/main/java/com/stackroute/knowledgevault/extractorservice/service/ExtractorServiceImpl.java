@@ -96,7 +96,6 @@ public class ExtractorServiceImpl implements ExtractorService {
 
                 //PDF Parsing
                 case "application/pdf":
-                    System.out.println("came here");
                     PDFParser pdfparser = new PDFParser();
                     pdfparser.parse(newStream, content, metadata, pcontext);
                     break;

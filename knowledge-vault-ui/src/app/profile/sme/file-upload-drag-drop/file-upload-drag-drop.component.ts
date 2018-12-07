@@ -13,7 +13,6 @@ export class FileUploadDragDropComponent implements OnInit {
   dragAreaClass = 'dragarea';
   fileList = [];
 
-//  @Input() fileExt = 'PDF';
   @Input() maxFiles = 10;
   @Input() maxSize = 50;
   @Output() uploadStatus = new EventEmitter<any>();
