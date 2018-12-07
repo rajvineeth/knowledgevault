@@ -17,6 +17,7 @@
 }
 
 .drag-drop-card {
+    background-color: rgba(249, 248, 252, 0.925);
   position: inherit;
   justify-content: center;
   text-align: center;
