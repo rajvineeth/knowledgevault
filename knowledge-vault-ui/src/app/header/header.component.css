@@ -58,9 +58,11 @@ mat-sidenav {
 }
 
 button:visited {
-  color: black;
+  color:#5cb85c;
+  font-weight: bolder;
 }
 
 button:focus {
-  color: black;
+  color: #5cb85c;
+  font-weight: bolder;
 }
