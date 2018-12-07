@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,6 +38,7 @@ public class ExtractorController {
     @GetMapping("{path}")
     public ResponseEntity<?> displayAllFiles(@PathVariable("path") String path) {
 
+        System.out.println("all files");
         List<File> allFiles = service.getAllFiles(initialPath + path); //Fetching all files from the specified path
 
         return new ResponseEntity<>(allFiles, HttpStatus.OK);
@@ -121,32 +124,32 @@ public class ExtractorController {
         return responseEntity;
     }
 
-    @PostMapping("{files}")
-    public ResponseEntity<?> sendSME_files(@PathVariable("files") File[] files) {
+    @PostMapping("/upload")
+    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
+        System.out.println("reached");
+        System.out.println(file);
 
-        for (File file : files) {
+/*        for (File file : files) {
 
             try {
                 data = service.extractOneFile(file);
 
-                kafkaTemplate.send(TOPIC, data);
+//                kafkaTemplate.send(TOPIC, data);
 
-                kafkaTemplate.send("extracted2", data);
+//                kafkaTemplate.send("extracted2", data);
 
                 responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-            }
-            catch (TikaException | SAXException e) {
+            } catch (TikaException | SAXException e) {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
-        }
 
+        }*/
         return responseEntity;
-    }
 
+    }
 }

@@ -19,7 +19,7 @@
         <button mat-button (click)="register()">Register</button>
       </span>
       <ng-template #elseBlock>
-        <span style="color: green" *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
+        <span style="color: green;vertical-align: middle" *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
         <ng-template #elseBlock1>
           <span> Welcome User </span>
         </ng-template>
@@ -47,7 +47,7 @@
           <button mat-button (click)="register()">Register</button>
         </nav>
         <ng-template #elseBlock>
-          <span style="color: green" *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
+          <span style="color: green;vertical-align: middle" *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
           <ng-template #elseBlock1>
             <span> Welcome User </span>
           </ng-template>

@@ -1,6 +1,36 @@
-<nav>
-  <mat-grid-list cols="2" >
-    <mat-grid-tile>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-  </mat-grid-list>
+<p class="heading"> Personal Details</p>
+
+<nav class="row">
+  <nav class="col-3">
+    <img class="avatar" src="../../assets/user.png">
+    <br>
+    <!-- <button style="gap: inherit" mat-button (click)="photu()"> Upload Profile Photo </button> -->
+  </nav>
+  <nav class="col-9" id="details">
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="fn" placeholder="First Name" #fn value="{{ userDetail.firstname }}" readonly>
+      </mat-form-field>
+    </mat-card>
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="ln" placeholder="Last Name" #ln value=" {{ userDetail.lastname }}" readonly>
+      </mat-form-field>
+    </mat-card>
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="un" placeholder="Username" #un value="{{ userDetail.username }}" readonly>
+      </mat-form-field>
+    </mat-card>
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="r" placeholder="role" #r value="{{ userDetail.role }}" readonly>
+      </mat-form-field>
+    </mat-card>
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="pwd" placeholder="password" #pwd value="{{ userDetail.password }}" readonly>
+      </mat-form-field>
+    </mat-card>
+  </nav>
 </nav>
