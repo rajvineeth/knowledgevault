@@ -28,5 +28,7 @@ public class DefaultData implements ApplicationListener<ContextRefreshedEvent> {
         documentService.saveDocuments(new ExtractedFileData(106,"meta","\n" +
                 "http://www.wpro.who.int/philippines/typhoon_haiyan/media/Typhoid_fever.pdf"));
         documentService.saveDocuments(new ExtractedFileData(107,"meta","http://applications.emro.who.int/dsaf/emropub_2011_1306.pdf?ua=1"));
+        documentService.saveDocuments(new ExtractedFileData(108,"meta","https://www.aafp.org/afp/2011/1215/p1390.pdf"));
+        documentService.saveDocuments(new ExtractedFileData(109,"meta","https://www.laserprofessionals.com/facts/Conjunctivitis.pdf"));
     }
 }
