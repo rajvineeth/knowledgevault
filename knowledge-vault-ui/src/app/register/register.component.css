@@ -1,5 +1,5 @@
 .register-card {
-  background-color: rgba(249,248,252,0.925);
+  background-color: rgba(249, 248, 252, 0.925);
   max-width: 80rem;
   position: inherit;
   justify-content: center;
@@ -17,6 +17,7 @@ button {
   text-decoration: none;
   display: inline-block;
   justify-content: center;
+  font-size: 1rem;
 
 }
 
@@ -30,12 +31,11 @@ button {
 }
 
 .register {
-  height: 90vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 mat-card-header {
   justify-content: center;
   color: #5cb85c;
@@ -48,4 +48,8 @@ mat-card-header {
 a {
   color: #5cb85c;
   font-size: 1rem;
+}
+
+.role-card {
+  background-color: rgba(249, 248, 252, 0.925);
 }

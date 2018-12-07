@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -130,24 +131,29 @@ public class ExtractorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) throws IOException {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
         System.out.println("reached");
 
-        File someFile = (File) file;
+        File convFile = new File( file.getOriginalFilename());
+        convFile.createNewFile();
 
-        System.out.println(someFile);
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
 
-        responseEntity =new ResponseEntity<String>("success", HttpStatus.OK);
+        System.out.println(convFile.canRead() + " name:" + convFile.getName());
+
+//        responseEntity =new ResponseEntity<String>("success", HttpStatus.OK);
 
 //        for (File file : files) {
 
-/*            try {
-                Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            try {
+                //Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
 
-                data = service.extractOneFile((File) file);
+                data = service.extractOneFile(convFile);
 
                 kafkaTemplate.send(TOPIC, data);
 
@@ -160,7 +166,7 @@ public class ExtractorController {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
 
-        }*/
+//        }
         return responseEntity;
 
     }

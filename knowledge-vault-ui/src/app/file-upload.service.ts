@@ -31,25 +31,28 @@ export class FileUploadService {
     });
 
     return this.http.request(req);
-    //      const getUrl = this.getRequest + 'Medical';
-    // console.log('in service');
-    // console.log(formData.getAll('File'));
-    // return this.http.post(this.getRequest, formData, httpOptions);
-    // .subscribe(
-    //   data => {
-    //     if (data == null) {
-    //       console.log(data);
-    //     }
-    //   }
-    // );
-    //      console.log('dsfds'+this.http.post(this.getRequest, formData, httpOptions));
-    // .subscribe(
-    //   data => {
-    //     //if (data == null) {
-    //       console.log(data);
-    //       console.log("sent data");
-    //   }
-    // );
+//      const getUrl = this.getRequest + 'Medical';
+      // console.log('in service');
+      // console.log(formData.getAll('File'));
+      // return this.http.post(this.getRequest, formData, httpOptions);
+      // .subscribe(
+      //   data => {
+      //     if (data == null) {
+      //       console.log(data);
+      //     }
+      //   }
+      // );
+//      console.log('dsfds'+this.http.post(this.getRequest, formData, httpOptions));
+      // .subscribe(
+      //   data => {
+      //     //if (data == null) {
+      //       console.log(data);
+      //       console.log("sent data");
+      //   }
+      // );
   }
 }
+
+
+
 
