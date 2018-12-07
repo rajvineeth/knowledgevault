@@ -57,6 +57,8 @@ public class Loaders implements ApplicationListener<ContextRefreshedEvent>{
             medicalGraphService.input("input5",105);
             medicalGraphService.input("input6",106);
             medicalGraphService.input("input7",107);
+            medicalGraphService.input("input8",108);
+            medicalGraphService.input("input9",109);
 
         } catch (Exception e) {
             e.printStackTrace();

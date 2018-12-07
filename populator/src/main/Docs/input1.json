@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "Malaria",
+  "alternateName": "malaria\u000Bmosquito transmitted illness",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
