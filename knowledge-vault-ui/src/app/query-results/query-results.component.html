@@ -1,15 +1,13 @@
-<div
-  class="search-results"
-  fxLayout="row wrap"
-  fxLayoutAlign="space-evenly center"
->
+<div class="search-results" fxLayout="row wrap" fxLayoutAlign="space-evenly center">
 
-<nav *ngIf="processingDone; else elseBlock;">
-  <nav *ngFor="let res of queryResults">
-    <app-card [card]="res"> </app-card>
+  <nav *ngIf="!processingDone; else elseBlock;">
+    <mat-spinner> </mat-spinner>
   </nav>
-</nav>
-<ng-template #elseBlock> 
-  <mat-spinner> </mat-spinner>
-</ng-template>
+  <ng-template #elseBlock>
+    <nav *ngFor="let res of queryResults">
+      <span>
+        <app-card [card]="res"> </app-card>
+      </span> 
+    </nav>
+  </ng-template>
 </div>

@@ -12,6 +12,7 @@ const httpOption = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class CrawlerService {
 
   private crawlerUrl = 'https://KnowledgeVault-zuul.stackroute.in/web-adapter/api/v1/webscraper';
