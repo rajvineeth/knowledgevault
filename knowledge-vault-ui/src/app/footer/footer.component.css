@@ -1,12 +1,9 @@
 mat-toolbar {
   background-color: #f3f3f3;
-  color: #bbb;
+  /* color: #bbb; */
   font-size: 1rem;
 }
 
-.attribution {
-  color: #5cb85c;
-}
 
 a {
   color: #5cb85c;

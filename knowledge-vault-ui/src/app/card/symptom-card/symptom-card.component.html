@@ -1,0 +1,8 @@
+<mat-list>
+  <h3 mat-subheader >Symptoms</h3>
+  <div *ngFor="let symptom of slicedSymptoms">
+      <mat-list-item *ngIf="symptom !== 'NULL'">
+          {{ symptom.substr(1, symptom.length - 2) }}
+    </mat-list-item>
+  </div>
+</mat-list>

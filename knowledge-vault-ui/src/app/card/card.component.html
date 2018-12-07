@@ -10,6 +10,7 @@
     <mat-card-subtitle>{{ alternateName }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+    <!-- <app-symptom-card [symptoms]="card.symptoms" ></app-symptom-card> -->
     <mat-expansion-panel
       *ngIf="card.symptoms.length != 0"
       [expanded]="step === 0"
