@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "typhoid",
+  "alternateName": "typhoid fever\u000Bsalmonella typhi infection from contaminated food or water",
   "code": {
     "@type": "MedicalCode",
     "code": "413",

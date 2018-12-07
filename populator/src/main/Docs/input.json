@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "HIV/AIDS",
+  "alternateName": "hiv aids\u000Bhuman immunodeficiency virus, acquired immune deficiency syndrome\u000Bhuman immunodeficiency virus [hiv] disease",
   "code": {
     "@type": "MedicalCode",
     "code": "413",

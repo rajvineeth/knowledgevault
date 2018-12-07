@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "Dengue",
+  "alternateName": "dengue fever\u000Btropical mosquito borne illness",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
