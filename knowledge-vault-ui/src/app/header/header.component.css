@@ -59,10 +59,10 @@ mat-sidenav {
 
 button:visited {
   color:#5cb85c;
-  font-weight: bolder;
+  /* font-weight: bolder; */
 }
 
 button:focus {
   color: #5cb85c;
-  font-weight: bolder;
+  /* font-weight: bolder; */
 }
