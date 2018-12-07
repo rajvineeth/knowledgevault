@@ -16,7 +16,7 @@ import { Injectable } from '@angular/core';
 export class FileUploadService {
 
   private getRequest = 'http://35.154.72.182:8094/api/upload';
-//  private postRequest = 'http://localhost:8094/api/';
+  //  private postRequest = 'http://localhost:8094/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -51,6 +51,8 @@ export class FileUploadService {
       //   }
       // );
   }
-  }
 }
+
+
+
 

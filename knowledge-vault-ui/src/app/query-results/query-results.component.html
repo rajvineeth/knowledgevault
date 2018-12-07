@@ -3,7 +3,13 @@
   fxLayout="row wrap"
   fxLayoutAlign="space-evenly center"
 >
+
+<nav *ngIf="processingDone; else elseBlock;">
   <nav *ngFor="let res of queryResults">
     <app-card [card]="res"> </app-card>
   </nav>
+</nav>
+<ng-template #elseBlock> 
+  <mat-spinner> </mat-spinner>
+</ng-template>
 </div>

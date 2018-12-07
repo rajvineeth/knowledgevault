@@ -1,9 +1,5 @@
 .register-card {
-<<<<<<< HEAD
   background-color: rgba(249, 248, 252, 0.925);
-=======
-  background-color: rgba(249,248,252,0.925);
->>>>>>> e73ae8fc36d96c13f24390ea8f6f9a5811ce068c
   max-width: 80rem;
   position: inherit;
   justify-content: center;
@@ -21,6 +17,7 @@ button {
   text-decoration: none;
   display: inline-block;
   justify-content: center;
+  font-size: 1rem;
 
 }
 
@@ -51,4 +48,8 @@ mat-card-header {
 a {
   color: #5cb85c;
   font-size: 1rem;
+}
+
+.role-card {
+  background-color: rgba(249, 248, 252, 0.925);
 }

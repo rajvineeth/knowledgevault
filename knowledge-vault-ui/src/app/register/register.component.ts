@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
             lastName: ['', Validators.required],
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            role: ['', Validators.required]
+            // role: ['', Validators.required]
         });
     }
 
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
         const fn: string = this.registerForm.controls['firstName'].value;
         const ln: string = this.registerForm.controls['lastName'].value;
         const un: string = this.registerForm.controls['username'].value;
-        const r: string = this.registerForm.controls['role'].value;
+        const r = 'General User';
         const pwd: string = this.registerForm.controls['password'].value;
 
         this.register.registerUser(fn, ln, un, r, pwd)
