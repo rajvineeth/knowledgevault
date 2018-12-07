@@ -29,6 +29,7 @@ import { AccordionComponent } from './card/accordion/accordion.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MongoService } from './mongo.service';
 import { CrawlerService } from './crawler.service';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CrawlerService } from './crawler.service';
     ExpansionPanelsComponent,
     AccordionComponent,
     UserProfileComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
