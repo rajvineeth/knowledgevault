@@ -86,26 +86,10 @@ export class FileUploadDragDropComponent implements OnInit {
       this.errors.push('Error: At a time you can upload only ' + this.maxFiles + ' files');
       return;
     }
-//    this.isValidFileExtension(files);
+
     this.isValidFileSize(files)
     return this.errors.length === 0;
   }
-
-  // private isValidFileExtension(files) {
-  //   // Make array of file extensions
-  //   const extensions = (this.fileExt.split(','))
-  //     .map(function (x) { return x.toLocaleUpperCase().trim(); });
-  //   for (let i = 0; i < files.length; i++) {
-  //     // Get file extension
-  //     const ext = files[i].name.toUpperCase().split('.').pop() || files[i].name;
-  //     // Check the extension exists
-  //     const exists = extensions.includes(ext);
-  //     if (!exists) {
-  //       this.errors.push('Invalid file : ' + files[i].name + ', Upload only ' + this.fileExt + ' file.');
-  //     }
-  //     this.isValidFileSize(files[i]);
-  //   }
-  // }
 
   private isValidFileSize(files) {
 
