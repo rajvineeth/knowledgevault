@@ -27,19 +27,15 @@ export class DragndropComponent implements OnInit {
     this.IsUploaded = false;
     this.show_success_msg = true;
 
-    this.save_success = 'Thank you for your contribution.We have saved your document in our database.We will add it to our knowledge-base once it is approved by Paurush Chaudhary.';
+    alert(this.save_success = 'Thank you for your contribution.We have saved your document in our database.We will add it to our knowledge-base once it is approved by Paurush Chaudhary.');
     if (this.fileList.length > 0) {
 
       for (let i = 0; i < this.fileList.length; i++) {
-        
         this.progress.percentage = 0;
-        
         this.upload_service.extractFile(this.fileList[i]).subscribe(event => {
-        
           if (event.type === HttpEventType.UploadProgress) {
             this.progress.percentage = Math.round(100 * event.loaded / event.total);
-          } 
-          else if (event instanceof HttpResponse) {
+          } else if (event instanceof HttpResponse) {
             console.log('File is completely uploaded!');
           }
         });

@@ -69,6 +69,7 @@ export class FileUploadDragDropComponent implements OnInit {
       for (let j = 0; j < files.length; j++) {
         if (!this.fileList.some(x => x.name === files[j].name)) {
           this.fileList.push(files[j]);
+          // alert('file added successfully');
           this.successfiles.push('File: ' + files[j].name + ' added successfully.');
         } else {
           this.errors.push('File: ' + files[j].name + ' Already added in list.');
