@@ -1,25 +1,29 @@
 <div class="home">
-  <h1 style="text-align:center;color: green">
-          <p>Welcome to the SME Landing page</p>
-    Feel free to contribute to our knowledge-base.
-  </h1>
   <div class="bg"></div>
+  <h3 style="text-align:center;color: #5cb85c">
+    <p>Welcome to the SME Landing page. Feel free to contribute to our knowledge-base.</p>
+  </h3>
   <div fxLayout fxLayoutAlign="space-evenly center">
       <div>
-          <h2 style="text-align:center;color: green"> You can provide url for your resource</h2>
-      
+        <mat-card class="url">
+          <mat-card-header>
+            <mat-card-title style="color: #5cb85c">You can provide url for your resource</mat-card-title>
+          </mat-card-header>        
           <nav>
             <mat-form-field class="url-field">
               <input matInput placeholder="Resource path" type="text" #inp (keyup.enter)="sendUrl(inp.value)">
             </mat-form-field>
           </nav>
+        </mat-card>
       </div>
+<!--
       <div>
           <h2 style="text-align:center;color: green">
               Or
             </h2>
       </div>
-      <div>
+      -->
+      <div class="card">
           <h2 style="text-align:center;color: green">
               <!-- You can upload data from your personal device itself -->
             </h2>
