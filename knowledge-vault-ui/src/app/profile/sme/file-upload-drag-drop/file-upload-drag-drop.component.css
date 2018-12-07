@@ -9,12 +9,12 @@
 .dragarea {
     font-size: 20px;
     padding: 24px 20px 24px 20px;
-    background-color: #fff;
+    background-color: rgba(249, 248, 252, 0.925);
     color: #ccc;
 }
 
 .drop {
-    background-color: blueviolet;
+    background-color: rgba(249,248,252,0.925);
 }
 .droparea {
     font-size: 20px;
@@ -33,5 +33,4 @@
 
 a {
     color: rgb(33, 150, 243);
-    margin-left: 20%;
 }
