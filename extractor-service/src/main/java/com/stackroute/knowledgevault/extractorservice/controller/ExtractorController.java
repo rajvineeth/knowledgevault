@@ -15,6 +15,9 @@ import org.xml.sax.SAXException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +33,8 @@ public class ExtractorController {
     private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
 
     private static final String TOPIC = "extracted";
+
+//    private final Path rootLocation = Paths.get("upload-dir");
 
     @Value("${folder.path}")
     private String initialPath;
@@ -130,16 +135,23 @@ public class ExtractorController {
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
         System.out.println("reached");
-        System.out.println(file);
 
-/*        for (File file : files) {
+        File someFile = (File) file;
 
-            try {
-                data = service.extractOneFile(file);
+        System.out.println(someFile);
 
-//                kafkaTemplate.send(TOPIC, data);
+        responseEntity =new ResponseEntity<String>("success", HttpStatus.OK);
 
-//                kafkaTemplate.send("extracted2", data);
+//        for (File file : files) {
+
+/*            try {
+                Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+
+                data = service.extractOneFile((File) file);
+
+                kafkaTemplate.send(TOPIC, data);
+
+                kafkaTemplate.send("extracted2", data);
 
                 responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
             } catch (IOException e) {
