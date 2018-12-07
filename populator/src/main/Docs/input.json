@@ -15,15 +15,11 @@
       },
       {
         "@type": "MedicalSymptom",
-        "name": "dry cough"
+        "name": "severe fatigue"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Whole body: fatigue, fever, loss of appetite, malaise, night sweats, or sweating"
-      },
-      {
-        "@type": "MedicalSymptom",
-        "name": "Gastrointestinal: nausea, persistent diarrhoea, vomiting, or watery diarrhoea"
+        "name": "pneumonia"
       },
       {
         "@type": "MedicalSymptom",
@@ -35,7 +31,7 @@
       },
       {
         "@type": "MedicalSymptom",
-        "name": "Throat: difficulty swallowing or soreness"
+        "name": "genital or anal sores"
       }
     ]
 
