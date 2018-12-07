@@ -4,6 +4,7 @@ import filters.ErrorFilter;
 import filters.PostFilter;
 import filters.PreFilter;
 import filters.RouteFilter;
+import filters.CORSFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -45,8 +46,8 @@ public class ZuulgatewayApplication {
 	}
 
 	@Bean 
-	public CORSfilter corsFilter() {
-		return new CORSfilter();
+	public CORSFilter corsFilter() {
+		return new CORSFilter();
 	}
 
 	// @Bean

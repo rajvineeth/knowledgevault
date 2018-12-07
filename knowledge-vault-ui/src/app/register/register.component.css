@@ -1,10 +1,16 @@
 .register-card {
-  background-color: rgba(238, 238, 240, 0.925);
+<<<<<<< HEAD
+  background-color: rgba(249, 248, 252, 0.925);
+=======
+  background-color: rgba(249,248,252,0.925);
+>>>>>>> e73ae8fc36d96c13f24390ea8f6f9a5811ce068c
   max-width: 80rem;
   position: inherit;
-  box-shadow: none;
   justify-content: center;
   text-align: center;
+  /* border: 1px solid;
+  padding: 10px; */
+  box-shadow: 5px 8px #888888;
 }
 
 button {
@@ -28,12 +34,11 @@ button {
 }
 
 .register {
-  height: 90vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 mat-card-header {
   justify-content: center;
   color: #5cb85c;
