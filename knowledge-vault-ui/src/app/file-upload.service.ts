@@ -15,7 +15,7 @@ import { Injectable } from '@angular/core';
 })
 export class FileUploadService {
 
-  private getRequest = 'http://35.154.72.182:8094/api/upload';
+//  private getRequest = 'http://localhost:8094/extractor-service/upload';
 //  private postRequest = 'http://localhost:8094/api/';
 
   constructor(private http: HttpClient) { }
@@ -25,7 +25,7 @@ export class FileUploadService {
 
     formdata.append('file', file);
 
-    const req = new HttpRequest('POST', '/upload', formdata, {
+    const req = new HttpRequest('POST', '/extractor-service/upload', formdata, {
       reportProgress: true,
       responseType: 'text'
     });
