@@ -1,0 +1,54 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "conjunctivitis\u000Bpink eye",
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "Itching of eye"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Discharge around the eye"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Crusting around the eye"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Senstivity to light"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "redness of eye"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "runny nose"
+      }
+    ]
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}

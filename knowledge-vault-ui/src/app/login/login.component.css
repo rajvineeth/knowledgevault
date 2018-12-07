@@ -2,10 +2,11 @@
   background-color: rgba(249,248,252,0.925);
   max-width: 80rem;
   position: inherit;
-
-  box-shadow: rgb(76, 0, 255);
   justify-content: center;
   text-align: center;
+  /* border: 1px solid;
+  padding: 10px; */
+  box-shadow: 5px 8px #888888;
 }
 
 button {

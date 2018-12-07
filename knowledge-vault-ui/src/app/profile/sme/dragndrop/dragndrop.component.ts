@@ -11,8 +11,7 @@ selector: 'app-dragndrop',
 
 export class DragndropComponent implements OnInit {
 
-  constructor(private upload_service: FileUploadService) {
-  }
+  constructor(private upload_service: FileUploadService) {}
 
   fileList = [];
   FileName: string;
@@ -28,7 +27,8 @@ export class DragndropComponent implements OnInit {
   sendFileDB() {
     this.IsUploaded = false;
     this.show_success_msg = true;
-    this.save_success = "Thank you for your contribution.We have saved your document in our database.We will add it to our knowledge-base once it is approved by Paurush Chaudhary."
+    // tslint:disable-next-line:max-line-length
+    this.save_success = 'Thank you for your contribution.We have saved your document in our database.We will add it to our knowledge-base once it is approved by Paurush Chaudhary.';
     if (this.fileList.length > 0) {
 
       for (let i = 0; i < this.fileList.length; i++) {
@@ -44,7 +44,7 @@ export class DragndropComponent implements OnInit {
 //        console.log(this.fileList[i]);
 //        this.formData.append('File', this.fileList[i]);
 //        console.log(this.formData.getAll('File'));
-        
+
         // append more item in FormData and send to server
         // call service to send file on server via FormData.
 

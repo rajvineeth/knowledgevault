@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "Cholera",
+  "alternateName": "cholera\u000Bintestinal bacterial infection",
   "code": {
     "@type": "MedicalCode",
     "code": "413",

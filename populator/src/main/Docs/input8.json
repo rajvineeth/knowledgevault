@@ -1,0 +1,70 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "common cold\u000Bupper respiratory infection",
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "Runny nose"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Sneezing"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Congestion"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Muscle Pain"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Cough with phlegm"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "fever"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "redness of eyes"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "chest pressure"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "headache"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "swollen lymph nodes"
+      }
+    ]
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}
