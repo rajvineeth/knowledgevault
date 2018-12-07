@@ -5,12 +5,14 @@ import { CustomMaterialModule } from 'src/app/core/material.module';
 import { SmeComponent } from './sme.component';
 import { FileUploadDragDropComponent } from './file-upload-drag-drop/file-upload-drag-drop.component';
 import { DragndropComponent } from './dragndrop/dragndrop.component';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [SmeComponent, DragndropComponent, FileUploadDragDropComponent],
   imports: [
     CommonModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    FlexModule
   ]
 })
 
