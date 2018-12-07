@@ -1,10 +1,36 @@
 .saveButton {
-    background-color: lightcoral;
-    margin-left: 40%;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    justify-content: center;
+    font-size: 1rem;
+    /* margin-left: 40%; */
 }
 
 #myImg {
     background-image: url("../../../../assets/dropArea.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.drag-drop-card {
+  position: inherit;
+  justify-content: center;
+  text-align: center;
+  width: 50vw;
+  /* height: 15vh; */
+}
+
+.drag-drop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-header {
+  justify-content: center;
+  color: #5cb85c;
 }
