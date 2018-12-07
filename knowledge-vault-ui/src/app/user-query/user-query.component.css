@@ -8,12 +8,14 @@
 button {
   background-color: #5cb85c;
   color: white;
+  font-size: 1rem;
 }
 
 .userInput-full-width {
   margin: auto;
   width: 85%;
   color: black;
+  font-size: 1.2rem;
 }
 
 mat-card-header, mat-card-title {
