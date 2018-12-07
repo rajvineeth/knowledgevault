@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "Tuberculosis",
+  "alternateName": "tuberculosis infection\u000Btb",
   "code": {
     "@type": "MedicalCode",
     "code": "413",

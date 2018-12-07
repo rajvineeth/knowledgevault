@@ -1,7 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "Common Cold",
+  "alternateName": "common cold\u000Bupper respiratory infection",
   "code": {
     "@type": "MedicalCode",
     "code": "413",

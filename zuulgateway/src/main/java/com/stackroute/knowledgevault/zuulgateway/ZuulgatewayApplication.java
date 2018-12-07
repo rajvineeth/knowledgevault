@@ -38,20 +38,27 @@ public class ZuulgatewayApplication {
 	public ErrorFilter errorFilter() {
 		return new ErrorFilter();
 	}
+	
 	@Bean
 	public RouteFilter routeFilter() {
 		return new RouteFilter();
 	}
-	@Bean
-	public CorsFilter corsFilter() {
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		final CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
-		config.setAllowedOrigins(Collections.singletonList("*"));
-		config.setAllowedHeaders(Collections.singletonList("*"));
-		config.setAllowedMethods(Arrays.stream(HttpMethod.values()).map(HttpMethod::name).collect(Collectors.toList()));
-		source.registerCorsConfiguration("/**", config);
-		return new CorsFilter(source);
+
+	@Bean 
+	public CORSfilter corsFilter() {
+		return new CORSfilter();
 	}
+
+	// @Bean
+	// public CorsFilter corsFilter() {
+	// 	final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	// 	final CorsConfiguration config = new CorsConfiguration();
+	// 	config.setAllowCredentials(true);
+	// 	config.setAllowedOrigins(Collections.singletonList("*"));
+	// 	config.setAllowedHeaders(Collections.singletonList("*"));
+	// 	config.setAllowedMethods(Arrays.stream(HttpMethod.values()).map(HttpMethod::name).collect(Collectors.toList()));
+	// 	source.registerCorsConfiguration("/**", config);
+	// 	return new CorsFilter(source);
+	// }
 
 }

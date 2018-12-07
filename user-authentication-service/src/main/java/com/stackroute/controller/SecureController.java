@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/secure")
-@CrossOrigin("*")
+@CrossOrigin
 public class SecureController {
 
    private UserService userService;
