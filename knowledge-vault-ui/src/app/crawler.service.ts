@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
+import { UrlClass } from './models/urlClass';
+
+const httpOption = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +18,11 @@ export class CrawlerService {
 
   constructor(private http: HttpClient) { }
 
-  scrapeUrl(url:string,token: string){
-    const httpOption = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorisation': 'Bearer '+ token
-      })
-    };
-    return this.http.post(this.crawlerUrl,url,httpOption);
+  scrapeUrl (url: UrlClass) {
+    this.http.post(this.crawlerUrl, url, httpOption).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
   }
 }

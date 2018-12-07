@@ -19,7 +19,7 @@
         <button mat-button (click)="register()">Register</button>
       </span>
       <ng-template #elseBlock>
-        <span style="color: green" *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
+        <span style="color: green;vertical-align: middle" *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
         <ng-template #elseBlock1>
           <span> Welcome User </span>
         </ng-template>
@@ -27,8 +27,8 @@
           <button mat-card-avatar class="avatar"></button>
         </a>
         <mat-menu #avatarMenu="matMenu">
-          <button mat-menu-item (onclick)="goToProfile()"> Profile</button>
-          <button mat-menu-item (onclick)="goToSetting()"> Setting </button>
+          <button mat-menu-item routerLink="/profile"> Profile</button>
+          <button mat-menu-item (click)="goToSetting()"> Setting </button>
           <button mat-button (click)="logout()"> Logout </button>
           <button mat-menu-item>Help</button>
         </mat-menu>
@@ -47,7 +47,7 @@
           <button mat-button (click)="register()">Register</button>
         </nav>
         <ng-template #elseBlock>
-          <span style="color: green" *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
+          <span style="color: green;vertical-align: middle" *ngIf="userThere; else elseBlock1;"> Welcome {{ username }} </span>
           <ng-template #elseBlock1>
             <span> Welcome User </span>
           </ng-template>
@@ -55,7 +55,7 @@
             <button mat-card-avatar class="avatar"></button>
           </a>
           <mat-menu #avatarMenu="matMenu">
-            <button mat-menu-item>Profile</button>
+            <button mat-menu-item routerLink='/profile'>Profile</button>
             <button mat-menu-item>Setting</button>
             <button mat-button (click)="logout()"> Logout </button>
             <button mat-menu-item>Help</button>

@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule, MatSidenavModule,
-    MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatExpansionModule, MatListModule
+    MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatExpansionModule, MatListModule,
+    MatGridListModule
 } from '@angular/material';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -18,7 +20,7 @@ import {
         MatExpansionModule,
         MatProgressSpinnerModule,
         MatListModule,
-        MatSidenavModule
+        MatSidenavModule,
     ],
     exports: [
         CommonModule,
@@ -33,7 +35,8 @@ import {
         MatListModule,
         MatSidenavModule,
         MatExpansionModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatGridListModule
     ],
 })
 export class CustomMaterialModule { }

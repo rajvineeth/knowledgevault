@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CrawlerService } from 'src/app/crawler.service';
 import { ActivatedRoute } from '@angular/router';
+import { UrlClass } from 'src/app/models/urlClass';
 
 @Component({
   selector: 'app-sme',
@@ -17,9 +18,9 @@ export class SmeComponent implements OnInit {
   ngOnInit() {}
 
   sendUrl(input: string) {
-    console.log(input)
-    const token = localStorage.getItem('usertoken');
-    console.log(token)
-    this.crawler.scrapeUrl(input,token);
+    console.log(input);
+    const url = new UrlClass(input);
+    this.crawler.scrapeUrl(url);
   }
+
 }
