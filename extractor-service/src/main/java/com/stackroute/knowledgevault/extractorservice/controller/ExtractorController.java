@@ -130,15 +130,17 @@ public class ExtractorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) throws IOException {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
         System.out.println("reached");
 
-        File someFile = (File) file;
+        File convFile = new File( file.getOriginalFilename());
 
-        System.out.println(someFile.canRead() + " name:" + someFile.getName());
+        file.transferTo(convFile);
+
+        System.out.println(convFile.canRead() + " name:" + convFile.getName());
 
 //        responseEntity =new ResponseEntity<String>("success", HttpStatus.OK);
 
@@ -147,7 +149,7 @@ public class ExtractorController {
             try {
                 //Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
 
-                data = service.extractOneFile(someFile);
+                data = service.extractOneFile(convFile);
 
                 kafkaTemplate.send(TOPIC, data);
 
