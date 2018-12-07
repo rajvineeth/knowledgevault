@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SuppressWarnings("deprecation")
 @Configuration
-public class CorsFilter {
+public class CORSFilter {
 
     @Bean
     public FilterRegistrationBean corsFilter() {

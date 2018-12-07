@@ -38,6 +38,7 @@ public class ZuulgatewayApplication {
 	public ErrorFilter errorFilter() {
 		return new ErrorFilter();
 	}
+	
 	@Bean
 	public RouteFilter routeFilter() {
 		return new RouteFilter();
@@ -47,7 +48,7 @@ public class ZuulgatewayApplication {
 	public CORSfilter corsFilter() {
 		return new CORSfilter();
 	}
-	
+
 	// @Bean
 	// public CorsFilter corsFilter() {
 	// 	final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
