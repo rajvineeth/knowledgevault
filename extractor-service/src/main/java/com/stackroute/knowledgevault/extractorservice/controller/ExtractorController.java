@@ -151,6 +151,8 @@ public class ExtractorController {
 
                 kafkaTemplate.send("extracted2", data);
 
+                System.out.println("Document id: " + data.getId() + "File name: " + convFile.getName());
+
                 responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
             } catch (IOException e) {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
