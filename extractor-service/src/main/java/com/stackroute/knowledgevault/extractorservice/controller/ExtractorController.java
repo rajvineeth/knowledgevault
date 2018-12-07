@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -137,8 +138,11 @@ public class ExtractorController {
         System.out.println("reached");
 
         File convFile = new File( file.getOriginalFilename());
+        convFile.createNewFile();
 
-        file.transferTo(convFile);
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
 
         System.out.println(convFile.canRead() + " name:" + convFile.getName());
 
