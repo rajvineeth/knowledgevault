@@ -16,7 +16,7 @@ import { Injectable } from '@angular/core';
 export class FileUploadService {
 
   private getRequest = 'http://35.154.72.182:8094/api/upload';
-//  private postRequest = 'http://localhost:8094/api/';
+  //  private postRequest = 'http://localhost:8094/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -31,26 +31,25 @@ export class FileUploadService {
     });
 
     return this.http.request(req);
-//      const getUrl = this.getRequest + 'Medical';
-      // console.log('in service');
-      // console.log(formData.getAll('File'));
-      // return this.http.post(this.getRequest, formData, httpOptions);
-      // .subscribe(
-      //   data => {
-      //     if (data == null) {
-      //       console.log(data);
-      //     }
-      //   }
-      // );
-//      console.log('dsfds'+this.http.post(this.getRequest, formData, httpOptions));
-      // .subscribe(
-      //   data => {
-      //     //if (data == null) {
-      //       console.log(data);
-      //       console.log("sent data");
-      //   }
-      // );
-  }
+    //      const getUrl = this.getRequest + 'Medical';
+    // console.log('in service');
+    // console.log(formData.getAll('File'));
+    // return this.http.post(this.getRequest, formData, httpOptions);
+    // .subscribe(
+    //   data => {
+    //     if (data == null) {
+    //       console.log(data);
+    //     }
+    //   }
+    // );
+    //      console.log('dsfds'+this.http.post(this.getRequest, formData, httpOptions));
+    // .subscribe(
+    //   data => {
+    //     //if (data == null) {
+    //       console.log(data);
+    //       console.log("sent data");
+    //   }
+    // );
   }
 }
 
