@@ -3,6 +3,11 @@ mat-toolbar {
   color: #bbb;
   font-size: 1rem;
 }
+
+.attribution {
+  color: #5cb85c;
+}
+
 a {
   color: #5cb85c;
   font-weight: bold;

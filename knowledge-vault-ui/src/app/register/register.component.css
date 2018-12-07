@@ -1,5 +1,5 @@
 .register-card {
-  background-color: rgba(249,248,252,0.925);
+  background-color: rgba(249, 248, 252, 0.925);
   max-width: 80rem;
   position: inherit;
   justify-content: center;
@@ -30,12 +30,11 @@ button {
 }
 
 .register {
-  height: 90vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 mat-card-header {
   justify-content: center;
   color: #5cb85c;

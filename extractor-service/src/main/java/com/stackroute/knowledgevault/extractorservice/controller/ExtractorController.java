@@ -138,16 +138,16 @@ public class ExtractorController {
 
         File someFile = (File) file;
 
-        System.out.println(someFile);
+        System.out.println(someFile.canRead() + " name:" + someFile.getName());
 
-        responseEntity =new ResponseEntity<String>("success", HttpStatus.OK);
+//        responseEntity =new ResponseEntity<String>("success", HttpStatus.OK);
 
 //        for (File file : files) {
 
-/*            try {
-                Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            try {
+                //Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
 
-                data = service.extractOneFile((File) file);
+                data = service.extractOneFile(someFile);
 
                 kafkaTemplate.send(TOPIC, data);
 
@@ -160,7 +160,7 @@ public class ExtractorController {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
 
-        }*/
+//        }
         return responseEntity;
 
     }
