@@ -2,14 +2,8 @@ import { Injectable } from '@angular/core';
 import { ReceivedQuery } from './models/receivedQuery';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-  })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +17,17 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getQuery(): Observable<Array<ReceivedQuery>> {
+
+    const token = localStorage.getItem('usertoken');
+    console.log(token);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        // 'Authorization': 'Bearer ' + token,
+        // 'Allow-Access-Control-Origin': '*'
+      })
+    };
     // console.log(this.http.get('recieved data: ' + this._url));
-    return this.http.get<Array<ReceivedQuery>>(this._url);
+    return this.http.get<Array<ReceivedQuery>>(this._url, httpOptions);
   }
 }

@@ -1,13 +1,20 @@
 <div class="search-results" fxLayout="row wrap" fxLayoutAlign="space-evenly center">
 
-  <nav *ngIf="!processingDone; else elseBlock;">
-    <mat-spinner> </mat-spinner>
-  </nav>
-  <ng-template #elseBlock>
+  <nav *ngIf="show; else elseBlock;" class="results">
     <nav *ngFor="let res of queryResults">
       <span>
         <app-card [card]="res"> </app-card>
-      </span> 
+      </span>
     </nav>
+  </nav>
+
+  <ng-template #elseBlock>
+    <mat-card class="example-card">
+      <img mat-card-image src="../../assets/medical.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-actions>
+        <button mat-button (click)="dikhao(true)" style="margin-left: 42%;">Show Results</button>
+      </mat-card-actions>
+    </mat-card>
   </ng-template>
+  
 </div>

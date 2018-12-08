@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router, private srvc: ShareService,
     private loginsrvc: LoginService, private mongo: MongoService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   shurukaro() {
     // if (this.username === 'abc') {
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userrole', this.userDetails.role);
         // console.log('user details', Object.values(this.userDetails));
       }
-    );
+      );
   }
 
   logIn(): void {
@@ -69,12 +69,19 @@ export class LoginComponent implements OnInit {
       console.log(this.userDetails.role);
       if (this.userDetails.role === 'General User') {
         this.router.navigate(['home']);
+        window.location.reload();
       } else {
-        this.router.navigate(['sme']);
+        if (this.userDetails.username === 'gamma' && this.userDetails.role === 'Subject Matter Expert') {
+          this.router.navigate(['sme/gamma']);
+          window.location.reload();
+        } else {
+          alert('invalid credentials');
+          localStorage.removeItem('username');
+          localStorage.removeItem('usertoken');
+          localStorage.removeItem('userrole');
+          this.router.navigate(['login']);
+        }
       }
-      window.location.reload();
-    } else {
-      alert('Invalid Credentials');
     }
   }
 }
