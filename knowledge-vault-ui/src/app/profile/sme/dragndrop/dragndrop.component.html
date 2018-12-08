@@ -1,7 +1,7 @@
 <div class="drag-drop" fxLayout fxLayoutAlign="space-evenly center">
   <mat-card class="drag-drop-card">
     <mat-card-header>
-      <mat-card-title>Upload Document</mat-card-title>
+      <mat-card-title>Add Documents</mat-card-title>
     </mat-card-header>
     <img mat-card-image id="myImg">
       <mat-card-content>
@@ -9,7 +9,7 @@
         </app-file-upload-drag-drop>
       </mat-card-content>
       <mat-card-actions>
-        <button class="saveButton"  mat-raised-button type="button" (click)="sendFileDB()">Save Document</button>
+        <button class="saveButton"  mat-raised-button type="button" (click)="sendFileDB()">Upload</button>
         <div *ngIf="show_success_msg">
           <!--<h6 style="color: black;"> {{ save_success }} </h6>-->
         </div>
