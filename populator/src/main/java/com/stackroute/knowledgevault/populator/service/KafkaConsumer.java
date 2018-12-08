@@ -52,7 +52,7 @@ public class KafkaConsumer {
         if(res!=null) {
             LOGGER.info("consumed message from para {}", res);
             ArrayList<Integer> id=new ArrayList<>();
-            id.add(1);
+            id.add(9999);
             MedicalCondition medicalCondition = new MedicalCondition(res.getTitle(),"MedicalCondition");
             Document document=new Document(res.getUrl(),"Document",id);
             List<MedicalSymptom> medicalSymptomList=new ArrayList<>();
