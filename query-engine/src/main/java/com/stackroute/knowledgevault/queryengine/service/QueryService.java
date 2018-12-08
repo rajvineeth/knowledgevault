@@ -84,9 +84,9 @@ boolean flag2=false;
                         anaset2.add(record.get("name").toString());
                     }
                     if(label.equals("\"Document\"")){
-//                        if(record.get("name").toString().contains("http")){
-//                            docset2.add(record.get("name").toString());
-//                        }
+                        if(record.get("name").toString().contains("http")){
+                            docset2.add(record.get("name").toString());
+                        }
                         String[] strlist =  record.get("docId").toString().substring(1,record.get("docId").toString().length()-1).split(",");
                         List<Integer> docs=new ArrayList<>();
                         for(String s:strlist){
