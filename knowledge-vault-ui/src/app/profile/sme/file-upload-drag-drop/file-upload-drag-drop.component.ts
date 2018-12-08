@@ -13,7 +13,6 @@ export class FileUploadDragDropComponent implements OnInit {
   dragAreaClass = 'dragarea';
   fileList = [];
 
-//  @Input() fileExt = 'PDF';
   @Input() maxFiles = 10;
   @Input() maxSize = 50;
   @Output() uploadStatus = new EventEmitter<any>();
@@ -70,6 +69,7 @@ export class FileUploadDragDropComponent implements OnInit {
       for (let j = 0; j < files.length; j++) {
         if (!this.fileList.some(x => x.name === files[j].name)) {
           this.fileList.push(files[j]);
+          // alert('file added successfully');
           this.successfiles.push('File: ' + files[j].name + ' added successfully.');
         } else {
           this.errors.push('File: ' + files[j].name + ' Already added in list.');
@@ -86,26 +86,10 @@ export class FileUploadDragDropComponent implements OnInit {
       this.errors.push('Error: At a time you can upload only ' + this.maxFiles + ' files');
       return;
     }
-//    this.isValidFileExtension(files);
+
     this.isValidFileSize(files)
     return this.errors.length === 0;
   }
-
-  // private isValidFileExtension(files) {
-  //   // Make array of file extensions
-  //   const extensions = (this.fileExt.split(','))
-  //     .map(function (x) { return x.toLocaleUpperCase().trim(); });
-  //   for (let i = 0; i < files.length; i++) {
-  //     // Get file extension
-  //     const ext = files[i].name.toUpperCase().split('.').pop() || files[i].name;
-  //     // Check the extension exists
-  //     const exists = extensions.includes(ext);
-  //     if (!exists) {
-  //       this.errors.push('Invalid file : ' + files[i].name + ', Upload only ' + this.fileExt + ' file.');
-  //     }
-  //     this.isValidFileSize(files[i]);
-  //   }
-  // }
 
   private isValidFileSize(files) {
 

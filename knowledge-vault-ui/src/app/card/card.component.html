@@ -10,6 +10,7 @@
     <mat-card-subtitle>{{ alternateName }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+    <!-- <app-symptom-card [symptoms]="card.symptoms" ></app-symptom-card> -->
     <mat-expansion-panel
       *ngIf="card.symptoms.length != 0"
       [expanded]="step === 0"
@@ -42,10 +43,4 @@
       [paragraphs]="card.doc"
     ></app-accordion>
   </mat-card-content>
-  <!-- <mat-card-footer class="foot">
-    <button mat-button routerLink="carddetail/{{card.medicalCondition}}">
-      Detailed View
-    </button>
-    <button mat-button>Save Card</button>
-  </mat-card-footer> -->
 </mat-card>

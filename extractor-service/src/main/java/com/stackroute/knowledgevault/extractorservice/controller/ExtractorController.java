@@ -14,7 +14,11 @@ import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +34,8 @@ public class ExtractorController {
     private KafkaTemplate<String, ExtractedFileData> kafkaTemplate;
 
     private static final String TOPIC = "extracted";
+
+//    private final Path rootLocation = Paths.get("upload-dir");
 
     @Value("${folder.path}")
     private String initialPath;
@@ -125,21 +131,27 @@ public class ExtractorController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) throws IOException {
 
         ExtractedFileData data;
         ResponseEntity responseEntity = null;
-        System.out.println("reached");
-        System.out.println(file);
 
-/*        for (File file : files) {
+        File convFile = new File( file.getOriginalFilename());
+        convFile.createNewFile();
+
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
 
             try {
-                data = service.extractOneFile(file);
 
-//                kafkaTemplate.send(TOPIC, data);
+                data = service.extractOneFile(convFile);
 
-//                kafkaTemplate.send("extracted2", data);
+                kafkaTemplate.send(TOPIC, data);
+
+                kafkaTemplate.send("extracted2", data);
+
+                System.out.println("Document id: " + data.getId() + "File name: " + convFile.getName());
 
                 responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
             } catch (IOException e) {
@@ -148,7 +160,6 @@ public class ExtractorController {
                 responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
             }
 
-        }*/
         return responseEntity;
 
     }

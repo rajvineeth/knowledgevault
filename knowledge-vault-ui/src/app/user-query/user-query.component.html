@@ -4,7 +4,7 @@
 <mat-card class="userInput-card" layout-align="center none">
    <mat-card-header>
      <div style="margin:auto">
-      <mat-card-title>Experiencing symptoms but not sure what they mean? Use Knowledge Vault to help determine possible causes and when to see a doctor.</mat-card-title>
+      <!-- <mat-card-title>Experiencing symptoms but not sure what they mean? Use Knowledge Vault to help determine possible causes and when to see a doctor.</mat-card-title> -->
       </div>
    </mat-card-header>
    <mat-card-content>
@@ -22,7 +22,7 @@
      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
    </mat-card-content>
    <mat-card-actions>
-   <button mat-raised-button (click)="toggleVoiceRecognition()">{{ started ? 'Stop voice to text' : 'Start voice to text' }}</button>
+   <button mat-raised-button (click)="toggleVoiceRecognition()">{{ started ? 'Stop Voice to Text' : 'Start Voice to Text' }}</button>
      <button mat-raised-button (click)="search()">Search</button>
    </mat-card-actions>
 

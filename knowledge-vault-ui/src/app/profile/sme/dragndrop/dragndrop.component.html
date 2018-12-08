@@ -1,18 +1,22 @@
-<mat-card>
-  <mat-card-title style="background-color:grey;width: 100%;">
-    <legend style="text-align:center"><b>Upload Document</b></legend>
-  </mat-card-title>
-  <img mat-card-image id="myImg">
-    <mat-card-content>
-      <app-file-upload-drag-drop [IsuploadSucess]="IsUploaded" maxFiles="10" maxSize="50" fileExt="PDF" (uploadStatus)="getFiles($event)">
-      </app-file-upload-drag-drop>
-    </mat-card-content>
-</mat-card>
-
-<button class="saveButton" mat-raised-button type="button" (click)="sendFileDB()">Save Document</button>
-
-<div *ngIf="show_success_msg">
-  <h1 style="color: mediumpurple"> {{ save_success }} </h1>
+<div class="drag-drop" fxLayout fxLayoutAlign="space-evenly center">
+  <mat-card class="drag-drop-card">
+    <mat-card-header>
+      <mat-card-title>Upload Document</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image id="myImg">
+      <mat-card-content>
+        <app-file-upload-drag-drop [IsuploadSucess]="IsUploaded" maxFiles="10" maxSize="50" fileExt="PDF" (uploadStatus)="getFiles($event)">
+        </app-file-upload-drag-drop>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="saveButton"  mat-raised-button type="button" (click)="sendFileDB()">Save Document</button>
+        <div *ngIf="show_success_msg">
+          <!--<h6 style="color: black;"> {{ save_success }} </h6>-->
+        </div>
+      </mat-card-actions>
+  </mat-card>
 </div>
+
+
 
 <br>

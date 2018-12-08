@@ -2,8 +2,8 @@ import { SpeechService } from './../../lib/speech.service';
 import { UserQueryService } from './../user-query.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { takeUntil, filter } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
     selector: 'app-user-query',
@@ -44,10 +44,21 @@ export class UserQueryComponent implements OnInit, OnDestroy {
     }
 
     search() {
-        console.log('message: ' , this.msg);
+        console.log('message: ', this.msg);
         this.service.postUserQuery(this.msg);
         this.speech.stop();
-        this.router.navigate(['queryresults']);
+        const username = localStorage.getItem('username');
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+              if (event.url === 'queryresults') {
+                if (username !== undefined) {
+                    this.router.navigate(['queryresults'], {queryParams: {'id': username }});
+                } else {
+                    this.router.navigate(['queryresults']);
+                }
+              }
+            }
+          });
     }
 
     toggleVoiceRecognition(): void {

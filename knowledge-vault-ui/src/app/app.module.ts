@@ -30,6 +30,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MongoService } from './mongo.service';
 import { CrawlerService } from './crawler.service';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { SymptomCardComponent } from './card/symptom-card/symptom-card.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     AccordionComponent,
     UserProfileComponent,
     SpinnerComponent,
+    SymptomCardComponent,
   ],
   imports: [
     BrowserModule,
