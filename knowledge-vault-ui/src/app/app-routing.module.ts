@@ -12,7 +12,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 const routes: Routes = [
   { path: 'carddetail/:medicalCondition', component: CardDetailComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'sme', component: SmeComponent },
+  { path: 'sme/gamma', component: SmeComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'home', component: HomeComponent},
   { path: 'profile', component: UserProfileComponent },

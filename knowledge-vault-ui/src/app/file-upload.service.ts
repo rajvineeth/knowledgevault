@@ -12,7 +12,6 @@ export class FileUploadService {
   constructor(private http: HttpClient) { }
 
   extractFile(file: File): Observable<HttpEvent<{}>> {
-    
     const formdata: FormData = new FormData();
 
     formdata.append('file', file);

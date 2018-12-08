@@ -10,9 +10,9 @@ export class ShareService {
 
   public setValue(value: any): void {
     this.valueObs.next(value);
-    console.log('value after setValue() is called: '+ this.valueObs.value)
+    console.log('value after setValue() is called: ', this.valueObs.value);
   }
- 
+
   public getValue(): Observable<any> {
     return this.valueObs;
   }

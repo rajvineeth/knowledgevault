@@ -48,17 +48,12 @@ export class UserQueryComponent implements OnInit, OnDestroy {
         this.service.postUserQuery(this.msg);
         this.speech.stop();
         const username = localStorage.getItem('username');
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-              if (event.url === 'queryresults') {
-                if (username !== undefined) {
-                    this.router.navigate(['queryresults'], {queryParams: {'id': username }});
-                } else {
-                    this.router.navigate(['queryresults']);
-                }
-              }
-            }
-          });
+        console.log('user name: ', username);
+        if (username === undefined || username == null) {
+            this.router.navigate(['queryresults'], { queryParams: { 'query': this.msg }});
+        } else {
+            this.router.navigate(['queryresults'], { queryParams: { 'id': username, 'query': this.msg } });
+        }
     }
 
     toggleVoiceRecognition(): void {
