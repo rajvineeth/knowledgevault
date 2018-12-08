@@ -11,13 +11,13 @@
 }
 
 #myImg {
-    background-image: url("../../../../assets/dropArea.jpg");
+    background-image: url("../../../../assets/vault.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .drag-drop-card {
-    background-color: rgba(249, 248, 252, 0.925);
+    background-color: rgba(249, 248, 252, 0.425);
   position: inherit;
   justify-content: center;
   text-align: center;

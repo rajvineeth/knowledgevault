@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <div>
-                    <a href="javascript:void(0)" (click)="file.click()"> Click to browse </a> <br>
+                    <button href="javascript:void(0)" mat-button type="button" (click)="file.click()"> Click to Browse </button> <br><br>
                     <a style="color: grey">Or Drag & Drop File.</a>
                 </div>
                 <input type="file" #file [multiple]="(maxFiles >=1)" (change)="onFileChange($event)" style="display:none" />
