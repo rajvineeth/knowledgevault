@@ -216,6 +216,9 @@ boolean flag=false;
         return savedList.get().getData();
     }
     public String getdoc(Integer id){
+        if(id==9999){
+            return null;
+        }
         Optional<ExtractedFileData> doc=extractedDataService.getDocById(id);
         String content=doc.get().getContent();
         return content;
