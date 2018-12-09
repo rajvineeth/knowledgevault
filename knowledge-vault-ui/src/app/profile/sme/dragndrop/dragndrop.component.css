@@ -7,23 +7,25 @@
     display: inline-block;
     justify-content: center;
     font-size: 1rem;
+  /* text-align: center; */
+
     /* margin-left: 40%; */
 }
 
 #myImg {
-    background-image: url("../../../../assets/dropArea.jpg");
+    background-image: url("../../../../assets/vault.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .drag-drop-card {
-    background-color: rgba(249, 248, 252, 0.925);
+  background-color: rgba(249, 248, 252, 0.925);
   position: inherit;
   justify-content: center;
   text-align: center;
   width: 50vw;
-  /* height: 15vh; */
-  height: 30vh;
+  /* height: 15vh; 
+  height: 30vh; */
 }
 
 .drag-drop {

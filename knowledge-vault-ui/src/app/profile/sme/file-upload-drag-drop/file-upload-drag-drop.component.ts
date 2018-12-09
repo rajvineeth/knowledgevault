@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
@@ -12,9 +13,12 @@ export class FileUploadDragDropComponent implements OnInit {
   successfiles: Array<string> = [];
   dragAreaClass = 'dragarea';
   fileList = [];
+  formats = new FormControl();
+  formatList: string[] = ['PDF', 'csv', 'doc', 'xls', 'text', 'JSON'];
 
   @Input() maxFiles = 10;
   @Input() maxSize = 50;
+  @Input() bar = false;
   @Output() uploadStatus = new EventEmitter<any>();
 
   @Input() set IsuploadSucess(isUploaded: boolean) {
@@ -70,9 +74,9 @@ export class FileUploadDragDropComponent implements OnInit {
         if (!this.fileList.some(x => x.name === files[j].name)) {
           this.fileList.push(files[j]);
           // alert('file added successfully');
-          this.successfiles.push('File: ' + files[j].name + ' added successfully.');
+          this.successfiles.push(files[j].name + ' added successfully');
         } else {
-          this.errors.push('File: ' + files[j].name + ' Already added in list.');
+          this.errors.push('File: ' + files[j].name + ' Already added in list');
         }
       }
       this.uploadStatus.emit(this.fileList);

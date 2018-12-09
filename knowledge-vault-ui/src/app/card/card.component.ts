@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { ReceivedQuery } from '../models/receivedQuery';
 
 @Component({
@@ -12,8 +11,11 @@ export class CardComponent implements OnInit {
   @Input() private card: ReceivedQuery;
   private name: string;
   private alternateName: string;
+  private rows;
+  private cols;
 
-  constructor(private router: Router) {
+  constructor(
+    ) {
    }
 
   ngOnInit() {
@@ -25,10 +27,6 @@ export class CardComponent implements OnInit {
       this.alternateName = this.ucFirst(this.alternateName);
     }
     this.name = this.ucFirst(this.name);
-   }
-
-  detailedView(card: ReceivedQuery) {
-    this.router.navigate(['carddetail/{{card.MedicalCondition}}']);
   }
 
   ucFirst(name: string) {

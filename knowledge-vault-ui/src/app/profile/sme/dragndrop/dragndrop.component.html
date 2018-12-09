@@ -1,21 +1,28 @@
 <div class="drag-drop" fxLayout fxLayoutAlign="space-evenly center">
+  <div>
   <mat-card class="drag-drop-card">
     <mat-card-header>
-      <mat-card-title>Add Document</mat-card-title>
+      <mat-card-title>Add Documents</mat-card-title>
     </mat-card-header>
+    <mat-card-content>
     <img mat-card-image id="myImg">
-      <mat-card-content>
-        <app-file-upload-drag-drop [IsuploadSucess]="IsUploaded" maxFiles="10" maxSize="50" fileExt="PDF" (uploadStatus)="getFiles($event)">
-        </app-file-upload-drag-drop>
+      <div *ngIf="currentFileUpload" class="progress">
+        Progress <br>
+          <mat-progress-bar
+              class="example-margin"
+               aria-valuemin="0"
+               aria-valuemax="100" 
+              [color]="primary"
+              [mode]="determinate"
+              [value]="progress.percentage"
+              [ngStyle]="{width:progress.percentage+'%'}">
+            </mat-progress-bar>
+      </div>
+      <app-file-upload-drag-drop [IsuploadSucess]="IsUploaded" maxFiles="10" maxSize="50" (uploadStatus)="getFiles($event)" [bar]="currentFileUpload">
+        </app-file-upload-drag-drop><br>
+        <button class="saveButton" mat-raised-button type="button" (click)="sendFileDB()">Upload</button>
       </mat-card-content>
-      <mat-card-actions>
-        <button class="saveButton"  mat-raised-button type="button" (click)="sendFileDB()">Upload Document</button>
-        <div *ngIf="show_success_msg">
-        </div>
-      </mat-card-actions>
   </mat-card>
 </div>
-
-
-
+</div>
 <br>

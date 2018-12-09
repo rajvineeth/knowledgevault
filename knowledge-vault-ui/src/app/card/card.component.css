@@ -2,7 +2,7 @@
   min-width: 220px;
   min-height: 220px;
   max-width: 300px;
-  background-color: rgba(234, 234, 234, 0.58);
+  background-color: rgba(234, 234, 234, 0.0);
   border-radius: 0;
 }
 
@@ -10,5 +10,5 @@ mat-card-title {
   color: #990000;
 }
 .sympHead {
-  background-color:  rgba(234, 234, 234, 0.9);
+  background-color:  rgba(234, 234, 234, 0.0);
 }
