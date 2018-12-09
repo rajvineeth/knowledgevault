@@ -11,6 +11,8 @@ export class CardComponent implements OnInit {
   @Input() private card: ReceivedQuery;
   private name: string;
   private alternateName: string;
+  private rows;
+  private cols;
 
   constructor(
     ) {
