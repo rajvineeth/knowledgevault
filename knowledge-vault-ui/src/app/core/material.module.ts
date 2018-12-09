@@ -1,10 +1,12 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule, MatSidenavModule,
     MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatExpansionModule, MatListModule,
-    MatGridListModule, MatProgressBarModule, MatFormFieldModule
+    MatGridListModule, MatProgressBarModule, MatFormFieldModule, MatRippleModule 
 } from '@angular/material';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     imports: [
@@ -22,7 +24,10 @@ import {
         MatListModule,
         MatSidenavModule,
         MatProgressBarModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatRippleModule,
+        MatSelectModule,
+        ReactiveFormsModule
     ],
     exports: [
         CommonModule,
@@ -40,7 +45,10 @@ import {
         MatProgressSpinnerModule,
         MatGridListModule,
         MatProgressBarModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatRippleModule,
+        MatSelectModule,
+        ReactiveFormsModule
     ],
 })
 export class CustomMaterialModule { }
