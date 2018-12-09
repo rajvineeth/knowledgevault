@@ -1,10 +1,8 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../_models';
 import { UserService } from '../_services';
 import { ShareService } from '../share.service';
-import { UserDetails } from '../models/reg/userdetails';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +15,7 @@ export class HeaderComponent implements OnInit {
   currentUser: User;
   username = 'User';
   userThere = false;
+  isSme = false;
 
   /**
    * private constructor to inject other components and/or services.
@@ -35,9 +34,16 @@ export class HeaderComponent implements OnInit {
       this.userThere = true;
       this.username = name;
     }
+
+    const role = localStorage.getItem('userrole');
+    console.log('role value: ', role);
+    if (role === 'Subject Matter Expert') {
+      this.isSme = true;
+    }
+
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /**
    * this function provides the routing for home component
@@ -57,17 +63,22 @@ export class HeaderComponent implements OnInit {
    * this function provides the routing for register component
    */
   register(): void {
-    // localStorage.removeItem('username');
-    // localStorage.removeItem('usertoken');
-    // localStorage.removeItem('userrole');
-    // this.userThere = false;
     this.router.navigate(['register']);
+  }
+
+  /**
+   * this function provides routing for authorized users to upload documents to add to knowledgebase
+   */
+  gotoSME(): void {
+    const name = localStorage.getItem('username');
+    this.router.navigate(['sme/' + name]);
   }
 
   /**
    * this function provides the routing for logout component
    */
   logout(): void {
+    this.isSme = false;
     localStorage.removeItem('username');
     localStorage.removeItem('usertoken');
     localStorage.removeItem('userrole');
