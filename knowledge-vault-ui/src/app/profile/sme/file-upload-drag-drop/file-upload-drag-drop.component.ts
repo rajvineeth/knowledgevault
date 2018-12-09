@@ -91,7 +91,7 @@ export class FileUploadDragDropComponent implements OnInit {
       return;
     }
 
-    this.isValidFileSize(files)
+    this.isValidFileSize(files);
     return this.errors.length === 0;
   }
 
