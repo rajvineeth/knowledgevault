@@ -53,7 +53,7 @@ public class KafkaConsumer {
             LOGGER.info("consumed message from para {}", res);
             ArrayList<Integer> id=new ArrayList<>();
             id.add(9999);
-            MedicalCondition medicalCondition = new MedicalCondition(res.getTitle(),"MedicalCondition");
+            MedicalCondition medicalCondition = new MedicalCondition(res.getTitle().toLowerCase(),"MedicalCondition");
             Document document=new Document(res.getUrl(),"Document",id);
             List<MedicalSymptom> medicalSymptomList=new ArrayList<>();
             medicalGraphService.populate(document, medicalCondition, new AnatomicalStructure(),medicalSymptomList);

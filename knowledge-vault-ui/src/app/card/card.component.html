@@ -7,33 +7,11 @@
 >
   <mat-card-header>
     <mat-card-title>{{ name }}</mat-card-title>
-    <mat-card-subtitle>{{ alternateName }}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="alternateName !== null" >{{ alternateName }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <!-- <app-symptom-card [symptoms]="card.symptoms" ></app-symptom-card> -->
-    <mat-expansion-panel
-      *ngIf="card.symptoms.length != 0"
-      [expanded]="step === 0"
-      (opened)="setStep(0)"
-      hideToggle
-      class="sympHead"
-    >
-      <mat-expansion-panel-header class="sympHead">
-        <mat-panel-title> Symptoms </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-symptoms [symptoms]="card.symptoms"></app-symptoms>
-    </mat-expansion-panel>
-    <mat-expansion-panel
-      *ngIf="card.anatomy.length != 0"
-      [expanded]="step === 0"
-      (opened)="setStep(0)"
-      hideToggle
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title> Anatomy </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-symptoms [symptoms]="card.anatomy"></app-symptoms>
-    </mat-expansion-panel>
+    <app-symptom-card *ngIf="card.symptoms.length != 0" [subHeader]="'Symptoms'" [symptoms]="card.symptoms" ></app-symptom-card>
+    <app-symptom-card *ngIf="card.anatomy.length != 0" [subHeader]="'Anatomical Structures'" [symptoms]="card.anatomy" ></app-symptom-card>
     <app-accordion
       *ngIf="card.para.length != 0"
       [paragraphs]="card.para"
