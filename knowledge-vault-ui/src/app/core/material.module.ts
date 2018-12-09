@@ -27,7 +27,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatFormFieldModule,
         MatRippleModule,
         MatSelectModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatDialogModule
     ],
     exports: [
         CommonModule,
@@ -48,7 +49,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatFormFieldModule,
         MatRippleModule,
         MatSelectModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatDialogModule
     ],
 })
 export class CustomMaterialModule { }
