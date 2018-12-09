@@ -1,6 +1,7 @@
 <div class="search-results" fxLayout="row wrap" fxLayoutAlign="space-evenly center">
 
-  <nav *ngIf="show; else elseBlock;" class="results">
+  <nav *ngIf="show; else elseBlock;" class="results" fxLayout="row wrap"
+  fxLayoutAlign="space-evenly center">
     <nav *ngFor="let res of queryResults">
       <span>
         <app-card [card]="res"> </app-card>
