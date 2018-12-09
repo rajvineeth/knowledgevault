@@ -7,22 +7,15 @@
       <div>
         <mat-card class="url">
           <mat-card-header>
-            <mat-card-title style="color: #5cb85c">You can provide url for your resource</mat-card-title>
+            <mat-card-title style="color: #5cb85c"> Enter Web URL</mat-card-title>
           </mat-card-header>        
           <nav>
             <mat-form-field class="url-field">
-              <input matInput placeholder="Resource path" type="text" #inp (keyup.enter)="sendUrl(inp.value)">
+              <input matInput placeholder="URL" type="text" #inp (keyup.enter)="sendUrl(inp.value)">
             </mat-form-field>
           </nav>
         </mat-card>
       </div>
-<!--
-      <div>
-          <h2 style="text-align:center;color: green">
-              Or
-            </h2>
-      </div>
-      -->
       <div class="card">
           <h2 style="text-align:center;color: green">
             </h2>

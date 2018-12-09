@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse, HttpEventType } from '@angular/common/http';
 
 @Component({
-//  selector: 'app-dragndrop',
-selector: 'app-dragndrop',
+  selector: 'app-dragndrop',
   templateUrl: './dragndrop.component.html',
   styleUrls: ['./dragndrop.component.css']
 })

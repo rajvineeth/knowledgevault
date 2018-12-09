@@ -10,6 +10,10 @@ mat-toolbar {
   top: 0;
 }
 
+button {
+  color: #5cb85c;
+}
+
 .example-container {
   flex: 1 1 auto;
   background-color: white;
@@ -54,18 +58,14 @@ span {
 
 mat-sidenav {
   width: 30vw;
-  /* background: rgba(0, 255, 106, 0.6); */
-  /* background:rgba(255, 255, 255, 0.3); */
   background: white;
   background-size: cover;
 }
 
 button:visited {
   color:#5cb85c;
-  /* font-weight: bolder; */
 }
 
 button:focus {
   color: #5cb85c;
-  /* font-weight: bolder; */
 }

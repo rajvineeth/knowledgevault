@@ -1,8 +1,7 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../_models';
 import { UserService } from '../_services';
-import { ShareService } from '../share.service';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +24,7 @@ export class HeaderComponent implements OnInit {
    * component irrespective of their relationship
    */
 
-  constructor(private router: Router, private srvc: ShareService) {
+  constructor(private router: Router) {
 
     const name = localStorage.getItem('username');
     console.log(name);
