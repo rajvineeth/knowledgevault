@@ -28,6 +28,9 @@
         </a>
         <mat-menu #avatarMenu="matMenu">
           <button mat-menu-item routerLink="/profile"> Profile</button>
+          <nav *ngIf="isSme">
+            <button mat-button (click)="gotoSME()"> SME </button>
+          </nav>
           <button mat-menu-item (click)="goToSetting()"> Setting </button>
           <button mat-button (click)="logout()"> Logout </button>
           <button mat-menu-item>Help</button>
@@ -56,6 +59,9 @@
           </a>
           <mat-menu #avatarMenu="matMenu">
             <button mat-menu-item routerLink='/profile'>Profile</button>
+            <nav *ngIf="isSme">
+              <button mat-button (click)="gotoSME()"> SME </button>
+            </nav>
             <button mat-menu-item>Setting</button>
             <button mat-button (click)="logout()"> Logout </button>
             <button mat-menu-item>Help</button>
