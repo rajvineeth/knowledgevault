@@ -1,8 +1,9 @@
 .bg {
-    background-image: url("../../../assets/knowledge_vault.jpg");
+    background-image: url("../../../assets/vault.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 40vh;
     /* height: 100%;
     max-width: 100%; */
 }
