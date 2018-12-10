@@ -1,9 +1,9 @@
-<div class="browse"><button href="javascript:void(0)" mat-stroked-button type="button" (click)="file.click()"> Click to Browse </button>
+<div class="browse" fxLayout.xs="column"><button href="javascript:void(0)" mat-stroked-button type="button" (click)="file.click()"> Click to Browse </button>
     <mat-form-field>
             <mat-select placeholder="Select file format(s)" [formControl]="formats" multiple required>
               <mat-option *ngFor="let format of formatList" [value]="format">{{format}}</mat-option>
             </mat-select>
-          </mat-form-field>
+        </mat-form-field>
 </div>
     <div class="drop">
     <div draggable="true" ngClass="{{dragAreaClass}}">
