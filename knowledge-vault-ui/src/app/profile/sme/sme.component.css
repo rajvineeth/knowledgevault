@@ -1,10 +1,24 @@
 .bg {
-    background-image: url("../../../assets/vault.jpg");
+    background-image: url("../../../assets/knowledge_vault.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 200px;
+    /* height: 100%;
+    max-width: 100%; */
 }
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    justify-content: center;
+    margin-left: 30%;
+    font-size: 1rem;
+}
+
 .home {
     background-color: white;
 }

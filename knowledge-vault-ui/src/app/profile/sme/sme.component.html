@@ -14,6 +14,9 @@
               <input matInput placeholder="URL" type="text" #inp (keyup.enter)="sendUrl(inp.value)">
             </mat-form-field>
           </nav>
+          <nav>
+            <button mat-button (click) = "sendUrl(inp.value)"> Go </button>
+          </nav>
         </mat-card>
       </div>
       <div class="card">

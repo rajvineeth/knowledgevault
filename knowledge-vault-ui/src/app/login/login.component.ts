@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   token: string;
+  invalidUser: string;
 
   userDetails: UserDetails;
 
@@ -31,9 +32,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() { }
 
   shurukaro() {
-    // if (this.username === 'abc') {
-    //   this.router.navigate(['sme']);
-    // }
     this.logIn();
   }
 
@@ -70,11 +68,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
         window.location.reload();
       } else {
-        if (this.userDetails.username === 'gamma' && this.userDetails.role === 'Subject Matter Expert') {
-          this.router.navigate(['sme/gamma']);
+        if (this.userDetails.username === 'arpit' && this.userDetails.role === 'Subject Matter Expert') {
+          this.router.navigate(['sme/arpit']);
           window.location.reload();
         } else {
-          alert('invalid credentials');
+          this.invalidUser = ' invalid credentials';
           localStorage.removeItem('username');
           localStorage.removeItem('usertoken');
           localStorage.removeItem('userrole');

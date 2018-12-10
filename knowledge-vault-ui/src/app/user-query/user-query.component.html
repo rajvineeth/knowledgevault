@@ -17,7 +17,7 @@
      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
    </mat-card-content>
    <mat-card-actions>
-   <button mat-raised-button (click)="toggleVoiceRecognition()">{{ started ? 'Stop Voice to Text' : 'Start Voice to Text' }}</button>
+   <button mat-raised-button class="voice" (click)="toggleVoiceRecognition()">{{ started ? 'Stop Voice to Text' : 'Start Voice to Text' }}</button>
      <button mat-raised-button (click)="search()">Search</button>
    </mat-card-actions>
 

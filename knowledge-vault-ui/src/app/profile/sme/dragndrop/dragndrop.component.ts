@@ -44,7 +44,7 @@ export class DragndropComponent implements OnInit {
           }
         });
       }
-      
+
       this.fileList = undefined;
     }
   }

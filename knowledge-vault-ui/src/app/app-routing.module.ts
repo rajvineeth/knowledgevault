@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'carddetail/:medicalCondition', component: CardDetailComponent},
   { path: 'login', component: LoginComponent },
   { path: 'sme/gamma', component: SmeComponent },
+  { path: 'sme/arpit', component: SmeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: UserProfileComponent },
