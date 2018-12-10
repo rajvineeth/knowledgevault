@@ -327,3 +327,13 @@ services:
       - 8090:8090
     expose:
       - 8090
+
+  agenttodocker:
+    image:  harsha7890/agenttomonitordocker:v40
+    restart: always
+    network_mode:  host
+    volumes:
+    -  /var/run/docker.sock:/var/run/docker.sock
+    ports:
+    -  9001:9001
+    container_name: dockeragent      

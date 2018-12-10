@@ -27,6 +27,12 @@
 	<dependencies>
 
 		<dependency>
+                   <groupId>com.stackroute</groupId>
+                   <artifactId>agent</artifactId>
+                   <version>0.0.1-SNAPSHOT</version>
+               </dependency>
+		
+		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
 			<version>3.9.2</version>

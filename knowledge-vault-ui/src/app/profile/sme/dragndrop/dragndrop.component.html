@@ -7,16 +7,19 @@
     <mat-card-content>
     <img mat-card-image id="myImg">
       <div *ngIf="currentFileUpload" class="progress">
-        Progress <br>
+        <h3>Progress </h3>
           <mat-progress-bar
               class="example-margin"
                aria-valuemin="0"
                aria-valuemax="100" 
               [color]="primary"
               [mode]="determinate"
-              [value]="progress.percentage"
+              [value]="status"
               [ngStyle]="{width:progress.percentage+'%'}">
             </mat-progress-bar>
+          <h2>
+            <p> Thank you for your contribution! We have saved your document in our database. </p>
+          </h2>
       </div>
       <app-file-upload-drag-drop [IsuploadSucess]="IsUploaded" maxFiles="10" maxSize="50" (uploadStatus)="getFiles($event)" [bar]="currentFileUpload">
         </app-file-upload-drag-drop><br>

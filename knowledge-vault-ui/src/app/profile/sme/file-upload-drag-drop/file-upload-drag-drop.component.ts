@@ -15,6 +15,9 @@ export class FileUploadDragDropComponent implements OnInit {
   fileList = [];
   formats = new FormControl();
   formatList: string[] = ['PDF', 'csv', 'doc', 'xls', 'text', 'JSON'];
+  formatMessage: string;
+  formatCondition: boolean;
+  someFile;
 
   @Input() maxFiles = 10;
   @Input() maxSize = 50;
@@ -31,35 +34,74 @@ export class FileUploadDragDropComponent implements OnInit {
 
   constructor() {
     this.successfiles = [];
+    this.formatCondition = true;
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+  }
 
+  @HostListener('click', ['$event'])
   onFileChange(event) {
-    const files = event.target.files;
-    this.saveFiles(files);
+    
+    if(!this.formats.hasError('required')){
+      this.formatCondition = true;
+      const files = event.target.files;
+      this.saveFiles(files);
+    }
+    
+    else { this.formatMessage = 'Please select file format(s)'; 
+          this.formatCondition = false;     
+  }
   }
 
   @HostListener('dragover', ['$event']) onDragOver(event) {
+    
+    if(!this.formats.hasError('required')){
+      this.formatCondition = true;
     this.dragAreaClass = 'droparea';
-    event.preventDefault();
+    event.preventDefault(); }
+    
+    else { this.formatMessage = 'Please select file format(s)'; 
+          this.formatCondition = false;  
+  }
   }
 
   @HostListener('dragenter', ['$event']) onDragEnter(event) {
+    
+    if(!this.formats.hasError('required')){
+      this.formatCondition = true;
     this.dragAreaClass = 'droparea';
-    event.preventDefault();
+    event.preventDefault(); }
+    
+    else { this.formatMessage = 'Please select file format(s)'; 
+          this.formatCondition = false;   
+  }
   }
   @HostListener('dragleave', ['$event']) onDragLeave(event) {
+    
+    if(!this.formats.hasError('required')){
+      this.formatCondition = true;
     this.dragAreaClass = 'dragarea';
-    event.preventDefault();
+    event.preventDefault(); }
+    
+    else { this.formatMessage = 'Please select file format(s)'; 
+    this.formatCondition = false;   
+}
   }
 
   @HostListener('drop', ['$event']) onDrop(event) {
+    
+    if(!this.formats.hasError('required')){
+      this.formatCondition = true;
     this.dragAreaClass = 'dragarea';
     event.preventDefault();
     event.stopPropagation();
-    const files = event.dataTransfer.files;
-    this.saveFiles(files);
+    const files = event.dataTransfer.files; 
+    this.saveFiles(files); }
+    
+    else { this.formatMessage = 'Please select file format(s)'; 
+    this.formatCondition = false;   
+}
   }
 
   saveFiles(files) {

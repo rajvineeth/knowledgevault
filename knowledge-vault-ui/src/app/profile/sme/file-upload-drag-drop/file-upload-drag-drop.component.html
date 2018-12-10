@@ -8,13 +8,17 @@
     <div class="drop">
     <div draggable="true" ngClass="{{dragAreaClass}}">
         <div class="row">
-            <!-- <div class="col-md-12 text-center"> -->
+            <div class="col-md-12 text-center">
                 <div>
                     <a>Or Drag & Drop Files</a>
                 </div>
                 <input type="file" #file [multiple]="(maxFiles >=1)" (change)="onFileChange($event)" style="display:none" />
-            <!-- </div> -->
+            </div>
         </div>
+    </div>
+    <br>
+    <div *ngIf="formatCondition==false">
+    <mat-error *ngIf="formats.hasError('required')">You must select file format(s)</mat-error>
     </div>
 
     <div *ngIf="errors.length > 0 || successfiles.length > 0" class="pull-right cursorpointer" (click)="clearFiles()">

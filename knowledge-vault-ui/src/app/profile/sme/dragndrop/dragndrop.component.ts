@@ -19,6 +19,7 @@ export class DragndropComponent implements OnInit {
   IsUploaded = false;
   currentFileUpload: File;
   progress: { percentage: number } = { percentage: 0 };
+  status : number;
 
   ngOnInit() { }
 
@@ -37,12 +38,12 @@ export class DragndropComponent implements OnInit {
         this.upload_service.extractFile(this.currentFileUpload).subscribe(event => {
           if (event.type === HttpEventType.UploadProgress) {
             this.progress.percentage = Math.round(100 * event.loaded / event.total);
+            this.status = this.progress.percentage;
           } else if (event instanceof HttpResponse) {
             console.log('File is completely uploaded!');
           }
         });
       }
-      alert(this.save_success = 'Thank you for your contribution. We have saved your document in our database.');
       
       this.fileList = undefined;
     }

@@ -37,3 +37,8 @@ mat-card-header {
   justify-content: center;
   color: #5cb85c;
 }
+
+.progress {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #5cb85c;
+}
