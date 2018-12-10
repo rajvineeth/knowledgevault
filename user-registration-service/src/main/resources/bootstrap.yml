@@ -1,0 +1,36 @@
+management:
+  security:
+    enabled: false
+spring:
+  application:
+    name: user-registration-service
+  cloud:
+    config:
+      uri: http://localhost:8092
+#  application:
+#    name: user-registration-service
+#user-Controller:
+#  messages:
+#    exception1: UserDetails Not Found
+#    update: Successfully Updated
+#    delete: Successfully deleted
+#    created: Successfully saved
+#    kafkatopic: login
+#user-Service:
+#  message
+#
+#
+#  #Hard Coded String Values
+#  user-Controller.messages.exception1= UserDetails Not Found
+#  user-Controller.messages.update=Successfully Updated
+#  user-Controller.messages.delete=Successfully deleted
+#  user-Controller.message.created=Successfully saved
+#  user-Controller.message.kafkatopic=login
+#  user-Service.message.exception1=No user Found
+#  user-Service.message.exception2=User already Exists
+#  kafka-config.message.ipaddress=localhost:9092
+#
+#  #tells about the Eureka server details and its refresh time
+#  eureka.client.service-url.defaultZone= http://localhost:8066/eureka/
+#  eureka.client.register-with-eureka= true
+#  eureka.client.fetch-registry= true

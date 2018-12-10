@@ -29,6 +29,7 @@ public class KafkaProducerConfig {
         configs.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        configs.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 1000000000);
 
         return new DefaultKafkaProducerFactory<>(configs);
     }
@@ -46,6 +47,7 @@ public class KafkaProducerConfig {
         config.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        config.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 1000000000);
 
         return  new DefaultKafkaProducerFactory<>(config);
     }

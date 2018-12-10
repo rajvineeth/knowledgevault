@@ -1,9 +1,10 @@
-#
-#
-#
-#spring:
-#  application:
-#    name: populator
-#  cloud:
-#    config:
-#      uri: http://localhost:8092
+management:
+  security:
+    enabled: false
+
+spring:
+  application:
+    name: populator
+  cloud:
+    config:
+      uri: http://localhost:8092

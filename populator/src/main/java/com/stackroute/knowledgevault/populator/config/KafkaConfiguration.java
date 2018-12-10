@@ -3,6 +3,7 @@ package com.stackroute.knowledgevault.populator.config;
 
 import com.stackroute.knowledgevault.domain.JSONld;
 import com.stackroute.knowledgevault.domain.JsonLDObject;
+import com.stackroute.knowledgevault.domain.ScrapedData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,6 +66,24 @@ public class KafkaConfiguration {
     public ConcurrentKafkaListenerContainerFactory userKafkaListenerFactory2(){
         ConcurrentKafkaListenerContainerFactory factory=new ConcurrentKafkaListenerContainerFactory();
         factory.setConsumerFactory(userConsumerFactory2());
+        return factory;
+
+    }
+    @Bean
+    public ConsumerFactory<String, ScrapedData> userConsumerFactory3(){
+
+        Map<String, Object> config=new HashMap<>();
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,consumerPort);
+        config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json");
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.class);
+
+        return new DefaultKafkaConsumerFactory<>(config,new StringDeserializer(),new JsonDeserializer<>(ScrapedData.class));
+    }
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory userKafkaListenerFactory3(){
+        ConcurrentKafkaListenerContainerFactory factory=new ConcurrentKafkaListenerContainerFactory();
+        factory.setConsumerFactory(userConsumerFactory3());
         return factory;
 
     }

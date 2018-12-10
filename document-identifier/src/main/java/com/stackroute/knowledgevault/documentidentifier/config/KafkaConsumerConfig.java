@@ -29,6 +29,7 @@ public class KafkaConsumerConfig {
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+//        config.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, 1000000000);
 
         return new DefaultKafkaConsumerFactory<>(config);
     }
@@ -48,6 +49,7 @@ public class KafkaConsumerConfig {
         config.put(ConsumerConfig.GROUP_ID_CONFIG,"group_json");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+//        config.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, 1000000000);
 
         return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),new JsonDeserializer<>(ExtractedFileData.class));
     }

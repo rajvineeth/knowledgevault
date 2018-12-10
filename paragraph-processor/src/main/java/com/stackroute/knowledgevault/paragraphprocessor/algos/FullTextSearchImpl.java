@@ -88,7 +88,6 @@ public class FullTextSearchImpl implements FullTextSearch {
             LOGGER.info("indexing complete....");
         }
         catch(Exception e) {
-            e.printStackTrace();
             LOGGER.error(String.valueOf(e.getMessage()));
             return "failure";
         }

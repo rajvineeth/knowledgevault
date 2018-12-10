@@ -1,0 +1,13 @@
+<div *ngIf="!excessPara(); else: elseBlock">
+  <div *ngFor="let paragraph of paragraphs">
+    <app-expansion-panels [paragraph]="paragraph"></app-expansion-panels>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div *ngFor="let paragraph of paragraphs.slice(0, 2)">
+    <app-expansion-panels [paragraph]="paragraph"></app-expansion-panels>
+  </div>
+  <button id="show-more" mat-raised-button (click)="openBottomSheet()">
+    Show More
+  </button>
+</ng-template>

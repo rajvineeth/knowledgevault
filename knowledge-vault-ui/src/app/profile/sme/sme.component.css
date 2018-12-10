@@ -1,0 +1,36 @@
+.bg {
+    background-image: url("../../../assets/vault.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 40vh;
+    /* height: 100%;
+    max-width: 100%; */
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    justify-content: center;
+    margin-left: 30%;
+    font-size: 1rem;
+}
+
+.home {
+    background-color: white;
+}
+.url-field {
+    width: 100%;
+    /* margin: auto; */
+    margin-top: 7vh;
+
+}
+
+.url {
+    height: 30vh; 
+    background-color: rgba(249, 248, 252, 0.925);
+}

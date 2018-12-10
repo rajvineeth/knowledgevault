@@ -1,0 +1,24 @@
+<mat-card
+  fxFlex="1 1 auto"
+  fxFlexAlign="center"
+  class="card"
+  fxLayout="column"
+  fxLayoutAlign="space-between"
+>
+  <mat-card-header>
+    <mat-card-title>{{ name }}</mat-card-title>
+    <mat-card-subtitle *ngIf="alternateName !== null" >{{ alternateName }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <app-symptom-card *ngIf="card.symptoms.length != 0" [subHeader]="'Symptoms'" [symptoms]="card.symptoms" ></app-symptom-card>
+    <app-symptom-card *ngIf="card.anatomy.length != 0" [subHeader]="'Anatomical Structures'" [symptoms]="card.anatomy" ></app-symptom-card>
+    <app-accordion
+      *ngIf="card.para.length != 0"
+      [paragraphs]="card.para"
+    ></app-accordion>
+    <app-accordion
+      *ngIf="card.doc.length != 0"
+      [paragraphs]="card.doc"
+    ></app-accordion>
+  </mat-card-content>
+</mat-card>

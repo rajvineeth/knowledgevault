@@ -1,9 +1,6 @@
 package com.stackroute.populator.services;
 
-import com.stackroute.knowledgevault.domain.AnatomicalStructure;
-import com.stackroute.knowledgevault.domain.MTR;
-import com.stackroute.knowledgevault.domain.MedicalCondition;
-import com.stackroute.knowledgevault.domain.MedicalSymptom;
+import com.stackroute.knowledgevault.domain.*;
 import com.stackroute.knowledgevault.populator.repository.MTRRepo;
 import com.stackroute.knowledgevault.populator.service.*;
 import org.junit.After;
@@ -34,13 +31,18 @@ public class MedicalGraphServiceTest {
     SymptomService symptomService;
 
     AnatomicalStructure anatomicalStructure;
+    Document document;
+    Content content;
     @Mock
     AnatomyService anatomyService;
     @Mock
     MTRRepo mtrRepo;
     @Mock
     QueryDriverService queryDriverService;
-
+    @Mock
+    DocumentService documentService;
+    @Mock
+    ContentService contentService;
     @InjectMocks
     MedicalGraphService medicalGraphService;
     List<MedicalSymptom> symptomList=new ArrayList<>();
@@ -52,7 +54,7 @@ public class MedicalGraphServiceTest {
         medicalSymptom=new MedicalSymptom();
         anatomicalStructure=new AnatomicalStructure();
         mtr=new MTR("type");
-        medicalGraphService=new MedicalGraphService(mtrRepo,medicalConditionService,anatomyService,symptomService);
+        medicalGraphService=new MedicalGraphService(mtrRepo,medicalConditionService,anatomyService,symptomService,documentService,contentService);
         medicalCondition.setName("cancer");
         medicalCondition.setType("MedicalCondition");
         medicalSymptom.setName("hair loss");
@@ -60,6 +62,18 @@ public class MedicalGraphServiceTest {
         symptomList.add(medicalSymptom);
         anatomicalStructure.setName("lungs");
         anatomicalStructure.setType("AnatomicalStructure");
+        document=new Document();
+        document.setName("cancer");
+        document.setType("Document");
+        content=new Content();
+
+        ArrayList<Integer> list=new ArrayList<>();
+        list.add(1);
+        document.setId(list);
+        content.setParaId(list);
+        content.setId(1);
+        content.setName("cancer");
+        content.setType("Content");
 
     }
 
@@ -73,12 +87,24 @@ public class MedicalGraphServiceTest {
     public void populateTestSuccess() {
         when(queryDriverService.createRel((Object)any(),(String)any(),(Object)any())).thenReturn(true);
         when(mtrRepo.getRelation((String)any(),(String)any())).thenReturn(mtr);
-        Boolean result=medicalGraphService.populate(1,medicalCondition,anatomicalStructure,symptomList);
+        Boolean result=medicalGraphService.populate(document,medicalCondition,anatomicalStructure,symptomList);
         Assert.assertEquals(true,result);
 
         verify(medicalConditionService,times(1)).saveCondition(medicalCondition);
         verify(anatomyService,times(1)).saveAnatomy(anatomicalStructure);
         verify(symptomService,times(1)).saveSymptom(medicalSymptom);
-        verify(mtrRepo,times(4)).getRelation((String) any(),(String) any());
+        verify(mtrRepo,times(5)).getRelation((String) any(),(String) any());
+    }
+    @Test
+    public void populateFromParaTestSuccess() {
+        when(queryDriverService.createRel((Object)any(),(String)any(),(Object)any())).thenReturn(true);
+        when(mtrRepo.getRelation((String)any(),(String)any())).thenReturn(mtr);
+        Boolean result=medicalGraphService.populateFromPara(content,medicalCondition,anatomicalStructure,symptomList);
+        Assert.assertEquals(true,result);
+
+        verify(medicalConditionService,times(1)).saveCondition(medicalCondition);
+        verify(anatomyService,times(1)).saveAnatomy(anatomicalStructure);
+        verify(symptomService,times(1)).saveSymptom(medicalSymptom);
+        verify(mtrRepo,times(5)).getRelation((String) any(),(String) any());
     }
 }

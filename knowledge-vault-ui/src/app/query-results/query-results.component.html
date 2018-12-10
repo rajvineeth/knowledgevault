@@ -1,0 +1,22 @@
+<div class="search-results" >
+
+  <nav *ngIf="show; else elseBlock;" class="results" fxLayout.xs="column" fxLayoutGap.xs="10px">
+    <nav *ngFor="let res of queryResults" fxFlex.lg="1 1 calc(25%)" fxFlex="1 1 calc(33.33%)" fxFlex.sm="1 1 calc(50%)" >
+      <span fxLayoutAlign="space-evenly center">
+
+        <app-card [card]="res" [ngStyle]="{'margin-bottom': '10px'}" > </app-card>
+      </span>
+
+    </nav>
+  </nav>
+
+  <ng-template #elseBlock>
+    <mat-card class="example-card">
+      <img style="max-width:100%;margin-left: 25%;" src="../../assets/healthcare-marketing-social-media.png" alt="Photo of a Shiba Inu">
+      <mat-card-actions>
+        <button mat-button (click)="dikhao(true)" style="margin-left: 42%;">Show Results</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-template>
+  
+</div>

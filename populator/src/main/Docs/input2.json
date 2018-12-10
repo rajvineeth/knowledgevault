@@ -1,21 +1,7 @@
 {
   "@context": "http://schema.org",
   "@type": "MedicalCondition",
-  "alternateName": "d2",
-  "associatedAnatomy": {
-    "@type": "AnatomicalStructure",
-    "name": "leg"
-  },
-  "cause": [
-    {
-      "@type": "MedicalCause",
-      "name": "atherosclerosis"
-    },
-    {
-      "@type": "MedicalCause",
-      "name": "s"
-    }
-  ],
+  "alternateName": "tuberculosis infection\u000Btb",
   "code": {
     "@type": "MedicalCode",
     "code": "413",
@@ -25,15 +11,47 @@
     "distinguishingSign": [
       {
         "@type": "MedicalSymptom",
-        "name": "c"
+        "name": "Usually symptoms include cough (blood-tinged)"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "r"
+        "name": "weight loss"
       },
       {
         "@type": "MedicalSymptom",
-        "name": "an accelerating pattern of chest discomfort (episodes that are more frequent, severe, longer in duration, and precipitated by minimal exertion)"
+        "name": "night sweats"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "fever"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Pain in the chest"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Pain can occur while breathing"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Cough: can be chronic or with blood"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "fatigue"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "swollen lymph nodes"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "shortness of breath"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "loss of muscle"
       }
     ]
 

@@ -5,7 +5,6 @@
 package com.stackroute.knowledgevault.paragraphprocessor.utilities;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +21,10 @@ public class FillUpData {
     private static final Logger LOGGER = LoggerFactory.getLogger(FillUpData.class);
     private FillUpData() {}
 
-    private static final String JSONTEMPLATE = "{" +
+    private static final String JSONTEMPLATE =
+            "{" +
             " \"@context\": \"http://schema.org\"," +
-            " \"@type\": \"null\"," +
+            " \"@type\": \"MedicalCondition\"," +
             " \"alternateName\": \"null\"," +
             " \"associatedAnatomy\": {" +
             "   \"@type\": \"AnatomicalStructure\"," +
@@ -80,40 +80,6 @@ public class FillUpData {
             " ]" +
             "}";
 
-    public static JSONObject fill(Map<String, String> taggedKeywords) {
-        JSONObject obj = null;
-        try {
-            obj = new JSONObject(JSONTEMPLATE);
-        } catch (JSONException e) {
-            LOGGER.info("couldn't create JSONLD object...something bad happened.");
-            LOGGER.debug(e.getMessage());
-        }
-
-        for (Map.Entry<String,String> entry : taggedKeywords.entrySet()) {
-            if(entry.getValue().compareTo("diseases")==0 && obj!=null) {
-                try {
-                    obj.put("alternateName",entry.getKey());
-                } catch (JSONException e) {
-                    LOGGER.debug(e.getMessage());
-                }
-            }
-            else if(entry.getValue().compareTo("body-part")==0 && obj!=null) {
-                try {
-                    JSONObject bp = (JSONObject) obj.get("associatedAnatomy");
-                    bp.put("name",entry.getKey());
-                } catch (JSONException e) {
-                    LOGGER.debug(e.getMessage());
-                }
-            }
-        }
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonOutput = gson.toJson(obj);
-        LOGGER.info(jsonOutput);
-
-        LOGGER.info("successfully updated JSON");
-        return obj;
-    }
-
     public static JSONObject fillOntology(Map<String,List<Pair>> tags) {
 
         JSONObject obj = null;
@@ -125,13 +91,7 @@ public class FillUpData {
 
         for(Map.Entry<String,List<Pair>> entry: tags.entrySet()) {
 
-            Collections.sort(entry.getValue(), new Comparator<Pair>() {
-                @Override
-                public int compare(Pair o1, Pair o2) {
-                    if(o1.getScore()>o2.getScore()) return 1;
-                    return 0;
-                }
-            });
+            Collections.sort(entry.getValue(),(p1,p2) -> (int) (p1.getScore() - p2.getScore()));
 
             if(entry.getKey().compareTo("diseases")==0 && !entry.getValue().isEmpty()) {
                 try {

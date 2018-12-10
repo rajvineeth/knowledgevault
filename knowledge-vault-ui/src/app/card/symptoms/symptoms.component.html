@@ -1,0 +1,3 @@
+<div *ngFor="let symptom of symptoms.slice(0, 3)" class="symp">
+  <div *ngIf="symptom !== 'NULL'" class="symptom">{{ symptom.substr(1, symptom.length - 2) }}</div>
+</div>

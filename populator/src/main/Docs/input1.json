@@ -1,0 +1,75 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "malaria\u000Bmosquito transmitted illness",
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "fever"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "sweating (occurs few weeks after being bitten)"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Pain in the abdomen or muscles"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "fatigue"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "night sweats"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "shivering"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Gastrointestinal: diarrhoea, nausea, or vomitin"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "fast heart rate"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "headache"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "mental confusion"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "pallor"
+      }
+    ]
+
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}

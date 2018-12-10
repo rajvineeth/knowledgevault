@@ -1,0 +1,103 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "Heart Attack",
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "tightness or pain in the chest, neck, back or arms"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "fatigue"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "lightheadedness"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "abnormal heartbeat"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "anxiety"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "pair during rest"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "dizziness"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "clammy skin"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "cold sweat"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "sweating"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "indigestion"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "nausea"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "vomiting"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "discomfort or tightness in neck"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "discomfort or tightness in arm"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "chest pressure"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "feeling of impending doom"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "palpitations"
+      }
+    ]
+
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}

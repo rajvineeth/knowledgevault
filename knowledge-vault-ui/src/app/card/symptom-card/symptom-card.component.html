@@ -1,0 +1,17 @@
+<mat-list>
+  <h3 mat-subheader>{{ subHeader }}</h3>
+  <div
+    [ngStyle]="{ display: valueDots }"
+    *ngFor="let symptom of slicedSymptoms"
+  >
+    <mat-list-item *ngIf="symptom !== 'NULL'"> {{ symptom }} </mat-list-item>
+  </div>
+  <div id="dots" (click)="showMore()" [ngStyle]="{ display: valueDots }">
+    <mat-list-item> (show more) </mat-list-item>
+  </div>
+  <div id="more" (click)="showMore()" [ngStyle]="{ display: valueLess }">
+    <div *ngFor="let symptom of symptoms">
+      <mat-list-item *ngIf="symptom !== 'NULL'"> {{ symptom }} </mat-list-item>
+    </div>
+  </div>
+</mat-list>

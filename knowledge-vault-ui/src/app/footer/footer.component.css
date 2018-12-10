@@ -1,0 +1,12 @@
+mat-toolbar {
+  background-color: #f3f3f3;
+  /* color: #bbb; */
+  font-size: 1rem;
+}
+
+
+a {
+  color: #5cb85c;
+  font-weight: bold;
+  text-decoration: none;
+}

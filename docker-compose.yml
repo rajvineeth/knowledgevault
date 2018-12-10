@@ -2,12 +2,37 @@ version:  '2'
 
 services:
 
+  eureka:
+    image: eureka:v1
+    build: eureka-registry/
+    restart: always
+    container_name: eureka-container
+    network_mode: host
+    ports:
+      - 8091:8091
+    expose:
+      - 8091
+
+  config-server:
+    image: config-server:v1
+    build: config-server/
+    restart: always
+    container_name: config-container
+    network_mode: host
+    depends_on:
+      - eureka
+    ports:
+      - 8092:8092
+    expose:
+      - 8092
+
   zookeeper:
     container_name: zookeeper
     image: wurstmeister/zookeeper
+    restart: always
     network_mode: host
     ports:
-    - "2181:2181"
+      - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -15,64 +40,66 @@ services:
   kafka:
     container_name: kafka
     image: wurstmeister/kafka
+    restart: always
+    mem_limit: 2000000000
     ports:
-    - "9092"
+      - "9092"
     depends_on:
-    - "zookeeper"
+      - zookeeper
     network_mode: host
     environment:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+      KAFKA_MESSAGE_MAX_BYTES: 1000000000
     volumes:
-    - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/var/run/docker.sock:/var/run/docker.sock'
 
   neo4j:
     container_name: neo4j
     image: neo4j:latest
+    restart: always
     ports:
-    - "7474:7474"
-    - "7687:7687"
+      - "7474:7474"
+      - "7687:7687"
     network_mode: host
     volumes:
-    - '../data/neo4j:/data/db'
+      - '../data/neo4j:/data/db'
     environment:
-    - NEO4J_AUTH=neo4j/123456
-
-  document-identifier:
-    image: document-identifier:v1
-    build: document-identifier/
-    #    restart: always
-    container_name: "document-identifier"
-    network_mode: host
-    depends_on:
-    - kafka
-    - mongodb
-    volumes:
-    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
-    ports:
-    - "8080:8080"
-    expose:
-    - "8080"
+      - NEO4J_AUTH=neo4j/123456
 
   mongodb:
     image: mongo:3.2-jessie
+    restart: always
     ports:
     - 27017:27017
-    container_name: "mongo-knowledgevault"
     network_mode: host
+    container_name: "mongo-docs"
     volumes:
-    - '../data/mongo:/data/db'
+    - '../data/mongo/docs:/data/db'
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    container_name: mysql
     environment:
-      MONGO_INITDB_DATABASE: mydatabase
+       MYSQL_ROOT_PASSWORD: 123456
+       MYSQL_DATABASE: userCredentials
+    volumes:
+      - '/opt/datasql:/var/lib/mysql'
+    network_mode: "host"
+    hostname: localhost
 
   extractor-service:
     image: extractor-service:v1
     build: extractor-service/
-   # restart: always
+    restart: always
     container_name: "extractor-service"
     network_mode: host
     depends_on:
+    - eureka
+    - config-server
     - kafka
     volumes:
     - '../knowledge-vault/extractor-service/src/main/resources/:/knowledge-vault/extractor-service/src/main/resources/'
@@ -81,44 +108,232 @@ services:
     expose:
     - "8094"
 
-  paragraph-processor:
-    image: paragraph-processor:v1
-    build: paragraph-processor/
-  #  restart: always
-    container_name: "paragraph-processor"
+  document-identifier:
+    image: document-identifier:v1
+    build: document-identifier/
+    restart: always
+    container_name: "document-identifier"
     network_mode: host
-    volumes:
-    -  '../knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
     depends_on:
+    - eureka
+    - config-server
     - kafka
+    - mongodb
+    volumes:
+    - '../knowledge-vault/document-identifier/:/knowledge-vault/document-identifier/'
     ports:
-    - "8433:8433"
+    - "8083:8083"
     expose:
-    - "8433"
+    - "8083"
 
   paragraph-tokenizer:
     image: paragraph-tokenizer:v1
     build: paragraph-tokenizer/
-   # restart: always
+    restart: always
     container_name: "paragraph-tokenizer"
     network_mode: host
     depends_on:
+    - eureka
+    - config-server
     - kafka
     ports:
     - "8065:8065"
     expose:
     - "8065"
 
+  paragraph-processor:
+    image: paragraph-processor:v1
+    build: paragraph-processor/
+    restart: always
+    container_name: "paragraph-processor"
+    network_mode: host
+    volumes:
+    - '../knowledge-vault/paragraph-processor/assets/taggerResource/:/knowledge-vault/paragraph-processor/assets/taggerResource/'
+    depends_on:
+    - eureka
+    - config-server
+    - mongodb
+    - kafka
+    ports:
+    - "8433:8433"
+    expose:
+    - "8433"
+
   populator:
     image: populator:v1
     build: populator/
-  #  restart: always
+    restart: always
     container_name: "populator"
     network_mode: host
+    volumes:
+    - '../knowledge-vault/populator/src/main/Docs/:/knowledge-vault/populator/src/main/Docs/'
     depends_on:
+    - eureka
+    - config-server
     - kafka
     - neo4j
     ports:
     - "8067:8067"
     expose:
     - "8067"
+
+  input-kafka:
+    image: input-kafka
+    build: input-kafka/
+    container_name: "input-kafka"
+    network_mode: host
+    depends_on:
+      - eureka
+      - kafka
+      - config-server
+    ports:
+      - "8148:8148"
+    expose:
+      - "8148"
+    restart: always
+
+  input-lemmatize:
+    image: input-lemmatize
+    build: input-lemmatize/
+    container_name: "input-lemmatize"
+    network_mode: host
+    depends_on:
+      - config-server
+      - eureka
+      - kafka
+    ports:
+      - "8140:8140"
+    expose:
+      - "8140"
+    restart: always
+
+  input-postag:
+    image: input-postag
+    build: input-postag/
+    container_name: "input-postag"
+    network_mode: host
+    depends_on:
+      - config-server
+      - eureka
+      - kafka
+    ports:
+      - "8142:8142"
+    expose:
+      - "8142"
+    restart: always
+
+  input-tagger:
+    image: input-tagger
+    build: input-tagger/
+    container_name: "input-tagger"
+    network_mode: host
+    depends_on:
+      - eureka
+      - config-server
+      - kafka
+    ports:
+      - "8144:8144"
+    expose:
+      - "8144"
+    restart: always
+    volumes:
+      - '../knowledge-vault/input-tagger/assets/taggerResource/:/knowledge-vault/input-tagger/assets/taggerResource/'
+
+  web-adapter:
+    image: web-adapter
+    build: web-scraping/
+    container_name: web-adapter
+    network_mode: host
+    depends_on:
+      - kafka
+      - eureka
+    ports:
+      - "8100:8100"
+    expose:
+      - "8100"
+    restart: always
+    volumes:
+      - '../knowledge-vault/web-scraping/:/knowledge-vault/web-scraping/'
+
+  knowledge-vault-ui:
+    image: angular
+    build: knowledge-vault-ui/
+    ports:
+      - "4200:4200"
+    expose:
+      - "4200"
+    container_name: "angular"
+
+  user-registration:
+    image: user-registration
+    build: user-registration-service/
+    container_name: user-registration
+    network_mode: host
+    depends_on:
+    - config-server
+    - eureka
+    - mongodb
+    - kafka
+    ports:
+      - "8181:8181"
+    expose:
+      - "8181"
+
+  user-authentication:
+    image: user-authentication
+    build: user-authentication-service/
+    container_name: user-authentication
+    network_mode: host
+    depends_on:
+      - config-server
+      - eureka
+      - kafka
+      - mysql
+    ports:
+      - "8184:8184"
+    expose:
+      - "8184"
+
+  query-engine:
+    image: query-engine
+    build: query-engine/
+    container_name: "query-engine"
+    network_mode: host
+    depends_on:
+      - eureka
+      - kafka
+      - neo4j
+    ports:
+      - "8185:8185"
+    expose:
+      - "8185"
+    restart: always
+
+  gateway:
+    image: zuulgateway:v1
+    build: zuulgateway/
+    restart: always
+    container_name: zuul-container
+    network_mode: host
+    depends_on:
+    - config-server
+    - eureka
+    - user-registration
+    - extractor-service
+    - document-identifier
+    - input-kafka
+    - query-engine
+    ports:
+      - 8090:8090
+    expose:
+      - 8090
+
+  agenttodocker:
+    image:  harsha7890/agenttomonitordocker:v40
+    restart: always
+    network_mode:  host
+    volumes:
+    -  /var/run/docker.sock:/var/run/docker.sock
+    ports:
+    -  9001:9001
+    container_name: dockeragent      

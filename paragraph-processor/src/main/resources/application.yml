@@ -1,10 +1,30 @@
-consumer:
-    ip: 127.0.0.1
-producer:
-    ip: 172.23.239.127
-    port: 9092
+#consumer:
+#    ip: 127.0.0.1
+#producer:
+#    ip: 172.23.239.127
+#    port: 9092
 server:
     port: 8433
+#spring:
+#    data:
+#        mongodb:
+#            database: mydatabase
+#            port: 27017
+#            uri: mongodb://127.0.0.1/mydatabase
+#management:
+#    security:
+#        enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
+#eureka:         #tells about the Eureka server details and its refresh time
+#    instance:
+#        leaseRenewalIntervalInSeconds: 1
+#        leaseExpirationDurationInSeconds: 2
+#    client:
+#        serviceUrl:
+#            defaultZone: http://127.0.0.1:8091/eureka/
+#        healthcheck:
+#            enabled: true
+#        lease:
+#            duration: 5
 #
 #lucene:
 #    INDEX_START: '"indexing the files now..."'

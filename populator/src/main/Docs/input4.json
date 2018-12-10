@@ -1,0 +1,75 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "dengue fever\u000Btropical mosquito borne illness",
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "high fever"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "headache"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "rash"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "muscle"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "joint pain"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "there is serious bleeding and shock (severe)"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Pain areas: in the abdomen, back, back of the eyes, bones, joints, or muscles"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "chills"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "loss of appetite"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "vomiting"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "red spots"
+      }
+    ]
+
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}

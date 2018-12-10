@@ -1,0 +1,31 @@
+<p class="heading"> <b>Personal Details </b></p>
+
+<nav class="row">
+  <nav class="col-3">
+    <img class="avatar" src="../../assets/user.png">
+    <br>
+    <!-- <button style="gap: inherit" mat-button (click)="photu()"> Upload Profile Photo </button> -->
+  </nav>
+  <nav class="col-9" id="details">
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="fn" placeholder="First Name" #fn value="{{ userDetail.firstname }}" readonly>
+      </mat-form-field>
+    </mat-card>
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="ln" placeholder="Last Name" #ln value=" {{ userDetail.lastname }}" readonly>
+      </mat-form-field>
+    </mat-card>
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="un" placeholder="Username" #un value="{{ userDetail.username }}" readonly>
+      </mat-form-field>
+    </mat-card>
+    <mat-card>
+      <mat-form-field>
+        <input matInput id="r" placeholder="role" #r value="{{ userDetail.role }}" readonly>
+      </mat-form-field>
+    </mat-card>
+  </nav>
+</nav>

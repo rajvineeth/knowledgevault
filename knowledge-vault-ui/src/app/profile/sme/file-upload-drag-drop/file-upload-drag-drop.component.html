@@ -1,0 +1,36 @@
+<div class="browse" fxLayout.xs="column"><button href="javascript:void(0)" mat-stroked-button type="button" (click)="file.click()"> Click to Browse </button>
+    <mat-form-field>
+            <mat-select placeholder="Select file format(s)" [formControl]="formats" multiple required>
+              <mat-option *ngFor="let format of formatList" [value]="format">{{format}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+</div>
+    <div class="drop">
+    <div draggable="true" ngClass="{{dragAreaClass}}">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div>
+                    <a>Or Drag & Drop Files</a>
+                </div>
+                <input type="file" #file [multiple]="(maxFiles >=1)" (change)="onFileChange($event)" style="display:none" />
+            </div>
+        </div>
+    </div>
+    <br>
+    <div *ngIf="formatCondition==false">
+    <mat-error *ngIf="formats.hasError('required')">You must select file format(s)</mat-error>
+    </div>
+
+    <div *ngIf="errors.length > 0 || successfiles.length > 0" class="pull-right cursorpointer" (click)="clearFiles()">
+        Clear All</div>
+    <div class="row error" *ngIf="errors.length > 0">
+        <ul>
+            <li *ngFor="let err of errors">{{err}}</li>
+        </ul>
+    </div>
+    <div class="row success successfiles" *ngIf="successfiles.length > 0">
+        <ul>
+            <li *ngFor="let succ of successfiles">{{ succ }}</li>
+        </ul>
+    </div>
+    </div>

@@ -1,0 +1,47 @@
+.error {
+    color: red;
+    background: url('../../assets/robot-error.webp') center center no-repeat;
+    background-size: cover;
+    text-align: center;
+    height: 600px;
+    width: 100%;
+}
+
+/* app-card {
+    margin: 10px 10px 10px 10px;
+} */
+
+.search-results {
+    /* background-color: rgba(112,209,104,0.075); */
+}
+
+.example-card {
+    width: 100%;
+}
+
+.cont {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.results{
+    display: flex;
+    flex-flow: row wrap;
+
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.results > *{
+    align-self: center;
+}

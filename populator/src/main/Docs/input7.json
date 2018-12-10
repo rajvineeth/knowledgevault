@@ -1,0 +1,71 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "cholera\u000Bintestinal bacterial infection",
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "diarrhoea and dehydration"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Shock (severe)"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "Seizures (severe)"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "pain in the abdomen"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "nausea"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "vomiting"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "watery diarrhoea"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "dehydration"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "lethargy"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "water-electrolyte imbalance"
+      }
+    ]
+
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}

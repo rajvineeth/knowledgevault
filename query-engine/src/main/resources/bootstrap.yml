@@ -1,0 +1,6 @@
+#spring:
+#  data:
+#    mongodb:
+#      database: mydatabase
+#      port: 27017
+#      uri: mongodb://172.23.239.75/mydatabase

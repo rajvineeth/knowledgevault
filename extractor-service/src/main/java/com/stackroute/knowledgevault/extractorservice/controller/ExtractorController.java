@@ -9,15 +9,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "extractor-service")
+@RequestMapping(value = "api")
+@CrossOrigin("*")
 public class ExtractorController {
 
     @Autowired
@@ -28,6 +35,8 @@ public class ExtractorController {
 
     private static final String TOPIC = "extracted";
 
+//    private final Path rootLocation = Paths.get("upload-dir");
+
     @Value("${folder.path}")
     private String initialPath;
 
@@ -35,6 +44,7 @@ public class ExtractorController {
     @GetMapping("{path}")
     public ResponseEntity<?> displayAllFiles(@PathVariable("path") String path) {
 
+        System.out.println("all files");
         List<File> allFiles = service.getAllFiles(initialPath + path); //Fetching all files from the specified path
 
         return new ResponseEntity<>(allFiles, HttpStatus.OK);
@@ -50,19 +60,17 @@ public class ExtractorController {
 
         try {
             for (File instance : allFiles) {
-                    ExtractedFileData data = service.extractOneFile(instance); //Fetching metadata and content
-                    extractedDocs.put(data.getId(), instance.getName());
+                ExtractedFileData data = service.extractOneFile(instance); //Fetching metadata and content
+                extractedDocs.put(data.getId(), instance.getName());
 
                     /* The following line will send our ExtractedFileData object containing all the information about
                     the document to the Kafka server */
-                    //kafkaTemplate.send(TOPIC, data);
+                //kafkaTemplate.send(TOPIC, data);
             }
             responseEntity = new ResponseEntity<HashMap<Integer, String>>(extractedDocs, HttpStatus.OK);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        catch (TikaException | SAXException e) {
+        } catch (TikaException | SAXException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
         }
 
@@ -113,15 +121,46 @@ public class ExtractorController {
                 }
 
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        catch (TikaException | SAXException e) {
+        } catch (TikaException | SAXException e) {
             responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
         }
 
         return responseEntity;
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<?> sendSME_files(@RequestParam("file") MultipartFile file) throws IOException {
+
+        ExtractedFileData data;
+        ResponseEntity responseEntity = null;
+
+        File convFile = new File( file.getOriginalFilename());
+        convFile.createNewFile();
+
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+
+            try {
+
+                data = service.extractOneFile(convFile);
+
+                kafkaTemplate.send(TOPIC, data);
+
+                kafkaTemplate.send("extracted2", data);
+
+                System.out.println("Document id: " + data.getId() + "File name: " + convFile.getName());
+
+                responseEntity = new ResponseEntity<ExtractedFileData>(data, HttpStatus.OK);
+            } catch (IOException e) {
+                responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            } catch (TikaException | SAXException e) {
+                responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+            }
+
+        return responseEntity;
+
+    }
 }

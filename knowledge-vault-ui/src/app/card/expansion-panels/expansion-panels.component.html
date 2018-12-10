@@ -1,0 +1,19 @@
+<mat-card class="content1" >
+  <mat-card-content>
+    <p>
+      {{ visiblePara
+      }}<span
+        *ngIf="hiddenPara"
+        id="dots"
+        (click)="showMore()"
+        [ngStyle]="{ display: valueDots }"
+        >...(show more)</span
+      ><span
+        id="more"
+        (click)="showMore()"
+        [ngStyle]="{ display: valuePara }"
+        >{{ hiddenPara }}</span
+      >
+    </p>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,39 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    justify-content: center;
+  
+}
+
+.heading {
+    margin-left: 40%;
+    text-decoration: cornflowerblue;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 4vh;
+}
+
+.avatar {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+#detail {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}

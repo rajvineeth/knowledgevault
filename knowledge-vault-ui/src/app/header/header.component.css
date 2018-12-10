@@ -1,0 +1,71 @@
+.nav-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color:rgba(255, 255, 255);
+  color: rgb(54, 51, 51);
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+}
+
+button {
+  color: #5cb85c;
+}
+
+.example-container {
+  flex: 1 1 auto;
+  background-color: white;
+}
+
+a {
+  color: #5cb85c;
+  font-weight: bold;
+  font-size: 4vw 4vh;
+  text-decoration: none;
+}
+
+button:hover {
+  color: black;
+}
+
+span {
+  margin-right: 3%;
+}
+
+#logo {
+  object-fit: cover;
+  background-image: url("../../assets/logo.jpg");
+  background-size: cover;
+  border: black;
+}
+
+.avatar {
+  border: black;
+  object-fit: fill;
+  background-image: url('../../assets/user.png');
+  background-size: cover;
+}
+
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-sidenav-container{
+  min-height: 80vh !important;
+}
+
+mat-sidenav {
+  width: 30vw;
+  background: white;
+  background-size: cover;
+}
+
+button:visited {
+  color:#5cb85c;
+}
+
+button:focus {
+  color: #5cb85c;
+}

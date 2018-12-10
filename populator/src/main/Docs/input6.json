@@ -1,0 +1,75 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalCondition",
+  "alternateName": "typhoid fever\u000Bsalmonella typhi infection from contaminated food or water",
+  "code": {
+    "@type": "MedicalCode",
+    "code": "413",
+    "codingSystem": "ICD-9"
+  },
+  "differentialDiagnosis": {
+    "distinguishingSign": [
+      {
+        "@type": "MedicalSymptom",
+        "name": "High fever"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "headache"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "stomach pain"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "weakness"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "vomiting"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "loose stools"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "pain in the abdomen or muscles"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "bloating"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "constipation"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "diarrhoea"
+      },
+      {
+        "@type": "MedicalSymptom",
+        "name": "loss of appetite"
+      }
+    ]
+
+  },
+  "possibleTreatment":[
+    {"@type":"Drug",
+      "name":"Cavlam-650",
+      "DoseSchedule":[
+        {"doseUnit":"650mg"},
+        {"frequency":"thrice daily"}
+      ]
+    },
+    {"@type":"Drug",
+      "name":"Paracetamol",
+      "DoseSchedule":[
+        {"doseUnit":"500mg"},
+        {"frequency":"twice daily"}
+      ]
+    }
+  ]
+}

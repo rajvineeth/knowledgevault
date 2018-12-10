@@ -11,6 +11,8 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JSONld {
+
     private int id;
+    private int paraId;
     private Map<String,Object> data;
 }

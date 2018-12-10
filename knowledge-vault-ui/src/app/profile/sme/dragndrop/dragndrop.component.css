@@ -1,0 +1,44 @@
+.saveButton {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    justify-content: center;
+    font-size: 1rem;
+  /* text-align: center; */
+
+    /* margin-left: 40%; */
+}
+
+#myImg {
+    background-image: url("../../../../assets/vault.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.drag-drop-card {
+  background-color: rgba(249, 248, 252, 0.925);
+  position: inherit;
+  justify-content: center;
+  text-align: center;
+  width: 50vw;
+
+}
+
+.drag-drop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-header {
+  justify-content: center;
+  color: #5cb85c;
+}
+
+.progress {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #5cb85c;
+}

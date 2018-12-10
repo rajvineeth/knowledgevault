@@ -1,0 +1,24 @@
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+</head>
+<mat-card class="userInput-card" layout-align="center none">
+   <mat-card-content>
+     <form class="userInput-form">
+       <table class="userInput-full-width" cellspacing="0">
+         <tr>
+           <td>
+             <mat-form-field class="userInput-full-width">
+             <input matInput placeholder="Enter your Query" type="search" [(ngModel)]="msg" color="primary" name="search" (keyup.enter)="search($event)" required>
+             </mat-form-field>
+           </td>
+         </tr>
+        </table>
+     </form>
+     <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+   </mat-card-content>
+   <mat-card-actions>
+   <button mat-raised-button class="voice" (click)="toggleVoiceRecognition()">{{ started ? 'Stop Voice to Text' : 'Start Voice to Text' }}</button>
+     <button mat-raised-button (click)="search()">Search</button>
+   </mat-card-actions>
+
+ 

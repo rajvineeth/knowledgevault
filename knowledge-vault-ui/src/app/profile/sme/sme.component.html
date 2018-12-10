@@ -1,0 +1,27 @@
+<div class="home">
+  <div class="bg"></div>
+  <h1 style="text-align:center;color: #5cb85c">
+    <p>Feel free to contribute to our knowledge-base</p>
+  </h1>
+  <div fxLayout fxLayout.xs="column" fxLayoutGap.xs="40px" fxLayoutAlign="space-evenly center">
+      <div>
+        <mat-card class="url">
+          <mat-card-header>
+            <mat-card-title style="color: #5cb85c">Enter web URL</mat-card-title>
+          </mat-card-header>        
+          <nav>
+            <mat-form-field class="url-field">
+              <input matInput placeholder="URL" type="text" #inp (keyup.enter)="sendUrl(inp.value)">
+            </mat-form-field>
+          </nav>
+          <nav>
+            <button mat-button (click) = "sendUrl(inp.value)"> Go </button>
+          </nav>
+        </mat-card>
+      </div>
+      <div class="card">
+            <app-dragndrop> </app-dragndrop>
+      </div>
+  </div>
+</div>
+

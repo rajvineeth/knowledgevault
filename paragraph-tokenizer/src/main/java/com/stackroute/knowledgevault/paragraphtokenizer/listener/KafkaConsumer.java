@@ -35,7 +35,7 @@ public class KafkaConsumer {
 
     //to log data on the console
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class);
-    List list;
+    private List list;
 
     /*
      * This method consumes data from kafka server and makes call to kafka producer.

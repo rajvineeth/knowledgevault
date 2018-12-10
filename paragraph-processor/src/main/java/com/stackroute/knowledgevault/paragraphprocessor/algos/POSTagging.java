@@ -1,17 +1,11 @@
 package com.stackroute.knowledgevault.paragraphprocessor.algos;
 
-import edu.stanford.nlp.ling.CoreAnnotations;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.pipeline.Annotation;
-import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.util.CoreMap;
+import edu.stanford.nlp.simple.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 public class POSTagging {
 
@@ -21,24 +15,23 @@ public class POSTagging {
     /**
      * This function performs the prt-of-speech tagging of each word in a given text file
      * @param txt: the input text file
-     * @return: a string with each word having a tag;
+     * @param regex: the regular expression which splits the String
+     * @return: a collection of keywords with each word having a POS-tag;
      */
-    public static Map<String,String> tagger(String txt) {
+    public static Map<String,String> tagger(String txt,String regex) {
         Map<String,String> res = new HashMap<>();
-        Properties props = new Properties();
-        props.setProperty("annotators","tokenize, ssplit, pos");
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-        Annotation annotation = new Annotation(txt);
-        pipeline.annotate(annotation);
-        List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
-        for (CoreMap sentence : sentences) {
-            for (CoreLabel token: sentence.get(CoreAnnotations.TokensAnnotation.class)) {
-                String word = token.get(CoreAnnotations.TextAnnotation.class);
-                String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
-                LOGGER.info("{}_{}",word,pos);
-                res.put(word,pos);
-            }
+        String text = txt.replaceAll("\\.","");
+        String[] arr = text.split(regex);
+        for(String token: arr) {
+            LOGGER.info("sentence: {}", token);
+            Document doc = new Document(token);
+            res.put(doc.text(),doc.sentence(0).posTag(0));
         }
         return res;
+    }
+
+    public static String individualTag(String key) {
+        Document doc = new Document(key);
+        return doc.sentences().get(0).posTag(0);
     }
 }
